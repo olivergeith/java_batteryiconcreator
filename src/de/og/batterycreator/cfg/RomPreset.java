@@ -82,6 +82,7 @@ public class RomPreset {
 
 	public static final String templateS2 = "./template/template.zip";
 	public static final String templateS3Nexus = "./template/templateS3Nexus.zip";
+	public static final String templateS3Nexus43 = "./template/templateS3Nexus-4.3.zip";
 
 	public static final String APPLY = "Apply Settings for Rom...";
 
@@ -159,7 +160,7 @@ public class RomPreset {
 				BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, templateS3Nexus, MORPHPATH_SYSTEMUI,
 				MORPHPATH_FRAMEWORK));
 		presets.add(new RomPreset("(S3 i9300/i747) Pacman Rom", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI, BATT_ICON_NAME_ROOTBOX_SQUARE,
-				BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, templateS3Nexus, MORPHPATH_SYSTEMUI,
+				BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, templateS3Nexus43, MORPHPATH_SYSTEMUI,
 				MORPHPATH_FRAMEWORK));
 		// Galaxy Nexus Presets
 		presets.add(new RomPreset("(Galaxy Nexus) ### RootBox 3.x ", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI, BATT_ICON_NAME_AOKP,
