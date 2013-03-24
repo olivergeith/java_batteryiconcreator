@@ -1,0 +1,172 @@
+[SIZE="4"][B][CENTER]I proudly present[/CENTER][/B][/SIZE]
+[COLOR="navy"][SIZE="6"][B][CENTER]The Battery Icon Creator & Rom Fumbler[/CENTER][/B][/SIZE][/COLOR]
+
+[SIZE="4"][B]History or why did I develop this tool?:[/B][/SIZE]
+I was fed up, with designing my battery icons with a painttool. 204 icons per set is a lot work, if you do it manually!
+As I mostly did abstract and simple icons to be in harmony with AOKP, I had the idea, to develop a little Java tool to do the work for me ;)
+Now it has grown up and much more was added. (I should think about a new Name? :)) 
+
+
+[SIZE="4"][B][CENTER]So here is: ...[/CENTER][/B][/SIZE]
+[COLOR="navy"][SIZE="6"][B][CENTER]The Battery Icon Creator & Rom Fumbler[/CENTER][/B][/SIZE][/COLOR]
+[SIZE="4"][B]Features:[/B][/SIZE]
+[LIST]
+[*]15+ highly customizable Battery Icon Styles (more to come...ideas welcome !)
+[*]...You can change colors, style, charge-icon, with or without percentage text, fonts, thesholds, gradient...
+[*]...add your own custom charge-icons...(place your own charge icons in folder ./custom/charge/ ...see samples there)
+[*]4+ highly customizable Wifi Icon Styles (more to come...ideas welcome !)
+[*]4+ highly customizable Signal Icon Styles (more to come...ideas welcome !)
+[*]Creating of overview.png's (If you want to show of your creations!)
+[*]Icons are resized to any supported dpi (can be fine-tuned)
+[*]Add Toggles to your flashable Zip (Attention the predefined toggles only work with AOKP roms)
+[*]Add your own toggle-icon-sets to folder ./custom/toggles/<setname>
+[*]Add Weather icons to your flashable Zip (Attention the predefined weathericons only work with AOKP roms)
+[*]Add your own weather-icon-sets to folder ./custom/weather/<setname>
+[*]Add a custom lockring to your flashable Zip (put them in ./custom/lockhandle/*.png)
+[*][B]New:[/B]Add any iconset to SystemUI.apk (use with caution!!! no checks, no resizing, ...)
+put those icons to ./custom/systemui-mods/<foldername>  see examples there
+[*][B]New:[/B]Add any iconset to framework-res.apk (use with caution!!! no checks, no resizing, ...)
+put those icons to ./custom/frameworkres-mod/<foldername> see examples there
+[*][B]New:[/B]Support for transparent notification area
+[*]Easy "all in one frame" Userinterface (you will find out how it works !)
+[*]Creation of[COLOR="Blue"][B] flashable Zips[/B][/COLOR] for xhdpi, hdpi, 720dp and 600dp ROMs
+[*]Creates a backup during flash (Thanks to the "Universal Flasher Tool") 
+[*]Add custom filesets to your flashable zip...for example add apk's, libs, media files whatever you want to be flashed alongside your icons!
+I use this frequently after full wipe installing a new rom...I add some of my own developed Apps to the rom.
+[*]Add custom Themes/Morphs to your flashable zip...theme almost anything!
+[/LIST]
+
+[SIZE="4"][B]Confirmed to work with the following ROMs:[/B][/SIZE]
+[LIST]
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1436854"]Resurection Remix 2.x &  3.x.x[/URL]
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1403044"]HydraH2O 1.4.1[/URL] 
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1806401"]Rootbox [/URL]
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1903162"]JellyBam[/URL]
+[*]Stock XWLPG with JKay 
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1563747"]SHOstock2 for SGH-i777[/URL] (thanks Jamlx1 for info!)
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1968724"]Galaxy S3 "MORPHOLOGY SOCIETY"[/URL]
+[*]...should work on many more...let me know!
+[/LIST]
+
+
+[SIZE="4"][B]Changelog:[/B][/SIZE]
+[COLOR="Blue"][B]Nov-15-2012[/B] : Release 15.0[/COLOR]
+[LIST]
+[*]Some Batteries (ArcBattery2...) can now be configured to have NO grey backround
+[*]Create and Zip button back on top right corner of the frame
+[*]New: [B][COLOR="Green"]Real Circle Animation[/COLOR][/B] during charge...very Cool...like Jkay Mod!!! But only for RR and maybe other AOKP-Roms!
+[*]New Setting to use same color on chargeicons as on normal icons!
+[*]4 new Battery styles and some old optimized
+[*][COLOR="green"][B]Gradient Battery Colors[/B][/COLOR] in some styles...looks very cool...
+[*]New Wifi and Signal styles
+[*]Glowing Charge Animation
+[*]Additional Warning when activating advanced features 
+[*]Advanced stuff is now hidden by default..."Noobs keep away" Messagebox, when activated. (Activate advanced stuff with new button in buttonbar)
+[/LIST]
+
+These new [B]"Theme" and "Fileset" Features[/B] make it possible, to create addons to your Rom. Flash them with only [B]one flashable zip[/B]!
+For example you can flash your Battery-Icons along with themed icons for almost any other app. And you cann add additional apk's, media, libs, data...
+Personally I use this to flash the Android 4.2 Camera along with my prefered battery and lockring...as an example.
+
+But be carefull this is a very advanced features. You should know how your rom looks from the inside! You need to be familiar with directory structures in a rom and in its apk's and so on...
+[SIZE="4"][COLOR="DarkRed"][B]Noobs keep away from those new features!!![/B][/COLOR][/SIZE]
+
+[SIZE="4"][B]Todo:[/B][/SIZE]
+[LIST]
+[*]Bugfixing
+[*]Make the Style-Modules even more customizable
+[*]Creating new styles
+[*]Supporting other apk's (any suggestions?)
+[*]And finally....A lot of things that you might come up with ;)
+[/LIST]
+
+[SIZE="4"][B]HowTo - General[/B][/SIZE]
+This tool is written in pure Java. So the only thing you need to have is a Java Runtime 1.6 or 1.7.
+[LIST]
+[*]Download the zip attached to this Post
+[*]Unzip the tool to any directory
+[*]Step into that directory
+[*]Doubleclick in the Jar-file
+[*]...or use the start.bat
+[*]Choose Battery Design (Combobox in Buttonbar)
+[*]Choose Wifi Design (Combobox in Buttonbar)
+[*]Choose Signal Design (Combobox in Buttonbar)
+[*]Choose any other iconset you want to add
+[*]Choose your ROM in Rom Presets Dropdown (Default values are for xhdpi Roms like Resurrection Remix 3.x.x)
+[*]Create your images (Play-Button)
+[*]...play with resize-option and algorithm to get best results
+[*]...the Tool will create a new folder "pngs" in the above directory
+[*]...find your Icons in there...
+[*]Or (when you are satisfied with your settings) create a flashable Zip (Button next to Playbutton)
+[*]...find the Zip in the "flashablezip_out"-folder
+[/LIST]
+
+[SIZE="4"][B]HowTo - Is my ROM supported?[/B][/SIZE]
+For a Rom to be supported, it needs to have a 1% battery mod!
+Samsung Stock Roms don't have this until a Mod like JKay is applied.
+CM10 Roms like the official nightlies or Paranoidandroid don't have this either. 
+I am sure there are some Mod's out there that will do the trick with these Roms...
+
+If your ROM has a 1% Mod, there are only a few things you need to investigate, to find the correct Settings for my tool.
+You need to...
+[LIST]
+[*]extract the SystemUI.apk from your Rom (look in the flashabel zip of your Rom, 
+[*}or use your phone and navigate with EsExplorer or Root-Explorer to /system/app and find SystemUI.apk there and 
+[*]...copy it to your internal or external SD card, so you can access the file from your Computer
+[*]Open SystemUI.apk with 7Zip and navigate to ...
+[*]...res\drawable-<xxxx> and find the rom's original 1% battery icons in there
+[*]remember the folder you found your png's in. (normally [B]drawable-hdpi or drawable-xhdpi[/B])
+[*]see how the Files are named. (something like [B]stat_sys_battery_circle_charge_anim<percentage>.png[/B])
+[*]check the height of the original png's
+[*]now you got everything to choose the correct settings in the Battery Icon Creator
+[*]...drawable-Folder
+[*]...naming convention/pattern of png's
+[*]...icon height
+[/LIST]
+If you found your settings, please let me know, what settings, what ROM you used. 
+So I can add the ROM to my compatibility list and add predefined Settings to the tool itself.
+
+[SIZE="4"][B]HowTo - Toggles...your own, custom toggles[/B][/SIZE]
+Same procedure with weather icons...but they are located in framework-res.apk
+[LIST]
+[*]Same procedure as above to analyse SystemUI.apk 
+[*}...find the toggle icons in there 
+[*]...copy toggles into a new folder under ./custom/toggles/<setname> 
+[*]......eg ./custom/toggles/MySuperDuperToggles
+[*]......next to my predifined Togglesets!
+[*]Hint: it might be a good idea to create another folder in there with the untouched original toggle icons from your Rom's SystemUI.apk
+[*]......eg ./custom/toggles/MyOriginalToggles
+[*]...for AOKP Roms there are normally 36 icons named like toggle_*.png
+[*]...edit the toggles with some Paint-Tool ore replace them with some completely new toggles(maybe you downloaded some from the internet)
+[*]...make sure you have the correct filenames of your toggles (filenames need to be exactly like in your SystemUI.apk)
+[*]Start The Battery Icon Creator and find your Toggleset in the Dropdownbox there...
+[*]choose your Toggleset and create your flaschable zip 
+[/LIST]
+
+[SIZE="4"][B]Resources[/B][/SIZE]
+
+[URL="http://forum.xda-developers.com/showthread.php?t=1770650"]Lot's of cool lockrings...[/URL]
+
+[SIZE="4"][B]Final remarks...and thanks[/B][/SIZE]
+If you used my tool for you MOD or custom ROM, please give credit and link to this thread! 
+
+I am not responsible, if you brick your device...this is just a tool, you need to do the thinking ;)
+
+Thanks for the "Universal Flasher Tool" [url]http://www.htcmania.com/showthread.php?t=258333[/url]
+My flashable Zips are created by using their template-zip!
+
+If you want to know how to create your own flashable Zip ...
+... Tutorial here: [url]http://forum.xda-developers.com/showpost.php?p=27021278&postcount=41597[/url]
+
+Want to see my icons in use?...see my MOD-Post for Resurrection Remix ROM
+[url]http://forum.xda-developers.com/showpost.php?p=32081287&postcount=1388[/url]
+Or over at Galaxy S3 Forum: [URL="http://forum.xda-developers.com/showthread.php?t=1968724"][MORPHOLOGY SOCIETY] [LJ7 JellyBean] Theme it your way! [/URL] Post[URL="http://forum.xda-developers.com/showpost.php?p=33573806&postcount=4"]4#[/URL]
+
+
+Finally press [SIZE="4"][b]Thanks[/b][/SIZE] please, if you like my tool!
+......
+.....
+....
+...
+..
+.

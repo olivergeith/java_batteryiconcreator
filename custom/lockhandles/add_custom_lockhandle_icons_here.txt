@@ -1,0 +1,5 @@
+Place custom Lockhandles here. 
+They can be named whatever you like
+They should be in png-format and around 216*216 pixels big. (Thats xhdpi size)
+They will be resized to the correct size for the chosen Rom dpi-settings
+If you create a mod for hdpi they will be resized to 162x162 pixel, eg. 216x216 for xhdpi

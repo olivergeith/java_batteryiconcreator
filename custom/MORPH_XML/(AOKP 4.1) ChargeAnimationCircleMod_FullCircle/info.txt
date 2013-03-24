@@ -1,0 +1,9 @@
+###############################################################
+This changes the Charge-Animation
+###############################################################
+This is only for AOKP-Roms with a CircleMod up to Android 4.1.2!
+Don't try this on other Roms!
+
+The Animation goes from 0% to 100%, regardless of the current battery-Level
+
+It changes the Animation for the 7-Level-normal-battery too!

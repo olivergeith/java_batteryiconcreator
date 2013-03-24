@@ -1,0 +1,39 @@
+Guten Morgen zusammen,
+
+ich wollte hier mal mein kleines Tool vorstellen, mit dem Ihr euch eigenen Mods für Euer Custom Rom basteln könnt.
+
+[B][SIZE="4"][CENTER]The Battery Icon Creator[/CENTER][/SIZE][/B]
+[CENTER][B][SIZE="3"][URL="http://forum.xda-developers.com/showthread.php?t=1918500"]Der original Thread bei XDA[/URL][/SIZE][/B][/CENTER]
+
+Entwickelt habe ich es ursprünglich für Resurrection Remix Rom von Westcrip, aber es funktioniert auch für viele weitere AOKP-Roms (JB und ICS) und teilweise auch für Stock-Roms (mit JKay bzw. 1% battery Mod)
+
+[B]Kurz was zur Geschichte des Tools, warum ich es gebaut habe, und wie es grob funktioniert:[/B]
+
+Ursprünglich entstanden ist das Tool, weil mir die Batterie-Icons, die so im Netz herumschwirren nicht immer 100%ig zusagten. Mal passten die Farben nicht. Oder der Wechsel zu "roten" niedrigen Batterielevels erfolgte viel zu früh oder zu spät. Oder die Auflösung der Icons passte nicht. Dann habe ich angefangen die 202+ Icons eines Sets per hand in Paint Shop Pro zu überarbeiten, was extrem mühselig ist! Und so entstand die Idee, mir meine Icons per Software über einen kleinen Rechenalgorithmus berechnen und als PNG's ausgeben zu lassen. Und da ich beruflich auch JAVA programmiere lag es nahe, das in Java zu erledigen.
+In der ersten Version spuckte diese Tool also nur 202+ Icons aus, die man dann im Filesystem "auflesen" und irgendwie in ein CWM-Flashable-Zip eintüten musste. Klar wurde mir auch das sehr schnell zu mühselig, und so entstand Version 2 (oder wars 3) in der dann ein Zip fertig zum Flashen am Ende der Bearbeitung herausfiel!
+Dazu verwende ich ein Template des UniversalFlasherTools. Vorteil, das funktioniert bei fast allen ROMs, da es nur Dateien (in meinem Fall nur PNG's) in APK's austauscht. Als netter Nebeneffekt wird auch ein Backup-zip angelegt!
+Ich verwende fast nur AOKP-Roms, und da gefallen mir immer die weißen Toggles nicht, die bei aktivierung nicht ihre Farbe wechseln! Und so fand sich also schnell ein weiterer Anwendungsfall für mein Too: Toggles sollten auch mit ins Zip! Als nächsten kamen Wetter-Icon-Sets und vieles mehr!
+
+So wurde langsam fast eine "Kitchen" aus meinem Tool, und der Name [B]Battery Icon Creator[/B] passt eigentlich nicht mehr so ganz!
+
+Wie gesagt, das Schöne ist, es sollte eigentlich mit so ziemlich jedem Rom zusammenspielen. Die Zips die hinten rausfallen sind nicht an eine spezielle ROM Version gebunden. Kommt einen neue Version Eures Roms, könnt ihr das unveränderte Zip einfach wieder flashen! Ihr könnt es sogar auch einem anderen Rom flashen!
+
+Und jetzt kommt das [I]"Aber"[/I]...aber nur, wenn das Rom die selben dpi Settings hat!
+[LIST]
+[*]RR 3.x verwendet xhdpi icons/png's
+[*]Rootbox 3.x hdpi
+[*]Stock Jaykay hdpi
+[/LIST]
+Einstellen läßt sich das in meinem Tool in den Rom Settings.
+
+Und das zweite [I]grundsätzliche "Aber"[/I]...aber nur wenn Euer Rom einen 1% Batterie-Mod hat. Bei AOKP-Roms verwende ich den Circle Mod bzw. tausche dessen Icons aus! Stock Roms haben erstmal keinen 1% Mod. Erst, wenn man JKay drauf hat, ist auch ein 1%Mod vorhanden.
+Und theoretisch es funktioniert sogar mit anderen Handys!!! (Bisher nicht getestet, aber das UniversalFlasherTool kommt eigentlich aus der HTC Ecke und kann unverändert beim SII verwendet werden!)
+
+
+[B]Voraussetzung:[/B]
+Das Tool ist in Java Programm, um es laufen zu lassen, müsst Ihr also Java 1.6 bzw 1.7 Runtime installiert haben.
+
+[B]Installation:[/B]
+Ladet Euch bei XDA das zip herunter. Alles irgendwo auspacken. Start.bat im ausgepackten Ordner suchen, uns los gehts!
+
+Ich will jetzt hier keinen Roman mehr schreiben. Schaut einfach bei XDA ins Forum, da sind eigentlich alle Informationen vorhanden. Spielt einfach etwas damit herum...nach kurzer Zeit solltet Ihr raus haben, wie es funktioniert! Kleiner Tip nach jeder Settings-Änderung den "Play"-Button drücken, damit die Vorschauen aktualisiert werden!

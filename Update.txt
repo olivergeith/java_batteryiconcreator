@@ -1,0 +1,24 @@
+[B][SIZE="3"]New Version out of [URL="http://forum.xda-developers.com/showthread.php?t=1918500"]"The Rom Fumbler" aka "The Battery Icon Creator"[/URL][/SIZE][/B]
+
+[SIZE="4"][B]Changelog:[/B][/SIZE]
+[COLOR="Blue"][B]March-10-2013[/B] : Release 21.0[/COLOR]
+[LIST]
+[*]Better default charge-icons
+[*]New predefined Signal & Wifi Icon-Set (V6)
+[*]Updated and polished 4.2 Toggle-Icon-Sets (V8...new tiles like Pie and so on....)
+[*]New Tacho Battery Style
+[*]New Option to add "%" to the Level-Numbers
+[*]New Option to add a glow behind the numbers
+[*]More and better Support for Rootbox (You can now create flashable-zips for overwriting all 3 CircleMods of Rootbox):
+[*]....support for new Rootbox Speedometer Battery (choose corresponding RomPreset!)
+[*]....support for new Rootbox Square Battery (choose corresponding RomPreset!)
+[*]....default settings will overwrite the "normal CircleMod" now also known as "Rootbox Circle"
+[*]Selectable Morphpath to framework-res implemented ... /preload/.... now possible (may help on stock Sammy JB ?!?!...but still no official support!)
+[/LIST]
+
+All default Rom-Settings in this tool are still for AOKP-Roms and HDPI-Devices like S2-i9100. (for example RootBox i9100) 
+As I am part of the Rootbox-Team now, it will probably stay like this for a very long time now ;-)
+...so, I will make sure Rootbos is best supported by the Rom-Fumbler ;-) 
+
+Happy modding & flashing :)
+

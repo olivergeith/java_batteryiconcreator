@@ -1,0 +1,81 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="de">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Neue Seite 1</title>
+</head>
+
+<body>
+
+<h1>Things you need to know</h1>
+<h2>1. Thing to know: Every Battery has its own settings</h2>
+<p>This programm is an App that has grown a lott. First it was -as the name 
+says- only an editor for battery icons. Every battery style had and still has 
+its own set of settings. Even the &quot;No Batt Icons&quot; style. When the App grew up...the 
+settings were growing too with all that stuff you need for Wifi and Signal icons 
+filenames for lockhandle and so on. All this is stored within the settings of 
+the chosen battery style.</p>
+<p>The consequence is, if you choose another battery style, you have to do your 
+adjustments for wifi and so on again. Most important you have to set your Rom 
+presets again for the new battery style! Don't forget that, or you might end up 
+with a flashable zip that does nothing but adding icons to systemui and 
+framework-res in the wrong drawable folder!!!</p>
+<p>The pro on this is: </p>
+<ul>
+  <li>You can store all settings in one file</li>
+  <li>You can have different settings for each battery style</li>
+  <li>you can even restore settings from for example ArcBattery to AOKP battery 
+  and all your colorsettings are the same</li>
+</ul>
+<p>What is not stored in settings is:</p>
+<ul>
+  <li>what kind of Wifi style or signal style you chose</li>
+  <li>what weather iconset you chose</li>
+  <li>what lockhandle you chose</li>
+  <li>what toggles you chose</li>
+  <li>how transparent your notification area should be</li>
+  <li>what charge icon you chose (this might be stored in some future 
+  Version..ist mor or less a low prio bug ;-))</li>
+</ul>
+<h2>2. Thing to know: No xml modding by this App</h2>
+<p>This tool dos not mod any xml files within your roms apk's! It most likely 
+will never do this!<br>
+The only thing it does is replacing png's! And flashing files (if you use the 
+fileset feature</p>
+<p>This makes all your flashable zips compatible for every version or 
+incarnation of your rom! No need to create a new zip for every nightly of your 
+rom. As long as the dev of you rom does not change from lets say xhdpi to hdpi 
+the mods will be compatible &quot;forever&quot;. The will even work on other roms with 
+same dpi!</p>
+<h2>3. Thing to know: 1% battery mod must be in your rom</h2>
+<p>Your rom needs to have a 1% battery mod to be compatible. The tool creates 
+204 png's for the 1% battery. 0 to 100% for charging and discharging and 2 &quot;full&quot; 
+icons.  </p>
+<p>All AOKP have a battery circle mod (find it in Settings -&gt; Rom Control -&gt; Battery) This 
+is what my tool will use and replace the 204 icons for it.</p>
+<p>Stock roms normally don't have a 1% mod unless you install a mod like JKay! 
+<b>Attention</b> the pngs for JKay are named slightly different then the ones in AOKP. 
+You can choose the right names with the Rom-Presets.</p>
+<p>CM10 does not have a 1% mod! So it is not compatible! <br>
+Since late Oktober 2012 they have a circle battery mod to, <b>but this is very different,</b> 
+as it has no 204 png's. It renders the icon online with a grafical algorithm 
+like my tool does. Perhaps it will later have different online renderred battery 
+styles...who knows...there definately is potential!</p>
+<h2>4. Thing to know: Custom Area</h2>
+<p>When you install the Battery Icon Creator by unzipping it to some folder, you 
+also unzip the custom area of this tool. This is where you can put your own 
+icons to be used by this tool to create flashable zips. Each aspect you can 
+customize has its own subfolder in this custom area! Feel free to explore this 
+area, you will find out how it works. And I provided a few predefined custom 
+icons...so it will be easy to understand how to add your own stuff!</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body>
+
+</html>

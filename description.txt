@@ -1,0 +1,177 @@
+[IMG]https://dl.dropbox.com/u/72571206/bic02.jpg[/IMG]
+
+[SIZE="4"][B]What is this ?[/B][/SIZE]
+This tool started as a "Creator/Renderer" for battery-icon-png's. And this is still the most prominent feature in this tool!
+It renders those images with algorithms, that are highly customizable! You can create almost unlimited variations of "battery icon sets"!   
+It can also render "Wifi- and Signal Icon Sets" in the same way as battery icon sets. 
+
+[URL="http://www.xda-developers.com/android/create-android-status-bar-icon-sets-with-the-rom-fumbler/"]Read the feature on XDA Portal ![/URL] (Thanks Guys for the promotion!)
+
+[B]But this tool can do a big bunch of other things![/B]
+Most usefull : It can [b]create "flashable-zip's"[/b] of the above icons!
+And there are still more things it can do!!! ...so here is the "complete" feature list:
+
+[SIZE="4"][B]Basic Features:[/B][/SIZE]
+[LIST]
+[*]Easy "all in one frame" Userinterface (you will find out how it works !)
+[*]lots of highly customizable [B]"Battery Icon Styles"[/B] (more to come...ideas always welcome !)
+... You can change colors, charge-icon, with or without percentage text, fonts, thresholds, gradients...
+... add your own custom charge-icons...(place your own charge icons in folder ./custom/charge/ ...see samples there)
+... control the naming, size and output-folder
+[*]highly customizable [B]"Wifi Icon Styles"[/B] (more to come...ideas welcome !)
+[*]highly customizable [B]"Signal Icon Styles"[/B] (more to come...ideas welcome !)
+[*]Creating of [B]overview.png's[/B] (If you want to show of your creations!)
+[*]Create [B]"flashable-zips"[/B]
+... Creates a backup during flash (Thanks to the "Universal Flasher Tool") 
+... there are "Rom-Presets" for all Roms confirmed to be compatible
+... lots of different Roms supported (Best chances, if you have an AOKP-Rom) 
+... Custom dpi-support
+[*]Add [B]"Toggles"[/B] to your flashable-zip 
+... predefined toggle-sets (Attention the predefined toggles only work with AOKP roms)
+... Add your own toggle-sets to folder ./custom/toggles/<setname>
+[*]Add [B]"Signal and Wifi icons"[/B] to your flashable-zip 
+... predefined signal&wifi-sets (Attention the predefined sets only work with AOKP roms)
+... Add your own signal&wifi-sets to folder ./custom/signalwifi/<setname>
+[*]Add [B]"Weather Icons"[/B] to your flashable-zip 
+... pedifined weather-sets (Attention the predefined weathericons only work with AOKP roms)
+... Add your own weather-sets to folder ./custom/weather/<setname>
+[*]Add a custom [B]"Lockrings"[/B] to your flashable Zip
+... lockrings are resized and renamed to fit your Rom's framework-res.apk (Rom-Presets) 
+... predefined lockrings
+... and you can add your own logrings to folder ./custom/lockhandle/*.png
+[*]Support for [B]"transparent notification area"[/B]
+[/LIST]
+
+[SIZE="4"][B]Advanced Features:[/B][/SIZE]
+With this advanced stuff you can create full themes for your Rom! 
+Files added to the flashable-zip with these features are not resized, renamed, checked...
+So use with caution...you need to know what you are doing! You need to know how your Rom and apk's look from the inside...
+[LIST]
+[*]Add any [B]"icon-set" to SystemUI.apk[/B] (use with caution!!! no checks, no resizing, ...)
+... Add your own icon-sets to ./custom/systemui-mods/<foldername>  (see examples there)
+[*]Add any [B]"icon-set" to framework-res.apk[/B] (use with caution!!! no checks, no resizing, ...)
+... Add your own icon-sets to ./custom/frameworkres-mod/<foldername> (see examples there)
+[*]Add custom [B]file-sets[/B] to your flashable zip
+... Add your own file-sets to ./custom/XTRAS/<set-name> (see examples in there)
+... for example add apk's, libs, media files whatever you want to be flashed alongside your icons
+... (I use this frequently after full wipe installing a new rom...I add some of my own developed Apps to the rom.)
+[*]Add custom [B]"Themes/Morphs"[/B] to your flashable-zip
+... Add your own icon-sets to ./custom/MORPH/<theme-name> (see examples in there)
+... theme any apk
+[*]Add custom [B]"precompiled xml's"[/B] to your flashable-zip
+... Add your own xml-sets to ./custom/MORPH_XML/<set-name> (see predefined examples in there)
+... Predefined sets to change Battery-charge-Animation can be found here!
+[/LIST]
+
+[SIZE="4"][B]Confirmed to work with the following ROMs:[/B][/SIZE]
+[LIST]
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1806401"]Rootbox [/URL]
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1436854"]Resurection Remix 2.x &  3.x.x[/URL]
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1403044"]HydraH2O 1.4.1[/URL] 
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1903162"]JellyBam[/URL]
+[*]Stock XWLPG with JKay 
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1563747"]SHOstock2 for SGH-i777[/URL] (thanks Jamlx1 for info!)
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1968724"]Galaxy S3 "MORPHOLOGY SOCIETY"[/URL]
+[*][URL="http://forum.xda-developers.com/showthread.php?t=2015607"]Galaxy S3 "P.A.C.-Man ROM"[/URL]
+[*][URL="http://forum.xda-developers.com/showpost.php?p=34934304&postcount=279"]Samsung Galaxy Exhibit 4G PACman ROM by Camcory[/URL] (Thanks GalaxyDozie for info)
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1847600"]Chameleon XXLSJ hybrid (AOKP Edition)[/URL]
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1898798"]Galaxy S3 RootBox[/URL]
+[*][URL="http://forum.xda-developers.com/showthread.php?t=2110698"]Galaxy Nexus RootBox[/URL]
+
+[*]...should work on many more...let me know!
+[/LIST]
+
+[SIZE="4"][B]Download:[/B][/SIZE]
+
+[B][SIZE="4"][URL="https://www.dropbox.com/sh/q8u74cbnnhi17a6/PVTSRqhXsn"]Download here![/URL][/SIZE][/B]
+
+
+[SIZE="4"][B]Changelog:[/B][/SIZE]
+[URL="http://forum.xda-developers.com/showpost.php?p=38968743&postcount=381"]Version 21.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=38507003&postcount=370"]Version 20.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=37744901&postcount=351"]Version 19.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=36880285&postcount=314"]Version 18.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=36652266&postcount=313"]Version 17.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=34969508&postcount=281"]Version 16.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=34541151&postcount=245"]Version 15.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=34115677&postcount=212"]Version 14.0[/URL]
+Version 13.0 ...there never was a Version 13
+[URL="http://forum.xda-developers.com/showpost.php?p=33708299&postcount=177"]Version 12.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=33426483&postcount=157"]Version 11.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=33117538&postcount=118"]Version 10.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=32927543&postcount=108"]Version 9.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=32744647&postcount=101"]Version 8.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=32616916&postcount=73"]Version 7.0[/URL]
+Version 6.0 Deleted
+[URL="http://forum.xda-developers.com/showpost.php?p=32466339&postcount=47"]Version 5.0[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=32452898&postcount=35"]Version 4.0 and 4.1[/URL]
+[URL="http://forum.xda-developers.com/showpost.php?p=32429486&postcount=17"]Version 3.0[/URL]
+Version 2.0 No changelog
+Version 1.0 Initial Version
+
+[SIZE="4"][B]Todo:[/B][/SIZE]
+[LIST]
+[*]Bugfixing
+[*]Make the Style-Modules even more customizable
+[*]Creating new styles
+[*]And finally....A lot of things that you might come up with ;)
+[/LIST]
+
+[SIZE="4"][B]Installation & How to use this tool (short version)[/B][/SIZE]
+This tool is written in pure Java. So the only thing you need to have is a Java Runtime 1.6 or 1.7.
+[LIST]
+[*][B][SIZE="4"][URL="https://www.dropbox.com/sh/q8u74cbnnhi17a6/PVTSRqhXsn"]Download[/URL][/SIZE][/B] the BatteryIconCreator...zip
+[*]Unzip the tool to any directory
+[*]Step into that directory
+[*]Look around...see the ./custom/... folder? This is where you can put your own custom stuff !
+[*]Doubleclick in the Jar-file
+... or better use the [B]start.bat[/B] to start this tool! 
+[*]Choose your ROM-Preset in tab "Rom-Settings" (Default values are for Resurrection Remix...)
+[*]Choose a Battery Design 
+[*]Choose a Wifi Design 
+[*]Choose a Signal Design 
+[*]Choose any other stuff you want to add
+[*]Play with all those different settings...
+[*]Create/Refresh your images (Play-Button)
+[*]If you just want the icons and no flashable-zip, then goto
+... the folder "./pngs/..." in the above directory and find your Icons in there...
+[*]Or (when you are satisfied with your settings) create a flashable-zip (Button next to Play-Button)
+... find the flashable-zip in the "./flashablezip_out"-folder...
+[/LIST]
+
+[SIZE="4"][B]Howto's FAQ from this thread:[/B][/SIZE]
+[LIST]
+[*][URL="http://forum.xda-developers.com/showpost.php?p=38272787&postcount=364"]HowTo: Is my Rom supported? & What settings do I need?[/URL]
+[*][URL="http://forum.xda-developers.com/showpost.php?p=37647055&postcount=342"]You have some battery-Icons from somewhere and want to flash them to your rom[/URL]
+[*][URL="http://forum.xda-developers.com/showpost.php?p=37342254&postcount=323"]During flashing you get: [B][error] we need one sd card mounted[/B][/URL]
+[*][URL="http://forum.xda-developers.com/showpost.php?p=38272452&postcount=363"]HowTo: Replacing xml's[/URL]
+[/LIST]
+
+[SIZE="4"][B]Resources[/B][/SIZE]
+Do you want lots of cool Lockrings to choose from? [URL="http://forum.xda-developers.com/showthread.php?t=1770650"]Goto shishircoolin's nice collection[/URL]. Download what you like and add it to the custom area of my tool! @shishircoolin: Thanks!
+
+[B][COLOR="SeaGreen"]You don't have a 1% BatteryMod?[/COLOR][/B] [URL="http://forum.xda-developers.com/showthread.php?t=1434061"]Go here and try this tool[/URL]...it's not been updated for a long time, but I know it's still compatibel with Android 4.1.2 and above! Thanks shayne77 for this great tool! [B]Update :[/B] There has been a new Version of [URL="http://forum.xda-developers.com/showthread.php?t=1755243"]apktool[/URL] for better support for Android 4.2.1. So if you download this BatteryMod-tool...update the apktool inside wtih the new version 1.5.1!
+
+
+[SIZE="4"][B]Final remarks...and thanks[/B][/SIZE]
+If you used my tool for you MOD or custom ROM, please give credit and link to this thread! 
+
+I am not responsible, if you brick your device...this is just a tool, you need to do the thinking, educate yourself...read on xda as much as you can ;)
+
+Thanks for the "Universal Flasher Tool" [url]http://www.htcmania.com/showthread.php?t=258333[/url]
+My flashable-zips are created by using their template-zip!
+
+If you want to know how to create your own flashable-zip ...
+... Tutorial by GaboWinter here: [url]http://forum.xda-developers.com/showpost.php?p=27021278&postcount=41597[/url]
+
+Want to see my icons in use?
+[URL="http://forum.xda-developers.com/showpost.php?p=32081287&postcount=1388"]MOD-Post for Resurrection Remix ROM[/URL]
+[URL="http://forum.xda-developers.com/showthread.php?t=1968724"]Or over at Galaxy S3 Forum: [MORPHOLOGY SOCIETY][/URL] Post[URL="http://forum.xda-developers.com/showpost.php?p=33573806&postcount=4"]4#[/URL]
+
+Finally press [SIZE="4"][b]Thanks[/b][/SIZE] please, if you like my tool!
+......
+.....
+....
+...
+..
+.
