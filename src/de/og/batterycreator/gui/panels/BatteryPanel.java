@@ -62,6 +62,7 @@ import de.og.batterycreator.creators.batt.TachoCreator3Quater;
 import de.og.batterycreator.creators.batt.TachoCreatorWide;
 import de.og.batterycreator.creators.batt.TachoCreatorWideV2;
 import de.og.batterycreator.creators.batt.TachoCreatorWideV3;
+import de.og.batterycreator.creators.batt.TachoCreatorWideV4;
 import de.og.batterycreator.creators.batt.TwoBarsCreator;
 import de.og.batterycreator.creators.batt.XORAndroidCreator;
 import de.og.batterycreator.creators.batt.XORApfelCreator;
@@ -127,6 +128,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new TachoCreatorWide(romSettings));
 		combo.addItem(new TachoCreatorWideV2(romSettings));
 		combo.addItem(new TachoCreatorWideV3(romSettings));
+		combo.addItem(new TachoCreatorWideV4(romSettings));
 		combo.addItem(new TachoCreator3Quater(romSettings));
 		combo.addItem(new ScalaBatteryCreator(romSettings));
 		combo.addItem(new XORAndroidCreator(romSettings));
