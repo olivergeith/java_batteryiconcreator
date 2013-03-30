@@ -33,6 +33,7 @@ import de.og.batterycreator.creators.batt.ArcDecimalCreator;
 import de.og.batterycreator.creators.batt.ArcGradientCreator;
 import de.og.batterycreator.creators.batt.ArcQuaterCreator2;
 import de.og.batterycreator.creators.batt.ArcSunCreator;
+import de.og.batterycreator.creators.batt.BallCreator;
 import de.og.batterycreator.creators.batt.BatterySymbolCreator;
 import de.og.batterycreator.creators.batt.BatteryVerticalSymbolCreator;
 import de.og.batterycreator.creators.batt.BinaryBarsCreator;
@@ -52,6 +53,7 @@ import de.og.batterycreator.creators.batt.CastawayCreatorFlip;
 import de.og.batterycreator.creators.batt.ClockCreator;
 import de.og.batterycreator.creators.batt.ClockPointerCreator;
 import de.og.batterycreator.creators.batt.DecimalBar2Creator;
+import de.og.batterycreator.creators.batt.DecimalBar3Creator;
 import de.og.batterycreator.creators.batt.DecimalBarCreator;
 import de.og.batterycreator.creators.batt.FontOnlyCreator;
 import de.og.batterycreator.creators.batt.HoneycombCreator;
@@ -105,6 +107,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new BoxCreator(romSettings));
 		combo.addItem(new Box2Creator(romSettings));
 		combo.addItem(new BubbleCreator(romSettings));
+		combo.addItem(new BallCreator(romSettings));
 		combo.addItem(new BrickBattCreator(romSettings));
 		combo.addItem(new BrickBattNoGapCreator(romSettings));
 		combo.addItem(new BrickDecimalCreator(romSettings));
@@ -113,6 +116,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new TwoBarsCreator(romSettings));
 		combo.addItem(new DecimalBarCreator(romSettings));
 		combo.addItem(new DecimalBar2Creator(romSettings));
+		combo.addItem(new DecimalBar3Creator(romSettings));
 		combo.addItem(new BinaryBarsCreator(romSettings));
 		combo.addItem(new BinarySquaresCreator(romSettings));
 		combo.addItem(new BatterySymbolCreator(romSettings));
@@ -152,7 +156,8 @@ public class BatteryPanel extends JPanel {
 				if (cre != null) {
 					activBattCreator = cre;
 					settingsPanel.setSettings(cre.getBattSettings());
-					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(), cre.supportsGradient());
+					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(),
+							cre.supportsGradient());
 					create();
 				}
 			}
@@ -235,9 +240,10 @@ public class BatteryPanel extends JPanel {
 		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
 		@Override
-		public Component getListCellRendererComponent(final JList<? extends AbstractIconCreator> list, final AbstractIconCreator value, final int index,
-				final boolean isSelected, final boolean cellHasFocus) {
-			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+		public Component getListCellRendererComponent(final JList<? extends AbstractIconCreator> list,
+				final AbstractIconCreator value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected,
+					cellHasFocus);
 			if (value instanceof AbstractIconCreator) {
 				if (isSelected)
 					renderer.setBackground(Color.darkGray.darker());
@@ -261,11 +267,13 @@ public class BatteryPanel extends JPanel {
 	private class IconListCellRenderer implements ListCellRenderer<Object> {
 		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
-		public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected,
-				final boolean cellHasFocus) {
+		@Override
+		public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index,
+				final boolean isSelected, final boolean cellHasFocus) {
 			String iconName = null;
 
-			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected,
+					cellHasFocus);
 			if (value instanceof String) {
 				iconName = (String) value;
 				renderer.setBorder(new EmptyBorder(1, 1, 1, 1));
