@@ -68,12 +68,11 @@ public class DecimalBar3Creator extends AbstractIconCreator {
 			g2d.fillRect(x, y, w - 2, h);
 		}
 
+		// Und nun die grauen Kästen einfärben
 		g2d.setXORMode(settings.getActivIconColor(percentage, charge));
-
 		g2d.fillRect(0, 0, Math.round(imgWidth / 100f * percentage), imgHeight);
 
 		g2d.setPaintMode();
-
 		if (!settings.isNoBG()) {
 			drawGlow(g2d, percentage, charge);
 		}
