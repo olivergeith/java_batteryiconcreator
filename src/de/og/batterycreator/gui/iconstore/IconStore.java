@@ -16,6 +16,7 @@ public class IconStore {
 	public static final ImageIcon nothingIcon = new ImageIcon(IconStore.class.getResource("nothing.png"));
 	public static final ImageIcon nothing2Icon = new ImageIcon(IconStore.class.getResource("nothing2.png"));
 	public static final ImageIcon toggleIcon = new ImageIcon(IconStore.class.getResource("toggle.png"));
+	public static final ImageIcon powerwidgetIcon = new ImageIcon(IconStore.class.getResource("powerwidget.png"));
 	public static final ImageIcon signalIcon = new ImageIcon(IconStore.class.getResource("signal.png"));
 	public static final ImageIcon signalwifiIcon = new ImageIcon(IconStore.class.getResource("signalwifi.png"));
 	public static final ImageIcon weatherIcon = new ImageIcon(IconStore.class.getResource("weather.png"));
