@@ -147,8 +147,7 @@ public class IconCreatingPanelNew extends JPanel {
 		// advancedTabPane, "Advanced Stuff!!");
 
 		advancedTabPane.addTab("SystemUI Mods", IconStore.androidredIcon, systemUIBox, "Get an Overview of your icons");
-		advancedTabPane
-				.addTab("FrameWorkRes Mods", IconStore.androidblueIcon, frameworkresBox, "Get an Overview of your icons");
+		advancedTabPane.addTab("FrameWorkRes Mods", IconStore.androidblueIcon, frameworkresBox, "Get an Overview of your icons");
 		advancedTabPane.addTab("Themes/Morphs", IconStore.folderIcon, iconsetBox, "Add any Themes/Morphs you want...");
 		advancedTabPane.addTab("Filesets", IconStore.folder2Icon, filesetBox, "Add Filesets like apk's, lib's, media...");
 		advancedTabPane.addTab("XML-Sets", IconStore.folder2Icon, xmlBox, "Add XML-Sets to any apk...Most dangerous!");
@@ -223,9 +222,11 @@ public class IconCreatingPanelNew extends JPanel {
 		} else { // default
 			files2add2SystemUI.addAll(toggleBox.getAllFilenamesAndPath());
 		}
-		// Add Toggles
+
+		// Add PowerWidget Toggles
 		updateProgressBar(step++, "Adding PowerWidgetToggle Icons (if configured)");
 		files2add2SystemUI.addAll(powerwidgetBox.getAllFilenamesAndPath());
+
 		// Add SignalWifi
 		updateProgressBar(step++, "Adding Signal%Wifi Icons (if configured)");
 		files2add2SystemUI.addAll(signalWifiBox.getAllFilenamesAndPath());
@@ -256,14 +257,12 @@ public class IconCreatingPanelNew extends JPanel {
 		// Adding Them MORPH
 		updateProgressBar(step++, "Adding Theme/Morph to ZipCollection");
 		if (iconsetBox.getSelectedSet() != null) {
-			zipCollection.addElements(iconsetBox.getSelectedSet().getFilenamesAndPath(), iconsetBox.getSelectedSet()
-					.getAllPathInZip());
+			zipCollection.addElements(iconsetBox.getSelectedSet().getFilenamesAndPath(), iconsetBox.getSelectedSet().getAllPathInZip());
 		}
 		// Adding XTRAS
 		updateProgressBar(step++, "Adding XTRAS to ZipCollection");
 		if (filesetBox.getSelectedSet() != null) {
-			zipCollection.addElements(filesetBox.getSelectedSet().getFilenamesAndPath(), filesetBox.getSelectedSet()
-					.getAllPathInZip());
+			zipCollection.addElements(filesetBox.getSelectedSet().getFilenamesAndPath(), filesetBox.getSelectedSet().getAllPathInZip());
 		}
 		// Adding XXML-Set
 		updateProgressBar(step++, "Adding XML's to ZipCollection");
@@ -278,14 +277,12 @@ public class IconCreatingPanelNew extends JPanel {
 			// all ok ? Then Messagebox
 			if (saved == true) {
 				updateProgressBar(step++, "Done Successfully!");
-				JOptionPane.showMessageDialog(IconCreatingPanelNew.this, "Zip was created successfully", "Zip creating",
-						JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(IconCreatingPanelNew.this, "Zip was created successfully", "Zip creating", JOptionPane.INFORMATION_MESSAGE);
 			}
 		} catch (final Exception e) {
 			// Error during zip...
 			updateProgressBar(step++, "Done With Error!");
-			JOptionPane.showMessageDialog(IconCreatingPanelNew.this,
-					"ERROR: Zip was not created successfully!!!\n" + e.getMessage(), "Zip creating ERROR",
+			JOptionPane.showMessageDialog(IconCreatingPanelNew.this, "ERROR: Zip was not created successfully!!!\n" + e.getMessage(), "Zip creating ERROR",
 					JOptionPane.ERROR_MESSAGE);
 			LOGGER.error("" + e.getMessage());
 		}
@@ -321,20 +318,23 @@ public class IconCreatingPanelNew extends JPanel {
 		updateProgressBar(step++, "Deploying Toggles (if configured)");
 		toggleBox.createAllImages(romSettingsPanel.getSettings().getToggleSize());
 
-		// creating powewidget
+		// creating powerwidget
 		updateProgressBar(step++, "Deploying PowerWidget Toggles (if configured)");
 		powerwidgetBox.createAllImages(romSettingsPanel.getSettings().getToggleSize());
 
 		// creating Signal&Wifi
 		updateProgressBar(step++, "Deploying Signal&Wifi (if configured)");
 		signalWifiBox.createAllImages(romSettingsPanel.getSettings().getBattIconSize());
+
 		// creating weather
 		updateProgressBar(step++, "Deploying Weather Icons (if configured)");
 		weatherBox.createAllImages(romSettingsPanel.getSettings().getWeatherSize());
 		updateProgressBar(step++, "Deploying Weather Icons ...done");
+
 		// Systemui Mods
 		updateProgressBar(step++, "Deploying SystemUI Icons (if configured)");
 		systemUIBox.createAllImages(IconSetDeployer.NO_RESIZING);
+
 		// frame Mods
 		updateProgressBar(step++, "Deploying Framework-res Icons (if configured)");
 		frameworkresBox.createAllImages(IconSetDeployer.NO_RESIZING);
