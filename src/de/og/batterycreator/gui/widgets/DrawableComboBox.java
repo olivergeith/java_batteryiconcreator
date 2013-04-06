@@ -10,12 +10,12 @@ import de.og.batterycreator.cfg.RomPreset;
 public class DrawableComboBox extends JComboBox<String> {
 	private static final long serialVersionUID = 1L;
 	// systemui
-	private final SliderAndLabel sliderBattSize = new SliderAndLabel(25, 70);
-	private final SliderAndLabel sliderToggleSize = new SliderAndLabel(32, 100);
+	private final SliderAndLabel sliderBattSize = new SliderAndLabel(10, 70);
+	private final SliderAndLabel sliderToggleSize = new SliderAndLabel(20, 100);
 	// frameworkres
-	private final SliderAndLabel sliderLockSize = new SliderAndLabel(130, 250);
+	private final SliderAndLabel sliderLockSize = new SliderAndLabel(100, 250);
 	private final SliderAndLabel sliderWeatherSize = new SliderAndLabel(50, 200);
-	private final SliderAndLabel sliderNotificationSize = new SliderAndLabel(2, 8);
+	private final SliderAndLabel sliderNotificationSize = new SliderAndLabel(1, 8);
 
 	public DrawableComboBox() {
 
@@ -26,6 +26,7 @@ public class DrawableComboBox extends JComboBox<String> {
 	private void initUI() {
 		addItem(RomPreset.DRAWABLE_XHDPI);
 		addItem(RomPreset.DRAWABLE_HDPI);
+		addItem(RomPreset.DRAWABLE_MDPI);
 		addItem(RomPreset.DRAWABLE_600DP_XHDPI);
 		addItem(RomPreset.DRAWABLE_720DP_XHDPI);
 		addItem(RomPreset.DRAWABLE_600DP_HDPI);
@@ -48,6 +49,13 @@ public class DrawableComboBox extends JComboBox<String> {
 					sliderWeatherSize.setValue(RomPreset.WEATHER_HDPI);
 					sliderToggleSize.setValue(RomPreset.TOGGLE_HDPI);
 					sliderNotificationSize.setValue(RomPreset.NOTIFICATION_HDPI);
+
+				} else if (getSelectedItem().equals(RomPreset.DRAWABLE_MDPI)) {
+					sliderBattSize.setValue(RomPreset.BATT_ICON_HEIGHT_MDPI);
+					sliderLockSize.setValue(RomPreset.LOCK_MDPI);
+					sliderWeatherSize.setValue(RomPreset.WEATHER_MDPI);
+					sliderToggleSize.setValue(RomPreset.TOGGLE_MDPI);
+					sliderNotificationSize.setValue(RomPreset.NOTIFICATION_MDPI);
 
 				} else if (getSelectedItem().equals(RomPreset.DRAWABLE_720DP_XHDPI)) {
 					sliderBattSize.setValue(RomPreset.BATT_ICON_HEIGHT_720DP_XHDPI);
