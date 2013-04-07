@@ -6,27 +6,31 @@ public class RomPreset {
 
 	// Konstanten Filenames
 	public static final String LOCKHANDLE_FILENAME_DEFAULT = "ic_lockscreen_handle_normal.png";
+
 	public static final String MORPHPATH_SYSTEMUI = "MORPH/system/app/SystemUI.apk/res/";
 	public static final String MORPHPATH_SYSTEMUI_SAMSUNG_JB = "MORPH/preload/symlink/system/app/SystemUI.apk/res/";
 	public static final String MORPHPATH_FRAMEWORK = "MORPH/system/framework/framework-res.apk/res/";
 	public static final String MORPHPATH_FRAMEWORK_SAMSUNG_JB = "MORPH/preload/symlink/system/framework/framework-res.apk/res/";
 	public static final String MORPHPATH_LIDROID = "MORPH/system/framework/lidroid-res.apk/res/";
+
 	public static final String WIFI_ICON_NAME = "stat_sys_wifi_signal_";
 	public static final String WIFI_ICON_EXTENSION_FULLY = "_fully";
 	public static final String WIFI_ICON_NAME_IN = "stat_sys_wifi_in.png";
 	public static final String WIFI_ICON_NAME_OUT = "stat_sys_wifi_out.png";
 	public static final String WIFI_ICON_NAME_INOUT = "stat_sys_wifi_inout.png";
+
 	public static final String SIGNAL_ICON_NAME = "stat_sys_signal_";
 	public static final String SIGNAL_ICON_EXTENSION_FULLY = "_fully";
 	public static final String SIGNAL_ICON_NAME_IN = "stat_sys_signal_in.png";
 	public static final String SIGNAL_ICON_NAME_OUT = "stat_sys_signal_out.png";
 	public static final String SIGNAL_ICON_NAME_INOUT = "stat_sys_signal_inout.png";
+
 	public static final String NOTIFICATION_BG_FILENME = "notification_panel_bg.9.png";
+
 	public static final String BATT_ICON_CHARGE_NAME_AOKP = "stat_sys_battery_circle_charge_anim";
 	public static final String BATT_ICON_NAME_AOKP = "stat_sys_battery_circle_";
 	public static final String BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY = "stat_sys_battery_charge_anim";
 	public static final String BATT_ICON_NAME_STOCK_ICS_JKAY = "stat_sys_battery_";
-
 	public static final String BATT_ICON_CHARGE_NAME_ROOTBOX_ALT = "stat_sys_battery_altcircle_charge_anim";
 	public static final String BATT_ICON_NAME_ROOTBOX_ALT = "stat_sys_battery_altcircle_";
 	public static final String BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE = "stat_sys_battery_square_charge_anim";

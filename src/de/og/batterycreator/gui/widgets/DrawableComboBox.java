@@ -31,7 +31,7 @@ public class DrawableComboBox extends JComboBox<String> {
 		addItem(RomPreset.DRAWABLE_720DP_XHDPI);
 		addItem(RomPreset.DRAWABLE_600DP_HDPI);
 		addItem(RomPreset.DRAWABLE_720DP_HDPI);
-		setEditable(false);
+		setEditable(true);
 		addActionListener(new ActionListener() {
 
 			@Override
