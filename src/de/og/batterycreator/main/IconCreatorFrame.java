@@ -24,15 +24,15 @@ public class IconCreatorFrame extends JFrame {
 	private final JButton aboutButton = new JButton(CommonIconProvider.BUTTON_ICON_INFO);
 	private final JButton exitButton = new JButton(CommonIconProvider.BUTTON_ICON_EXIT);
 	private static final String APP_NAME = "'The Rom Fumbler'";
-	public static final String VERSION_NR = "22.0";
-	private static final String VERSION_DATE = "06.April.2013";
+	public static final String VERSION_NR = "23.0 beta";
+	private static final String VERSION_DATE = "xx.mmmm.2013";
 	private static final long serialVersionUID = 1L;
 	private static IconCreatorFrame frame;
 	private final IconCreatingPanelNew iconCreatingPanel = new IconCreatingPanelNew(this);
 	LToolBar toolBar = iconCreatingPanel.getToolBar();
 
 	public static void main(final String[] args) {
-		LOGGER.info("Starting " + APP_NAME + " " + VERSION_NR + "(" + VERSION_DATE + ")");
+		LOGGER.info("Starting " + APP_NAME + " V." + VERSION_NR + "(" + VERSION_DATE + ")");
 		frame = new IconCreatorFrame();
 
 	}
