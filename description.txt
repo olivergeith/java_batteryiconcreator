@@ -72,12 +72,10 @@ So use with caution...you need to know what you are doing! You need to know how 
 [*]Stock XWLPG with JKay 
 [*][URL="http://forum.xda-developers.com/showthread.php?t=1563747"]SHOstock2 for SGH-i777[/URL] (thanks Jamlx1 for info!)
 [*][URL="http://forum.xda-developers.com/showthread.php?t=1968724"]Galaxy S3 "MORPHOLOGY SOCIETY"[/URL]
-[*][URL="http://forum.xda-developers.com/showthread.php?t=2015607"]Galaxy S3 "P.A.C.-Man ROM"[/URL]
 [*][URL="http://forum.xda-developers.com/showpost.php?p=34934304&postcount=279"]Samsung Galaxy Exhibit 4G PACman ROM by Camcory[/URL] (Thanks GalaxyDozie for info)
 [*][URL="http://forum.xda-developers.com/showthread.php?t=1847600"]Chameleon XXLSJ hybrid (AOKP Edition)[/URL]
 [*][URL="http://forum.xda-developers.com/showthread.php?t=1898798"]Galaxy S3 RootBox[/URL]
 [*][URL="http://forum.xda-developers.com/showthread.php?t=2110698"]Galaxy Nexus RootBox[/URL]
-
 [*]...should work on many more...let me know!
 [/LIST]
 
@@ -87,6 +85,7 @@ So use with caution...you need to know what you are doing! You need to know how 
 
 
 [SIZE="4"][B]Changelog:[/B][/SIZE]
+[URL="http://forum.xda-developers.com/showpost.php?p=40005004&postcount=448"]Version 22.0[/URL]
 [URL="http://forum.xda-developers.com/showpost.php?p=38968743&postcount=381"]Version 21.0[/URL]
 [URL="http://forum.xda-developers.com/showpost.php?p=38507003&postcount=370"]Version 20.0[/URL]
 [URL="http://forum.xda-developers.com/showpost.php?p=37744901&postcount=351"]Version 19.0[/URL]
@@ -151,6 +150,7 @@ This tool is written in pure Java. So the only thing you need to have is a Java 
 Do you want lots of cool Lockrings to choose from? [URL="http://forum.xda-developers.com/showthread.php?t=1770650"]Goto shishircoolin's nice collection[/URL]. Download what you like and add it to the custom area of my tool! @shishircoolin: Thanks!
 
 [B][COLOR="SeaGreen"]You don't have a 1% BatteryMod?[/COLOR][/B] [URL="http://forum.xda-developers.com/showthread.php?t=1434061"]Go here and try this tool[/URL]...it's not been updated for a long time, but I know it's still compatibel with Android 4.1.2 and above! Thanks shayne77 for this great tool! [B]Update :[/B] There has been a new Version of [URL="http://forum.xda-developers.com/showthread.php?t=1755243"]apktool[/URL] for better support for Android 4.2.1. So if you download this BatteryMod-tool...update the apktool inside wtih the new version 1.5.1!
+Or Try this [URL="http://forum.xda-developers.com/showthread.php?t=2037171"]tool[/URL]!
 
 
 [SIZE="4"][B]Final remarks...and thanks[/B][/SIZE]

@@ -57,6 +57,7 @@ public class IconCreatingPanelNew extends JPanel {
 	private final LockHandlePanel lockHandleSelector = new LockHandlePanel();
 	private final IconSetSelector signalWifiBox = new IconSetSelector("Signal$Wifi", "./custom/signalwifi/");
 	private final IconSetSelector toggleBox = new IconSetSelector("Toggles", "./custom/toggles/");
+	private final IconSetSelector battBox = new IconSetSelector("Batteries", "./custom/batteries/");
 	private final IconSetSelector powerwidgetBox = new IconSetSelector("PowerWidgetToggles", "./custom/powerwidget/");
 	private final IconSetSelector weatherBox = new IconSetSelector("Weather", "./custom/weather/");
 	private final NotificationAreaBG notificationBG = new NotificationAreaBG();
@@ -72,7 +73,7 @@ public class IconCreatingPanelNew extends JPanel {
 	private Thread t = null;
 	private boolean isrunning = false;
 	// private boolean stopnow = false;
-	private final int maxsteps = 17;
+	private final int maxsteps = 18;
 	private int step = 0;
 
 	private final JFrame parentFrame;
@@ -149,6 +150,7 @@ public class IconCreatingPanelNew extends JPanel {
 		iconsetsTabPane.addTab("Signal$Wifi", IconStore.signalwifiIcon, signalWifiBox, "Predefined Signal- and Wifi-Icon-Sets");
 		iconsetsTabPane.addTab("Weather", IconStore.weatherIcon, weatherBox, "Predefined Weather-Icon-Sets");
 		iconsetsTabPane.addTab("Lockring", IconStore.lockringIcon, lockHandleSelector, "See your choosen Lockring!");
+		iconsetsTabPane.addTab("Batteries", IconStore.batteryIcon, battBox, "Predefined Battery-Icon-Sets");
 		tabPane.addTab("Icon-Sets", IconStore.iconsetsIcon, iconsetsTabPane, "Custom Icon-Sets");
 
 		// Main Tabbed Pane
@@ -259,6 +261,10 @@ public class IconCreatingPanelNew extends JPanel {
 		updateProgressBar(step++, "Adding Signal%Wifi Icons (if configured)");
 		files2add2SystemUI.addAll(signalWifiBox.getAllFilenamesAndPath());
 
+		// Add Battery IconSets
+		updateProgressBar(step++, "Adding Battery Icon-Sets (if configured)");
+		files2add2SystemUI.addAll(battBox.getAllFilenamesAndPath());
+
 		// Add Weather
 		updateProgressBar(step++, "Adding Weather Icons (if configured)");
 		files2add2Framework.addAll(weatherBox.getAllFilenamesAndPath());
@@ -353,6 +359,10 @@ public class IconCreatingPanelNew extends JPanel {
 		// creating Signal&Wifi
 		updateProgressBar(step++, "Deploying Signal&Wifi (if configured)");
 		signalWifiBox.createAllImages(romSettingsPanel.getSettings().getBattIconSize());
+
+		// creating Battery Icon-Sets
+		updateProgressBar(step++, "Deploying BatteryIconSets (if configured)");
+		battBox.createAllImages(romSettingsPanel.getSettings().getBattIconSize());
 
 		// creating weather
 		updateProgressBar(step++, "Deploying Weather Icons (if configured)");
