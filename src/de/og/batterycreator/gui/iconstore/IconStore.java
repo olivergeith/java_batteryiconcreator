@@ -32,6 +32,9 @@ public class IconStore {
 	public static final ImageIcon folderIcon = new ImageIcon(IconStore.class.getResource("folder.png"));
 	public static final ImageIcon folder2Icon = new ImageIcon(IconStore.class.getResource("folder2.png"));
 
+	public static final ImageIcon rendererIcon = new ImageIcon(IconStore.class.getResource("renderer.png"));
+	public static final ImageIcon iconsetsIcon = new ImageIcon(IconStore.class.getResource("iconsets.png"));
+
 	public IconStore() {
 	}
 

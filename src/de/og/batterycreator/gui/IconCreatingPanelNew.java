@@ -131,20 +131,48 @@ public class IconCreatingPanelNew extends JPanel {
 		resetProgressBar();
 
 		advancedTabPane = new JTabbedPane();
-		// Main Tabbed Pane
+		final JTabbedPane rendererTabPane = new JTabbedPane();
+		final JTabbedPane iconsetsTabPane = new JTabbedPane();
+
 		tabPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabPane.addTab("RomSettings", IconStore.cfgIcon, romSettingsPanel, "RomSettings");
-		tabPane.addTab("Battery", IconStore.batteryIcon, battPanel, "Create your batteries here");
-		tabPane.addTab("Wifi", IconStore.wifiIcon, wifiPanel, "Create your Wifi Icons here");
-		tabPane.addTab("Signal", IconStore.signalIcon, signalPanel, "Create your Signal Icons here");
-		tabPane.addTab("NotificationPanel", IconStore.notificationIcon, notificationBG, "Transparent Notification Panel");
-		tabPane.addTab("Toggles", IconStore.toggleIcon, toggleBox, "Predefined Toggle-Icon-Sets");
-		tabPane.addTab("CM Powerwidget", IconStore.powerwidgetIcon, powerwidgetBox, "Predefined PowerWidget Toggle-Icon-Sets");
-		tabPane.addTab("Signal$Wifi", IconStore.signalwifiIcon, signalWifiBox, "Predefined Signal- and Wifi-Icon-Sets");
-		tabPane.addTab("Weather", IconStore.weatherIcon, weatherBox, "Predefined Weather-Icon-Sets");
-		tabPane.addTab("Lockring", IconStore.lockringIcon, lockHandleSelector, "See your choosen Lockring!");
-		// tabPane.addTab("Advanced Theming", IconStore.additionalIcon,
-		// advancedTabPane, "Advanced Stuff!!");
+		// Renderer Tabbed Pane
+		rendererTabPane.addTab("Battery", IconStore.batteryIcon, battPanel, "Create your batteries here");
+		rendererTabPane.addTab("Wifi", IconStore.wifiIcon, wifiPanel, "Create your Wifi Icons here");
+		rendererTabPane.addTab("Signal", IconStore.signalIcon, signalPanel, "Create your Signal Icons here");
+		rendererTabPane.addTab("NotificationPanel", IconStore.notificationIcon, notificationBG, "Transparent Notification Panel");
+		tabPane.addTab("Renderer", IconStore.rendererIcon, rendererTabPane, "Icon Renderes");
+
+		// Renderer Tabbed Pane
+		iconsetsTabPane.addTab("Toggles", IconStore.toggleIcon, toggleBox, "Predefined Toggle-Icon-Sets");
+		iconsetsTabPane.addTab("CM Powerwidget", IconStore.powerwidgetIcon, powerwidgetBox, "Predefined PowerWidget Toggle-Icon-Sets");
+		iconsetsTabPane.addTab("Signal$Wifi", IconStore.signalwifiIcon, signalWifiBox, "Predefined Signal- and Wifi-Icon-Sets");
+		iconsetsTabPane.addTab("Weather", IconStore.weatherIcon, weatherBox, "Predefined Weather-Icon-Sets");
+		iconsetsTabPane.addTab("Lockring", IconStore.lockringIcon, lockHandleSelector, "See your choosen Lockring!");
+		tabPane.addTab("Icon-Sets", IconStore.iconsetsIcon, iconsetsTabPane, "Custom Icon-Sets");
+
+		// Main Tabbed Pane
+		// tabPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		// tabPane.addTab("RomSettings", IconStore.cfgIcon, romSettingsPanel,
+		// "RomSettings");
+		// tabPane.addTab("Battery", IconStore.batteryIcon, battPanel,
+		// "Create your batteries here");
+		// tabPane.addTab("Wifi", IconStore.wifiIcon, wifiPanel,
+		// "Create your Wifi Icons here");
+		// tabPane.addTab("Signal", IconStore.signalIcon, signalPanel,
+		// "Create your Signal Icons here");
+		// tabPane.addTab("NotificationPanel", IconStore.notificationIcon,
+		// notificationBG, "Transparent Notification Panel");
+		// tabPane.addTab("Toggles", IconStore.toggleIcon, toggleBox,
+		// "Predefined Toggle-Icon-Sets");
+		// tabPane.addTab("CM Powerwidget", IconStore.powerwidgetIcon,
+		// powerwidgetBox, "Predefined PowerWidget Toggle-Icon-Sets");
+		// tabPane.addTab("Signal$Wifi", IconStore.signalwifiIcon,
+		// signalWifiBox, "Predefined Signal- and Wifi-Icon-Sets");
+		// tabPane.addTab("Weather", IconStore.weatherIcon, weatherBox,
+		// "Predefined Weather-Icon-Sets");
+		// tabPane.addTab("Lockring", IconStore.lockringIcon,
+		// lockHandleSelector, "See your choosen Lockring!");
 
 		advancedTabPane.addTab("SystemUI Mods", IconStore.androidredIcon, systemUIBox, "Get an Overview of your icons");
 		advancedTabPane.addTab("FrameWorkRes Mods", IconStore.androidblueIcon, frameworkresBox, "Get an Overview of your icons");
@@ -166,7 +194,7 @@ public class IconCreatingPanelNew extends JPanel {
 			tabPane.remove(advancedTabPane);
 		else {
 			tabPane.addTab("Advanced Theming", IconStore.additionalIcon, advancedTabPane, "Advanced Stuff!!");
-			tabPane.setSelectedIndex(8);
+			tabPane.setSelectedIndex(3);
 		}
 
 	}
