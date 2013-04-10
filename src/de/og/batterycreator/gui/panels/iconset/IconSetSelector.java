@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.util.Vector;
 
 import javax.swing.DefaultListCellRenderer;
@@ -22,6 +23,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
+
+import og.basics.gui.html.HTMLFileDisplay;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +42,7 @@ public class IconSetSelector extends JPanel {
 	private final ImageIcon nada = IconStore.nothingIcon;
 	private Vector<String> filenamesAndPath = new Vector<String>();
 	private final Vector<IconSet> iconSets = new Vector<IconSet>();
-
+	private File howtoHtml;
 	private final String rootDir;
 	private final String setTypeName;
 
@@ -67,6 +70,22 @@ public class IconSetSelector extends JPanel {
 		return null;
 	}
 
+	private File findHowToHtml() {
+		final File dir = new File(rootDir);
+		final File[] files = dir.listFiles(new FilenameFilter() {
+
+			public boolean accept(final File dir, final String name) {
+				return name.toLowerCase().equals("howto.htm");
+			}
+		});
+		// File found!!!
+		if (files != null && files.length == 1) {
+			LOGGER.info("Found howto.htm");
+			return files[0];
+		} else
+			return null;
+	}
+
 	/**
 	 * @return the filenamesAndPath
 	 */
@@ -75,6 +94,9 @@ public class IconSetSelector extends JPanel {
 	}
 
 	private void initUI() {
+		// about ?
+		howtoHtml = findHowToHtml();
+
 		// Icon Liste
 		final JScrollPane scroller = new JScrollPane();
 		list.setBackground(Color.black);
@@ -122,6 +144,9 @@ public class IconSetSelector extends JPanel {
 		// battTabPane.setTabPlacement(JTabbedPane.LEFT);
 		tabPane.addTab("Overview", IconStore.overIcon, overPane, "Get an Overview of your icons");
 		tabPane.addTab("List", IconStore.listIcon, scroller, "Get an Overview of your icons");
+		if (howtoHtml != null) {
+			tabPane.addTab("Howto", IconStore.overIcon, new HTMLFileDisplay(howtoHtml), "How to Use this feature!");
+		}
 
 		this.add(tabPane, BorderLayout.CENTER);
 		makeButtonBar();
