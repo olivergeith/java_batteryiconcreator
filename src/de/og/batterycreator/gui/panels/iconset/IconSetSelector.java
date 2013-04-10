@@ -81,7 +81,7 @@ public class IconSetSelector extends JPanel {
 		});
 		// File found!!!
 		if (files != null && files.length == 1) {
-			LOGGER.info("Found howto.htm");
+			LOGGER.debug("Found " + files[0].getAbsolutePath());
 			return files[0];
 		} else
 			return null;
