@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Toggles</title>
+</head>
+<body>
+<h2 pbzloc="254">Weather&nbsp;Icon-Sets</h2>
+
+<hr /> What are we doing here ?
+<hr pbzloc="255" />
+<p pbzloc="266">This is the right place, if you have&nbsp;custom weather icons from somewhere ( downloaded from the internet, self-designed...) and want to add them to your flashable-zip!<br />
+You will find some predefined IconSets here, but you can add your own IconSets as well!<br />
+The predefined Icon-Sets are for AOKP Rom&#39;s and will probably not work on Stock Rom&#39;s!<br />
+<span pbzloc="269" style="color: #b22222"><strong>Attention:</strong> Since AOKP / CM &nbsp;Android 4.1 and 4.2 the weather icons are gone from framework-res.apk.<br />
+This feature is quiet useless for theres ROMS now...but it is still there (just in case ;-))<br />
+So don&#39;t try to flash them unless you are sure your ROM still has those icons!</span><br />
+&nbsp;</p>
+
+<p pbzloc="268">Make sure you have the correct Rom Settings before you create a flashable-zip!</p>
+
+<p pbzloc="237"><a href="http://forum.xda-developers.com/showpost.php?p=38272787&amp;postcount=364">Learn how to find the correct Rom Settings for your ROM</a></p>
+
+<h3 pbzloc="245">HowTo add your own IconSets:</h3>
+
+<ul>
+	<li>Goto the folder where you extracted the &quot;Rom Fumbler&quot;</li>
+	<li pbzloc="238">Find the subfolder <strong pbzloc="270">./weather/</strong></li>
+	<li pbzloc="271">See the predefined IconSets in there ?</li>
+	<li>Create a new subfolder(s) next to the predefined IconSets. For example &quot;CoolWeatherIcons&quot;</li>
+	<li>and place your custom png&#39;s in that new folder.</li>
+	<li>That is all&hellip;after a restart of the Rom Fumbler you should see your IconSet in the dropdown box.</li>
+	<li><b>Hint: </b>The Rom Fumbler will create an overview-png automaticly in your new subfolder on restart<br />
+	(if you want to show of your creations ?)</li>
+	<li><b>Hint: </b>So if you want to stay flexible it might be a good idea to put xhdpi icons in here, even if you are on a hdpi ROM.<br />
+	(icons are resized to fit your ROM-Presets!)</li>
+	<li pbzloc="272"><b>Hint: </b>If you create your own IconSet, it might be a good idea to start with the signal &amp; wifi icons you find in your framework-res.apk.<br />
+	So you are sure you have all icons your ROM supports. And you have the correct filenames. Now replace these icons with your own designs.</li>
+</ul>
+
+<h3 pbzloc="246">When you create your flashable-zip&hellip;</h3>
+
+<ul>
+	<li pbzloc="248">The Icons will <b>not</b> be renamed!<br />
+	(So make sure filenames match your ROM!!!)</li>
+	<li pbzloc="273">The icons will be resized to the defined weather-height<br />
+	(find it in Rom Settings)!</li>
+	<li pbzloc="276">The resized icons will be deployed to a subfolder<strong> ./png/deploy/Weather/&lt;IconSetName&gt;</strong><br />
+	(in case you want to look at the resized icons, or use them for something else)</li>
+	<li>Finally the flashable-zip will be created!<br />
+	(Find it in ./flashablezip-out/...)</li>
+</ul>
+</body>
+</html>

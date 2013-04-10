@@ -74,6 +74,7 @@ public class IconSetSelector extends JPanel {
 		final File dir = new File(rootDir);
 		final File[] files = dir.listFiles(new FilenameFilter() {
 
+			@Override
 			public boolean accept(final File dir, final String name) {
 				return name.toLowerCase().equals("howto.htm");
 			}
@@ -145,7 +146,7 @@ public class IconSetSelector extends JPanel {
 		tabPane.addTab("Overview", IconStore.overIcon, overPane, "Get an Overview of your icons");
 		tabPane.addTab("List", IconStore.listIcon, scroller, "Get an Overview of your icons");
 		if (howtoHtml != null) {
-			tabPane.addTab("Howto", IconStore.overIcon, new HTMLFileDisplay(howtoHtml), "How to Use this feature!");
+			tabPane.addTab("Howto & Help", IconStore.helpIcon, new HTMLFileDisplay(howtoHtml), "How to Use this feature!");
 		}
 
 		this.add(tabPane, BorderLayout.CENTER);
@@ -255,6 +256,7 @@ public class IconSetSelector extends JPanel {
 	private class IconListCellRenderer implements ListCellRenderer<ImageIcon> {
 		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
+		@Override
 		public Component getListCellRendererComponent(final JList<? extends ImageIcon> list, final ImageIcon value, final int index, final boolean isSelected,
 				final boolean cellHasFocus) {
 			ImageIcon iconName = null;

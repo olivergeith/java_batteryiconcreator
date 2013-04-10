@@ -34,6 +34,7 @@ public class IconStore {
 
 	public static final ImageIcon rendererIcon = new ImageIcon(IconStore.class.getResource("renderer.png"));
 	public static final ImageIcon iconsetsIcon = new ImageIcon(IconStore.class.getResource("iconsets.png"));
+	public static final ImageIcon helpIcon = new ImageIcon(IconStore.class.getResource("help.png"));
 
 	public IconStore() {
 	}
