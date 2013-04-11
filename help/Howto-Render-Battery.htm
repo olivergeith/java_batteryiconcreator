@@ -5,10 +5,10 @@
 	<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
 </head>
 <body>
-<h2 pbzloc="104">This is the Battery Renderer</h2>
+<h2 pbzloc="68">This is the Battery Renderer</h2>
 
-<hr />
-<p>The <strong>Battery Renderer </strong>is the main feature in the Rom Fumbler. There are lots of styles to select from in the dropdown box above.<br />
+<hr pbzloc="18" />
+<p>The <strong pbzloc="12">Battery Renderer </strong>is the main feature in the Rom Fumbler. There are lots of styles to select from in the dropdown box above.<br />
 The Renderer creates your battery-icons with graphical and mathmatical algorithms. There are no prestored battery icons!<br />
 The Icons are created/calculated online, when you press the play-button.</p>
 
@@ -21,7 +21,7 @@ After you made your modifications, you can save your settings and later restore 
 
 <p>Settings are not stored automaticly on program exit...so if you tweaked a lot of stuff, than you should save the battery settings and load them when you start the Rom Fumbler again!</p>
 
-<p pbzloc="112">You can save and load these settings with the two buttons on the left.</p>
+<p pbzloc="4">You can save and load these settings with the two buttons on the left.</p>
 
 <h3 pbzloc="115">Rom Settings</h3>
 
@@ -29,25 +29,35 @@ After you made your modifications, you can save your settings and later restore 
 
 <ul pbzloc="135">
 	<li pbzloc="123">the icon height</li>
-	<li pbzloc="124">naming pattern of the icons</li>
+	<li pbzloc="3">naming pattern of the icons</li>
 	<li pbzloc="125">resizing options (smart resize)</li>
 	<li pbzloc="130">the drawable folder used in the flashable-zip</li>
 </ul>
 
-<p pbzloc="137"><a class="0" href="http://forum.xda-developers.com/showpost.php?p=38272787&amp;postcount=364" pbzloc="136">Learn how to find the right Rom Settings</a></p>
+<p pbzloc="5"><a class="0" href="http://forum.xda-developers.com/showpost.php?p=38272787&amp;postcount=364" pbzloc="136">Learn how to find the right Rom Settings</a></p>
 
-<h3 pbzloc="126">Charge icons</h3>
+<h3 pbzloc="43">Charge Symbol</h3>
 
-<p>The dropdownbox with charge icons has some icons that are compiled into the Java jar. But you can add your own icons as well.</p>
+<p pbzloc="46">The dropdownbox with charge icons has some icons that are compiled into the Java jar.<br />
+But you can add your own icons as well.<br />
+Look at the subfolder:</p>
 
-<p>Look at the subfolder<strong> ./custom/charge/... </strong>and put your additional charge icons in there and restart the Rom Fumbler. The icons must be transparent png&#39;s! (No gif, no jpg...!)</p>
+<ul>
+	<li pbzloc="70"><span style="color: #008000"><span style="font-family: courier new,courier,monospace"><strong pbzloc="73">./custom/charge/... </strong></span></span></li>
+</ul>
 
-<h3>Overview &amp; Listview</h3>
+<p pbzloc="42">and put your own additional charge icons in there and restart the Rom Fumbler. The icons must be transparent png&#39;s! (No gif, no jpg...!)</p>
 
-<p>The overview shows the overview-png, that is created and saved every time you press the play-button on the top right side! (Like the 200+ battery-png&#39;s)<br />
-This overvies and the battery png&#39;s&nbsp;is stored in a subfolder of the Rom Fumbler ./pngs/&lt;batterystylename&gt;/overview*</p>
+<h3 pbzloc="1">Overview &amp; Listview</h3>
 
-<p>So if you want the png&#39;s only and no flashable zip...then look in that subfolder(s)!</p>
+<p pbzloc="47">The overview shows&nbsp;all rendered icons in a grid. This overview is stored as a png to disc every time you press the play-button!<br />
+This overvies and the battery png&#39;s&nbsp;are stored in a subfolder of the Rom Fumbler:</p>
+
+<ul>
+	<li pbzloc="72"><span style="color: #008000"><span style="font-family: courier new,courier,monospace"><strong pbzloc="74">./pngs/&lt;battery-style-name&gt;/...</strong></span></span></li>
+</ul>
+
+<p pbzloc="24">So if you want the png&#39;s only and no flashable zip...then look in that subfolder(s)!</p>
 
 <p>The Listview is usefull if you want to check out how the icons animate...just scroll up and down slowly!</p>
 
