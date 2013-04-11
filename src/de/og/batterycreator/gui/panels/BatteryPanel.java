@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
@@ -20,6 +21,7 @@ import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 
+import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.batt.AOKPCircleModCreator;
@@ -160,8 +162,7 @@ public class BatteryPanel extends JPanel {
 				if (cre != null) {
 					activBattCreator = cre;
 					settingsPanel.setSettings(cre.getBattSettings());
-					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(),
-							cre.supportsGradient());
+					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(), cre.supportsGradient());
 					create();
 				}
 			}
@@ -187,6 +188,12 @@ public class BatteryPanel extends JPanel {
 		// battTabPane.setTabPlacement(JTabbedPane.LEFT);
 		battTabPane.addTab("Overview", IconStore.overIcon, battOverviewPanel, "Get an Overview of your icons");
 		battTabPane.addTab("List", IconStore.listIcon, scroller, "Get an Overview of your icons");
+		// Adding Howto, if Helpfile exists !
+		final File howto = new File("./help/Howto-Render-Battery.htm");
+		if (howto.exists()) {
+			battTabPane.addTab("HowTo & Help", IconStore.helpIcon, new HTMLFileDisplay(howto), "Some things you might want to know :-)");
+		}
+
 		setLayout(new BorderLayout());
 
 		final JPanel p = new JPanel(new BorderLayout());
@@ -244,10 +251,9 @@ public class BatteryPanel extends JPanel {
 		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
 		@Override
-		public Component getListCellRendererComponent(final JList<? extends AbstractIconCreator> list,
-				final AbstractIconCreator value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected,
-					cellHasFocus);
+		public Component getListCellRendererComponent(final JList<? extends AbstractIconCreator> list, final AbstractIconCreator value, final int index,
+				final boolean isSelected, final boolean cellHasFocus) {
+			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 			if (value instanceof AbstractIconCreator) {
 				if (isSelected)
 					renderer.setBackground(Color.darkGray.darker());
@@ -272,12 +278,11 @@ public class BatteryPanel extends JPanel {
 		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
 		@Override
-		public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index,
-				final boolean isSelected, final boolean cellHasFocus) {
+		public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected,
+				final boolean cellHasFocus) {
 			String iconName = null;
 
-			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected,
-					cellHasFocus);
+			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 			if (value instanceof String) {
 				iconName = (String) value;
 				renderer.setBorder(new EmptyBorder(1, 1, 1, 1));
