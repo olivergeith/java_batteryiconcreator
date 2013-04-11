@@ -223,4 +223,9 @@ public abstract class AbstractWifiCreator extends AbstractCreator {
 		this.settings = settings;
 	}
 
+	@Override
+	public String getPath() {
+		return "./pngs/renderer/wifi/" + toString();
+	}
+
 }

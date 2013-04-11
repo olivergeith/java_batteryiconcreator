@@ -224,4 +224,9 @@ public abstract class AbstractSignalCreator extends AbstractCreator {
 		this.settings = settings;
 	}
 
+	@Override
+	public String getPath() {
+		return "./pngs/renderer/signal/" + toString();
+	}
+
 }

@@ -193,12 +193,8 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			// creating paint
 			final Point2D center = new Point2D.Float(img.getWidth() / 2, img.getHeight() / 2);
 			final float radius = settings.getChargeGlowRadius();
-			final float[] dist = {
-					0.0f, 1.0f
-			};
-			final Color[] colors = {
-					col2, col3
-			};
+			final float[] dist = { 0.0f, 1.0f };
+			final Color[] colors = { col2, col3 };
 			final RadialGradientPaint p = new RadialGradientPaint(center, radius, dist, colors);
 
 			// painting
@@ -231,12 +227,8 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			// creating paint
 			final Point2D center = new Point2D.Float(img.getWidth() / 2, img.getHeight() / 2);
 			final float radius = settings.getGlowRadius();
-			final float[] dist = {
-					0.0f, 1.0f
-			};
-			final Color[] colors = {
-					col2, col3
-			};
+			final float[] dist = { 0.0f, 1.0f };
+			final Color[] colors = { col2, col3 };
 			final RadialGradientPaint p = new RadialGradientPaint(center, radius, dist, colors);
 
 			// painting
@@ -429,6 +421,11 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	 */
 	public void setBattSettings(final BattSettings settings) {
 		this.settings = settings;
+	}
+
+	@Override
+	public String getPath() {
+		return "./pngs/renderer/batt/" + toString();
 	}
 
 }
