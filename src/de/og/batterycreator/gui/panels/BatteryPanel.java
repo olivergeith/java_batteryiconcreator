@@ -183,22 +183,22 @@ public class BatteryPanel extends JPanel {
 		scroller.setPreferredSize(new Dimension(750, 500));
 
 		// Tabbed Pane
-		final JTabbedPane battTabPane = new JTabbedPane();
+		final JTabbedPane tabPane = new JTabbedPane();
 
 		// battTabPane.setTabPlacement(JTabbedPane.LEFT);
-		battTabPane.addTab("Overview", IconStore.overIcon, battOverviewPanel, "Get an Overview of your icons");
-		battTabPane.addTab("List", IconStore.listIcon, scroller, "Get an Overview of your icons");
+		tabPane.addTab("Overview", IconStore.overIcon, battOverviewPanel, "Get an Overview of your icons");
+		tabPane.addTab("List", IconStore.listIcon, scroller, "Get an Overview of your icons");
 		// Adding Howto, if Helpfile exists !
 		final File howto = new File("./help/Howto-Render-Battery.htm");
 		if (howto.exists()) {
-			battTabPane.addTab("HowTo & Help", IconStore.helpIcon, new HTMLFileDisplay(howto), "Some things you might want to know :-)");
+			tabPane.addTab("HowTo & Help", IconStore.helpIcon, new HTMLFileDisplay(howto), "Some things you might want to know :-)");
 		}
 
 		setLayout(new BorderLayout());
 
 		final JPanel p = new JPanel(new BorderLayout());
 		final JToolBar toolBar = makeButtonBar();
-		p.add(battTabPane, BorderLayout.CENTER);
+		p.add(tabPane, BorderLayout.CENTER);
 		p.add(toolBar, BorderLayout.NORTH);
 
 		this.add(p, BorderLayout.CENTER);

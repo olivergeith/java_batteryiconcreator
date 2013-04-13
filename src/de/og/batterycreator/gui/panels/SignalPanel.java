@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
@@ -14,9 +15,11 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
 
+import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.signal.AbstractSignalCreator;
@@ -74,7 +77,19 @@ public class SignalPanel extends JPanel {
 		setActivSignalCreator((AbstractSignalCreator) combo.getSelectedItem());
 		setLayout(new BorderLayout());
 		overPane.add(makeButtonBar(), BorderLayout.NORTH);
-		this.add(overPane, BorderLayout.CENTER);
+
+		// Tabbed Pane
+		final JTabbedPane tabPane = new JTabbedPane();
+
+		// battTabPane.setTabPlacement(JTabbedPane.LEFT);
+		tabPane.addTab("Overview", IconStore.overIcon, overPane, "Get an Overview of your icons");
+		// Adding Howto, if Helpfile exists !
+		final File howto = new File("./help/Howto-Render-SignalWifi.htm");
+		if (howto.exists()) {
+			tabPane.addTab("HowTo & Help", IconStore.helpIcon, new HTMLFileDisplay(howto), "Some things you might want to know :-)");
+		}
+
+		this.add(tabPane, BorderLayout.CENTER);
 		this.add(settingsPanel, BorderLayout.WEST);
 
 	}
