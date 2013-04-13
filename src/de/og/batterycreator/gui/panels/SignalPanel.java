@@ -24,8 +24,8 @@ import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.signal.AbstractSignalCreator;
 import de.og.batterycreator.creators.signal.ArcSignalCreator;
-import de.og.batterycreator.creators.signal.ForkSignal2Creator;
 import de.og.batterycreator.creators.signal.ForkSignalCreator;
+import de.og.batterycreator.creators.signal.NiceSignalCreator;
 import de.og.batterycreator.creators.signal.NoSignalIcons;
 import de.og.batterycreator.creators.signal.TowerSignalCreator;
 import de.og.batterycreator.gui.cfg.WifiSignaleSettingsPanel;
@@ -50,8 +50,8 @@ public class SignalPanel extends JPanel {
 
 	private void fillFillCreatorList() {
 		combo.addItem(new NoSignalIcons(romSettings));
+		combo.addItem(new NiceSignalCreator(romSettings));
 		combo.addItem(new ForkSignalCreator(romSettings));
-		combo.addItem(new ForkSignal2Creator(romSettings));
 		combo.addItem(new ArcSignalCreator(romSettings));
 		combo.addItem(new TowerSignalCreator(romSettings));
 	}

@@ -3,6 +3,7 @@ package de.og.batterycreator.creators.signal;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -10,26 +11,31 @@ import javax.swing.ImageIcon;
 
 import de.og.batterycreator.cfg.RomSettings;
 
-public class ForkSignal2Creator extends AbstractSignalCreator {
+public class NiceSignalCreator extends AbstractSignalCreator {
 
-	public static String name = "ForkSignal.V2";
+	public static String name = "NiceSignal";
 
 	private static final int imgWidth = 39;
 	private static final int imgHeight = 36;
-	private static int offsetlinks = 9;
+	private static int offsetlinks = 8;
 	private static final int gap = 1;
 	private final int breite = Math.round((imgWidth - offsetlinks - (4 * gap)) / 5f);
 
-	public ForkSignal2Creator(final RomSettings romSettings) {
+	public NiceSignalCreator(final RomSettings romSettings) {
 		super(romSettings);
-		settings.setInColor(Color.white);
-		settings.setOutColor(Color.white);
-		settings.setColor(Color.LIGHT_GRAY);
+		settings.setOutColor(Color.lightGray);
+		settings.setInColor(Color.lightGray);
+		settings.setColor(new Color(230, 230, 230, 185));
+		settings.setColorInActiv(new Color(128, 128, 128, 128));
+		//
+		// settings.setInColor(Color.white);
+		// settings.setOutColor(Color.white);
+		// settings.setColor(Color.LIGHT_GRAY);
 	}
 
 	private Rectangle calculateRectForLevel(final int level) {
 
-		final int offsetUnten = 4;
+		final int offsetUnten = 2;
 		final int offsetOben = 4;
 
 		final int maxHeight = imgHeight - offsetUnten - offsetOben;
@@ -52,7 +58,7 @@ public class ForkSignal2Creator extends AbstractSignalCreator {
 			for (int i = 0; i < 5; i++) {
 				g2d.setColor(getSettings().getColorInActiv());
 				final Rectangle rect = calculateRectForLevel(i);
-				g2d.drawRect(rect.x + 1, rect.y, rect.width - 1, rect.height - 1);
+				g2d.fillRect(rect.x - 1, rect.y, rect.width + 1, rect.height);
 			}
 		} else {
 			for (int i = 0; i < 5; i++) {
@@ -67,6 +73,12 @@ public class ForkSignal2Creator extends AbstractSignalCreator {
 			}
 		}
 
+		// Clearing diagonal to get an triangular shape
+		g2d.setBackground(new Color(255, 255, 255, 0));
+		for (int i = 0; i < imgHeight; i++) {
+			g2d.clearRect(-4 + i, imgHeight - 4 - i, 6, 7);
+		}
+
 		// Filewriting
 		img = writeFile(getFileName(level, fully), img);
 		return new ImageIcon(img);
@@ -78,15 +90,20 @@ public class ForkSignal2Creator extends AbstractSignalCreator {
 		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
 		final Graphics2D g2d = initGrafics2D(img, true);
 
-		final Rectangle rectin = new Rectangle(25, 20, 18, 18);
-		final Rectangle rectout = new Rectangle(25, 1, 18, 18);
+		final int pw = 8;
+		final int ph = 10;
+		final int px = imgWidth - pw - 3;
+		final int py = imgHeight / 2;
+		final Polygon poliin = createUpDownTriangle(px, py + 2, pw, ph); // oben
+		final Polygon poliou = createUpDownTriangle(px, py - 2, pw, -ph); // unten
+
 		if (in) {
 			g2d.setColor(getSettings().getInColor());
-			g2d.fillArc(rectin.x, rectin.y, rectin.width, rectin.height, 65, 50);
+			g2d.fillPolygon(poliin);
 		}
 		if (out) {
 			g2d.setColor(getSettings().getOutColor());
-			g2d.fillArc(rectout.x, rectout.y, rectout.width, rectout.height, -65, -50);
+			g2d.fillPolygon(poliou);
 		}
 
 		// Filewriting

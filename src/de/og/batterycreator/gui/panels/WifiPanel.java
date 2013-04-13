@@ -27,6 +27,7 @@ import de.og.batterycreator.creators.wifi.BrickWifi1Creator;
 import de.og.batterycreator.creators.wifi.BrickWifi2Creator;
 import de.og.batterycreator.creators.wifi.CircleWifiCreator;
 import de.og.batterycreator.creators.wifi.ForkWifiCreator;
+import de.og.batterycreator.creators.wifi.NiceWifiCreator;
 import de.og.batterycreator.creators.wifi.NoWifiIcons;
 import de.og.batterycreator.creators.wifi.StarGateWifiCreator;
 import de.og.batterycreator.creators.wifi.TextWifiCreator;
@@ -55,6 +56,7 @@ public class WifiPanel extends JPanel {
 
 	private void fillFillCreatorList() {
 		combo.addItem(new NoWifiIcons(romSettings));
+		combo.addItem(new NiceWifiCreator(romSettings));
 		combo.addItem(new BrickWifi1Creator(romSettings));
 		combo.addItem(new BrickWifi2Creator(romSettings));
 		combo.addItem(new TowerWifiCreator(romSettings));
