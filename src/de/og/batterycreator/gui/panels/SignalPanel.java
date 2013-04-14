@@ -24,6 +24,7 @@ import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.signal.AbstractSignalCreator;
 import de.og.batterycreator.creators.signal.ArcSignalCreator;
+import de.og.batterycreator.creators.signal.BarsSignalCreator;
 import de.og.batterycreator.creators.signal.ForkSignalCreator;
 import de.og.batterycreator.creators.signal.NiceSignalCreator;
 import de.og.batterycreator.creators.signal.NoSignalIcons;
@@ -51,6 +52,7 @@ public class SignalPanel extends JPanel {
 	private void fillFillCreatorList() {
 		combo.addItem(new NoSignalIcons(romSettings));
 		combo.addItem(new NiceSignalCreator(romSettings));
+		combo.addItem(new BarsSignalCreator(romSettings));
 		combo.addItem(new ForkSignalCreator(romSettings));
 		combo.addItem(new ArcSignalCreator(romSettings));
 		combo.addItem(new TowerSignalCreator(romSettings));
