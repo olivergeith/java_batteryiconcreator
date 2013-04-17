@@ -3,35 +3,32 @@ package de.og.batterycreator.main;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
 import og.basics.gui.LToolBar;
 import og.basics.gui.about.UniversalAboutDialog;
 import og.basics.gui.about.VersionDetails;
 import og.basics.gui.icon.CommonIconProvider;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import de.og.batterycreator.gui.IconCreatingPanelNew;
 import de.og.batterycreator.gui.iconstore.IconStore;
 
 public class IconCreatorFrame extends JFrame {
-	private static final Logger LOGGER = LoggerFactory.getLogger(IconCreatorFrame.class);
+	private static final Logger			LOGGER				= LoggerFactory.getLogger(IconCreatorFrame.class);
 
-	private final JButton aboutButton = new JButton(CommonIconProvider.BUTTON_ICON_INFO);
-	private final JButton exitButton = new JButton(CommonIconProvider.BUTTON_ICON_EXIT);
-	private static final String APP_NAME = "'The Rom Fumbler'";
-	public static final String VERSION_NR = "23.0 beta";
-	private static final String VERSION_DATE = "xx.mmmm.2013";
-	private static final long serialVersionUID = 1L;
-	private static IconCreatorFrame frame;
-	private final IconCreatingPanelNew iconCreatingPanel = new IconCreatingPanelNew(this);
-	LToolBar toolBar = iconCreatingPanel.getToolBar();
+	private final JButton				aboutButton			= new JButton(CommonIconProvider.BUTTON_ICON_INFO);
+	private final JButton				exitButton			= new JButton(CommonIconProvider.BUTTON_ICON_EXIT);
+	private static final String			APP_NAME			= "'The Rom Fumbler'";
+	public static final String			VERSION_NR			= "23.0 beta";
+	private static final String			VERSION_DATE		= "xx.mmmm.2013";
+	private static final long			serialVersionUID	= 1L;
+	private static IconCreatorFrame		frame;
+	private final IconCreatingPanelNew	iconCreatingPanel	= new IconCreatingPanelNew(this);
+	LToolBar							toolBar				= iconCreatingPanel.getToolBar();
 
 	public static void main(final String[] args) {
+		LOGGER.info("Java Version:" + VersionDetails.javaVendor + " " + VersionDetails.javaVersion);
 		LOGGER.info("Starting " + APP_NAME + " V." + VERSION_NR + "(" + VERSION_DATE + ")");
 		frame = new IconCreatorFrame();
 
