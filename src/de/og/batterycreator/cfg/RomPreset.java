@@ -5,98 +5,98 @@ import java.util.Vector;
 public class RomPreset {
 
 	// Konstanten Filenames
-	public static final String LOCKHANDLE_FILENAME_DEFAULT = "ic_lockscreen_handle_normal.png";
+	public static final String			LOCKHANDLE_FILENAME_DEFAULT				= "ic_lockscreen_handle_normal.png";
 
-	public static final String MORPHPATH_SYSTEMUI = "MORPH/system/app/SystemUI.apk/res/";
-	public static final String MORPHPATH_SYSTEMUI_SAMSUNG_JB = "MORPH/preload/symlink/system/app/SystemUI.apk/res/";
-	public static final String MORPHPATH_FRAMEWORK = "MORPH/system/framework/framework-res.apk/res/";
-	public static final String MORPHPATH_FRAMEWORK_SAMSUNG_JB = "MORPH/preload/symlink/system/framework/framework-res.apk/res/";
-	public static final String MORPHPATH_LIDROID = "MORPH/system/framework/lidroid-res.apk/res/";
+	public static final String			MORPHPATH_SYSTEMUI						= "MORPH/system/app/SystemUI.apk/res/";
+	public static final String			MORPHPATH_SYSTEMUI_SAMSUNG_JB			= "MORPH/preload/symlink/system/app/SystemUI.apk/res/";
+	public static final String			MORPHPATH_FRAMEWORK						= "MORPH/system/framework/framework-res.apk/res/";
+	public static final String			MORPHPATH_FRAMEWORK_SAMSUNG_JB			= "MORPH/preload/symlink/system/framework/framework-res.apk/res/";
+	public static final String			MORPHPATH_LIDROID						= "MORPH/system/framework/lidroid-res.apk/res/";
 
-	public static final String WIFI_ICON_NAME = "stat_sys_wifi_signal_";
-	public static final String WIFI_ICON_EXTENSION_FULLY = "_fully";
-	public static final String WIFI_ICON_NAME_IN = "stat_sys_wifi_in.png";
-	public static final String WIFI_ICON_NAME_OUT = "stat_sys_wifi_out.png";
-	public static final String WIFI_ICON_NAME_INOUT = "stat_sys_wifi_inout.png";
+	public static final String			WIFI_ICON_NAME							= "stat_sys_wifi_signal_";
+	public static final String			WIFI_ICON_EXTENSION_FULLY				= "_fully";
+	public static final String			WIFI_ICON_NAME_IN						= "stat_sys_wifi_in.png";
+	public static final String			WIFI_ICON_NAME_OUT						= "stat_sys_wifi_out.png";
+	public static final String			WIFI_ICON_NAME_INOUT					= "stat_sys_wifi_inout.png";
 
-	public static final String SIGNAL_ICON_NAME = "stat_sys_signal_";
-	public static final String SIGNAL_ICON_EXTENSION_FULLY = "_fully";
-	public static final String SIGNAL_ICON_NAME_IN = "stat_sys_signal_in.png";
-	public static final String SIGNAL_ICON_NAME_OUT = "stat_sys_signal_out.png";
-	public static final String SIGNAL_ICON_NAME_INOUT = "stat_sys_signal_inout.png";
+	public static final String			SIGNAL_ICON_NAME						= "stat_sys_signal_";
+	public static final String			SIGNAL_ICON_EXTENSION_FULLY				= "_fully";
+	public static final String			SIGNAL_ICON_NAME_IN						= "stat_sys_signal_in.png";
+	public static final String			SIGNAL_ICON_NAME_OUT					= "stat_sys_signal_out.png";
+	public static final String			SIGNAL_ICON_NAME_INOUT					= "stat_sys_signal_inout.png";
 
-	public static final String NOTIFICATION_BG_FILENME = "notification_panel_bg.9.png";
+	public static final String			NOTIFICATION_BG_FILENME					= "notification_panel_bg.9.png";
 
-	public static final String BATT_ICON_CHARGE_NAME_AOKP = "stat_sys_battery_circle_charge_anim";
-	public static final String BATT_ICON_NAME_AOKP = "stat_sys_battery_circle_";
-	public static final String BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY = "stat_sys_battery_charge_anim";
-	public static final String BATT_ICON_NAME_STOCK_ICS_JKAY = "stat_sys_battery_";
-	public static final String BATT_ICON_CHARGE_NAME_ROOTBOX_ALT = "stat_sys_battery_altcircle_charge_anim";
-	public static final String BATT_ICON_NAME_ROOTBOX_ALT = "stat_sys_battery_altcircle_";
-	public static final String BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE = "stat_sys_battery_square_charge_anim";
-	public static final String BATT_ICON_NAME_ROOTBOX_SQUARE = "stat_sys_battery_square_";
+	public static final String			BATT_ICON_CHARGE_NAME_AOKP				= "stat_sys_battery_circle_charge_anim";
+	public static final String			BATT_ICON_NAME_AOKP						= "stat_sys_battery_circle_";
+	public static final String			BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY	= "stat_sys_battery_charge_anim";
+	public static final String			BATT_ICON_NAME_STOCK_ICS_JKAY			= "stat_sys_battery_";
+	public static final String			BATT_ICON_CHARGE_NAME_ROOTBOX_ALT		= "stat_sys_battery_altcircle_charge_anim";
+	public static final String			BATT_ICON_NAME_ROOTBOX_ALT				= "stat_sys_battery_altcircle_";
+	public static final String			BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE	= "stat_sys_battery_square_charge_anim";
+	public static final String			BATT_ICON_NAME_ROOTBOX_SQUARE			= "stat_sys_battery_square_";
 
 	// is in frameworkres...
-	public static final int WEATHER_XHDPI = 128;
-	public static final int WEATHER_MDPI = 66;
-	public static final int WEATHER_HDPI = 98;
-	public static final int WEATHER_720DP_XHDPI = 162;
-	public static final int WEATHER_720DP_HDPI = 144;
-	public static final int WEATHER_600DP_XHDPI = 162;
-	public static final int WEATHER_600DP_HDPI = 144;
+	public static final int				WEATHER_XHDPI							= 128;
+	public static final int				WEATHER_MDPI							= 66;
+	public static final int				WEATHER_HDPI							= 98;
+	public static final int				WEATHER_720DP_XHDPI						= 162;
+	public static final int				WEATHER_720DP_HDPI						= 144;
+	public static final int				WEATHER_600DP_XHDPI						= 162;
+	public static final int				WEATHER_600DP_HDPI						= 144;
 
-	public static final int LOCK_MDPI = 108;
-	public static final int LOCK_XHDPI = 216;
-	public static final int LOCK_HDPI = 162;
-	public static final int LOCK_600DP_HDPI = 183;
-	public static final int LOCK_720P_HDPI = 193;
-	public static final int LOCK_600DP_XHDPI = 183;
-	public static final int LOCK_720P_XHDPI = 193;
+	public static final int				LOCK_MDPI								= 108;
+	public static final int				LOCK_XHDPI								= 216;
+	public static final int				LOCK_HDPI								= 162;
+	public static final int				LOCK_600DP_HDPI							= 183;
+	public static final int				LOCK_720P_HDPI							= 193;
+	public static final int				LOCK_600DP_XHDPI						= 183;
+	public static final int				LOCK_720P_XHDPI							= 193;
 
 	// in systemUI
-	public static final int TOGGLE_720DP_XHDPI = 96;
-	public static final int TOGGLE_600DP_XHDPI = 84;
-	public static final int TOGGLE_720DP_HDPI = 96;
-	public static final int TOGGLE_600DP_HDPI = 84;
-	public static final int TOGGLE_XHDPI = 64;
-	public static final int TOGGLE_MDPI = 40;
-	public static final int TOGGLE_HDPI = 48;
-	public static final int TOGGLE_XHDPI_S3 = 72;
+	public static final int				TOGGLE_720DP_XHDPI						= 96;
+	public static final int				TOGGLE_600DP_XHDPI						= 84;
+	public static final int				TOGGLE_720DP_HDPI						= 96;
+	public static final int				TOGGLE_600DP_HDPI						= 84;
+	public static final int				TOGGLE_XHDPI							= 64;
+	public static final int				TOGGLE_MDPI								= 40;
+	public static final int				TOGGLE_HDPI								= 48;
+	public static final int				TOGGLE_XHDPI_S3							= 72;
 
-	public static final int NOTIFICATION_MDPI = 2;
-	public static final int NOTIFICATION_HDPI = 3;
-	public static final int NOTIFICATION_720DP_HDPI = 3;
-	public static final int NOTIFICATION_600DP_HDPI = 3;
-	public static final int NOTIFICATION_XHDPI = 4;
-	public static final int NOTIFICATION_720DP_XHDPI = 4;
-	public static final int NOTIFICATION_600DP_XHDPI = 4;
+	public static final int				NOTIFICATION_MDPI						= 2;
+	public static final int				NOTIFICATION_HDPI						= 3;
+	public static final int				NOTIFICATION_720DP_HDPI					= 3;
+	public static final int				NOTIFICATION_600DP_HDPI					= 3;
+	public static final int				NOTIFICATION_XHDPI						= 4;
+	public static final int				NOTIFICATION_720DP_XHDPI				= 4;
+	public static final int				NOTIFICATION_600DP_XHDPI				= 4;
 
-	public static final int BATT_ICON_HEIGHT_MDPI = 18;
-	public static final int BATT_ICON_HEIGHT_XHDPI = 36;
-	public static final int BATT_ICON_HEIGHT_HDPI = 27;
-	public static final int BATT_ICON_HEIGHT_HDPI_S3 = 38;
-	public static final int BATT_ICON_HEIGHT_XHDPI_S3 = 50;
-	public static final int BATT_ICON_HEIGHT_720DP_XHDPI = 48;
-	public static final int BATT_ICON_HEIGHT_600DP_XHDPI = 43;
-	public static final int BATT_ICON_HEIGHT_720DP_HDPI = 48;
-	public static final int BATT_ICON_HEIGHT_600DP_HDPI = 43;
+	public static final int				BATT_ICON_HEIGHT_MDPI					= 18;
+	public static final int				BATT_ICON_HEIGHT_XHDPI					= 36;
+	public static final int				BATT_ICON_HEIGHT_HDPI					= 27;
+	public static final int				BATT_ICON_HEIGHT_HDPI_S3				= 38;
+	public static final int				BATT_ICON_HEIGHT_XHDPI_S3				= 50;
+	public static final int				BATT_ICON_HEIGHT_720DP_XHDPI			= 48;
+	public static final int				BATT_ICON_HEIGHT_600DP_XHDPI			= 43;
+	public static final int				BATT_ICON_HEIGHT_720DP_HDPI				= 48;
+	public static final int				BATT_ICON_HEIGHT_600DP_HDPI				= 43;
 
-	public static final String DRAWABLE_MDPI = "drawable-mdpi";
-	public static final String DRAWABLE_XHDPI = "drawable-xhdpi";
-	public static final String DRAWABLE_HDPI = "drawable-hdpi";
-	public static final String DRAWABLE_HDPI_S3 = "drawable-hdpi";
-	public static final String DRAWABLE_720DP_XHDPI = "drawable-sw720dp-xhdpi";
-	public static final String DRAWABLE_600DP_XHDPI = "drawable-sw600dp-xhdpi";
-	public static final String DRAWABLE_720DP_HDPI = "drawable-sw720dp-hdpi";
-	public static final String DRAWABLE_600DP_HDPI = "drawable-sw600dp-hdpi";
+	public static final String			DRAWABLE_MDPI							= "drawable-mdpi";
+	public static final String			DRAWABLE_XHDPI							= "drawable-xhdpi";
+	public static final String			DRAWABLE_HDPI							= "drawable-hdpi";
+	public static final String			DRAWABLE_HDPI_S3						= "drawable-hdpi";
+	public static final String			DRAWABLE_720DP_XHDPI					= "drawable-sw720dp-xhdpi";
+	public static final String			DRAWABLE_600DP_XHDPI					= "drawable-sw600dp-xhdpi";
+	public static final String			DRAWABLE_720DP_HDPI						= "drawable-sw720dp-hdpi";
+	public static final String			DRAWABLE_600DP_HDPI						= "drawable-sw600dp-hdpi";
 
-	public static final String templateS2 = "./template/template.zip";
-	public static final String templateS3Nexus = "./template/templateS3Nexus.zip";
-	public static final String templateS3Nexus43 = "./template/templateS3Nexus-4.3.zip";
+	public static final String			templateS2								= "./template/template.zip";
+	public static final String			templateS3Nexus							= "./template/templateS3Nexus.zip";
+	public static final String			templateS3Nexus43						= "./template/templateS3Nexus-4.3.zip";
 
-	public static final String APPLY = "Apply Settings for Rom...";
+	public static final String			APPLY									= "Apply Settings for Rom...";
 
-	private static Vector<RomPreset> presets = new Vector<RomPreset>();
+	private static Vector<RomPreset>	presets									= new Vector<RomPreset>();
 
 	static {
 		presets.add(new RomPreset(APPLY, DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP, BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI,
@@ -186,20 +186,20 @@ public class RomPreset {
 				templateS3Nexus, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
 	}
 
-	private final String romName;
-	private final String systemUIDrawableFolder;
-	private final String frameworkDrawableFolder;
-	private final String filePattern;
-	private final String filePatternCharge;
-	private final int weatherSize;
-	private final int toggleSize;
-	private final int lockHandleSize;
-	private final int notificationHeight;
-	private final int battsize;
-	private final boolean useLidroid;
-	private final String template;
-	private final String morphPath2SystemUIRes;
-	private final String morphPath2FrameworkRes;
+	private final String				romName;
+	private final String				systemUIDrawableFolder;
+	private final String				frameworkDrawableFolder;
+	private final String				filePattern;
+	private final String				filePatternCharge;
+	private final int					weatherSize;
+	private final int					toggleSize;
+	private final int					lockHandleSize;
+	private final int					notificationHeight;
+	private final int					battsize;
+	private final boolean				useLidroid;
+	private final String				template;
+	private final String				morphPath2SystemUIRes;
+	private final String				morphPath2FrameworkRes;
 
 	public RomPreset(final String romName, final String systemUIDrawableFolder, final int battsize, final String frameworkDrawableFolder,
 			final String filePattern, final String filePatternCharge, final int lockHandleSize, final int notificationHeight, final int toggleSize,
