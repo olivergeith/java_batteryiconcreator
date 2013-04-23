@@ -6,20 +6,18 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-
 import javax.swing.ImageIcon;
-
 import de.og.batterycreator.cfg.RomSettings;
 
 public class BarsSignalCreator extends AbstractSignalCreator {
 
-	public static String name = "SignalBars";
+	public static String		name		= "SignalBars";
 
-	private static final int imgWidth = 39;
-	private static final int imgHeight = 36;
-	private static int offsetlinks = 8;
-	private static final int gap = 1;
-	private final int breite = Math.round((imgWidth - offsetlinks - (4 * gap)) / 5f);
+	private static final int	imgWidth	= 39;
+	private static final int	imgHeight	= 36;
+	private static int			offsetlinks	= 6;
+	private static final int	gap			= 2;
+	private final int			breite		= Math.round((imgWidth - offsetlinks - (4 * gap)) / 5f);
 
 	public BarsSignalCreator(final RomSettings romSettings) {
 		super(romSettings);
@@ -35,8 +33,8 @@ public class BarsSignalCreator extends AbstractSignalCreator {
 
 	private Rectangle calculateRectForLevel(final int level) {
 
-		final int offsetUnten = 2;
-		final int offsetOben = 4;
+		final int offsetUnten = 1;
+		final int offsetOben = 2;
 
 		final int maxHeight = imgHeight - offsetUnten - offsetOben;
 		final int stufenhoehe = Math.round(maxHeight / 5f);
@@ -58,7 +56,7 @@ public class BarsSignalCreator extends AbstractSignalCreator {
 			for (int i = 0; i < 5; i++) {
 				g2d.setColor(getSettings().getColorInActiv());
 				final Rectangle rect = calculateRectForLevel(i);
-				g2d.fillRect(rect.x - 1, rect.y, rect.width + 1, rect.height);
+				g2d.fillRect(rect.x - gap, rect.y, rect.width + gap, rect.height);
 			}
 		} else {
 			for (int i = 0; i < 5; i++) {
@@ -75,7 +73,7 @@ public class BarsSignalCreator extends AbstractSignalCreator {
 
 		// Clearing diagonal to get an triangular shape
 		// g2d.setBackground(new Color(255, 255, 255, 0));
-		// for (int i = 0; i < imgHeight; i++) {
+		// for (int i = 0; i <= imgHeight + 2; i++) {
 		// g2d.clearRect(-4 + i, imgHeight - 4 - i, 6, 7);
 		// }
 
