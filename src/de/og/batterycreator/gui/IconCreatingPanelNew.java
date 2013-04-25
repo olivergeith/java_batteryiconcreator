@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -12,13 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
-
 import og.basics.gui.LToolBar;
 import og.basics.gui.icon.CommonIconProvider;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import de.og.batterycreator.creators.batt.AbstractIconCreator;
 import de.og.batterycreator.creators.signal.AbstractSignalCreator;
 import de.og.batterycreator.creators.signal.NoSignalIcons;
@@ -41,44 +37,45 @@ import de.og.batterycreator.zipcreator.ZipElementCollection;
 import de.og.batterycreator.zipcreator.ZipMaker;
 
 public class IconCreatingPanelNew extends JPanel {
-	private static final Logger LOGGER = LoggerFactory.getLogger(IconCreatingPanelNew.class);
-	private static final long serialVersionUID = -2956273745014471932L;
+	private static final Logger				LOGGER				= LoggerFactory.getLogger(IconCreatingPanelNew.class);
+	private static final long				serialVersionUID	= -2956273745014471932L;
 
-	private final JButton zipButton = new JButton(IconStore.zipIcon);
-	private final JButton createButton = new JButton(CommonIconProvider.BUTTON_ICON_START);
-	private final JToggleButton advancedToggle = new JToggleButton(IconStore.moreIcon, false);
-	private final JTabbedPane tabPane = new JTabbedPane();
-	private final LToolBar toolBar = new LToolBar();
-	private final RomSettingsPanel romSettingsPanel = new RomSettingsPanel();
-	private final BatteryPanel battPanel = new BatteryPanel(romSettingsPanel.getSettings());
-	private final WifiPanel wifiPanel = new WifiPanel(romSettingsPanel.getSettings());
-	private final SignalPanel signalPanel = new SignalPanel(romSettingsPanel.getSettings());
+	private final JButton					zipButton			= new JButton(IconStore.zipIcon);
+	private final JButton					createButton		= new JButton(CommonIconProvider.BUTTON_ICON_START);
+	private final JToggleButton				advancedToggle		= new JToggleButton(IconStore.moreIcon, false);
+	private final JTabbedPane				tabPane				= new JTabbedPane();
+	private final LToolBar					toolBar				= new LToolBar();
+	private final RomSettingsPanel			romSettingsPanel	= new RomSettingsPanel();
+	private final BatteryPanel				battPanel			= new BatteryPanel(romSettingsPanel.getSettings());
+	private final WifiPanel					wifiPanel			= new WifiPanel(romSettingsPanel.getSettings());
+	private final SignalPanel				signalPanel			= new SignalPanel(romSettingsPanel.getSettings());
 
-	private final LockHandlePanel lockHandleSelector = new LockHandlePanel();
-	private final IconSetSelector signalWifiBox = new IconSetSelector("Signal$Wifi", "./custom/signalwifi/");
-	private final IconSetSelector toggleBox = new IconSetSelector("Toggles", "./custom/toggles/");
-	private final IconSetSelector battBox = new IconSetSelector("Batteries", "./custom/batteries/");
-	private final IconSetSelector powerwidgetBox = new IconSetSelector("PowerWidgetToggles", "./custom/powerwidget/");
-	private final IconSetSelector weatherBox = new IconSetSelector("Weather", "./custom/weather/");
-	private final NotificationAreaBG notificationBG = new NotificationAreaBG();
-	private final RawIconSetSelector systemUIBox = new RawIconSetSelector("SystemUIMods", "./custom/systemui-mods/");
-	private final RawIconSetSelector frameworkresBox = new RawIconSetSelector("FrameworkResMods", "./custom/frameworkres-mods/");
-	private final RecurseXMLSetSelector xmlBox = new RecurseXMLSetSelector();
+	private final LockHandlePanel			lockHandleSelector	= new LockHandlePanel();
+	private final IconSetSelector			signalWifiBox		= new IconSetSelector("Signal$Wifi", "./custom/signalwifi/");
+	private final IconSetSelector			toggleBox			= new IconSetSelector("Toggles", "./custom/toggles/");
+	private final IconSetSelector			battBox				= new IconSetSelector("Batteries", "./custom/batteries/");
+	private final IconSetSelector			powerwidgetBox		= new IconSetSelector("PowerWidgetToggles", "./custom/powerwidget/");
+	private final IconSetSelector			weatherBox			= new IconSetSelector("Weather", "./custom/weather/");
+	private final IconSetSelector			emoBox				= new IconSetSelector("Emoticons", "./custom/emoticons/");
+	private final NotificationAreaBG		notificationBG		= new NotificationAreaBG();
+	private final RawIconSetSelector		systemUIBox			= new RawIconSetSelector("SystemUIMods", "./custom/systemui-mods/");
+	private final RawIconSetSelector		frameworkresBox		= new RawIconSetSelector("FrameworkResMods", "./custom/frameworkres-mods/");
+	private final RecurseXMLSetSelector		xmlBox				= new RecurseXMLSetSelector();
 
-	private final RecurseFileSetSelector filesetBox = new RecurseFileSetSelector();
-	private final RecurseIconSetSelector iconsetBox = new RecurseIconSetSelector();
+	private final RecurseFileSetSelector	filesetBox			= new RecurseFileSetSelector();
+	private final RecurseIconSetSelector	iconsetBox			= new RecurseIconSetSelector();
 
 	// Treadstuff
-	private final JProgressBar progressBar = new JProgressBar();
-	private Thread t = null;
-	private boolean isrunning = false;
+	private final JProgressBar				progressBar			= new JProgressBar();
+	private Thread							t					= null;
+	private boolean							isrunning			= false;
 	// private boolean stopnow = false;
-	private final int maxsteps = 18;
-	private int step = 0;
+	private final int						maxsteps			= 19;
+	private int								step				= 0;
 
-	private final JFrame parentFrame;
+	private final JFrame					parentFrame;
 
-	private JTabbedPane advancedTabPane;
+	private JTabbedPane						advancedTabPane;
 
 	public IconCreatingPanelNew(final JFrame parentFrame) {
 		this.parentFrame = parentFrame;
@@ -107,7 +104,7 @@ public class IconCreatingPanelNew extends JPanel {
 		advancedToggle.setSelected(false);
 		advancedToggle.setToolTipText("Show Advanced Features...Noobs stay away!!!!");
 		advancedToggle.addActionListener(new ActionListener() {
-			boolean firstTime = true;
+			boolean	firstTime	= true;
 
 			@Override
 			public void actionPerformed(final ActionEvent e) {
@@ -149,6 +146,7 @@ public class IconCreatingPanelNew extends JPanel {
 		iconsetsTabPane.addTab("CM Powerwidget", IconStore.powerwidgetIcon, powerwidgetBox, "Predefined PowerWidget Toggle-Icon-Sets");
 		iconsetsTabPane.addTab("Signal$Wifi", IconStore.signalwifiIcon, signalWifiBox, "Predefined Signal- and Wifi-Icon-Sets");
 		iconsetsTabPane.addTab("Weather", IconStore.weatherIcon, weatherBox, "Predefined Weather-Icon-Sets");
+		iconsetsTabPane.addTab("Emoticons", IconStore.weatherIcon, emoBox, "Predefined Emoticon-Icon-Sets");
 		iconsetsTabPane.addTab("Lockring", IconStore.lockringIcon, lockHandleSelector, "See your choosen Lockring!");
 		iconsetsTabPane.addTab("Batteries", IconStore.batteryIcon, battBox, "Predefined Battery-Icon-Sets");
 		tabPane.addTab("Icon-Sets", IconStore.iconsetsIcon, iconsetsTabPane, "Custom Icon-Sets");
@@ -268,6 +266,9 @@ public class IconCreatingPanelNew extends JPanel {
 		// Add Weather
 		updateProgressBar(step++, "Adding Weather Icons (if configured)");
 		files2add2Framework.addAll(weatherBox.getAllFilenamesAndPath());
+		// Add Emoticons
+		updateProgressBar(step++, "Adding Emoticons Emoticons (if configured)");
+		files2add2Framework.addAll(emoBox.getAllFilenamesAndPath());
 		// Lockhandle
 		updateProgressBar(step++, "Adding Lock Icons (if configured)");
 		files2add2Framework.addAll(lockHandleSelector.getAllFilenamesAndPath());
@@ -367,7 +368,10 @@ public class IconCreatingPanelNew extends JPanel {
 		// creating weather
 		updateProgressBar(step++, "Deploying Weather Icons (if configured)");
 		weatherBox.createAllImages(romSettingsPanel.getSettings().getWeatherSize());
-		updateProgressBar(step++, "Deploying Weather Icons ...done");
+
+		// creating emoticons
+		updateProgressBar(step++, "Deploying Emoticons (if configured)");
+		emoBox.createAllImages(romSettingsPanel.getSettings().getEmoSize());
 
 		// Systemui Mods
 		updateProgressBar(step++, "Deploying SystemUI Icons (if configured)");

@@ -2,20 +2,19 @@ package de.og.batterycreator.gui.widgets;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JComboBox;
-
 import de.og.batterycreator.cfg.RomPreset;
 
 public class DrawableComboBox extends JComboBox<String> {
-	private static final long serialVersionUID = 1L;
+	private static final long		serialVersionUID		= 1L;
 	// systemui
-	private final SliderAndLabel sliderBattSize = new SliderAndLabel(10, 70);
-	private final SliderAndLabel sliderToggleSize = new SliderAndLabel(20, 100);
+	private final SliderAndLabel	sliderBattSize			= new SliderAndLabel(10, 70);
+	private final SliderAndLabel	sliderToggleSize		= new SliderAndLabel(20, 100);
 	// frameworkres
-	private final SliderAndLabel sliderLockSize = new SliderAndLabel(100, 250);
-	private final SliderAndLabel sliderWeatherSize = new SliderAndLabel(50, 200);
-	private final SliderAndLabel sliderNotificationSize = new SliderAndLabel(1, 8);
+	private final SliderAndLabel	sliderLockSize			= new SliderAndLabel(100, 250);
+	private final SliderAndLabel	sliderWeatherSize		= new SliderAndLabel(50, 200);
+	private final SliderAndLabel	sliderEmoSize			= new SliderAndLabel(10, 200);
+	private final SliderAndLabel	sliderNotificationSize	= new SliderAndLabel(1, 8);
 
 	public DrawableComboBox() {
 
@@ -40,6 +39,7 @@ public class DrawableComboBox extends JComboBox<String> {
 					sliderBattSize.setValue(RomPreset.BATT_ICON_HEIGHT_XHDPI);
 					sliderLockSize.setValue(RomPreset.LOCK_XHDPI);
 					sliderWeatherSize.setValue(RomPreset.WEATHER_XHDPI);
+					sliderEmoSize.setValue(RomPreset.EMO_XHDPI);
 					sliderToggleSize.setValue(RomPreset.TOGGLE_XHDPI);
 					sliderNotificationSize.setValue(RomPreset.NOTIFICATION_XHDPI);
 
@@ -47,6 +47,7 @@ public class DrawableComboBox extends JComboBox<String> {
 					sliderBattSize.setValue(RomPreset.BATT_ICON_HEIGHT_HDPI);
 					sliderLockSize.setValue(RomPreset.LOCK_HDPI);
 					sliderWeatherSize.setValue(RomPreset.WEATHER_HDPI);
+					sliderEmoSize.setValue(RomPreset.EMO_HDPI);
 					sliderToggleSize.setValue(RomPreset.TOGGLE_HDPI);
 					sliderNotificationSize.setValue(RomPreset.NOTIFICATION_HDPI);
 
@@ -54,6 +55,7 @@ public class DrawableComboBox extends JComboBox<String> {
 					sliderBattSize.setValue(RomPreset.BATT_ICON_HEIGHT_MDPI);
 					sliderLockSize.setValue(RomPreset.LOCK_MDPI);
 					sliderWeatherSize.setValue(RomPreset.WEATHER_MDPI);
+					sliderEmoSize.setValue(RomPreset.EMO_MDPI);
 					sliderToggleSize.setValue(RomPreset.TOGGLE_MDPI);
 					sliderNotificationSize.setValue(RomPreset.NOTIFICATION_MDPI);
 
@@ -61,6 +63,7 @@ public class DrawableComboBox extends JComboBox<String> {
 					sliderBattSize.setValue(RomPreset.BATT_ICON_HEIGHT_720DP_XHDPI);
 					sliderLockSize.setValue(RomPreset.LOCK_720P_XHDPI);
 					sliderWeatherSize.setValue(RomPreset.WEATHER_720DP_XHDPI);
+					sliderEmoSize.setValue(RomPreset.EMO_720DP_XHDPI);
 					sliderToggleSize.setValue(RomPreset.TOGGLE_720DP_XHDPI);
 					sliderNotificationSize.setValue(RomPreset.NOTIFICATION_720DP_XHDPI);
 
@@ -68,6 +71,7 @@ public class DrawableComboBox extends JComboBox<String> {
 					sliderBattSize.setValue(RomPreset.BATT_ICON_HEIGHT_600DP_XHDPI);
 					sliderLockSize.setValue(RomPreset.LOCK_600DP_XHDPI);
 					sliderWeatherSize.setValue(RomPreset.WEATHER_600DP_XHDPI);
+					sliderEmoSize.setValue(RomPreset.EMO_600DP_XHDPI);
 					sliderToggleSize.setValue(RomPreset.TOGGLE_600DP_XHDPI);
 					sliderNotificationSize.setValue(RomPreset.NOTIFICATION_600DP_XHDPI);
 
@@ -75,6 +79,7 @@ public class DrawableComboBox extends JComboBox<String> {
 					sliderBattSize.setValue(RomPreset.BATT_ICON_HEIGHT_720DP_HDPI);
 					sliderLockSize.setValue(RomPreset.LOCK_720P_HDPI);
 					sliderWeatherSize.setValue(RomPreset.WEATHER_720DP_HDPI);
+					sliderEmoSize.setValue(RomPreset.EMO_720DP_HDPI);
 					sliderToggleSize.setValue(RomPreset.TOGGLE_720DP_HDPI);
 					sliderNotificationSize.setValue(RomPreset.NOTIFICATION_720DP_HDPI);
 
@@ -82,6 +87,7 @@ public class DrawableComboBox extends JComboBox<String> {
 					sliderBattSize.setValue(RomPreset.BATT_ICON_HEIGHT_600DP_HDPI);
 					sliderLockSize.setValue(RomPreset.LOCK_600DP_HDPI);
 					sliderWeatherSize.setValue(RomPreset.WEATHER_600DP_HDPI);
+					sliderEmoSize.setValue(RomPreset.EMO_600DP_HDPI);
 					sliderToggleSize.setValue(RomPreset.TOGGLE_600DP_HDPI);
 					sliderNotificationSize.setValue(RomPreset.NOTIFICATION_600DP_HDPI);
 				}
@@ -122,6 +128,10 @@ public class DrawableComboBox extends JComboBox<String> {
 	 */
 	public SliderAndLabel getSliderNotificationSize() {
 		return sliderNotificationSize;
+	}
+
+	public SliderAndLabel getSliderEmoSize() {
+		return sliderEmoSize;
 	}
 
 }

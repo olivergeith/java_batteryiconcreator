@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -18,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
-
 import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
@@ -26,6 +24,7 @@ import de.og.batterycreator.creators.wifi.AbstractWifiCreator;
 import de.og.batterycreator.creators.wifi.BrickWifi1Creator;
 import de.og.batterycreator.creators.wifi.BrickWifi2Creator;
 import de.og.batterycreator.creators.wifi.CircleWifiCreator;
+import de.og.batterycreator.creators.wifi.EmmyWifiCreator;
 import de.og.batterycreator.creators.wifi.ForkWifiCreator;
 import de.og.batterycreator.creators.wifi.NiceWifiCreator;
 import de.og.batterycreator.creators.wifi.NoWifiIcons;
@@ -39,13 +38,13 @@ import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.OverviewPanel;
 
 public class WifiPanel extends JPanel {
-	private static final long serialVersionUID = -4657987890334428414L;
+	private static final long						serialVersionUID	= -4657987890334428414L;
 
-	private final JComboBox<AbstractWifiCreator> combo = new JComboBox<AbstractWifiCreator>();
-	private AbstractWifiCreator activWifiCreator;
-	private final WifiSignaleSettingsPanel settingsPanel = new WifiSignaleSettingsPanel();
-	private final OverviewPanel overPane = new OverviewPanel();
-	private final RomSettings romSettings;
+	private final JComboBox<AbstractWifiCreator>	combo				= new JComboBox<AbstractWifiCreator>();
+	private AbstractWifiCreator						activWifiCreator;
+	private final WifiSignaleSettingsPanel			settingsPanel		= new WifiSignaleSettingsPanel();
+	private final OverviewPanel						overPane			= new OverviewPanel();
+	private final RomSettings						romSettings;
 
 	public WifiPanel(final RomSettings romSettings) {
 		super();
@@ -57,6 +56,7 @@ public class WifiPanel extends JPanel {
 	private void fillFillCreatorList() {
 		combo.addItem(new NoWifiIcons(romSettings));
 		combo.addItem(new NiceWifiCreator(romSettings));
+		combo.addItem(new EmmyWifiCreator(romSettings));
 		combo.addItem(new BrickWifi1Creator(romSettings));
 		combo.addItem(new BrickWifi2Creator(romSettings));
 		combo.addItem(new TowerWifiCreator(romSettings));
@@ -137,7 +137,7 @@ public class WifiPanel extends JPanel {
 	 * Renderer for WifiCreator-Combo
 	 */
 	private class WifiCreatorListCellRenderer implements ListCellRenderer<AbstractWifiCreator> {
-		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+		protected DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
 
 		@Override
 		public Component getListCellRendererComponent(final JList<? extends AbstractWifiCreator> list, final AbstractWifiCreator value, final int index,

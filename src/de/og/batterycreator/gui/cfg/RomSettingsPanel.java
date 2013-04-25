@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JCheckBox;
@@ -14,14 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
-
 import og.basics.gui.icon.CommonIconProvider;
 import og.basics.jgoodies.JGoodiesHelper;
-
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-
 import de.og.batterycreator.cfg.RomPreset;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.cfg.SettingsPersistor;
@@ -33,61 +29,63 @@ import de.og.batterycreator.gui.widgets.SliderAndLabel;
 import de.og.batterycreator.gui.widgets.TemplateChooser;
 
 public class RomSettingsPanel extends SettingsPanel {
-	private static final long serialVersionUID = 1L;
+	private static final long		serialVersionUID				= 1L;
 
-	private RomSettings settings = new RomSettings();
+	private RomSettings				settings						= new RomSettings();
 
-	JCheckBox cboxUseAdvResize = createCheckbox("Use advanced Resize-Algorithm",
-			"(Experimental) Advanced Resize-Algorith...might give better results on small imagesizes!?");
+	JCheckBox						cboxUseAdvResize				= createCheckbox("Use advanced Resize-Algorithm",
+																			"(Experimental) Advanced Resize-Algorith...might give better results on small imagesizes!?");
 
 	// Presets
-	JComboBox<RomPreset> romPresetCombo = new JComboBox<RomPreset>(RomPreset.getPresets());
+	JComboBox<RomPreset>			romPresetCombo					= new JComboBox<RomPreset>(RomPreset.getPresets());
 
 	// Drawable
-	DrawableComboBox frameworkDrawableFolderCombo = new DrawableComboBox();
-	DrawableComboBox systemUIDrawableFolderCombo = new DrawableComboBox();
-	DrawableComboBox lidroidDrawableFolderCombo = new DrawableComboBox();
+	DrawableComboBox				frameworkDrawableFolderCombo	= new DrawableComboBox();
+	DrawableComboBox				systemUIDrawableFolderCombo		= new DrawableComboBox();
+	DrawableComboBox				lidroidDrawableFolderCombo		= new DrawableComboBox();
 
 	// Morphpathes
-	MorphpathSystemUIComboBox morphpathSystemUIComboBox = new MorphpathSystemUIComboBox();
-	MorphpathFrameWorkComboBox morphpathFrameworkComboBox = new MorphpathFrameWorkComboBox();
+	MorphpathSystemUIComboBox		morphpathSystemUIComboBox		= new MorphpathSystemUIComboBox();
+	MorphpathFrameWorkComboBox		morphpathFrameworkComboBox		= new MorphpathFrameWorkComboBox();
 	// Battery
-	SliderAndLabel sliderBattSize = systemUIDrawableFolderCombo.getSliderBattSize();
-	JTextField filepattern = new JTextField();
-	JTextField filepatternCharge = new JTextField();
+	SliderAndLabel					sliderBattSize					= systemUIDrawableFolderCombo.getSliderBattSize();
+	JTextField						filepattern						= new JTextField();
+	JTextField						filepatternCharge				= new JTextField();
 
 	// Lockhandle
-	JTextField lockHandleFileName = new JTextField();
-	SliderAndLabel lockHandleSize = frameworkDrawableFolderCombo.getSliderLockSize();
+	JTextField						lockHandleFileName				= new JTextField();
+	SliderAndLabel					lockHandleSize					= frameworkDrawableFolderCombo.getSliderLockSize();
 
 	// Toggles
-	SliderAndLabel toggleSize = systemUIDrawableFolderCombo.getSliderToggleSize();
-	JCheckBox cboxUseLidroid = createCheckbox("lidroid-res.apk for Toggles (S3 only)",
-			"Morph Toggles to framework/lidroid-res.apk (Galaxy S3 only dont play with this on S2 !)");
+	SliderAndLabel					toggleSize						= systemUIDrawableFolderCombo.getSliderToggleSize();
+	JCheckBox						cboxUseLidroid					= createCheckbox("lidroid-res.apk for Toggles (S3 only)",
+																			"Morph Toggles to framework/lidroid-res.apk (Galaxy S3 only dont play with this on S2 !)");
 
 	// Weather
-	SliderAndLabel weatherSize = frameworkDrawableFolderCombo.getSliderWeatherSize();
+	SliderAndLabel					weatherSize						= frameworkDrawableFolderCombo.getSliderWeatherSize();
+	// Emoticons
+	SliderAndLabel					emoSize							= frameworkDrawableFolderCombo.getSliderEmoSize();
 
 	// Notification
-	JTextField notificationFileName = new JTextField();
-	SliderAndLabel notificationHeight = systemUIDrawableFolderCombo.getSliderNotificationSize();
+	JTextField						notificationFileName			= new JTextField();
+	SliderAndLabel					notificationHeight				= systemUIDrawableFolderCombo.getSliderNotificationSize();
 
 	// Signal stuff
-	private final JTextField fileNameSignalIn = new JTextField();
-	private final JTextField fileNameSignalOut = new JTextField();
-	private final JTextField fileNameSignalInOut = new JTextField();
-	private final JTextField fileSignalPattern = new JTextField();
-	private final JTextField fileSignalPatternFully = new JTextField();
+	private final JTextField		fileNameSignalIn				= new JTextField();
+	private final JTextField		fileNameSignalOut				= new JTextField();
+	private final JTextField		fileNameSignalInOut				= new JTextField();
+	private final JTextField		fileSignalPattern				= new JTextField();
+	private final JTextField		fileSignalPatternFully			= new JTextField();
 
 	// Wifi stuff
-	private final JTextField fileNameWifiIn = new JTextField();
-	private final JTextField fileNameWifiOut = new JTextField();
-	private final JTextField fileNameWifiInOut = new JTextField();
-	private final JTextField fileWifiPattern = new JTextField();
-	private final JTextField fileWifiPatternFully = new JTextField();
+	private final JTextField		fileNameWifiIn					= new JTextField();
+	private final JTextField		fileNameWifiOut					= new JTextField();
+	private final JTextField		fileNameWifiInOut				= new JTextField();
+	private final JTextField		fileWifiPattern					= new JTextField();
+	private final JTextField		fileWifiPatternFully			= new JTextField();
 
 	// Template
-	private final TemplateChooser templateChooser = new TemplateChooser();
+	private final TemplateChooser	templateChooser					= new TemplateChooser();
 
 	// Construktor
 	public RomSettingsPanel() {
@@ -119,6 +117,7 @@ public class RomSettingsPanel extends SettingsPanel {
 					notificationHeight.setValue(pre.getNotificationHeight());
 					toggleSize.setValue(pre.getToggleSize());
 					weatherSize.setValue(pre.getWeatherSize());
+					emoSize.setValue(pre.getEmoSize());
 					sliderBattSize.setValue(pre.getBattsize());
 					cboxUseLidroid.setSelected(pre.isUseLidroid());
 					lidroidDrawableFolderCombo.setEnabled(pre.isUseLidroid());
@@ -239,7 +238,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(lockHandleSize, cc.xyw(6, row, 1));
 		builder.add(lockHandleSize.getValueLabel(), cc.xyw(8, row, 1));
 
-		builder.add(JGoodiesHelper.createGroupLabel("Toggle & Weather Size ..."), cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createGroupLabel("Toggle & Weather & Emoticon Size ..."), cc.xyw(2, ++row, 7));
 		builder.addSeparator("", cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("ToggleSize (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("WeatherSize (is set via Rom Presets)"), cc.xyw(6, row, 3));
@@ -247,6 +246,9 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(toggleSize.getValueLabel(), cc.xyw(4, row, 1));
 		builder.add(weatherSize, cc.xyw(6, row, 1));
 		builder.add(weatherSize.getValueLabel(), cc.xyw(8, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Emoticon Size (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
+		builder.add(emoSize, cc.xyw(2, ++row, 1));
+		builder.add(emoSize.getValueLabel(), cc.xyw(4, row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Choose your lidroid-res's resolution"), cc.xyw(6, ++row, 3));
 		builder.add(cboxUseLidroid, cc.xyw(2, ++row, 3));
 		builder.add(lidroidDrawableFolderCombo, cc.xyw(6, row, 3));
@@ -309,6 +311,8 @@ public class RomSettingsPanel extends SettingsPanel {
 			cboxUseLidroid.setSelected(settings.isUseLidroid());
 			// weather
 			weatherSize.setValue(settings.getWeatherSize());
+			// emoticon
+			emoSize.setValue(settings.getEmoSize());
 
 			// template
 			templateChooser.setSelectedItem(settings.getTemplate());
@@ -355,6 +359,8 @@ public class RomSettingsPanel extends SettingsPanel {
 		settings.setUseLidroid(cboxUseLidroid.isSelected());
 		// weather
 		settings.setWeatherSize(weatherSize.getValue());
+		// Emo
+		settings.setEmoSize(emoSize.getValue());
 
 		// template
 		settings.setTemplate((String) templateChooser.getSelectedItem());
@@ -380,12 +386,13 @@ public class RomSettingsPanel extends SettingsPanel {
 	 * 
 	 */
 	private class LoadSettingsAktion extends AbstractAction {
-		private static final long serialVersionUID = 1L;
+		private static final long	serialVersionUID	= 1L;
 
 		public LoadSettingsAktion(final String arg0, final Icon arg1) {
 			super(arg0, arg1);
 		}
 
+		@Override
 		public void actionPerformed(final ActionEvent arg0) {
 			setSettings(SettingsPersistor.loadRomSettings());
 		}
@@ -396,12 +403,13 @@ public class RomSettingsPanel extends SettingsPanel {
 	 * 
 	 */
 	private class SaveSettingsAktion extends AbstractAction {
-		private static final long serialVersionUID = 1L;
+		private static final long	serialVersionUID	= 1L;
 
 		public SaveSettingsAktion(final String arg0, final Icon arg1) {
 			super(arg0, arg1);
 		}
 
+		@Override
 		public void actionPerformed(final ActionEvent arg0) {
 			SettingsPersistor.saveRomSettings("MyRomSettings", getSettings());
 		}

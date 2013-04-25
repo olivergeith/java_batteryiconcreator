@@ -7,53 +7,55 @@ public class RomSettings implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6675299018043274221L;
+	private static final long	serialVersionUID			= 6675299018043274221L;
 
-	private String fileBattPattern = RomPreset.BATT_ICON_NAME_AOKP;
-	private String fileBattPatternCharge = RomPreset.BATT_ICON_CHARGE_NAME_AOKP;
+	private String				fileBattPattern				= RomPreset.BATT_ICON_NAME_AOKP;
+	private String				fileBattPatternCharge		= RomPreset.BATT_ICON_CHARGE_NAME_AOKP;
 
-	private String frameworkDrawableFolder = RomPreset.DRAWABLE_HDPI;
-	private String systemUIDrawableFolder = RomPreset.DRAWABLE_HDPI;
-	private String lidroidDrawableFolder = RomPreset.DRAWABLE_HDPI;
+	private String				frameworkDrawableFolder		= RomPreset.DRAWABLE_HDPI;
+	private String				systemUIDrawableFolder		= RomPreset.DRAWABLE_HDPI;
+	private String				lidroidDrawableFolder		= RomPreset.DRAWABLE_HDPI;
 
-	private String morphPath2SystemUIRes = RomPreset.MORPHPATH_SYSTEMUI;
-	private String folderSystemUIInZip = morphPath2SystemUIRes + RomPreset.DRAWABLE_HDPI + "/";
+	private String				morphPath2SystemUIRes		= RomPreset.MORPHPATH_SYSTEMUI;
+	private String				folderSystemUIInZip			= morphPath2SystemUIRes + RomPreset.DRAWABLE_HDPI + "/";
 
-	private String morphPath2Framework = RomPreset.MORPHPATH_FRAMEWORK;
-	private String folderFrameworkInZip = morphPath2Framework + RomPreset.DRAWABLE_HDPI + "/";
+	private String				morphPath2Framework			= RomPreset.MORPHPATH_FRAMEWORK;
+	private String				folderFrameworkInZip		= morphPath2Framework + RomPreset.DRAWABLE_HDPI + "/";
 
-	private String folderLidroidInZip = RomPreset.MORPHPATH_LIDROID + RomPreset.DRAWABLE_HDPI + "/";
+	private String				folderLidroidInZip			= RomPreset.MORPHPATH_LIDROID + RomPreset.DRAWABLE_HDPI + "/";
 
-	private int battIconSize = RomPreset.BATT_ICON_HEIGHT_HDPI;
-	private boolean useAdvancedResize = true;
+	private int					battIconSize				= RomPreset.BATT_ICON_HEIGHT_HDPI;
+	private boolean				useAdvancedResize			= true;
 
 	// Lockhandle
-	private String lockHandleFileName = RomPreset.LOCKHANDLE_FILENAME_DEFAULT;
-	private int lockHandleSize = RomPreset.LOCK_HDPI;
+	private String				lockHandleFileName			= RomPreset.LOCKHANDLE_FILENAME_DEFAULT;
+	private int					lockHandleSize				= RomPreset.LOCK_HDPI;
 	// toggle
-	private int toggleSize = RomPreset.TOGGLE_HDPI;
-	private boolean useLidroid = false;
+	private int					toggleSize					= RomPreset.TOGGLE_HDPI;
+	private boolean				useLidroid					= false;
 	// weather
-	private int weatherSize = RomPreset.WEATHER_HDPI;
+	private int					weatherSize					= RomPreset.WEATHER_HDPI;
+	// EMoticons
+	private int					emoSize						= RomPreset.EMO_HDPI;
 
 	// Notification
-	private String notificationBGFilename = RomPreset.NOTIFICATION_BG_FILENME;
-	private int notificationHeight = RomPreset.NOTIFICATION_HDPI;
+	private String				notificationBGFilename		= RomPreset.NOTIFICATION_BG_FILENME;
+	private int					notificationHeight			= RomPreset.NOTIFICATION_HDPI;
 	// Signal Stuff
-	private String fileSignalPattern = RomPreset.SIGNAL_ICON_NAME;
-	private String fileSignalEXtensionFully = RomPreset.SIGNAL_ICON_EXTENSION_FULLY;
-	private String fileSignalIn = RomPreset.SIGNAL_ICON_NAME_IN;
-	private String fileSignalOut = RomPreset.SIGNAL_ICON_NAME_OUT;
-	private String fileSignalInOut = RomPreset.SIGNAL_ICON_NAME_INOUT;
+	private String				fileSignalPattern			= RomPreset.SIGNAL_ICON_NAME;
+	private String				fileSignalEXtensionFully	= RomPreset.SIGNAL_ICON_EXTENSION_FULLY;
+	private String				fileSignalIn				= RomPreset.SIGNAL_ICON_NAME_IN;
+	private String				fileSignalOut				= RomPreset.SIGNAL_ICON_NAME_OUT;
+	private String				fileSignalInOut				= RomPreset.SIGNAL_ICON_NAME_INOUT;
 
 	// Wifi Stuff
-	private String fileWifiPattern = RomPreset.WIFI_ICON_NAME;
-	private String fileWifiEXtensionFully = RomPreset.WIFI_ICON_EXTENSION_FULLY;
-	private String fileWifiIn = RomPreset.WIFI_ICON_NAME_IN;
-	private String fileWifiOut = RomPreset.WIFI_ICON_NAME_OUT;
-	private String fileWifiInOut = RomPreset.WIFI_ICON_NAME_INOUT;
+	private String				fileWifiPattern				= RomPreset.WIFI_ICON_NAME;
+	private String				fileWifiEXtensionFully		= RomPreset.WIFI_ICON_EXTENSION_FULLY;
+	private String				fileWifiIn					= RomPreset.WIFI_ICON_NAME_IN;
+	private String				fileWifiOut					= RomPreset.WIFI_ICON_NAME_OUT;
+	private String				fileWifiInOut				= RomPreset.WIFI_ICON_NAME_INOUT;
 
-	private String template = new String("./template/template.zip");
+	private String				template					= new String("./template/template.zip");
 
 	public String getFolderSystemUIInZip() {
 		return folderSystemUIInZip;
@@ -474,6 +476,14 @@ public class RomSettings implements Serializable {
 
 	public String getMorphPath2FrameworkRes() {
 		return morphPath2Framework;
+	}
+
+	public int getEmoSize() {
+		return emoSize;
+	}
+
+	public void setEmoSize(final int emoSize) {
+		this.emoSize = emoSize;
 	}
 
 }
