@@ -146,7 +146,7 @@ public class IconCreatingPanelNew extends JPanel {
 		iconsetsTabPane.addTab("CM Powerwidget", IconStore.powerwidgetIcon, powerwidgetBox, "Predefined PowerWidget Toggle-Icon-Sets");
 		iconsetsTabPane.addTab("Signal$Wifi", IconStore.signalwifiIcon, signalWifiBox, "Predefined Signal- and Wifi-Icon-Sets");
 		iconsetsTabPane.addTab("Weather", IconStore.weatherIcon, weatherBox, "Predefined Weather-Icon-Sets");
-		iconsetsTabPane.addTab("Emoticons", IconStore.weatherIcon, emoBox, "Predefined Emoticon-Icon-Sets");
+		iconsetsTabPane.addTab("Emoticons", IconStore.emoIcon, emoBox, "Predefined Emoticon-Icon-Sets");
 		iconsetsTabPane.addTab("Lockring", IconStore.lockringIcon, lockHandleSelector, "See your choosen Lockring!");
 		iconsetsTabPane.addTab("Batteries", IconStore.batteryIcon, battBox, "Predefined Battery-Icon-Sets");
 		tabPane.addTab("Icon-Sets", IconStore.iconsetsIcon, iconsetsTabPane, "Custom Icon-Sets");
