@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Vector;
-
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -18,14 +17,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
-
+import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.IconProviderInterface;
 import de.og.batterycreator.gui.iconstore.IconStore;
@@ -33,25 +31,25 @@ import de.og.batterycreator.gui.widgets.OverviewCreator;
 import de.og.batterycreator.gui.widgets.OverviewPanel;
 
 public class LockHandlePanel extends JPanel implements IconProviderInterface {
-	private static final Logger LOGGER = LoggerFactory.getLogger(LockHandlePanel.class);
+	private static final Logger		LOGGER				= LoggerFactory.getLogger(LockHandlePanel.class);
 
-	JComboBox<ImageIcon> combo = new JComboBox<ImageIcon>();
+	JComboBox<ImageIcon>			combo				= new JComboBox<ImageIcon>();
 
-	private static final String PROVIDER_NAME = "Lockhandle";
-	private static final String CUSTOM_DIR = "./custom/lockhandles/";
+	private static final String		PROVIDER_NAME		= "Lockhandle";
+	private static final String		CUSTOM_DIR			= "./custom/lockhandles/";
 	// private static final String CUSTOM_DIR = "H:/_IconLibrary/Lockrings/";
-	private static final String CUSTOM_OUT_DIR = "./pngs/deploy/lock/";
+	private static final String		CUSTOM_OUT_DIR		= "./pngs/deploy/lock/";
 
-	private static final long serialVersionUID = -7712530632645291404L;
-	private final ImageIcon nada = IconStore.nothingIcon;
-	private static final ImageIcon origlock = new ImageIcon(LockHandlePanel.class.getResource("ic_lockscreen_handle_normal.png"));
-	private static final ImageIcon androidlock = new ImageIcon(LockHandlePanel.class.getResource("ic_lock_android.png"));
-	private static final ImageIcon entelock = new ImageIcon(LockHandlePanel.class.getResource("ic_lock_ente.png"));
+	private static final long		serialVersionUID	= -7712530632645291404L;
+	private final ImageIcon			nada				= IconStore.nothingIcon;
+	private static final ImageIcon	origlock			= new ImageIcon(LockHandlePanel.class.getResource("ic_lockscreen_handle_normal.png"));
+	private static final ImageIcon	androidlock			= new ImageIcon(LockHandlePanel.class.getResource("ic_lock_android.png"));
+	private static final ImageIcon	entelock			= new ImageIcon(LockHandlePanel.class.getResource("ic_lock_ente.png"));
 
-	private final Vector<ImageIcon> handleList = new Vector<ImageIcon>();
-	protected OverviewPanel overPane = new OverviewPanel();
-	private ImageIcon overview;
-	private final Vector<String> filenamesAndPath = new Vector<String>();
+	private final Vector<ImageIcon>	handleList			= new Vector<ImageIcon>();
+	protected OverviewPanel			overPane			= new OverviewPanel();
+	private ImageIcon				overview;
+	private final Vector<String>	filenamesAndPath	= new Vector<String>();
 
 	public LockHandlePanel() {
 		super();
@@ -85,7 +83,19 @@ public class LockHandlePanel extends JPanel implements IconProviderInterface {
 		});
 		combo.setSelectedIndex(0);
 		setLayout(new BorderLayout());
-		this.add(overPane, BorderLayout.CENTER);
+
+		// Tabbed Pane
+		final JTabbedPane tabPane = new JTabbedPane();
+
+		// battTabPane.setTabPlacement(JTabbedPane.LEFT);
+		tabPane.addTab("Overview", IconStore.overIcon, overPane, "Get an Overview of your icons");
+		// Adding Howto, if Helpfile exists !
+		final File howto = new File("./custom/lockhandles/howto.htm");
+		if (howto.exists()) {
+			tabPane.addTab("HowTo & Help", IconStore.helpIcon, new HTMLFileDisplay(howto), "Some things you might want to know :-)");
+		}
+
+		this.add(tabPane, BorderLayout.CENTER);
 		final JToolBar tollBar = makeButtonBar();
 
 		this.add(tollBar, BorderLayout.NORTH);
@@ -181,7 +191,7 @@ public class LockHandlePanel extends JPanel implements IconProviderInterface {
 	 * Renderer for WifiCreator-Combo
 	 */
 	private class MyCellRenderer implements ListCellRenderer<ImageIcon> {
-		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+		protected DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
 
 		@Override
 		public Component getListCellRendererComponent(final JList<? extends ImageIcon> list, final ImageIcon value, final int index, final boolean isSelected,
