@@ -23,6 +23,7 @@ public class RomSettings implements Serializable {
 	private String				folderFrameworkInZip		= morphPath2Framework + RomPreset.DRAWABLE_HDPI + "/";
 
 	private String				folderLidroidInZip			= RomPreset.MORPHPATH_LIDROID + RomPreset.DRAWABLE_HDPI + "/";
+	private String				folderEmoticonsInZip		= RomPreset.MORPHPATH_MMS + RomPreset.DRAWABLE_HDPI + "/";
 
 	private int					battIconSize				= RomPreset.BATT_ICON_HEIGHT_HDPI;
 	private boolean				useAdvancedResize			= true;
@@ -37,6 +38,7 @@ public class RomSettings implements Serializable {
 	private int					weatherSize					= RomPreset.WEATHER_HDPI;
 	// EMoticons
 	private int					emoSize						= RomPreset.EMO_HDPI;
+	private boolean				useMmsForEmoticons			= false;
 
 	// Notification
 	private String				notificationBGFilename		= RomPreset.NOTIFICATION_BG_FILENME;
@@ -484,6 +486,27 @@ public class RomSettings implements Serializable {
 
 	public void setEmoSize(final int emoSize) {
 		this.emoSize = emoSize;
+	}
+
+	public void setFolderEmoticonsInZip(final String folderMMSInZip) {
+		this.folderEmoticonsInZip = folderMMSInZip;
+	}
+
+	public String getFolderEmoticonsInZip() {
+		return folderEmoticonsInZip;
+	}
+
+	public boolean isUseMmsForEmoticons() {
+		return useMmsForEmoticons;
+	}
+
+	public void setUseMmsForEmoticons(final boolean useMmsForEmoticons) {
+		this.useMmsForEmoticons = useMmsForEmoticons;
+		if (useMmsForEmoticons == true)
+			this.folderEmoticonsInZip = RomPreset.MORPHPATH_MMS + frameworkDrawableFolder + "/";
+		else
+			this.folderEmoticonsInZip = folderFrameworkInZip;
+
 	}
 
 }

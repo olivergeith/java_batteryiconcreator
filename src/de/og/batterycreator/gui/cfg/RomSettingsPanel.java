@@ -65,6 +65,8 @@ public class RomSettingsPanel extends SettingsPanel {
 	SliderAndLabel					weatherSize						= frameworkDrawableFolderCombo.getSliderWeatherSize();
 	// Emoticons
 	SliderAndLabel					emoSize							= frameworkDrawableFolderCombo.getSliderEmoSize();
+	JCheckBox						cboxUseMms						= createCheckbox("Morph to Mms.apk",
+																			"Morph Emoticons to Mms.apk instead of framework-res.apk");
 
 	// Notification
 	JTextField						notificationFileName			= new JTextField();
@@ -246,12 +248,15 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(toggleSize.getValueLabel(), cc.xyw(4, row, 1));
 		builder.add(weatherSize, cc.xyw(6, row, 1));
 		builder.add(weatherSize.getValueLabel(), cc.xyw(8, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Emoticon Size (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
-		builder.add(emoSize, cc.xyw(2, ++row, 1));
-		builder.add(emoSize.getValueLabel(), cc.xyw(4, row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Choose your lidroid-res's resolution"), cc.xyw(6, ++row, 3));
 		builder.add(cboxUseLidroid, cc.xyw(2, ++row, 3));
 		builder.add(lidroidDrawableFolderCombo, cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createGroupLabel("Emoticons ..."), cc.xyw(2, ++row, 7));
+		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Emoticon Size (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
+		builder.add(emoSize, cc.xyw(2, ++row, 1));
+		builder.add(emoSize.getValueLabel(), cc.xyw(4, row, 1));
+		builder.add(cboxUseMms, cc.xyw(6, row, 3));
 
 		builder.add(JGoodiesHelper.createGroupLabel("Notification BG Filename & Size ..."), cc.xyw(2, ++row, 7));
 		builder.addSeparator("", cc.xyw(2, ++row, 7));
@@ -313,7 +318,7 @@ public class RomSettingsPanel extends SettingsPanel {
 			weatherSize.setValue(settings.getWeatherSize());
 			// emoticon
 			emoSize.setValue(settings.getEmoSize());
-
+			cboxUseMms.setSelected(settings.isUseMmsForEmoticons());
 			// template
 			templateChooser.setSelectedItem(settings.getTemplate());
 
@@ -361,6 +366,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		settings.setWeatherSize(weatherSize.getValue());
 		// Emo
 		settings.setEmoSize(emoSize.getValue());
+		settings.setUseMmsForEmoticons(cboxUseMms.isSelected());
 
 		// template
 		settings.setTemplate((String) templateChooser.getSelectedItem());

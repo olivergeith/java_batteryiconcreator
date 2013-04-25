@@ -12,6 +12,7 @@ public class RomPreset {
 	public static final String			MORPHPATH_FRAMEWORK						= "MORPH/system/framework/framework-res.apk/res/";
 	public static final String			MORPHPATH_FRAMEWORK_SAMSUNG_JB			= "MORPH/preload/symlink/system/framework/framework-res.apk/res/";
 	public static final String			MORPHPATH_LIDROID						= "MORPH/system/framework/lidroid-res.apk/res/";
+	public static final String			MORPHPATH_MMS							= "MORPH/system/app/Mms.apk/res/";
 
 	public static final String			WIFI_ICON_NAME							= "stat_sys_wifi_signal_";
 	public static final String			WIFI_ICON_EXTENSION_FULLY				= "_fully";
