@@ -1,24 +1,27 @@
 [B][SIZE="3"]New Version out of [URL="http://forum.xda-developers.com/showthread.php?t=1918500"]"The Rom Fumbler" aka "The Battery Icon Creator"[/URL][/SIZE][/B]
 
 [SIZE="4"][B]Changelog:[/B][/SIZE]
-[COLOR="Blue"][B]April-06-2013[/B] : Release 22.0[/COLOR]
+[COLOR="Blue"][B]April-26-2013[/B] : Release 23.0[/COLOR]
 [LIST]
-[*]Adding Support for MDPI-Roms
-[*]Adding Default Rom Preset for MDPI
-[*]Adding Support for CM PowerWidget Toggles
-[*]Predefined Icon-Sets for CM PowerWidget Toggles added
-[*]New Toggle Icons for Screenshot and Reboot in AOKP4.2 Toggle Icon Sets
-[*]Some new Battery Styles
-[*]New Version 4.3 of Universal Flasher Tools Templates added 
-[*]....Needed for TWRP Recoveries 
-[*]....Attention: Put flashable-zips on internal sdcard! Wont flash from external sdcard with 4.3 templates! 
-[*]ROM Preset for PacmanRom S3
+[*]Custom Battery Iconsets (with resizing to fit your ROM, but without renaming...so make sure filenames match your ROM!) 
+[*]....Maybe I will add some kind of optional renaming later ?!
+[*]....If you use this wisely, you can add all the Rootbox battery Mods into one single flashable-zip ;)
+[*]....New predifined Battery Icon-Sets (add your own icon-Sets in ./custom/battery/...)
+[*]HowTo-Tabs with infos, help and links in most of the "main features"
+[*]Gui re-arranged to group "Renderes" and "Icon-Sets"...
+[*]Combobox for drawable folder now editable (in case you have a rare dpi like ldpi or something)
+[*]New predefined Powerwidget Toggle Icon-Sets. (More consistent to the normal Tile-Toggles in Rootbox)
+[*]Adding Support for Emoticon Iconsets
+[*]...flashabel to framework-res.apk or mms.apk (See Rom Settings)
+[*]...Predefined Emoticon Iconsets (add your own to /custom/emoticons/...)
+[*]optimized folder-structure unter ./pngs/...
+[*]New Signal and Wifi Styles in Renderer
+[*]...one of them inspired by the idea of my daughter Emmylou :-)
 [/LIST]
 
 All default Rom-Settings in this tool are still for AOKP-Roms and HDPI-Devices like S2-i9100. (for example RootBox i9100) 
 As I am part of the Rootbox-Team now, it will probably stay like this for a very long time now ;-)
 ...so, I will make sure Rootbox is best supported by the Rom-Fumbler ;-) 
-This Version adds support for CM Powerwidget Toggles in Rootbox!
 
 Happy modding & flashing :)
 
