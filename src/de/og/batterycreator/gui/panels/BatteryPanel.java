@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -20,7 +19,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
-
 import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
@@ -37,6 +35,7 @@ import de.og.batterycreator.creators.batt.ArcQuaterCreator2;
 import de.og.batterycreator.creators.batt.ArcSunCreator;
 import de.og.batterycreator.creators.batt.BallCreator;
 import de.og.batterycreator.creators.batt.BatterySymbolCreator;
+import de.og.batterycreator.creators.batt.SimpleBatteryCreator;
 import de.og.batterycreator.creators.batt.BatteryVerticalSymbolCreator;
 import de.og.batterycreator.creators.batt.BinaryBarsCreator;
 import de.og.batterycreator.creators.batt.BinarySquaresCreator;
@@ -79,15 +78,15 @@ import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.OverviewPanel;
 
 public class BatteryPanel extends JPanel {
-	private static final long serialVersionUID = -5956664471952448919L;
+	private static final long						serialVersionUID	= -5956664471952448919L;
 
-	private final JComboBox<AbstractIconCreator> combo = new JComboBox<AbstractIconCreator>();
+	private final JComboBox<AbstractIconCreator>	combo				= new JComboBox<AbstractIconCreator>();
 
-	private final JList<String> battIconList = new JList<String>();
-	private AbstractIconCreator activBattCreator = null;
-	private final OverviewPanel battOverviewPanel = new OverviewPanel();
+	private final JList<String>						battIconList		= new JList<String>();
+	private AbstractIconCreator						activBattCreator	= null;
+	private final OverviewPanel						battOverviewPanel	= new OverviewPanel();
 
-	private final BattSettingsPanel settingsPanel = new BattSettingsPanel();
+	private final BattSettingsPanel					settingsPanel		= new BattSettingsPanel();
 
 	public BatteryPanel(final RomSettings romSettings) {
 		super();
@@ -123,6 +122,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new DecimalBar3Creator(romSettings));
 		combo.addItem(new BinaryBarsCreator(romSettings));
 		combo.addItem(new BinarySquaresCreator(romSettings));
+		combo.addItem(new SimpleBatteryCreator(romSettings));
 		combo.addItem(new BatterySymbolCreator(romSettings));
 		combo.addItem(new BatteryVerticalSymbolCreator(romSettings));
 		combo.addItem(new AppleBatteryCreator(romSettings));
@@ -248,7 +248,7 @@ public class BatteryPanel extends JPanel {
 	 * Renderer for BattCreator-Combo
 	 */
 	private class BattCreatorListCellRenderer implements ListCellRenderer<AbstractIconCreator> {
-		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+		protected DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
 
 		@Override
 		public Component getListCellRendererComponent(final JList<? extends AbstractIconCreator> list, final AbstractIconCreator value, final int index,
@@ -275,7 +275,7 @@ public class BatteryPanel extends JPanel {
 	 * Renderer für IconList
 	 */
 	private class IconListCellRenderer implements ListCellRenderer<Object> {
-		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+		protected DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
 
 		@Override
 		public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected,

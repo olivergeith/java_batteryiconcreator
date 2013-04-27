@@ -20,8 +20,8 @@ public class IconCreatorFrame extends JFrame {
 	private final JButton				aboutButton			= new JButton(CommonIconProvider.BUTTON_ICON_INFO);
 	private final JButton				exitButton			= new JButton(CommonIconProvider.BUTTON_ICON_EXIT);
 	private static final String			APP_NAME			= "'The Rom Fumbler'";
-	public static final String			VERSION_NR			= "23.0";
-	private static final String			VERSION_DATE		= "26.April.2013";
+	public static final String			VERSION_NR			= "24.0 beta";
+	private static final String			VERSION_DATE		= "xx.xxxx.2013";
 	private static final long			serialVersionUID	= 1L;
 	private static IconCreatorFrame		frame;
 	private final IconCreatingPanelNew	iconCreatingPanel	= new IconCreatingPanelNew(this);
