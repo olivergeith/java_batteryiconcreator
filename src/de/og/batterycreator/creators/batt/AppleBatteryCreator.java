@@ -4,14 +4,12 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
 import javax.swing.ImageIcon;
-
 import de.og.batterycreator.cfg.RomSettings;
 
 public class AppleBatteryCreator extends AbstractIconCreator {
 
-	protected static String name = "ApfelBattery";
+	protected static String	name	= "ApfelBattery";
 
 	public AppleBatteryCreator(final RomSettings romSettings) {
 		super(romSettings);
@@ -40,7 +38,9 @@ public class AppleBatteryCreator extends AbstractIconCreator {
 		final Graphics2D g2d = initGrafics2D(img);
 
 		g2d.setColor(Color.gray);
-		final int w = Math.round(39f / 100f * percentage);
+		int w = Math.round(39f / 100f * percentage);
+		if (w < 2)
+			w = 2;
 
 		final int cornerRad = 7;
 		g2d.fillRoundRect(1, 7, 45, 27, cornerRad + 2, cornerRad + 2); // Battery

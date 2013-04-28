@@ -4,14 +4,12 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
 import javax.swing.ImageIcon;
-
 import de.og.batterycreator.cfg.RomSettings;
 
 public class Box2Creator extends AbstractIconCreator {
 
-	protected static String name = "Box2Battery";
+	protected static String	name	= "BoxBattery.2";
 
 	public Box2Creator(final RomSettings romSettings) {
 		super(romSettings);
@@ -63,7 +61,10 @@ public class Box2Creator extends AbstractIconCreator {
 		}
 		g2d.fillRect(w, w, 40 - w - w, 40 - w - w); // Inner Battery
 
-		final int h = Math.round((40f - w - w - 2) / 100f * percentage);
+		int h = Math.round((40f - w - w - 2) / 100f * percentage);
+		if (h < 2)
+			h = 2;
+
 		if (settings.isBattGradient()) {
 			final Color col1 = settings.getActivIconColor(percentage, charge);
 			final Color col2 = getBattGardientSecondColor(col1);
