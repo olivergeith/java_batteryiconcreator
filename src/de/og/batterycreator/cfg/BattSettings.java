@@ -3,7 +3,6 @@ package de.og.batterycreator.cfg;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.Serializable;
-
 import javax.swing.ImageIcon;
 
 /**
@@ -17,71 +16,74 @@ public class BattSettings implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6505593229306008760L;
+	private static final long	serialVersionUID			= 6505593229306008760L;
 
 	// Konstanten
-	public static final Color COLOR_INACTIV = Color.darkGray;
-	public static final Color COLOR_BGRND = Color.black;
-	public static final Color COLOR_FONT = Color.white;
-	public static final Color COLOR_CHARGE = Color.green.darker();
-	public static final Color COLOR_Med_BATT = Color.orange;
-	public static final Color COLOR_LOW_BATT = Color.red;
-	public static final Color COLOR_AOKP_BLUE = new Color(39, 135, 173);
-	public static final Font DEFAULT_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 21);
+	public static final Color	COLOR_INACTIV				= Color.darkGray;
+	public static final Color	COLOR_BGRND					= Color.black;
+	public static final Color	COLOR_FONT					= Color.white;
+	public static final Color	COLOR_CHARGE				= Color.green.darker();
+	public static final Color	COLOR_Med_BATT				= Color.orange;
+	public static final Color	COLOR_LOW_BATT				= Color.red;
+	public static final Color	COLOR_AOKP_BLUE				= new Color(39, 135, 173);
+	public static final Font	DEFAULT_FONT				= new Font(Font.SANS_SERIF, Font.BOLD, 21);
 
 	// Member
-	private Color fontColor = COLOR_FONT;
-	private Color fontColorLowBatt = COLOR_LOW_BATT;
-	private Color fontColorMedBatt = COLOR_Med_BATT;
-	private Color fontChargeColor = COLOR_FONT;
+	private Color				fontColor					= COLOR_FONT;
+	private Color				fontColorLowBatt			= COLOR_LOW_BATT;
+	private Color				fontColorMedBatt			= COLOR_Med_BATT;
+	private Color				fontChargeColor				= COLOR_FONT;
 
-	private boolean useChargeColor = true;
+	private boolean				useChargeColor				= true;
 
-	private Color iconColorInActiv = COLOR_INACTIV;
-	private Color iconColor = COLOR_AOKP_BLUE;
-	private Color iconColorLowBatt = COLOR_LOW_BATT;
-	private Color iconColorMedBatt = COLOR_Med_BATT;
-	private Color iconChargeColor = COLOR_CHARGE;
-	private boolean glow = false;
-	private boolean glowForChargeToo = true;
-	private int glowRadius = 20;
+	private Color				extraColor1					= COLOR_AOKP_BLUE;
+	private Color				extraColor2					= COLOR_AOKP_BLUE;
 
-	private Color iconChargeGlowColor = Color.orange;
-	private boolean chargeGlow = false;
-	private int chargeGlowRadius = 20;
+	private Color				iconColorInActiv			= COLOR_INACTIV;
+	private Color				iconColor					= COLOR_AOKP_BLUE;
+	private Color				iconColorLowBatt			= COLOR_LOW_BATT;
+	private Color				iconColorMedBatt			= COLOR_Med_BATT;
+	private Color				iconChargeColor				= COLOR_CHARGE;
+	private boolean				glow						= false;
+	private boolean				glowForChargeToo			= true;
+	private int					glowRadius					= 20;
 
-	private boolean transparentBackground = true;
-	private Color backgroundColor = COLOR_BGRND;
+	private Color				iconChargeGlowColor			= Color.orange;
+	private boolean				chargeGlow					= false;
+	private int					chargeGlowRadius			= 20;
+
+	private boolean				transparentBackground		= true;
+	private Color				backgroundColor				= COLOR_BGRND;
 
 	// font and charge icon offset
-	private int iconXOffset = 0;
-	private int iconYOffset = 0;
-	private int fontXOffset = 0;
-	private int fontYOffset = 0;
+	private int					iconXOffset					= 0;
+	private int					iconYOffset					= 0;
+	private int					fontXOffset					= 0;
+	private int					fontYOffset					= 0;
 	// font
-	private Font font = DEFAULT_FONT;
-	private int reduceFontOn100 = -3;
-	private boolean showFont = true;
-	private boolean coloredFont = false;
-	private boolean coloredIcon = true;
-	private boolean showChargeSymbol = true;
-	private boolean resizeChargeSymbol = true;
-	private int resizeChargeSymbolHeight = 24;
-	private boolean useGradiantForMediumColor = false;
-	private boolean useGradiantForNormalColor = false;
-	private boolean flip = false;
-	private boolean noBG = false;
-	private boolean battGradient = false;
-	private int battGradientLevel = 2;
-	private int strokewidth = 3;
+	private Font				font						= DEFAULT_FONT;
+	private int					reduceFontOn100				= -3;
+	private boolean				showFont					= true;
+	private boolean				coloredFont					= false;
+	private boolean				coloredIcon					= true;
+	private boolean				showChargeSymbol			= true;
+	private boolean				resizeChargeSymbol			= true;
+	private int					resizeChargeSymbolHeight	= 24;
+	private boolean				useGradiantForMediumColor	= false;
+	private boolean				useGradiantForNormalColor	= false;
+	private boolean				flip						= false;
+	private boolean				noBG						= false;
+	private boolean				battGradient				= false;
+	private int					battGradientLevel			= 2;
+	private int					strokewidth					= 3;
 
-	private int lowBattTheshold = 10;
-	private int MedBattTheshold = 30;
+	private int					lowBattTheshold				= 10;
+	private int					MedBattTheshold				= 30;
 
-	private boolean addPercent = false;
+	private boolean				addPercent					= false;
 
 	// this is transient because it should not be serialized
-	private transient ImageIcon chargeIcon = null;
+	private transient ImageIcon	chargeIcon					= null;
 
 	public Color getFontColor() {
 		return fontColor;
@@ -728,6 +730,22 @@ public class BattSettings implements Serializable {
 	 */
 	public void setAddPercent(final boolean addPercent) {
 		this.addPercent = addPercent;
+	}
+
+	public Color getExtraColor1() {
+		return extraColor1;
+	}
+
+	public void setExtraColor1(final Color extraColor1) {
+		this.extraColor1 = extraColor1;
+	}
+
+	public Color getExtraColor2() {
+		return extraColor2;
+	}
+
+	public void setExtraColor2(final Color extraColor2) {
+		this.extraColor2 = extraColor2;
 	}
 
 }

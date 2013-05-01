@@ -39,6 +39,11 @@ public class BatterySymbolCreatorV3 extends AbstractIconCreator {
 		return true;
 	}
 
+	@Override
+	public boolean supportsExtraColor1() {
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -104,7 +109,7 @@ public class BatterySymbolCreatorV3 extends AbstractIconCreator {
 
 		Color col1 = settings.getActivIconColor(percentage, charge);
 		if (settings.isNoBG()) {
-			col1 = settings.getIconColor().brighter();
+			col1 = settings.getExtraColor1();
 		}
 		if (settings.isBattGradient()) {
 			final Color col2 = getBattGardientSecondColor(col1);

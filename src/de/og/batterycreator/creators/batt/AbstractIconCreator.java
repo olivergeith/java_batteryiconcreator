@@ -11,15 +11,11 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.swing.ImageIcon;
-
 import og.basics.grafics.Draw2DFunktions;
 import og.basics.gui.image.StaticImageHelper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.AbstractCreator;
@@ -31,13 +27,13 @@ import de.og.batterycreator.main.IconCreatorFrame;
  */
 public abstract class AbstractIconCreator extends AbstractCreator {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractIconCreator.class);
+	private static final Logger	LOGGER	= LoggerFactory.getLogger(AbstractIconCreator.class);
 
 	public AbstractIconCreator(final RomSettings romSettings) {
 		super(romSettings);
 	}
 
-	protected BattSettings settings = new BattSettings();
+	protected BattSettings	settings	= new BattSettings();
 
 	// ###############################################################################
 	// Abstracte Methoden
@@ -60,6 +56,14 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	}
 
 	public boolean supportsStrokeWidth() {
+		return false;
+	}
+
+	public boolean supportsExtraColor1() {
+		return false;
+	}
+
+	public boolean supportsExtraColor2() {
 		return false;
 	}
 
@@ -148,39 +152,39 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 
 			final int mod = percentage % 10;
 			switch (mod) {
-			case 0:
-				centertranparenz = centertranparenz * 10 / 10;
-				break;
-			case 1:
-				centertranparenz = centertranparenz * 8 / 10;
-				break;
-			case 2:
-				centertranparenz = centertranparenz * 6 / 10;
-				break;
-			case 3:
-				centertranparenz = centertranparenz * 4 / 10;
-				break;
-			case 4:
-				centertranparenz = centertranparenz * 2 / 10;
-				break;
-			case 5:
-				centertranparenz = centertranparenz * 0 / 10;
-				break;
-			case 6:
-				centertranparenz = centertranparenz * 2 / 10;
-				break;
-			case 7:
-				centertranparenz = centertranparenz * 4 / 10;
-				break;
-			case 8:
-				centertranparenz = centertranparenz * 6 / 10;
-				break;
-			case 9:
-				centertranparenz = centertranparenz * 8 / 10;
-				break;
-			default:
-				centertranparenz = centertranparenz * 10 / 10;
-				break;
+				case 0:
+					centertranparenz = centertranparenz * 10 / 10;
+					break;
+				case 1:
+					centertranparenz = centertranparenz * 8 / 10;
+					break;
+				case 2:
+					centertranparenz = centertranparenz * 6 / 10;
+					break;
+				case 3:
+					centertranparenz = centertranparenz * 4 / 10;
+					break;
+				case 4:
+					centertranparenz = centertranparenz * 2 / 10;
+					break;
+				case 5:
+					centertranparenz = centertranparenz * 0 / 10;
+					break;
+				case 6:
+					centertranparenz = centertranparenz * 2 / 10;
+					break;
+				case 7:
+					centertranparenz = centertranparenz * 4 / 10;
+					break;
+				case 8:
+					centertranparenz = centertranparenz * 6 / 10;
+					break;
+				case 9:
+					centertranparenz = centertranparenz * 8 / 10;
+					break;
+				default:
+					centertranparenz = centertranparenz * 10 / 10;
+					break;
 			}
 
 			// centertranparenz = centertranparenz / steps * mod;
@@ -193,8 +197,12 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			// creating paint
 			final Point2D center = new Point2D.Float(img.getWidth() / 2, img.getHeight() / 2);
 			final float radius = settings.getChargeGlowRadius();
-			final float[] dist = { 0.0f, 1.0f };
-			final Color[] colors = { col2, col3 };
+			final float[] dist = {
+					0.0f, 1.0f
+			};
+			final Color[] colors = {
+					col2, col3
+			};
 			final RadialGradientPaint p = new RadialGradientPaint(center, radius, dist, colors);
 
 			// painting
@@ -227,8 +235,12 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			// creating paint
 			final Point2D center = new Point2D.Float(img.getWidth() / 2, img.getHeight() / 2);
 			final float radius = settings.getGlowRadius();
-			final float[] dist = { 0.0f, 1.0f };
-			final Color[] colors = { col2, col3 };
+			final float[] dist = {
+					0.0f, 1.0f
+			};
+			final Color[] colors = {
+					col2, col3
+			};
 			final RadialGradientPaint p = new RadialGradientPaint(center, radius, dist, colors);
 
 			// painting
