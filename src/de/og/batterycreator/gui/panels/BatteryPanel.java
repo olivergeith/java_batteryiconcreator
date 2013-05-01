@@ -35,7 +35,8 @@ import de.og.batterycreator.creators.batt.ArcQuaterCreator2;
 import de.og.batterycreator.creators.batt.ArcSunCreator;
 import de.og.batterycreator.creators.batt.BallCreator;
 import de.og.batterycreator.creators.batt.BatterySymbolCreator;
-import de.og.batterycreator.creators.batt.SimpleBatteryCreator;
+import de.og.batterycreator.creators.batt.BatterySymbolCreatorV2;
+import de.og.batterycreator.creators.batt.BatterySymbolCreatorV3;
 import de.og.batterycreator.creators.batt.BatteryVerticalSymbolCreator;
 import de.og.batterycreator.creators.batt.BinaryBarsCreator;
 import de.og.batterycreator.creators.batt.BinarySquaresCreator;
@@ -60,6 +61,7 @@ import de.og.batterycreator.creators.batt.FontOnlyCreator;
 import de.og.batterycreator.creators.batt.HoneycombCreator;
 import de.og.batterycreator.creators.batt.NoBattIcons;
 import de.og.batterycreator.creators.batt.ScalaBatteryCreator;
+import de.og.batterycreator.creators.batt.SimpleBatteryCreator;
 import de.og.batterycreator.creators.batt.TachoCreator;
 import de.og.batterycreator.creators.batt.TachoCreator3Quater;
 import de.og.batterycreator.creators.batt.TachoCreatorWide;
@@ -124,6 +126,8 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new BinarySquaresCreator(romSettings));
 		combo.addItem(new SimpleBatteryCreator(romSettings));
 		combo.addItem(new BatterySymbolCreator(romSettings));
+		combo.addItem(new BatterySymbolCreatorV2(romSettings));
+		combo.addItem(new BatterySymbolCreatorV3(romSettings));
 		combo.addItem(new BatteryVerticalSymbolCreator(romSettings));
 		combo.addItem(new AppleBatteryCreator(romSettings));
 		combo.addItem(new ClockCreator(romSettings));
@@ -172,7 +176,7 @@ public class BatteryPanel extends JPanel {
 			combo.setSelectedIndex(0);
 		activBattCreator = (AbstractIconCreator) combo.getSelectedItem();
 
-		combo.setToolTipText("Choose your IconCreator...then press play-button");
+		combo.setToolTipText("Choose your Battery-Renderer...then press play-button");
 		combo.setRenderer(new BattCreatorListCellRenderer());
 		combo.setMaximumRowCount(15);
 		combo.setMaximumSize(new Dimension(300, 40));
