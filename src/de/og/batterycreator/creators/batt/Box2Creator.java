@@ -32,6 +32,11 @@ public class Box2Creator extends AbstractIconCreator {
 		return true;
 	}
 
+	@Override
+	public boolean supportsNoBg() {
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -51,16 +56,17 @@ public class Box2Creator extends AbstractIconCreator {
 		g2d.fillRect(0, 0, w, 40);
 		g2d.fillRect(40 - w, 0, w, 40);
 
-		if (settings.isBattGradient()) {
-			final Color col1 = settings.getIconColorInActiv();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(w, 5, col2, 40 - w - w, 40, col1);
-			g2d.setPaint(gradientFill);
-		} else {
-			g2d.setColor(settings.getIconColorInActiv());
+		if (!settings.isNoBG()) {
+			if (settings.isBattGradient()) {
+				final Color col1 = settings.getIconColorInActiv();
+				final Color col2 = getBattGardientSecondColor(col1);
+				final GradientPaint gradientFill = new GradientPaint(w, 5, col2, 40 - w - w, 40, col1);
+				g2d.setPaint(gradientFill);
+			} else {
+				g2d.setColor(settings.getIconColorInActiv());
+			}
+			g2d.fillRect(w, w, 40 - w - w, 40 - w - w); // Inner Battery
 		}
-		g2d.fillRect(w, w, 40 - w - w, 40 - w - w); // Inner Battery
-
 		int h = Math.round((40f - w - w - 2) / 100f * percentage);
 		if (h < 2)
 			h = 2;

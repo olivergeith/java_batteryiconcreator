@@ -4,18 +4,16 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
 import javax.swing.ImageIcon;
-
 import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.RomSettings;
 
 public class BatteryVerticalSymbolCreator extends AbstractIconCreator {
 
-	protected static String name = "BatteryVerticalSymbol";
+	protected static String	name		= "BatteryVerticalSymbol";
 
-	private final int imgHeight = 41;
-	private final int imgWidth = 45;
+	private final int		imgHeight	= 41;
+	private final int		imgWidth	= 45;
 
 	public BatteryVerticalSymbolCreator(final RomSettings romSettings) {
 		super(romSettings);
@@ -53,7 +51,9 @@ public class BatteryVerticalSymbolCreator extends AbstractIconCreator {
 		final Graphics2D g2d = initGrafics2D(img);
 
 		g2d.setColor(settings.getIconColorInActiv().brighter());
-		final int w = Math.round((width - 6) / 100f * percentage);
+		int w = Math.round((width - 6) / 100f * percentage);
+		if (w < 2)
+			w = 2;
 
 		if (!settings.isFlip()) {
 			g2d.fillRect(0, offsetOben, width, height); // Battery Border
