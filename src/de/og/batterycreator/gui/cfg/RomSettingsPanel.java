@@ -10,10 +10,11 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import og.basics.gui.icon.CommonIconProvider;
+import og.basics.gui.widgets.hidepanel.HidePanel;
 import og.basics.jgoodies.JGoodiesHelper;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
@@ -139,15 +140,19 @@ public class RomSettingsPanel extends SettingsPanel {
 		final JLabel label = new JLabel();
 		label.setIcon(IconStore.logoIcon);
 
-		final JTabbedPane tabPane = new JTabbedPane();
-		tabPane.addTab("RomSettings Tab1", IconStore.cfgIcon, createTabPaneRomSettings(), "RomSettings");
-		tabPane.addTab("RomSettings Tab2", IconStore.cfgIcon, createTabPaneWifiColors(), "RomSettings");
-		this.add(tabPane, BorderLayout.WEST);
+		final JPanel cfg = createSettingsPanel();
+		final JScrollPane cfgScroller = new JScrollPane();
+		cfgScroller.add(cfg);
+		cfgScroller.getViewport().setView(cfg);
+		// cfgScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		cfgScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(cfgScroller, BorderLayout.WEST);
+
+		// this.add(createSettingsPanel(), BorderLayout.WEST);
 		this.add(label, BorderLayout.CENTER);
-		// this.add(createTabPaneRomSettings(), BorderLayout.WEST);
 	}
 
-	public JPanel createTabPaneWifiColors() {
+	private JPanel createSettingsPanel() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
 				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
@@ -155,33 +160,13 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(JGoodiesHelper.createGroupLabel("Wifi Filenames & Output ..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Filename Data In"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Filename Data Out"), cc.xyw(6, row, 3));
-		builder.add(fileNameWifiIn, cc.xyw(2, ++row, 3));
-		builder.add(fileNameWifiOut, cc.xyw(6, row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Filename Data InOut"), cc.xyw(2, ++row, 3));
-		builder.add(fileNameWifiInOut, cc.xyw(2, ++row, 3));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Filename Pattern"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Fileextens. 'fully'"), cc.xyw(6, row, 3));
-		builder.add(fileWifiPattern, cc.xyw(2, ++row, 3));
-		builder.add(fileWifiPatternFully, cc.xyw(6, row, 3));
-
-		builder.add(JGoodiesHelper.createGroupLabel("Signal Filenames & Output ..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Filename Data In"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Filename Data Out"), cc.xyw(6, row, 3));
-		builder.add(fileNameSignalIn, cc.xyw(2, ++row, 3));
-		builder.add(fileNameSignalOut, cc.xyw(6, row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Filename Data InOut"), cc.xyw(2, ++row, 3));
-		builder.add(fileNameSignalInOut, cc.xyw(2, ++row, 3));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Filename Pattern"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Fileextens. 'fully'"), cc.xyw(6, row, 3));
-		builder.add(fileSignalPattern, cc.xyw(2, ++row, 3));
-		builder.add(fileSignalPatternFully, cc.xyw(6, row, 3));
+		builder.add(createCfgPaneRomSettings(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneBattery(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneLockhandle(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneToggleWeather(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneNotification(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneWifi(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneSignal(), cc.xyw(1, ++row, 9));
 
 		final JPanel cfp = builder.getPanel();
 		// cfp.setBorder(BorderFactory.createLineBorder(Color.black, 2));
@@ -190,7 +175,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		return out;
 	}
 
-	public JPanel createTabPaneRomSettings() {
+	private JPanel createCfgPaneRomSettings() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
 				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
@@ -198,16 +183,13 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(JGoodiesHelper.createGroupLabel("Rom-Presets..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Rom Presets"), cc.xyw(2, ++row, 3));
 		builder.add(romPresetCombo, cc.xyw(2, ++row, 5));
 
-		builder.add(JGoodiesHelper.createGroupLabel("Template..."), cc.xyw(2, ++row, 7));
 		builder.addSeparator("", cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("TemplateFile for flashable-Zip"), cc.xyw(2, ++row, 3));
 		builder.add(templateChooser, cc.xyw(2, ++row, 3));
 
-		builder.add(JGoodiesHelper.createGroupLabel("Output-path in flashable-zips..."), cc.xyw(2, ++row, 7));
 		builder.addSeparator("", cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("Morph-Path"), cc.xyw(2, ++row, 3));
 		builder.add(morphpathSystemUIComboBox, cc.xyw(2, ++row, 7));
@@ -217,13 +199,18 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(systemUIDrawableFolderCombo, cc.xyw(2, ++row, 3));
 		builder.add(frameworkDrawableFolderCombo, cc.xyw(6, row, 3));
 
-		// builder.add(JGoodiesHelper.createGroupLabel("Resizing..."), cc.xyw(2,
-		// ++row, 7));
-		// builder.addSeparator("", cc.xyw(2, ++row, 7));
-		// builder.add(cboxUseAdvResize, cc.xyw(2, ++row, 3));
+		final JPanel hide = new HidePanel("Main Rom Settings...", builder.getPanel());
+		return hide;
+	}
 
-		builder.add(JGoodiesHelper.createGroupLabel("Battery Filenames & Size ..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+	private JPanel createCfgPaneBattery() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
 		builder.add(JGoodiesHelper.createBlackLabel("FileName-Pattern Nomal / Charge"), cc.xyw(2, ++row, 7));
 		builder.add(filepattern, cc.xyw(2, ++row, 3));
 		builder.add(filepatternCharge, cc.xyw(6, row, 3));
@@ -232,16 +219,36 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(sliderBattSize.getValueLabel(), cc.xyw(4, row, 1));
 		builder.add(cboxUseAdvResize, cc.xyw(6, row, 3));
 
-		builder.add(JGoodiesHelper.createGroupLabel("Lockhandle Filename & Size ..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		final JPanel hide = new HidePanel("Battery Filenames & Size ...", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createCfgPaneLockhandle() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
 		builder.add(JGoodiesHelper.createBlackLabel("Lockhandle Filename"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("Size"), cc.xyw(6, row, 3));
 		builder.add(lockHandleFileName, cc.xyw(2, ++row, 3));
 		builder.add(lockHandleSize, cc.xyw(6, row, 1));
 		builder.add(lockHandleSize.getValueLabel(), cc.xyw(8, row, 1));
 
-		builder.add(JGoodiesHelper.createGroupLabel("Toggle & Weather & Emoticon Size ..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		final JPanel hide = new HidePanel("Lockhandle Filename & Size ...", builder.getPanel(), false);
+		return hide;
+	}
+
+	private JPanel createCfgPaneToggleWeather() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
 		builder.add(JGoodiesHelper.createBlackLabel("ToggleSize (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("WeatherSize (is set via Rom Presets)"), cc.xyw(6, row, 3));
 		builder.add(toggleSize, cc.xyw(2, ++row, 1));
@@ -258,19 +265,76 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(emoSize.getValueLabel(), cc.xyw(4, row, 1));
 		builder.add(cboxUseMms, cc.xyw(6, row, 3));
 
-		builder.add(JGoodiesHelper.createGroupLabel("Notification BG Filename & Size ..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		final JPanel hide = new HidePanel("Toggle & Weather & Emoticon Size ...", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createCfgPaneNotification() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
 		builder.add(JGoodiesHelper.createBlackLabel("Notification BG Filename"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("Size (height)"), cc.xyw(6, row, 3));
 		builder.add(notificationFileName, cc.xyw(2, ++row, 3));
 		builder.add(notificationHeight, cc.xyw(6, row, 1));
 		builder.add(notificationHeight.getValueLabel(), cc.xyw(8, row, 1));
 
-		final JPanel cfp = builder.getPanel();
-		// cfp.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		final JPanel out = new JPanel(new BorderLayout());
-		out.add(cfp, BorderLayout.CENTER);
-		return out;
+		final JPanel hide = new HidePanel("Notification BG Filename & Size ...", builder.getPanel(), false);
+		return hide;
+	}
+
+	private JPanel createCfgPaneWifi() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(JGoodiesHelper.createBlackLabel("Filename Data In"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Filename Data Out"), cc.xyw(6, row, 3));
+		builder.add(fileNameWifiIn, cc.xyw(2, ++row, 3));
+		builder.add(fileNameWifiOut, cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Filename Data InOut"), cc.xyw(2, ++row, 3));
+		builder.add(fileNameWifiInOut, cc.xyw(2, ++row, 3));
+		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Filename Pattern"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Fileextens. 'fully'"), cc.xyw(6, row, 3));
+		builder.add(fileWifiPattern, cc.xyw(2, ++row, 3));
+		builder.add(fileWifiPatternFully, cc.xyw(6, row, 3));
+
+		final JPanel hide = new HidePanel("Wifi Filenames & Output ..", builder.getPanel(), false);
+		return hide;
+	}
+
+	private JPanel createCfgPaneSignal() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(JGoodiesHelper.createGroupLabel("Signal Filenames & Output ..."), cc.xyw(2, ++row, 7));
+		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Filename Data In"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Filename Data Out"), cc.xyw(6, row, 3));
+		builder.add(fileNameSignalIn, cc.xyw(2, ++row, 3));
+		builder.add(fileNameSignalOut, cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Filename Data InOut"), cc.xyw(2, ++row, 3));
+		builder.add(fileNameSignalInOut, cc.xyw(2, ++row, 3));
+		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Filename Pattern"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Fileextens. 'fully'"), cc.xyw(6, row, 3));
+		builder.add(fileSignalPattern, cc.xyw(2, ++row, 3));
+		builder.add(fileSignalPatternFully, cc.xyw(6, row, 3));
+
+		final JPanel hide = new HidePanel("Signal Filenames & Output ...", builder.getPanel(), false);
+		return hide;
 	}
 
 	public void setSettings(final RomSettings settings) {

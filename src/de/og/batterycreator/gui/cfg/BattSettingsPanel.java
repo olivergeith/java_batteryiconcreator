@@ -132,7 +132,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		final JPanel cfg = createTabPaneBattSettings();
 		cfgScroller.add(cfg);
 		cfgScroller.getViewport().setView(cfg);
-
+		// cfgScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		cfgScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(cfgScroller, BorderLayout.CENTER);
 		makeButtonBar();
 	}
