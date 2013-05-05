@@ -36,6 +36,8 @@ public class IconStore {
 	public static final ImageIcon	iconsetsIcon		= new ImageIcon(IconStore.class.getResource("iconsets.png"));
 	public static final ImageIcon	helpIcon			= new ImageIcon(IconStore.class.getResource("help.png"));
 	public static final ImageIcon	emoIcon				= new ImageIcon(IconStore.class.getResource("emoticon.png"));
+	public static final ImageIcon	hidden				= new ImageIcon(IconStore.class.getResource("hidden.png"));
+	public static final ImageIcon	nothidden			= new ImageIcon(IconStore.class.getResource("not_hidden.png"));
 
 	public IconStore() {
 	}
