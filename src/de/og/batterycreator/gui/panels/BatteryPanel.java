@@ -191,7 +191,7 @@ public class BatteryPanel extends JPanel {
 		final JScrollPane scroller = new JScrollPane();
 		scroller.add(battIconList);
 		scroller.getViewport().setView(battIconList);
-		scroller.setPreferredSize(new Dimension(750, 500));
+		scroller.setPreferredSize(new Dimension(750, 680));
 
 		// Tabbed Pane
 		final JTabbedPane tabPane = new JTabbedPane();

@@ -8,12 +8,14 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import og.basics.gui.Jcolorselectbutton.JColorSelectButton;
 import og.basics.gui.icon.CommonIconProvider;
 import og.basics.gui.jfontchooser.JFontChooserButton;
+import og.basics.gui.widgets.hidepanel.HidePanel;
 import og.basics.jgoodies.JGoodiesHelper;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
@@ -125,19 +127,41 @@ public class BattSettingsPanel extends SettingsPanel {
 
 	private void myInit() {
 		setLayout(new BorderLayout());
-		this.add(createTabPaneBattSettings(), BorderLayout.CENTER);
+
+		final JScrollPane cfgScroller = new JScrollPane();
+		final JPanel cfg = createTabPaneBattSettings();
+		cfgScroller.add(cfg);
+		cfgScroller.getViewport().setView(cfg);
+
+		this.add(cfgScroller, BorderLayout.CENTER);
 		makeButtonBar();
 	}
 
-	public JPanel createTabPaneBattSettings() {
+	private JPanel createTabPaneBattSettings() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
 				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
 		final CellConstraints cc = new CellConstraints();
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
-		builder.add(JGoodiesHelper.createGroupLabel("Percentages..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		builder.add(createCfgPanePercentages(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneIcons(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneThresholds(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneMisc(), cc.xyw(1, ++row, 9));
+		final JPanel cfp = builder.getPanel();
+		return cfp;
+	}
+
+	private JPanel createCfgPanePercentages() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+		// builder.add(JGoodiesHelper.createGroupLabel("Percentages..."),
+		// cc.xyw(2, ++row, 7));
+		// builder.addSeparator("", cc.xyw(2, ++row, 7));
 
 		builder.add(cboxShowFont, cc.xyw(2, ++row, 1));
 		builder.add(cboxAddPercent, cc.xyw(4, row, 1));
@@ -167,8 +191,20 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(sliderGlowRadius.getValueLabel(), cc.xyw(6, row, 1));
 		builder.add(cboxGlowForChargeToo, cc.xyw(8, row, 1));
 
-		builder.add(JGoodiesHelper.createGroupLabel("Icon..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		final JPanel hide = new HidePanel("Percentages...", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createCfgPaneIcons() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+		// builder.add(JGoodiesHelper.createGroupLabel("Icon..."), cc.xyw(2,
+		// ++row, 7));
+		// builder.addSeparator("", cc.xyw(2, ++row, 7));
 
 		builder.add(cboxShowChargeSymbol, cc.xyw(2, ++row, 1));
 		builder.add(chargeIconSeletor, cc.xyw(4, row, 1));
@@ -204,8 +240,20 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(cboxTransparentBgrnd, cc.xyw(2, ++row, 5));
 		builder.add(backgroundColor, cc.xyw(8, row, 1));
 
-		builder.add(JGoodiesHelper.createGroupLabel("Thresholds..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		final JPanel hide = new HidePanel("Icon...", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createCfgPaneThresholds() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+		// builder.add(JGoodiesHelper.createGroupLabel("Thresholds..."),
+		// cc.xyw(2, ++row, 7));
+		// builder.addSeparator("", cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("...for Low Battery-Levels"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("...for Med Battery-Levels"), cc.xyw(6, row, 3));
 		builder.add(sliderLowBatt, cc.xyw(2, ++row, 1));
@@ -215,8 +263,20 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(cboxUseGradientMediumLevels, cc.xyw(2, ++row, 3));
 		builder.add(cboxUseGradientNormalLevels, cc.xyw(6, row, 3));
 
-		builder.add(JGoodiesHelper.createGroupLabel("Misc Options (only work in some renderes)"), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		final JPanel hide = new HidePanel("Thresholds...", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createCfgPaneMisc() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+		// builder.add(JGoodiesHelper.createGroupLabel("Misc Options (only work in some renderes)"),
+		// cc.xyw(2, ++row, 7));
+		// builder.addSeparator("", cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("Stroke Width"), cc.xyw(6, ++row, 3));
 		builder.add(cboxFlip, cc.xyw(2, ++row, 1));
 		builder.add(cboxNoBG, cc.xyw(4, row, 1));
@@ -231,8 +291,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(extraColor1, cc.xyw(2, ++row, 1));
 		builder.add(extraColor2, cc.xyw(4, row, 1));
 
-		final JPanel cfp = builder.getPanel();
-		return cfp;
+		final JPanel hide = new HidePanel("Misc Options (only work in some renderes)", builder.getPanel());
+		return hide;
 	}
 
 	public void setSettings(final BattSettings settings) {
