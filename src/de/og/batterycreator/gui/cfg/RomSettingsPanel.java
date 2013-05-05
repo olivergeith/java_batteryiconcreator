@@ -160,10 +160,13 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
+		builder.add(createCfgPaneRomPresets(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneRomSettings(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneBattery(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneLockhandle(), cc.xyw(1, ++row, 9));
-		builder.add(createCfgPaneToggleWeather(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneToggle(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneWeather(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneEmos(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneNotification(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneWifi(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneSignal(), cc.xyw(1, ++row, 9));
@@ -175,7 +178,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		return out;
 	}
 
-	private JPanel createCfgPaneRomSettings() {
+	private JPanel createCfgPaneRomPresets() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
 				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
@@ -186,11 +189,21 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(JGoodiesHelper.createBlackLabel("Rom Presets"), cc.xyw(2, ++row, 3));
 		builder.add(romPresetCombo, cc.xyw(2, ++row, 5));
 
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		final JPanel hide = new HidePanel("Rom Presets", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createCfgPaneRomSettings() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
 		builder.add(JGoodiesHelper.createBlackLabel("TemplateFile for flashable-Zip"), cc.xyw(2, ++row, 3));
 		builder.add(templateChooser, cc.xyw(2, ++row, 3));
 
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("Morph-Path"), cc.xyw(2, ++row, 3));
 		builder.add(morphpathSystemUIComboBox, cc.xyw(2, ++row, 7));
 		builder.add(morphpathFrameworkComboBox, cc.xyw(2, ++row, 7));
@@ -241,7 +254,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		return hide;
 	}
 
-	private JPanel createCfgPaneToggleWeather() {
+	private JPanel createCfgPaneToggle() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
 				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
@@ -249,23 +262,48 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
+		builder.addSeparator("", cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("ToggleSize (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("WeatherSize (is set via Rom Presets)"), cc.xyw(6, row, 3));
 		builder.add(toggleSize, cc.xyw(2, ++row, 1));
 		builder.add(toggleSize.getValueLabel(), cc.xyw(4, row, 1));
-		builder.add(weatherSize, cc.xyw(6, row, 1));
-		builder.add(weatherSize.getValueLabel(), cc.xyw(8, row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Choose your lidroid-res's resolution"), cc.xyw(6, ++row, 3));
 		builder.add(cboxUseLidroid, cc.xyw(2, ++row, 3));
 		builder.add(lidroidDrawableFolderCombo, cc.xyw(6, row, 3));
-		builder.add(JGoodiesHelper.createGroupLabel("Emoticons ..."), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+
+		final JPanel hide = new HidePanel("Toggles", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createCfgPaneWeather() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(JGoodiesHelper.createBlackLabel("WeatherSize (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
+		builder.add(weatherSize, cc.xyw(2, ++row, 1));
+		builder.add(weatherSize.getValueLabel(), cc.xyw(4, row, 1));
+
+		final JPanel hide = new HidePanel("Weather", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createCfgPaneEmos() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
 		builder.add(JGoodiesHelper.createBlackLabel("Emoticon Size (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
 		builder.add(emoSize, cc.xyw(2, ++row, 1));
 		builder.add(emoSize.getValueLabel(), cc.xyw(4, row, 1));
 		builder.add(cboxUseMms, cc.xyw(6, row, 3));
 
-		final JPanel hide = new HidePanel("Toggle & Weather & Emoticon Size ...", builder.getPanel());
+		final JPanel hide = new HidePanel("Emoticons", builder.getPanel());
 		return hide;
 	}
 
