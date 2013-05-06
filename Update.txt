@@ -1,27 +1,29 @@
 [B][SIZE="3"]New Version out of [URL="http://forum.xda-developers.com/showthread.php?t=1918500"]"The Rom Fumbler" aka "The Battery Icon Creator"[/URL][/SIZE][/B]
 
 [SIZE="4"][B]Changelog:[/B][/SIZE]
-[COLOR="Blue"][B]April-26-2013[/B] : Release 23.0[/COLOR]
+[COLOR="Blue"][B]May-06-2013[/B] : Release 24.0[/COLOR]
 [LIST]
-[*]Custom Battery Iconsets (with resizing to fit your ROM, but without renaming...so make sure filenames match your ROM!) 
-[*]....Maybe I will add some kind of optional renaming later ?!
-[*]....If you use this wisely, you can add all the Rootbox battery Mods into one single flashable-zip ;)
-[*]....New predifined Battery Icon-Sets (add your own icon-Sets in ./custom/battery/...)
-[*]HowTo-Tabs with infos, help and links in most of the "main features"
-[*]Gui re-arranged to group "Renderes" and "Icon-Sets"...
-[*]Combobox for drawable folder now editable (in case you have a rare dpi like ldpi or something)
-[*]New predefined Powerwidget Toggle Icon-Sets. (More consistent to the normal Tile-Toggles in Rootbox)
-[*]Adding Support for Emoticon Iconsets
-[*]...flashabel to framework-res.apk or mms.apk (See Rom Settings)
-[*]...Predefined Emoticon Iconsets (add your own to /custom/emoticons/...)
-[*]optimized folder-structure unter ./pngs/...
-[*]New Signal and Wifi Styles in Renderer
-[*]...one of them inspired by the idea of my daughter Emmylou :-)
+[*]Support for small screens like in Netbooks or Laptops
+[*]...Battery Settings scrollable and hideable (Click dark grey triangle)
+[*]...Rom Settings scrollable and hideable (Click dark grey triangle)
+[*]...All Overview Panels zoomable and scrollable
+[*]New Battery Renderer
+[*]...new KnobBattery
+[*]...new SimpleBattery
+[*]...new SimpleBattery V2
+[*]...new VerticalBatterySymbol V2
+[*]...new BatterySymbol V2
+[*]...new BatterySymbol V3
+[*]Optimized Renderes
+[*]...optimized BoxBattery V2
+[*]...optimized VerticalSymbolBattery
+[*]...optimized ArcQuaterBattery
+[*]New predefined Tile/Toggleset OlliG V9  (With new StayAwake-Toogle from Rootbox)
+[*]New predefined Powerwidget/Toggleset OlliG V9 
+[*]New predefined Signal&Wifi Iconset V9
+[*]...all V9 Iconsets consistent to each other!
+[*]New predefined Lockrings (Rootbox-icons)
 [/LIST]
-
-All default Rom-Settings in this tool are still for AOKP-Roms and HDPI-Devices like S2-i9100. (for example RootBox i9100) 
-As I am part of the Rootbox-Team now, it will probably stay like this for a very long time now ;-)
-...so, I will make sure Rootbox is best supported by the Rom-Fumbler ;-) 
 
 Happy modding & flashing :)
 

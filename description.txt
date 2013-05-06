@@ -83,8 +83,15 @@ So use with caution...you need to know what you are doing! You need to know how 
 
 [B][SIZE="4"][URL="https://www.dropbox.com/sh/q8u74cbnnhi17a6/PVTSRqhXsn"]Download here![/URL][/SIZE][/B]
 
+Buy me a drink, if you like [B]The Rom Fumbler[/B]:
+[URL="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VLSWZM23FGTDW"] [IMG]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif[/IMG][/URL]
+
+
 
 [SIZE="4"][B]Changelog:[/B][/SIZE]
+[URL="http://forum.xda-developers.com/showpost.php?p=41115232&postcount=499"]Version 24.0[/URL]
+
+[URL="http://forum.xda-developers.com/showpost.php?p=40741939&postcount=461"]Version 23.0[/URL]
 [URL="http://forum.xda-developers.com/showpost.php?p=40005004&postcount=448"]Version 22.0[/URL]
 [URL="http://forum.xda-developers.com/showpost.php?p=38968743&postcount=381"]Version 21.0[/URL]
 [URL="http://forum.xda-developers.com/showpost.php?p=38507003&postcount=370"]Version 20.0[/URL]
@@ -125,7 +132,7 @@ This tool is written in pure Java. So the only thing you need to have is a Java 
 [*]Look around...see the ./custom/... folder? This is where you can put your own custom stuff !
 [*]Doubleclick in the Jar-file
 ... or better use the [B]start.bat[/B] to start this tool! 
-[*]Choose your ROM-Preset in tab "Rom-Settings" (Default values are for Resurrection Remix...)
+[*]Choose your ROM-Preset in tab "Rom-Settings" (Default values are for hdpi ROM's like [URL="Resurrection Remix..."]Rootbox[/URL])
 [*]Choose a Battery Design 
 [*]Choose a Wifi Design 
 [*]Choose a Signal Design 
@@ -147,11 +154,17 @@ This tool is written in pure Java. So the only thing you need to have is a Java 
 [/LIST]
 
 [SIZE="4"][B]Resources[/B][/SIZE]
-Do you want lots of cool Lockrings to choose from? [URL="http://forum.xda-developers.com/showthread.php?t=1770650"]Goto shishircoolin's nice collection[/URL]. Download what you like and add it to the custom area of my tool! @shishircoolin: Thanks!
 
-[B][COLOR="SeaGreen"]You don't have a 1% BatteryMod?[/COLOR][/B] [URL="http://forum.xda-developers.com/showthread.php?t=1434061"]Go here and try this tool[/URL]...it's not been updated for a long time, but I know it's still compatibel with Android 4.1.2 and above! Thanks shayne77 for this great tool! [B]Update :[/B] There has been a new Version of [URL="http://forum.xda-developers.com/showthread.php?t=1755243"]apktool[/URL] for better support for Android 4.2.1. So if you download this BatteryMod-tool...update the apktool inside wtih the new version 1.5.1!
-Or Try this [URL="http://forum.xda-developers.com/showthread.php?t=2037171"]tool[/URL]!
+[LIST]
+[*][URL="http://forum.xda-developers.com/showthread.php?t=1770650"]Do you want lots of cool Lockrings to choose from? Goto shishircoolin's nice collection of Lockrings[/URL]. Download what you like and add it to the custom area of my tool!     [MENTION=4192120]shishircoolin[/MENTION]: Thanks!
 
+[*]More Modifications for Rootbox [URL="http://forum.xda-developers.com/showthread.php?t=1806577"][Mod][AOKP/CM] RootBox Jelly Bean [Themes|Mods|Extras][/URL]
+
+[*][B][COLOR="SeaGreen"]You don't have a 1% BatteryMod?[/COLOR][/B] [URL="http://forum.xda-developers.com/showthread.php?t=1434061"]Go here and try this tool[/URL]...it's not been updated for a long time, but I know it's still compatibel with Android 4.1.2 and above! Thanks shayne77 for this great tool! 
+[B]Update :[/B] There has been a new Version of [URL="http://forum.xda-developers.com/showthread.php?t=1755243"]apktool[/URL] for better support for Android 4.2.1. So if you download this BatteryMod-tool...update the apktool inside with the new version 1.5.2!
+
+[*]Or Try this [URL="http://forum.xda-developers.com/showthread.php?t=2037171"]tool[/URL] to get the 1%-Battery Mod!
+[/LIST]
 
 [SIZE="4"][B]Final remarks...and thanks[/B][/SIZE]
 If you used my tool for you MOD or custom ROM, please give credit and link to this thread! 
@@ -168,7 +181,18 @@ Want to see my icons in use?
 [URL="http://forum.xda-developers.com/showpost.php?p=32081287&postcount=1388"]MOD-Post for Resurrection Remix ROM[/URL]
 [URL="http://forum.xda-developers.com/showthread.php?t=1968724"]Or over at Galaxy S3 Forum: [MORPHOLOGY SOCIETY][/URL] Post[URL="http://forum.xda-developers.com/showpost.php?p=33573806&postcount=4"]4#[/URL]
 
+[SIZE="4"][B]Donate[/B][/SIZE]
+This tool is -and will be- free and AD-free forever! 
+
+If you enjoy [B]The Rom Fumbler[/B] as much as I enjoy developing it, then...
+buy me a beer, wine, coke or coffee:
+
+[URL="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VLSWZM23FGTDW"] [IMG]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif[/IMG][/URL]
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 Finally press [SIZE="4"][b]Thanks[/b][/SIZE] please, if you like my tool!
+
 ......
 .....
 ....
