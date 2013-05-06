@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.util.Vector;
-
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -23,28 +22,25 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
-
 import og.basics.gui.html.HTMLFileDisplay;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.OverviewPanel;
 
 public class IconSetSelector extends JPanel {
-	private static final long serialVersionUID = -2767025548199058416L;
-	private static final Logger LOGGER = LoggerFactory.getLogger(IconSetSelector.class);
+	private static final long			serialVersionUID	= -2767025548199058416L;
+	private static final Logger			LOGGER				= LoggerFactory.getLogger(IconSetSelector.class);
 
-	private final JList<ImageIcon> list = new JList<ImageIcon>();
-	private final JComboBox<ImageIcon> combo = new JComboBox<ImageIcon>();
-	private final OverviewPanel overPane = new OverviewPanel();
-	private final ImageIcon nada = IconStore.nothingIcon;
-	private Vector<String> filenamesAndPath = new Vector<String>();
-	private final Vector<IconSet> iconSets = new Vector<IconSet>();
-	private File howtoHtml;
-	private final String rootDir;
-	private final String setTypeName;
+	private final JList<ImageIcon>		list				= new JList<ImageIcon>();
+	private final JComboBox<ImageIcon>	combo				= new JComboBox<ImageIcon>();
+	private final OverviewPanel			overPane			= new OverviewPanel();
+	private final ImageIcon				nada				= IconStore.nothingIcon;
+	private Vector<String>				filenamesAndPath	= new Vector<String>();
+	private final Vector<IconSet>		iconSets			= new Vector<IconSet>();
+	private File						howtoHtml;
+	private final String				rootDir;
+	private final String				setTypeName;
 
 	public IconSetSelector(final String setTypeName, final String rootDir) {
 		super();
@@ -122,10 +118,18 @@ public class IconSetSelector extends JPanel {
 					final IconSet set = iconSets.elementAt(index - 1);
 					list.setListData(set.getIcons());
 					final ImageIcon over = set.getOverview();
-					if (over.getIconWidth() > 600 || over.getIconHeight() > 600)
-						overPane.setOverview(set.getOverviewsmall());
-					else
+					final int overpaneHeight = overPane.getHeight();
+					// Wenn der overview höher ist als das Overview Panel
+					if (over.getIconHeight() > overpaneHeight) {
+						// dann passen wir es genau an!
+						int zoom = Math.round(100f * overpaneHeight / over.getIconHeight());
+						if (zoom < 12)
+							zoom = 12;
+						zoom -= 2; // ein bißchen weniger...
+						overPane.setOverview(over, zoom);
+					} else {
 						overPane.setOverview(over);
+					}
 					overPane.setText("");
 				} else {
 					overPane.setOverview(icon);
@@ -188,7 +192,7 @@ public class IconSetSelector extends JPanel {
 	 * Renderer for WifiCreator-Combo
 	 */
 	private class MyCellRenderer implements ListCellRenderer<ImageIcon> {
-		private final DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+		private final DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
 
 		@Override
 		public Component getListCellRendererComponent(final JList<? extends ImageIcon> list, final ImageIcon value, final int index, final boolean isSelected,
@@ -254,7 +258,7 @@ public class IconSetSelector extends JPanel {
 	 * Renderer für IconList
 	 */
 	private class IconListCellRenderer implements ListCellRenderer<ImageIcon> {
-		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+		protected DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
 
 		@Override
 		public Component getListCellRendererComponent(final JList<? extends ImageIcon> list, final ImageIcon value, final int index, final boolean isSelected,

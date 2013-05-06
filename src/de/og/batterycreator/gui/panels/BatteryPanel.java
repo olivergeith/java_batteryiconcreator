@@ -249,7 +249,7 @@ public class BatteryPanel extends JPanel {
 			battOverviewPanel.setText("Choose your Battery Style in dropdown box");
 		else
 			battOverviewPanel.setText("");
-		battOverviewPanel.setOverview(cre.getOverviewIcon());
+		battOverviewPanel.setOverview(cre.getOverviewIcon(), 100);
 		battIconList.removeAll();
 		battIconList.setListData(cre.getFilenames());
 		battIconList.repaint();
