@@ -2,16 +2,23 @@ package de.og.batterycreator.gui.widgets;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
+import javax.swing.JToolBar;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import og.basics.gui.image.StaticImageHelper;
+import de.og.batterycreator.gui.iconstore.IconStore;
 
 public class OverviewPanel extends JPanel {
 	private static final long	serialVersionUID	= -2956273745014471932L;
@@ -21,6 +28,8 @@ public class OverviewPanel extends JPanel {
 	private final JSlider		slider				= new JSlider(10, 200);
 	private BufferedImage		overbuff;
 	private final JLabel		zoomLabel			= new JLabel("Zoom");
+	private final JButton		autofitButton		= new JButton();
+	private final JButton		auto100Button		= new JButton();
 
 	public OverviewPanel(final int zoomValue) {
 		initUI(zoomValue);
@@ -43,12 +52,47 @@ public class OverviewPanel extends JPanel {
 		// slider.setSnapToTicks(true);
 		slider.setOrientation(JSlider.VERTICAL);
 		slider.addChangeListener(new ChangeListener() {
-
 			@Override
 			public void stateChanged(final ChangeEvent arg0) {
 				showOverview();
 			}
 		});
+
+		// Doppelclick auf ZoomLabel --> 100%
+		zoomLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent arg0) {
+				if (arg0.getClickCount() == 2) {
+					setOverview(overview, 100);
+				}
+
+			}
+		});
+		autofitButton.setToolTipText("Will auto-fit large overview into the overview-panel. Will not zoom more than 100%");
+		autofitButton.setIcon(IconStore.zoomfit);
+		autofitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				if (overview != null) {
+					setOverview(overview, true);
+				}
+
+			}
+		});
+
+		auto100Button.setToolTipText("Zoom to 100%");
+		auto100Button.setIcon(IconStore.zoom100);
+		auto100Button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				if (overview != null) {
+					setOverview(overview, 100);
+				}
+
+			}
+		});
+
 		// Scrollable Overview!
 		final JPanel p = new JPanel(new BorderLayout());
 		p.setBackground(Color.black);
@@ -58,11 +102,17 @@ public class OverviewPanel extends JPanel {
 		scroller.getViewport().setView(p);
 		// scroller.setBackground(Color.black);
 		add(scroller, BorderLayout.CENTER);
-		final JPanel toolbar = new JPanel(new BorderLayout());
-		toolbar.setBorder(new EmptyBorder(3, 3, 3, 3));
-		toolbar.add(zoomLabel, BorderLayout.NORTH);
-		toolbar.add(slider, BorderLayout.CENTER);
-		add(toolbar, BorderLayout.EAST);
+		final JPanel leftBar = new JPanel(new BorderLayout());
+		leftBar.setBorder(new EmptyBorder(3, 3, 3, 3));
+		leftBar.add(zoomLabel, BorderLayout.NORTH);
+		leftBar.add(slider, BorderLayout.CENTER);
+		final JToolBar toolbar = new JToolBar();
+		toolbar.setOrientation(JToolBar.VERTICAL);
+		toolbar.setFloatable(false);
+		toolbar.add(autofitButton);
+		toolbar.add(auto100Button);
+		leftBar.add(toolbar, BorderLayout.SOUTH);
+		add(leftBar, BorderLayout.EAST);
 	}
 
 	public void setOverview(final ImageIcon overview) {
@@ -113,11 +163,11 @@ public class OverviewPanel extends JPanel {
 			// dann passen wir es genau an!
 			zoom = Math.round(100f * overpaneHeight / overview.getIconHeight());
 			// kleiner als 12 % sollte es nie werden
-			if (zoom < 12)
-				zoom = 12;
+			if (zoom < 13)
+				zoom = 13;
 			// ein bißchen weniger... kleiner Offset, dass es sicher
 			// passt!
-			zoom -= 2;
+			zoom -= 3;
 		}
 		return zoom;
 	}
@@ -128,8 +178,10 @@ public class OverviewPanel extends JPanel {
 		html += "<font size=4 color=blue>";
 		html += "<b>Zoom</b><br><hr>";
 		html += "</font>";
-
-		html += "<font size=3 color=black>";
+		if (value == 100)
+			html += "<font size=3 color=green>";
+		else
+			html += "<font size=3 color=black>";
 		html += value + "%";
 		html += "</font>";
 

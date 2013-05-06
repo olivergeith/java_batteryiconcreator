@@ -38,6 +38,8 @@ public class IconStore {
 	public static final ImageIcon	emoIcon				= new ImageIcon(IconStore.class.getResource("emoticon.png"));
 	public static final ImageIcon	hidden				= new ImageIcon(IconStore.class.getResource("hidden.png"));
 	public static final ImageIcon	nothidden			= new ImageIcon(IconStore.class.getResource("not_hidden.png"));
+	public static final ImageIcon	zoomfit				= new ImageIcon(IconStore.class.getResource("zoom-fit.png"));
+	public static final ImageIcon	zoom100				= new ImageIcon(IconStore.class.getResource("zoom-100.png"));
 
 	public IconStore() {
 	}
