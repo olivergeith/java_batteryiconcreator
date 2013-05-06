@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import og.basics.gui.image.StaticImageHelper;
@@ -19,6 +20,7 @@ public class OverviewPanel extends JPanel {
 	private ImageIcon			overview;
 	private final JSlider		slider				= new JSlider(10, 200);
 	private BufferedImage		overbuff;
+	private final JLabel		zoomLabel			= new JLabel("Zoom");
 
 	public OverviewPanel(final int zoomValue) {
 		initUI(zoomValue);
@@ -57,13 +59,21 @@ public class OverviewPanel extends JPanel {
 		// scroller.setBackground(Color.black);
 		add(scroller, BorderLayout.CENTER);
 		final JPanel toolbar = new JPanel(new BorderLayout());
-		toolbar.add(new JLabel("Zoom"), BorderLayout.NORTH);
+		toolbar.setBorder(new EmptyBorder(3, 3, 3, 3));
+		toolbar.add(zoomLabel, BorderLayout.NORTH);
 		toolbar.add(slider, BorderLayout.CENTER);
 		add(toolbar, BorderLayout.EAST);
 	}
 
 	public void setOverview(final ImageIcon overview) {
 		setOverview(overview, 100);
+	}
+
+	public void setOverview(final ImageIcon overview, final boolean autozoom) {
+		if (autozoom)
+			setOverview(overview, calcAutoZoom(overview));
+		else
+			setOverview(overview);
 	}
 
 	public void setOverview(final ImageIcon overview, final int zoom) {
@@ -84,6 +94,47 @@ public class OverviewPanel extends JPanel {
 			final int height = Math.round(height100 / 100f * value);
 			final BufferedImage buff = StaticImageHelper.resize2Height(overbuff, height);
 			overviewLabel.setIcon(new ImageIcon(buff));
+			zoomLabel.setText(createZoomLabelText(value));
 		}
 	}
+
+	/**
+	 * Calculates the Zoomfactor so that the height og the overview matches the
+	 * height of the panel!
+	 * 
+	 * @param overview
+	 * @return
+	 */
+	private int calcAutoZoom(final ImageIcon overview) {
+		int zoom = 100;
+		final int overpaneHeight = getHeight();
+		// Wenn der overview höher ist als das Overview Panel
+		if (overview.getIconHeight() > overpaneHeight) {
+			// dann passen wir es genau an!
+			zoom = Math.round(100f * overpaneHeight / overview.getIconHeight());
+			// kleiner als 12 % sollte es nie werden
+			if (zoom < 12)
+				zoom = 12;
+			// ein bißchen weniger... kleiner Offset, dass es sicher
+			// passt!
+			zoom -= 2;
+		}
+		return zoom;
+	}
+
+	private String createZoomLabelText(final int value) {
+		String html = "<html>";
+
+		html += "<font size=4 color=blue>";
+		html += "<b>Zoom</b><br><hr>";
+		html += "</font>";
+
+		html += "<font size=3 color=black>";
+		html += value + "%";
+		html += "</font>";
+
+		html += "</html>";
+		return html;
+	}
+
 }

@@ -118,18 +118,7 @@ public class IconSetSelector extends JPanel {
 					final IconSet set = iconSets.elementAt(index - 1);
 					list.setListData(set.getIcons());
 					final ImageIcon over = set.getOverview();
-					final int overpaneHeight = overPane.getHeight();
-					// Wenn der overview höher ist als das Overview Panel
-					if (over.getIconHeight() > overpaneHeight) {
-						// dann passen wir es genau an!
-						int zoom = Math.round(100f * overpaneHeight / over.getIconHeight());
-						if (zoom < 12)
-							zoom = 12;
-						zoom -= 2; // ein bißchen weniger...
-						overPane.setOverview(over, zoom);
-					} else {
-						overPane.setOverview(over);
-					}
+					overPane.setOverview(over, true); // true= autozoom
 					overPane.setText("");
 				} else {
 					overPane.setOverview(icon);
