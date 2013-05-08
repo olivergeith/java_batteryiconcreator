@@ -11,13 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 import og.basics.gui.Jcolorselectbutton.ColorChangeListener;
 import og.basics.gui.Jcolorselectbutton.JColorSelectButton;
-import og.basics.gui.icon.CommonIconProvider;
 import og.basics.util.timer.AbstractTrigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import de.og.batterycreator.gui.iconstore.IconStore;
 
 public class AnimatorBar extends JToolBar {
 	private static final long			serialVersionUID	= -7723769368206156309L;
@@ -28,11 +27,14 @@ public class AnimatorBar extends JToolBar {
 	private AbstractTrigger				trigger;
 	private int							index				= 0;
 	private static final Logger			LOG					= LoggerFactory.getLogger(AnimatorBar.class);
-
 	private final JColorSelectButton	bgColor				= new JColorSelectButton("", "BackgroundColor of Animator");
 	final JPanel						aniPanel			= new JPanel(new BorderLayout());
-
 	private int							delayTime			= 80;
+
+	public static final ImageIcon		start				= new ImageIcon(AnimatorBar.class.getResource("start.png"));
+	public static final ImageIcon		stop				= new ImageIcon(AnimatorBar.class.getResource("stop.png"));
+	public static final ImageIcon		pause				= new ImageIcon(AnimatorBar.class.getResource("pause.png"));
+	public static final ImageIcon		color				= new ImageIcon(AnimatorBar.class.getResource("color.png"));
 
 	/**
 	 * @param delayTime
@@ -50,7 +52,7 @@ public class AnimatorBar extends JToolBar {
 	private void initUI() {
 
 		bgColor.setColor(Color.black);
-		bgColor.setIcon(IconStore.colorIcon);
+		bgColor.setIcon(color);
 		bgColor.addColorChangeListener(new ColorChangeListener() {
 			@Override
 			public void onChange(final Color col) {
@@ -59,11 +61,12 @@ public class AnimatorBar extends JToolBar {
 		});
 
 		aniPanel.setBackground(Color.black);
+		aniPanel.setBorder(new EmptyBorder(2, 4, 2, 2));
 		aniPanel.add(animationLabel, BorderLayout.CENTER);
 
 		startButton.setEnabled(false);
 		startButton.setToolTipText("Start animation");
-		startButton.setIcon(CommonIconProvider.BUTTON_ICON_START);
+		startButton.setIcon(start);
 		startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
@@ -73,7 +76,7 @@ public class AnimatorBar extends JToolBar {
 		});
 		stopButton.setEnabled(false);
 		stopButton.setToolTipText("Stop animation");
-		stopButton.setIcon(CommonIconProvider.BUTTON_ICON_STOP);
+		stopButton.setIcon(stop);
 		stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
