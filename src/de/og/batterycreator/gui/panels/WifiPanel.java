@@ -36,6 +36,7 @@ import de.og.batterycreator.creators.wifi.TowerWifiCreator;
 import de.og.batterycreator.gui.cfg.WifiSignaleSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.OverviewPanel;
+import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
 
 public class WifiPanel extends JPanel {
 	private static final long						serialVersionUID	= -4657987890334428414L;
@@ -45,6 +46,8 @@ public class WifiPanel extends JPanel {
 	private final WifiSignaleSettingsPanel			settingsPanel		= new WifiSignaleSettingsPanel();
 	private final OverviewPanel						overPane			= new OverviewPanel();
 	private final RomSettings						romSettings;
+
+	private final AnimatorBar						anibar				= new AnimatorBar(200);				// millies
 
 	public WifiPanel(final RomSettings romSettings) {
 		super();
@@ -102,6 +105,7 @@ public class WifiPanel extends JPanel {
 
 		this.add(tabPane, BorderLayout.CENTER);
 		this.add(settingsPanel, BorderLayout.WEST);
+		overPane.add(anibar, BorderLayout.SOUTH);
 	}
 
 	/**
@@ -126,9 +130,11 @@ public class WifiPanel extends JPanel {
 			activWifiCreator.createAllImages();
 			overPane.setOverview(activWifiCreator.getOverviewIcon());
 			overPane.setText("");
+			anibar.setIcons(activWifiCreator.getIcons());
 		} else {
 			overPane.setOverview(IconStore.nothingIcon);
 			overPane.setText("    No Wifi Icons selected...choose Wifi icon style in Toolbar");
+			anibar.setIcons(null);
 		}
 
 	}

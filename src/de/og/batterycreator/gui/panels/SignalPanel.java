@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -18,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
-
 import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
@@ -32,15 +30,18 @@ import de.og.batterycreator.creators.signal.TowerSignalCreator;
 import de.og.batterycreator.gui.cfg.WifiSignaleSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.OverviewPanel;
+import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
 
 public class SignalPanel extends JPanel {
-	private static final long serialVersionUID = -4657987890334428414L;
+	private static final long						serialVersionUID	= -4657987890334428414L;
 
-	private final JComboBox<AbstractSignalCreator> combo = new JComboBox<AbstractSignalCreator>();
-	private final OverviewPanel overPane = new OverviewPanel();
-	private final WifiSignaleSettingsPanel settingsPanel = new WifiSignaleSettingsPanel();
-	private AbstractSignalCreator activSignalCreator;
-	private RomSettings romSettings;
+	private final JComboBox<AbstractSignalCreator>	combo				= new JComboBox<AbstractSignalCreator>();
+	private final OverviewPanel						overPane			= new OverviewPanel();
+	private final WifiSignaleSettingsPanel			settingsPanel		= new WifiSignaleSettingsPanel();
+	private AbstractSignalCreator					activSignalCreator;
+	private RomSettings								romSettings;
+
+	private final AnimatorBar						anibar				= new AnimatorBar(250);					// millies
 
 	public SignalPanel(final RomSettings romSettings) {
 		super();
@@ -93,6 +94,7 @@ public class SignalPanel extends JPanel {
 
 		this.add(tabPane, BorderLayout.CENTER);
 		this.add(settingsPanel, BorderLayout.WEST);
+		overPane.add(anibar, BorderLayout.SOUTH);
 
 	}
 
@@ -118,9 +120,11 @@ public class SignalPanel extends JPanel {
 			activSignalCreator.createAllImages();
 			overPane.setOverview(activSignalCreator.getOverviewIcon());
 			overPane.setText("");
+			anibar.setIcons(activSignalCreator.getIcons());
 		} else {
 			overPane.setOverview(IconStore.nothingIcon);
 			overPane.setText("    No Signal Icons selected...choose Signal icon style in Toolbar");
+			anibar.setIcons(null);
 		}
 
 	}
@@ -129,7 +133,7 @@ public class SignalPanel extends JPanel {
 	 * Renderer for SignalCreator-Combo
 	 */
 	private class SignalCreatorListCellRenderer implements ListCellRenderer<AbstractSignalCreator> {
-		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+		protected DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
 
 		@Override
 		public Component getListCellRendererComponent(final JList<? extends AbstractSignalCreator> list, final AbstractSignalCreator value, final int index,
