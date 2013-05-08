@@ -94,7 +94,7 @@ public class BatteryPanel extends JPanel {
 
 	private final BattSettingsPanel					settingsPanel		= new BattSettingsPanel();
 
-	private final AnimatorBar						anibar				= new AnimatorBar();
+	private final AnimatorBar						anibar				= new AnimatorBar(80);					// millies
 
 	public BatteryPanel(final RomSettings romSettings) {
 		super();

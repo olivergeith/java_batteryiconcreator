@@ -32,6 +32,17 @@ public class AnimatorBar extends JToolBar {
 	private final JColorSelectButton	bgColor				= new JColorSelectButton("", "BackgroundColor of Animator");
 	final JPanel						aniPanel			= new JPanel(new BorderLayout());
 
+	private int							delayTime			= 80;
+
+	/**
+	 * @param delayTime
+	 *            in millies
+	 */
+	public AnimatorBar(final int delayTime) {
+		this.delayTime = delayTime;
+		initUI();
+	}
+
 	public AnimatorBar() {
 		initUI();
 	}
@@ -89,7 +100,7 @@ public class AnimatorBar extends JToolBar {
 			}
 		});
 
-		trigger = new AbstractTrigger(80) {
+		trigger = new AbstractTrigger(delayTime) {
 			@Override
 			public void trigger(final int triggercount) {
 				animationLabel.setIcon(icons.get(index));
@@ -124,7 +135,7 @@ public class AnimatorBar extends JToolBar {
 	 *            the icons to set
 	 */
 	public void setIcons(final List<ImageIcon> icons) {
-		LOG.info("Icons Set: {}", icons);
+		LOG.debug("Icons Set: {}", icons);
 		stopAnimation();
 		index = 0;
 		this.icons = icons;
@@ -141,11 +152,17 @@ public class AnimatorBar extends JToolBar {
 	}
 
 	/**
-	 * @param args
+	 * @return the delayTime in millies
 	 */
-	public static void main(final String[] args) {
+	public int getDelayTime() {
+		return delayTime;
+	}
 
-		// TODO Auto-generated method stub
-
+	/**
+	 * @param delayTime
+	 *            the delayTime to set in millies
+	 */
+	public void setDelayTime(final int delayTime) {
+		this.delayTime = delayTime;
 	}
 }
