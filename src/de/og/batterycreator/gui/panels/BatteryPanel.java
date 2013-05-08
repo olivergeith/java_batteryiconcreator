@@ -81,6 +81,7 @@ import de.og.batterycreator.creators.batt.XORVnvCreator;
 import de.og.batterycreator.gui.cfg.BattSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.OverviewPanel;
+import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
 
 public class BatteryPanel extends JPanel {
 	private static final long						serialVersionUID	= -5956664471952448919L;
@@ -92,6 +93,8 @@ public class BatteryPanel extends JPanel {
 	private final OverviewPanel						battOverviewPanel	= new OverviewPanel();
 
 	private final BattSettingsPanel					settingsPanel		= new BattSettingsPanel();
+
+	private final AnimatorBar						anibar				= new AnimatorBar();
 
 	public BatteryPanel(final RomSettings romSettings) {
 		super();
@@ -211,6 +214,7 @@ public class BatteryPanel extends JPanel {
 		final JToolBar toolBar = makeButtonBar();
 		p.add(tabPane, BorderLayout.CENTER);
 		p.add(toolBar, BorderLayout.NORTH);
+		p.add(anibar, BorderLayout.SOUTH);
 
 		this.add(p, BorderLayout.CENTER);
 		this.add(settingsPanel, BorderLayout.WEST);
@@ -223,6 +227,7 @@ public class BatteryPanel extends JPanel {
 		final JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		toolBar.add(combo);
+		// toolBar.add(anibar);
 		return toolBar;
 	}
 
@@ -253,6 +258,7 @@ public class BatteryPanel extends JPanel {
 		battIconList.removeAll();
 		battIconList.setListData(cre.getFilenames());
 		battIconList.repaint();
+		anibar.setIcons(cre.getIcons());
 	}
 
 	/**
