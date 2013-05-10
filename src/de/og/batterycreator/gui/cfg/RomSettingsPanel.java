@@ -119,7 +119,7 @@ public class RomSettingsPanel extends SettingsPanel {
 
 		});
 		// romPresetCombo.setSelectedIndex(7);
-		romPresetCombo.setSelectedIndex(1);
+		romPresetCombo.setSelectedIndex(0);
 		romPresetCombo.setMaximumRowCount(20);
 	}
 

@@ -15,6 +15,7 @@ import og.basics.gui.LToolBar;
 import og.basics.gui.icon.CommonIconProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import de.og.batterycreator.cfg.GlobalSettings;
 import de.og.batterycreator.cfg.RomPreset;
 import de.og.batterycreator.creators.batt.AbstractIconCreator;
 import de.og.batterycreator.creators.signal.AbstractSignalCreator;
@@ -176,14 +177,27 @@ public class IconCreatingPanelNew extends JPanel {
 		// add(configPane, BorderLayout.WEST);
 		add(progressBar, BorderLayout.SOUTH);
 		makeButtonBar();
-		// setting rom presets
-		final RomPreset preset = globalSettingsPanel.getSettings().getRomPreset();
+		// validate GlobalSettings
+		applyGlobalSettingsOnStart();
+	}
+
+	private void applyGlobalSettingsOnStart() {
+		final GlobalSettings gset = globalSettingsPanel.getSettings();
+		if (gset == null) {
+			LOGGER.error("No GlobalSettings!!!");
+			return;
+		}
+		// rom preset
+		final RomPreset preset = gset.getRomPreset();
 		if (preset != null && !preset.getRomName().equals(RomPreset.APPLY)) {
 			LOGGER.info("Setting your RomPreset to : {}", preset.getRomName());
 			romSettingsPanel.applyRomPresets(preset);
 		} else {
 			LOGGER.info("No RomPresets choosen to be applied on startup...using Defaults!!!");
 		}
+		// advanced Tab
+		LOGGER.info("Showing advanced toggle = {}", gset.isShowAdvancedButton());
+		advancedToggle.setVisible(gset.isShowAdvancedButton());
 
 	}
 

@@ -3,6 +3,7 @@ package de.og.batterycreator.gui.cfg;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,12 +22,14 @@ import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.main.IconCreatorFrame;
 
 public class GlobalSettingsPanel extends SettingsPanel {
-	private static final long		serialVersionUID	= 1L;
+	private static final long		serialVersionUID		= 1L;
 
-	private GlobalSettings			settings			= new GlobalSettings();
+	private GlobalSettings			settings				= new GlobalSettings();
 	// Presets
 	private JComboBox<RomPreset>	romPresetCombo;
-	private static final Logger		LOGGER				= LoggerFactory.getLogger(GlobalSettingsPanel.class);
+	private final JCheckBox			cboxShowAdvancedButton	= createCheckbox("Show 'Advanced Button' on startup (requires restart to take effect)",
+																	"Show 'Advanced Button' in buttonbar (requires restart to take effect)");
+	private static final Logger		LOGGER					= LoggerFactory.getLogger(GlobalSettingsPanel.class);
 
 	// Construktor
 	public GlobalSettingsPanel() {
@@ -34,38 +37,28 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	}
 
 	private void myInit() {
+		// Components
 		romPresetCombo = new JComboBox<RomPreset>(RomPreset.getPresets());
-		// reading settings
-		final GlobalSettings set = SettingsPersistor.loadGlobalSettings();
-		LOGGER.info("Reading Global Settings");
-		if (set != null) {
-			LOGGER.info("- loading RomPreset to load on start: {}", set.getRomPreset().getRomName());
-			setSettings(set);
-		}
 
+		// reading and saving settings
+		loadSettingsFromFilesystem();
 		romPresetCombo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				final GlobalSettings set = getSettings();
-				LOGGER.info("Saving Global Settings");
-				LOGGER.info("- saving RomPreset to load on start: {}", set.getRomPreset().getRomName());
-				SettingsPersistor.saveGlobalSettings(set);
+				saveSettingsToFilesystem();
 			}
 		});
 
+		// Layout
 		setLayout(new BorderLayout());
 		final JLabel label = new JLabel();
-		label.setIcon(IconStore.logoIcon);
-
+		label.setIcon(IconStore.logoIconCFG);
 		final JPanel cfg = createSettingsPanel();
 		final JScrollPane cfgScroller = new JScrollPane();
 		cfgScroller.add(cfg);
 		cfgScroller.getViewport().setView(cfg);
-		// cfgScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		cfgScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(cfgScroller, BorderLayout.WEST);
-
-		// this.add(createSettingsPanel(), BorderLayout.WEST);
 		this.add(label, BorderLayout.CENTER);
 	}
 
@@ -94,10 +87,11 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(JGoodiesHelper.createBlackLabel("Rom Presets to load on startup of the " + IconCreatorFrame.APP_NAME), cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Load this Rom Preset:"), cc.xyw(2, ++row, 7));
 		builder.add(romPresetCombo, cc.xyw(2, ++row, 7));
+		builder.add(cboxShowAdvancedButton, cc.xyw(2, ++row, 7));
 
-		final JPanel hide = new HidePanel("Global Settings", builder.getPanel());
+		final JPanel hide = new HidePanel("What to do on startup of " + IconCreatorFrame.APP_NAME, builder.getPanel());
 		return hide;
 	}
 
@@ -105,17 +99,46 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		if (settings != null) {
 			this.settings = settings;
 			romPresetCombo.setSelectedItem(settings.getRomPreset());
-			validateControls();
+			cboxShowAdvancedButton.setSelected(settings.isShowAdvancedButton());
 			this.repaint();
 		}
 	}
 
 	public GlobalSettings getSettings() {
 		settings.setRomPreset((RomPreset) romPresetCombo.getSelectedItem());
+		settings.setShowAdvancedButton(cboxShowAdvancedButton.isSelected());
 		return settings;
 	}
 
 	@Override
 	protected void validateControls() {
+		saveSettingsToFilesystem();
+	}
+
+	private GlobalSettings loadSettingsFromFilesystem() {
+		final GlobalSettings set = SettingsPersistor.loadGlobalSettings();
+		LOGGER.info("Reading Global Settings");
+		if (set != null) {
+			debugGlobalSettings(set);
+			setSettings(set);
+		}
+		return set;
+	}
+
+	/**
+	 * TODO comment debugGlobalSettings
+	 * 
+	 * @param set
+	 */
+	public void debugGlobalSettings(final GlobalSettings set) {
+		LOGGER.info("--> RomPreset to load on start: {}", set.getRomPreset().getRomName());
+		LOGGER.info("--> showAdvanced Button on start: {}", set.isShowAdvancedButton());
+	}
+
+	private void saveSettingsToFilesystem() {
+		final GlobalSettings set = getSettings();
+		LOGGER.info("Saving Global Settings");
+		debugGlobalSettings(set);
+		SettingsPersistor.saveGlobalSettings(set);
 	}
 }
