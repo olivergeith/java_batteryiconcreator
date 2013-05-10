@@ -15,11 +15,13 @@ import og.basics.gui.LToolBar;
 import og.basics.gui.icon.CommonIconProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import de.og.batterycreator.cfg.RomPreset;
 import de.og.batterycreator.creators.batt.AbstractIconCreator;
 import de.og.batterycreator.creators.signal.AbstractSignalCreator;
 import de.og.batterycreator.creators.signal.NoSignalIcons;
 import de.og.batterycreator.creators.wifi.AbstractWifiCreator;
 import de.og.batterycreator.creators.wifi.NoWifiIcons;
+import de.og.batterycreator.gui.cfg.GlobalSettingsPanel;
 import de.og.batterycreator.gui.cfg.RomSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.panels.BatteryPanel;
@@ -37,41 +39,51 @@ import de.og.batterycreator.zipcreator.ZipElementCollection;
 import de.og.batterycreator.zipcreator.ZipMaker;
 
 public class IconCreatingPanelNew extends JPanel {
-	private static final Logger				LOGGER				= LoggerFactory.getLogger(IconCreatingPanelNew.class);
-	private static final long				serialVersionUID	= -2956273745014471932L;
+	@SuppressWarnings("unused")
+	private static final int				TAB_INDEX_GLOBALSETTINGS	= 0;
+	@SuppressWarnings("unused")
+	private static final int				TAB_INDEX_ROMSETTINGS		= 1;
+	private static final int				TAB_INDEX_RENDERER			= 2;
+	@SuppressWarnings("unused")
+	private static final int				TAB_INDEX_ICONSETS			= 3;
+	private static final int				TAB_INDEX_ADVANCED			= 4;
+	private static final Logger				LOGGER						= LoggerFactory.getLogger(IconCreatingPanelNew.class);
+	private static final long				serialVersionUID			= -2956273745014471932L;
 
-	private final JButton					zipButton			= new JButton(IconStore.zipIcon);
-	private final JButton					createButton		= new JButton(CommonIconProvider.BUTTON_ICON_START);
-	private final JToggleButton				advancedToggle		= new JToggleButton(IconStore.moreIcon, false);
-	private final JTabbedPane				tabPane				= new JTabbedPane();
-	private final LToolBar					toolBar				= new LToolBar();
-	private final RomSettingsPanel			romSettingsPanel	= new RomSettingsPanel();
-	private final BatteryPanel				battPanel			= new BatteryPanel(romSettingsPanel.getSettings());
-	private final WifiPanel					wifiPanel			= new WifiPanel(romSettingsPanel.getSettings());
-	private final SignalPanel				signalPanel			= new SignalPanel(romSettingsPanel.getSettings());
+	private final JButton					zipButton					= new JButton(IconStore.zipIcon);
+	private final JButton					createButton				= new JButton(CommonIconProvider.BUTTON_ICON_START);
+	private final JToggleButton				advancedToggle				= new JToggleButton(IconStore.moreIcon, false);
+	private final JTabbedPane				tabPane						= new JTabbedPane();
+	private final LToolBar					toolBar						= new LToolBar();
+	private final RomSettingsPanel			romSettingsPanel			= new RomSettingsPanel();
+	private final BatteryPanel				battPanel					= new BatteryPanel(romSettingsPanel.getSettings());
+	private final WifiPanel					wifiPanel					= new WifiPanel(romSettingsPanel.getSettings());
+	private final SignalPanel				signalPanel					= new SignalPanel(romSettingsPanel.getSettings());
 
-	private final LockHandlePanel			lockHandleSelector	= new LockHandlePanel();
-	private final IconSetSelector			signalWifiBox		= new IconSetSelector("Signal$Wifi", "./custom/signalwifi/");
-	private final IconSetSelector			toggleBox			= new IconSetSelector("Toggles", "./custom/toggles/");
-	private final IconSetSelector			battBox				= new IconSetSelector("Batteries", "./custom/batteries/");
-	private final IconSetSelector			powerwidgetBox		= new IconSetSelector("PowerWidgetToggles", "./custom/powerwidget/");
-	private final IconSetSelector			weatherBox			= new IconSetSelector("Weather", "./custom/weather/");
-	private final IconSetSelector			emoBox				= new IconSetSelector("Emoticons", "./custom/emoticons/");
-	private final NotificationAreaBG		notificationBG		= new NotificationAreaBG();
-	private final RawIconSetSelector		systemUIBox			= new RawIconSetSelector("SystemUIMods", "./custom/systemui-mods/");
-	private final RawIconSetSelector		frameworkresBox		= new RawIconSetSelector("FrameworkResMods", "./custom/frameworkres-mods/");
-	private final RecurseXMLSetSelector		xmlBox				= new RecurseXMLSetSelector();
+	private final GlobalSettingsPanel		globalSettingsPanel			= new GlobalSettingsPanel();
 
-	private final RecurseFileSetSelector	filesetBox			= new RecurseFileSetSelector();
-	private final RecurseIconSetSelector	iconsetBox			= new RecurseIconSetSelector();
+	private final LockHandlePanel			lockHandleSelector			= new LockHandlePanel();
+	private final IconSetSelector			signalWifiBox				= new IconSetSelector("Signal$Wifi", "./custom/signalwifi/");
+	private final IconSetSelector			toggleBox					= new IconSetSelector("Toggles", "./custom/toggles/");
+	private final IconSetSelector			battBox						= new IconSetSelector("Batteries", "./custom/batteries/");
+	private final IconSetSelector			powerwidgetBox				= new IconSetSelector("PowerWidgetToggles", "./custom/powerwidget/");
+	private final IconSetSelector			weatherBox					= new IconSetSelector("Weather", "./custom/weather/");
+	private final IconSetSelector			emoBox						= new IconSetSelector("Emoticons", "./custom/emoticons/");
+	private final NotificationAreaBG		notificationBG				= new NotificationAreaBG();
+	private final RawIconSetSelector		systemUIBox					= new RawIconSetSelector("SystemUIMods", "./custom/systemui-mods/");
+	private final RawIconSetSelector		frameworkresBox				= new RawIconSetSelector("FrameworkResMods", "./custom/frameworkres-mods/");
+	private final RecurseXMLSetSelector		xmlBox						= new RecurseXMLSetSelector();
+
+	private final RecurseFileSetSelector	filesetBox					= new RecurseFileSetSelector();
+	private final RecurseIconSetSelector	iconsetBox					= new RecurseIconSetSelector();
 
 	// Treadstuff
-	private final JProgressBar				progressBar			= new JProgressBar();
-	private Thread							t					= null;
-	private boolean							isrunning			= false;
+	private final JProgressBar				progressBar					= new JProgressBar();
+	private Thread							t							= null;
+	private boolean							isrunning					= false;
 	// private boolean stopnow = false;
-	private final int						maxsteps			= 19;
-	private int								step				= 0;
+	private final int						maxsteps					= 19;
+	private int								step						= 0;
 
 	private final JFrame					parentFrame;
 
@@ -133,6 +145,7 @@ public class IconCreatingPanelNew extends JPanel {
 		final JTabbedPane iconsetsTabPane = new JTabbedPane();
 
 		tabPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabPane.addTab("GlobalSettings", IconStore.settings1, globalSettingsPanel, "Program global settings");
 		tabPane.addTab("RomSettings", IconStore.cfgIcon, romSettingsPanel, "RomSettings");
 		// Renderer Tabbed Pane
 		rendererTabPane.addTab("Battery", IconStore.batteryIcon, battPanel, "Create your batteries here");
@@ -151,42 +164,27 @@ public class IconCreatingPanelNew extends JPanel {
 		iconsetsTabPane.addTab("Batteries", IconStore.batteryIcon, battBox, "Predefined Battery-Icon-Sets");
 		tabPane.addTab("Icon-Sets", IconStore.iconsetsIcon, iconsetsTabPane, "Custom Icon-Sets");
 
-		// Main Tabbed Pane
-		// tabPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		// tabPane.addTab("RomSettings", IconStore.cfgIcon, romSettingsPanel,
-		// "RomSettings");
-		// tabPane.addTab("Battery", IconStore.batteryIcon, battPanel,
-		// "Create your batteries here");
-		// tabPane.addTab("Wifi", IconStore.wifiIcon, wifiPanel,
-		// "Create your Wifi Icons here");
-		// tabPane.addTab("Signal", IconStore.signalIcon, signalPanel,
-		// "Create your Signal Icons here");
-		// tabPane.addTab("NotificationPanel", IconStore.notificationIcon,
-		// notificationBG, "Transparent Notification Panel");
-		// tabPane.addTab("Toggles", IconStore.toggleIcon, toggleBox,
-		// "Predefined Toggle-Icon-Sets");
-		// tabPane.addTab("CM Powerwidget", IconStore.powerwidgetIcon,
-		// powerwidgetBox, "Predefined PowerWidget Toggle-Icon-Sets");
-		// tabPane.addTab("Signal$Wifi", IconStore.signalwifiIcon,
-		// signalWifiBox, "Predefined Signal- and Wifi-Icon-Sets");
-		// tabPane.addTab("Weather", IconStore.weatherIcon, weatherBox,
-		// "Predefined Weather-Icon-Sets");
-		// tabPane.addTab("Lockring", IconStore.lockringIcon,
-		// lockHandleSelector, "See your choosen Lockring!");
-
 		advancedTabPane.addTab("SystemUI Mods", IconStore.androidredIcon, systemUIBox, "Get an Overview of your icons");
 		advancedTabPane.addTab("FrameWorkRes Mods", IconStore.androidblueIcon, frameworkresBox, "Get an Overview of your icons");
 		advancedTabPane.addTab("Themes/Morphs", IconStore.folderIcon, iconsetBox, "Add any Themes/Morphs you want...");
 		advancedTabPane.addTab("Filesets", IconStore.folder2Icon, filesetBox, "Add Filesets like apk's, lib's, media...");
 		advancedTabPane.addTab("XML-Sets", IconStore.folder2Icon, xmlBox, "Add XML-Sets to any apk...Most dangerous!");
 
-		tabPane.setSelectedIndex(1);
+		tabPane.setSelectedIndex(TAB_INDEX_RENDERER);
 		// Panel zusammensetzen
 		add(tabPane, BorderLayout.CENTER);
 		// add(configPane, BorderLayout.WEST);
 		add(progressBar, BorderLayout.SOUTH);
-
 		makeButtonBar();
+		// setting rom presets
+		final RomPreset preset = globalSettingsPanel.getSettings().getRomPreset();
+		if (preset != null && !preset.getRomName().equals(RomPreset.APPLY)) {
+			LOGGER.info("Setting your RomPreset to : {}", preset.getRomName());
+			romSettingsPanel.applyRomPresets(preset);
+		} else {
+			LOGGER.info("No RomPresets choosen to be applied on startup...using Defaults!!!");
+		}
+
 	}
 
 	private void validatePanel(final boolean advancedMode) {
@@ -194,7 +192,7 @@ public class IconCreatingPanelNew extends JPanel {
 			tabPane.remove(advancedTabPane);
 		else {
 			tabPane.addTab("Advanced Theming", IconStore.additionalIcon, advancedTabPane, "Advanced Stuff!!");
-			tabPane.setSelectedIndex(3);
+			tabPane.setSelectedIndex(TAB_INDEX_ADVANCED);
 		}
 
 	}

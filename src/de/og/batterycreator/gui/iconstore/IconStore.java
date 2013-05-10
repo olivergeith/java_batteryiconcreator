@@ -41,6 +41,9 @@ public class IconStore {
 	public static final ImageIcon	zoomfit				= new ImageIcon(IconStore.class.getResource("zoom-fit.png"));
 	public static final ImageIcon	zoom100				= new ImageIcon(IconStore.class.getResource("zoom-100.png"));
 
+	public static final ImageIcon	settings1			= new ImageIcon(IconStore.class.getResource("settings01.png"));
+	public static final ImageIcon	settings2			= new ImageIcon(IconStore.class.getResource("settings02.png"));
+
 	public IconStore() {
 	}
 

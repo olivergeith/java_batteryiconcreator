@@ -1,8 +1,10 @@
 package de.og.batterycreator.cfg;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class RomPreset {
+public class RomPreset implements Serializable {
+	private static final long			serialVersionUID						= -3021307571250459807L;
 
 	// Konstanten Filenames
 	public static final String			LOCKHANDLE_FILENAME_DEFAULT				= "ic_lockscreen_handle_normal.png";
@@ -81,8 +83,9 @@ public class RomPreset {
 	public static final int				NOTIFICATION_600DP_XHDPI				= 4;
 
 	public static final int				BATT_ICON_HEIGHT_MDPI					= 18;
-	public static final int				BATT_ICON_HEIGHT_XHDPI					= 36;
 	public static final int				BATT_ICON_HEIGHT_HDPI					= 27;
+	public static final int				BATT_ICON_HEIGHT_XHDPI					= 36;
+	public static final int				BATT_ICON_HEIGHT_XXHDPI					= 54;
 	public static final int				BATT_ICON_HEIGHT_HDPI_S3				= 38;
 	public static final int				BATT_ICON_HEIGHT_XHDPI_S3				= 50;
 	public static final int				BATT_ICON_HEIGHT_720DP_XHDPI			= 48;
@@ -103,7 +106,7 @@ public class RomPreset {
 	public static final String			templateS3Nexus							= "./template/templateS3Nexus.zip";
 	public static final String			templateS3Nexus43						= "./template/templateS3Nexus-4.3.zip";
 
-	public static final String			APPLY									= "Apply Settings for Rom...";
+	public static final String			APPLY									= "Apply Rom-Presets for...";
 
 	private static Vector<RomPreset>	presets									= new Vector<RomPreset>();
 
@@ -111,11 +114,11 @@ public class RomPreset {
 		presets.add(new RomPreset(APPLY, DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP, BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI,
 				NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
 
-		presets.add(new RomPreset("Default (hdpi AOKP)", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP, BATT_ICON_CHARGE_NAME_AOKP,
-				LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
 		presets.add(new RomPreset("Default (xhdpi AOKP)", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI, BATT_ICON_NAME_AOKP,
 				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS2, MORPHPATH_SYSTEMUI,
 				MORPHPATH_FRAMEWORK));
+		presets.add(new RomPreset("Default (hdpi AOKP)", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP, BATT_ICON_CHARGE_NAME_AOKP,
+				LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
 		presets.add(new RomPreset("Default (mhdpi AOKP)", DRAWABLE_MDPI, BATT_ICON_HEIGHT_MDPI, DRAWABLE_MDPI, BATT_ICON_NAME_AOKP, BATT_ICON_CHARGE_NAME_AOKP,
 				LOCK_MDPI, NOTIFICATION_MDPI, TOGGLE_MDPI, false, WEATHER_MDPI, EMO_MDPI, templateS2, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
 
@@ -330,4 +333,30 @@ public class RomPreset {
 	public int getEmoSize() {
 		return emoSize;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((romName == null) ? 0 : romName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final RomPreset other = (RomPreset) obj;
+		if (romName == null) {
+			if (other.romName != null)
+				return false;
+		} else if (!romName.equals(other.romName))
+			return false;
+		return true;
+	}
+
 }

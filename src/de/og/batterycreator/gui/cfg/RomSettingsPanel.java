@@ -16,6 +16,8 @@ import javax.swing.JToolBar;
 import og.basics.gui.icon.CommonIconProvider;
 import og.basics.gui.widgets.hidepanel.HidePanel;
 import og.basics.jgoodies.JGoodiesHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -31,6 +33,7 @@ import de.og.batterycreator.gui.widgets.TemplateChooser;
 
 public class RomSettingsPanel extends SettingsPanel {
 	private static final long		serialVersionUID				= 1L;
+	private static final Logger		LOGGER							= LoggerFactory.getLogger(RomSettingsPanel.class);
 
 	private RomSettings				settings						= new RomSettings();
 
@@ -110,28 +113,13 @@ public class RomSettingsPanel extends SettingsPanel {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
 				final RomPreset pre = (RomPreset) romPresetCombo.getSelectedItem();
-				if (!pre.getRomName().equals(RomPreset.APPLY)) {
-					systemUIDrawableFolderCombo.setSelectedItem(pre.getSystemUIDrawableFolder());
-					frameworkDrawableFolderCombo.setSelectedItem(pre.getFrameworkDrawableFolder());
-					filepattern.setText(pre.getFilePattern());
-					filepatternCharge.setText(pre.getFilePatternCharge());
-					romPresetCombo.setSelectedIndex(0);
-					lockHandleSize.setValue(pre.getLockHandleSize());
-					notificationHeight.setValue(pre.getNotificationHeight());
-					toggleSize.setValue(pre.getToggleSize());
-					weatherSize.setValue(pre.getWeatherSize());
-					emoSize.setValue(pre.getEmoSize());
-					sliderBattSize.setValue(pre.getBattsize());
-					cboxUseLidroid.setSelected(pre.isUseLidroid());
-					lidroidDrawableFolderCombo.setEnabled(pre.isUseLidroid());
-					templateChooser.setSelectedItem(pre.getTemplate());
-					morphpathSystemUIComboBox.setSelectedItem(pre.getMorphPath2SystemUIRes());
-					morphpathFrameworkComboBox.setSelectedItem(pre.getMorphPath2FrameworkRes());
-				}
+				applyRomPresets(pre);
+				romPresetCombo.setSelectedIndex(0);
 			}
+
 		});
 		// romPresetCombo.setSelectedIndex(7);
-		romPresetCombo.setSelectedIndex(0);
+		romPresetCombo.setSelectedIndex(1);
 		romPresetCombo.setMaximumRowCount(20);
 	}
 
@@ -150,6 +138,33 @@ public class RomSettingsPanel extends SettingsPanel {
 
 		// this.add(createSettingsPanel(), BorderLayout.WEST);
 		this.add(label, BorderLayout.CENTER);
+	}
+
+	/**
+	 * 
+	 * @param pre
+	 */
+	public void applyRomPresets(final RomPreset pre) {
+		if (!pre.getRomName().equals(RomPreset.APPLY)) {
+			LOGGER.info("Setting RomPreset to : {}", pre.getRomName());
+			systemUIDrawableFolderCombo.setSelectedItem(pre.getSystemUIDrawableFolder());
+			frameworkDrawableFolderCombo.setSelectedItem(pre.getFrameworkDrawableFolder());
+			filepattern.setText(pre.getFilePattern());
+			filepatternCharge.setText(pre.getFilePatternCharge());
+			lockHandleSize.setValue(pre.getLockHandleSize());
+			notificationHeight.setValue(pre.getNotificationHeight());
+			toggleSize.setValue(pre.getToggleSize());
+			weatherSize.setValue(pre.getWeatherSize());
+			emoSize.setValue(pre.getEmoSize());
+			sliderBattSize.setValue(pre.getBattsize());
+			cboxUseLidroid.setSelected(pre.isUseLidroid());
+			lidroidDrawableFolderCombo.setEnabled(pre.isUseLidroid());
+			templateChooser.setSelectedItem(pre.getTemplate());
+			morphpathSystemUIComboBox.setSelectedItem(pre.getMorphPath2SystemUIRes());
+			morphpathFrameworkComboBox.setSelectedItem(pre.getMorphPath2FrameworkRes());
+
+			// romPresetCombo.setSelectedIndex(0);
+		}
 	}
 
 	private JPanel createSettingsPanel() {
