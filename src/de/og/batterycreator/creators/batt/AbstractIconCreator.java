@@ -40,6 +40,10 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	// ###############################################################################
 	public abstract ImageIcon createImage(final int percentage, final boolean charge);
 
+	public boolean isNativeXXHDPI() {
+		return false;
+	}
+
 	// ###############################################################################
 	// Special features
 	// ###############################################################################

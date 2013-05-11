@@ -22,6 +22,7 @@ public class IconCreatorFrame extends JFrame {
 	public static final String			APP_NAME			= "'The Rom Fumbler'";
 	public static final String			VERSION_NR			= "25.0 beta";
 	private static final String			VERSION_DATE		= "xx.xxx.2013";
+	public static final String			HOMEPAGE_URL		= "http://forum.xda-developers.com/showthread.php?t=1918500";
 	private static final long			serialVersionUID	= 1L;
 	private static IconCreatorFrame		frame;
 	private final IconCreatingPanelNew	iconCreatingPanel	= new IconCreatingPanelNew(this);

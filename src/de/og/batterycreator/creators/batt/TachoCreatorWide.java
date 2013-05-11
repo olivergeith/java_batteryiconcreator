@@ -7,33 +7,36 @@ import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-
 import javax.swing.ImageIcon;
-
 import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
 public class TachoCreatorWide extends AbstractIconCreator {
 
-	protected static String name = "TachoBattery.Wide";
+	protected static String	name	= "TachoBattery.Wide";
 
 	public TachoCreatorWide(final RomSettings romSettings) {
 		super(romSettings);
-		settings.setFontYOffset(-2);
+		settings.setFontYOffset(10);
 		settings.setFontXOffset(-1);
-		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 26));
 		settings.setReduceFontOn100(0);
-		settings.setIconXOffset(0);
+		settings.setIconXOffset(10);
 		settings.setIconYOffset(0);
-		settings.setResizeChargeSymbolHeight(22);
+		settings.setResizeChargeSymbolHeight(28);
 		settings.setLowBattTheshold(0);
 		settings.setMedBattTheshold(40);
 		settings.setUseGradiantForMediumColor(true);
 		settings.setUseGradiantForNormalColor(true);
 	}
 
-	private final int imgWidth = 82;
-	private final int imgHeight = 41;
+	private final int	imgWidth	= 108;
+	private final int	imgHeight	= 54;
+
+	@Override
+	public boolean isNativeXXHDPI() {
+		return true;
+	}
 
 	@Override
 	public boolean supportsNoBg() {
@@ -75,29 +78,35 @@ public class TachoCreatorWide extends AbstractIconCreator {
 
 		g2d.setColor(col);
 		final int w = Math.round(-90 + (1.8f * winkel));
-		final int r = 35;
+		final int r = imgHeight - 5;
 		final int x = imgWidth / 2 + (int) Math.round(r * Math.sin(w * Math.PI / 180));
 		final int y = imgHeight - 2 - (int) Math.round(r * Math.cos(w * Math.PI / 180));
 
-		Draw2DFunktions.fillCircle(g2d, x, y, 2, 0, 360);
+		Draw2DFunktions.fillCircle(g2d, x, y, 3, 0, 360);
 	}
 
 	private void drawZeiger(final Graphics2D g2d, final boolean charge, final int percentage) {
 		final Color col = settings.getActivIconColor(percentage, charge);
-		g2d.setColor(col);
 		final int w = Math.round(-90 + (1.8f * percentage));
+		g2d.setColor(col);
+
+		g2d.setStroke(new BasicStroke(6f));
 		final int r = 15;
 		final int x = imgWidth / 2 + (int) Math.round(r * Math.sin(w * Math.PI / 180));
 		final int y = imgHeight - 2 - (int) Math.round(r * Math.cos(w * Math.PI / 180));
-
 		g2d.drawLine(imgWidth / 2, imgHeight - 2, x, y);
 
-		g2d.setStroke(new BasicStroke(2f));
+		g2d.setStroke(new BasicStroke(4f));
 		final int r2 = 29;
 		final int x2 = imgWidth / 2 + (int) Math.round(r2 * Math.sin(w * Math.PI / 180));
 		final int y2 = imgHeight - 2 - (int) Math.round(r2 * Math.cos(w * Math.PI / 180));
-
 		g2d.drawLine(imgWidth / 2, imgHeight - 2, x2, y2);
+
+		g2d.setStroke(new BasicStroke(2f));
+		final int r3 = 45;
+		final int x3 = imgWidth / 2 + (int) Math.round(r3 * Math.sin(w * Math.PI / 180));
+		final int y3 = imgHeight - 2 - (int) Math.round(r3 * Math.cos(w * Math.PI / 180));
+		g2d.drawLine(imgWidth / 2, imgHeight - 2, x3, y3);
 
 	}
 

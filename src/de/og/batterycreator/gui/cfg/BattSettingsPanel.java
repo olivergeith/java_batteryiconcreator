@@ -80,10 +80,10 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final SliderAndLabel		sliderLowBatt				= new SliderAndLabel(0, 30);
 	private final SliderAndLabel		sliderMedBatt				= new SliderAndLabel(0, 100);
 
-	private final SliderAndLabel		sliderFontXOffset			= new SliderAndLabel(-12, 12);
-	private final SliderAndLabel		sliderFontYOffset			= new SliderAndLabel(-12, 12);
-	private final SliderAndLabel		slidericonXOffset			= new SliderAndLabel(-12, 12);
-	private final SliderAndLabel		slidericonYOffset			= new SliderAndLabel(-12, 12);
+	private final SliderAndLabel		sliderFontXOffset			= new SliderAndLabel(-20, 20);
+	private final SliderAndLabel		sliderFontYOffset			= new SliderAndLabel(-20, 20);
+	private final SliderAndLabel		slidericonXOffset			= new SliderAndLabel(-20, 20);
+	private final SliderAndLabel		slidericonYOffset			= new SliderAndLabel(-20, 20);
 
 	private final SliderAndLabel		sliderReduceOn100			= new SliderAndLabel(-5, 0);
 

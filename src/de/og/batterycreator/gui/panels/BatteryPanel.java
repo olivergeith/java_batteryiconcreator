@@ -58,6 +58,7 @@ import de.og.batterycreator.creators.batt.ClockPointerCreator;
 import de.og.batterycreator.creators.batt.DecimalBar2Creator;
 import de.og.batterycreator.creators.batt.DecimalBar3Creator;
 import de.og.batterycreator.creators.batt.DecimalBarCreator;
+import de.og.batterycreator.creators.batt.FaecherCreatorWide;
 import de.og.batterycreator.creators.batt.FontOnlyCreator;
 import de.og.batterycreator.creators.batt.HoneycombCreator;
 import de.og.batterycreator.creators.batt.KnobBatteryCreator;
@@ -150,6 +151,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new TachoCreatorWideV2(romSettings));
 		combo.addItem(new TachoCreatorWideV3(romSettings));
 		combo.addItem(new TachoCreatorWideV4(romSettings));
+		combo.addItem(new FaecherCreatorWide(romSettings));
 		combo.addItem(new TachoCreator3Quater(romSettings));
 		combo.addItem(new ScalaBatteryCreator(romSettings));
 		combo.addItem(new XORAndroidCreator(romSettings));
@@ -276,16 +278,52 @@ public class BatteryPanel extends JPanel {
 					renderer.setBackground(Color.darkGray.darker());
 				else
 					renderer.setBackground(Color.black);
-				renderer.setForeground(Color.white);
+				renderer.setForeground(Color.lightGray);
 				final AbstractIconCreator creator = value;
 				if (creator != null && renderer.getIcon() == null) {
 					final ImageIcon icon = creator.createImage(45, false);
 					final BufferedImage bimg = StaticImageHelper.resize2Height(StaticImageHelper.convertImageIcon(icon), 32);
 					renderer.setIcon(new ImageIcon(bimg));
+					if (creator.isNativeXXHDPI()) {
+						renderer.setToolTipText(getTooltip(creator.isNativeXXHDPI()));
+						renderer.setForeground(Color.white);
+					} else {
+						renderer.setToolTipText(getTooltip(creator.isNativeXXHDPI()));
+					}
+
 				}
 			}
 			return renderer;
 		}
+
+		private String getTooltip(final boolean xxhdpi) {
+			String html = "<html>";
+
+			if (xxhdpi) {
+				html += "<font size=5 color=green>";
+				html += "<b>" + "This Battery Renderer is native xxhdpi" + "</b><br><hr>";
+				html += "</font>";
+				html += "<font size=3 color=black>";
+				html += "That means, that the icons are rendered in xxhdpi<br>";
+				html += "and resized to the height defined in Rom Settings<br>";
+				html += "<b>They will not be blurry in xxhdpi!</b><br>";
+				html += "</font>";
+			} else {
+				html += "<font size=5 color=blue>";
+				html += "<b>" + "This Battery Renderer is native xhdpi" + "</b><br><hr>";
+				html += "</font>";
+				html += "<font size=3 color=black>";
+				html += "That means, that the icons are rendered in <b>xhdpi</b><br>";
+				html += "and resized to the height defined in Rom Settings<br>";
+				html += "They will be slightly blurry in xxhdpi, because<br>";
+				html += "they have to be 'blown up' to 54pixel for xxhdpi<br>";
+				html += "</font>";
+			}
+
+			html += "</html>";
+			return html;
+		}
+
 	}
 
 	/**

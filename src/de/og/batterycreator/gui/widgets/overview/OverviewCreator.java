@@ -7,9 +7,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Vector;
-
 import javax.swing.ImageIcon;
-
 import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.main.IconCreatorFrame;
 
@@ -62,7 +60,7 @@ public class OverviewCreator {
 			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
 			g2d.setColor(Color.gray);
 			g2d.drawString("Created with ''The Battery Icon Creator'' V" + IconCreatorFrame.VERSION_NR + " by OlliG", 2, 32);
-			g2d.drawString("http://forum.xda-developers.com/showthread.php?t=1918500", 2, h - offsetUnten + 20);
+			g2d.drawString(IconCreatorFrame.HOMEPAGE_URL, 2, h - offsetUnten + 20);
 			g2d.setColor(Color.white);
 			g2d.fillRect(0, 40, w, 2);
 			g2d.fillRect(0, h - offsetUnten, w, 2);
