@@ -29,8 +29,8 @@ import de.og.batterycreator.creators.signal.NoSignalIcons;
 import de.og.batterycreator.creators.signal.TowerSignalCreator;
 import de.og.batterycreator.gui.cfg.WifiSignaleSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
-import de.og.batterycreator.gui.widgets.OverviewPanel;
 import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
+import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
 
 public class SignalPanel extends JPanel {
 	private static final long						serialVersionUID	= -4657987890334428414L;

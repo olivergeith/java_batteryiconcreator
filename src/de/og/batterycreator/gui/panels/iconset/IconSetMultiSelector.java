@@ -20,7 +20,7 @@ import javax.swing.event.ListSelectionListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.og.batterycreator.gui.widgets.OverviewPanel;
+import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
 
 public class IconSetMultiSelector extends JList<IconSet> {
 	private static final long serialVersionUID = -2767025548199058416L;

@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.og.batterycreator.gui.iconstore.IconStore;
-import de.og.batterycreator.gui.widgets.OverviewPanel;
+import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
 
 public class RecurseFileSetSelector extends JPanel {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RecurseFileSetSelector.class);

@@ -80,8 +80,8 @@ import de.og.batterycreator.creators.batt.XORSkullCreator;
 import de.og.batterycreator.creators.batt.XORVnvCreator;
 import de.og.batterycreator.gui.cfg.BattSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
-import de.og.batterycreator.gui.widgets.OverviewPanel;
 import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
+import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
 
 public class BatteryPanel extends JPanel {
 	private static final long						serialVersionUID	= -5956664471952448919L;

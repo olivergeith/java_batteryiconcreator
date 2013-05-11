@@ -27,8 +27,8 @@ import org.slf4j.LoggerFactory;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.IconProviderInterface;
 import de.og.batterycreator.gui.iconstore.IconStore;
-import de.og.batterycreator.gui.widgets.OverviewCreator;
-import de.og.batterycreator.gui.widgets.OverviewPanel;
+import de.og.batterycreator.gui.widgets.overview.OverviewCreator;
+import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
 
 public class LockHandlePanel extends JPanel implements IconProviderInterface {
 	private static final Logger		LOGGER				= LoggerFactory.getLogger(LockHandlePanel.class);

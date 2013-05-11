@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import og.basics.gui.image.StaticImageHelper;
-import de.og.batterycreator.gui.widgets.OverviewCreator;
+import de.og.batterycreator.gui.widgets.overview.OverviewCreator;
 
 /**
  * {@link IconSet} is a collection of Icons in One Folder that are flashed

@@ -1,4 +1,4 @@
-package de.og.batterycreator.gui.widgets;
+package de.og.batterycreator.gui.widgets.overview;
 
 import java.awt.Color;
 import java.awt.Font;

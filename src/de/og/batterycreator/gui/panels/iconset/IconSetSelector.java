@@ -26,7 +26,7 @@ import og.basics.gui.html.HTMLFileDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import de.og.batterycreator.gui.iconstore.IconStore;
-import de.og.batterycreator.gui.widgets.OverviewPanel;
+import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
 
 public class IconSetSelector extends JPanel {
 	private static final long			serialVersionUID	= -2767025548199058416L;
