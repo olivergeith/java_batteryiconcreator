@@ -40,25 +40,28 @@ public class RomPreset implements Serializable {
 	public static final String			BATT_ICON_NAME_ROOTBOX_SQUARE			= "stat_sys_battery_square_";
 
 	// is in frameworkres...
+	public static final int				WEATHER_XXHDPI							= 164;
 	public static final int				WEATHER_XHDPI							= 128;
-	public static final int				WEATHER_MDPI							= 66;
 	public static final int				WEATHER_HDPI							= 98;
+	public static final int				WEATHER_MDPI							= 66;
 	public static final int				WEATHER_720DP_XHDPI						= 162;
 	public static final int				WEATHER_720DP_HDPI						= 144;
 	public static final int				WEATHER_600DP_XHDPI						= 162;
 	public static final int				WEATHER_600DP_HDPI						= 144;
 
+	public static final int				EMO_XXHDPI								= 55;
 	public static final int				EMO_XHDPI								= 44;
-	public static final int				EMO_MDPI								= 22;
 	public static final int				EMO_HDPI								= 33;
+	public static final int				EMO_MDPI								= 22;
 	public static final int				EMO_720DP_XHDPI							= 66;
 	public static final int				EMO_720DP_HDPI							= 55;
 	public static final int				EMO_600DP_XHDPI							= 66;
 	public static final int				EMO_600DP_HDPI							= 55;
 
-	public static final int				LOCK_MDPI								= 108;
+	public static final int				LOCK_XXHDPI								= 256;
 	public static final int				LOCK_XHDPI								= 216;
 	public static final int				LOCK_HDPI								= 162;
+	public static final int				LOCK_MDPI								= 108;
 	public static final int				LOCK_600DP_HDPI							= 183;
 	public static final int				LOCK_720P_HDPI							= 193;
 	public static final int				LOCK_600DP_XHDPI						= 183;
@@ -69,6 +72,7 @@ public class RomPreset implements Serializable {
 	public static final int				TOGGLE_600DP_XHDPI						= 84;
 	public static final int				TOGGLE_720DP_HDPI						= 96;
 	public static final int				TOGGLE_600DP_HDPI						= 84;
+	public static final int				TOGGLE_XXHDPI							= 138;
 	public static final int				TOGGLE_XHDPI							= 64;
 	public static final int				TOGGLE_MDPI								= 40;
 	public static final int				TOGGLE_HDPI								= 48;
@@ -81,6 +85,7 @@ public class RomPreset implements Serializable {
 	public static final int				NOTIFICATION_XHDPI						= 4;
 	public static final int				NOTIFICATION_720DP_XHDPI				= 4;
 	public static final int				NOTIFICATION_600DP_XHDPI				= 4;
+	public static final int				NOTIFICATION_XXHDPI						= 5;
 
 	public static final int				BATT_ICON_HEIGHT_MDPI					= 18;
 	public static final int				BATT_ICON_HEIGHT_HDPI					= 27;
@@ -94,6 +99,7 @@ public class RomPreset implements Serializable {
 	public static final int				BATT_ICON_HEIGHT_600DP_HDPI				= 43;
 
 	public static final String			DRAWABLE_MDPI							= "drawable-mdpi";
+	public static final String			DRAWABLE_XXHDPI							= "drawable-xxhdpi";
 	public static final String			DRAWABLE_XHDPI							= "drawable-xhdpi";
 	public static final String			DRAWABLE_HDPI							= "drawable-hdpi";
 	public static final String			DRAWABLE_HDPI_S3						= "drawable-hdpi";
@@ -121,6 +127,9 @@ public class RomPreset implements Serializable {
 				LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
 		presets.add(new RomPreset("Default (mhdpi AOKP)", DRAWABLE_MDPI, BATT_ICON_HEIGHT_MDPI, DRAWABLE_MDPI, BATT_ICON_NAME_AOKP, BATT_ICON_CHARGE_NAME_AOKP,
 				LOCK_MDPI, NOTIFICATION_MDPI, TOGGLE_MDPI, false, WEATHER_MDPI, EMO_MDPI, templateS2, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+		presets.add(new RomPreset("Default (xxhdpi AOKP)", DRAWABLE_XXHDPI, BATT_ICON_HEIGHT_XXHDPI, DRAWABLE_XXHDPI, BATT_ICON_NAME_AOKP,
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XXHDPI, NOTIFICATION_XXHDPI, TOGGLE_XXHDPI, false, WEATHER_XXHDPI, EMO_XXHDPI, templateS2, MORPHPATH_SYSTEMUI,
+				MORPHPATH_FRAMEWORK));
 
 		// Rootbox
 		presets.add(new RomPreset("(S2 i9100) ### RootBox 3.x", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP,
