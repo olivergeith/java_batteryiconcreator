@@ -1,0 +1,18 @@
+#Paramterdaten
+#Sun May 12 20:35:51 CEST 2013
+FrameworkDrawableFolder=drawable-hdpi
+UseVRThemeTemplate=false
+UsePreload=false
+NotificationHeight=3
+FilePatternCharge=stat_sys_battery_circle_charge_anim
+UseMMSforEmoticons=true
+SystemUIDrawableFolder=drawable-hdpi
+Battsize=27
+LockHandleSize=162
+RomName=(S2 i9100) Original AOKP
+WeatherSize=98
+ToggleSize=48
+Template=./template/template.zip
+EmoSize=33
+FilePattern=stat_sys_battery_circle_
+UseLidroid=false

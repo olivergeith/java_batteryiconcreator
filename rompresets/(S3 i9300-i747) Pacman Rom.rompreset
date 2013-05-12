@@ -1,0 +1,18 @@
+#Paramterdaten
+#Sun May 12 20:35:51 CEST 2013
+FrameworkDrawableFolder=drawable-xhdpi
+UseVRThemeTemplate=false
+UsePreload=false
+NotificationHeight=4
+FilePatternCharge=stat_sys_battery_square_charge_anim
+UseMMSforEmoticons=true
+SystemUIDrawableFolder=drawable-xhdpi
+Battsize=36
+LockHandleSize=216
+RomName=(S3 i9300-i747) Pacman Rom
+WeatherSize=128
+ToggleSize=64
+Template=./template/templateS3Nexus-4.3.zip
+EmoSize=44
+FilePattern=stat_sys_battery_square_
+UseLidroid=false

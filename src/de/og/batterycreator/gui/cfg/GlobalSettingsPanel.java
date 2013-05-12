@@ -19,6 +19,7 @@ import de.og.batterycreator.cfg.GlobalSettings;
 import de.og.batterycreator.cfg.RomPreset;
 import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.gui.iconstore.IconStore;
+import de.og.batterycreator.gui.widgets.RomPresetsComboBox;
 import de.og.batterycreator.main.IconCreatorFrame;
 
 public class GlobalSettingsPanel extends SettingsPanel {
@@ -38,7 +39,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 
 	private void myInit() {
 		// Components
-		romPresetCombo = new JComboBox<RomPreset>(RomPreset.getPresets());
+		romPresetCombo = new RomPresetsComboBox();
+		romPresetCombo.setMaximumRowCount(20);
 
 		// reading and saving settings
 		loadSettingsFromFilesystem();

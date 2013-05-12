@@ -27,6 +27,7 @@ import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.DrawableComboBox;
 import de.og.batterycreator.gui.widgets.MorphPathWidget;
+import de.og.batterycreator.gui.widgets.RomPresetsComboBox;
 import de.og.batterycreator.gui.widgets.SliderAndLabel;
 import de.og.batterycreator.gui.widgets.TemplateChooser;
 
@@ -46,7 +47,7 @@ public class RomSettingsPanel extends SettingsPanel {
 																			"Check this if you want to flash emoticons to Mms.apk");
 
 	// Presets
-	JComboBox<RomPreset>			romPresetCombo					= new JComboBox<RomPreset>(RomPreset.getPresets());
+	JComboBox<RomPreset>			romPresetCombo					= new RomPresetsComboBox();
 
 	// Drawable
 	DrawableComboBox				frameworkDrawableFolderCombo	= new DrawableComboBox();
@@ -130,6 +131,17 @@ public class RomSettingsPanel extends SettingsPanel {
 	}
 
 	private void myInit() {
+
+		templateChooser.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				final String template = (String) templateChooser.getSelectedItem();
+				cboxVRTheme.setSelected(template.contains("vrtheme"));
+				validateControls();
+			}
+		});
+
 		setLayout(new BorderLayout());
 		final JLabel label = new JLabel();
 		label.setIcon(IconStore.logoIcon);
@@ -153,6 +165,7 @@ public class RomSettingsPanel extends SettingsPanel {
 	public void applyRomPresets(final RomPreset pre) {
 		if (!pre.getRomName().equals(RomPreset.APPLY)) {
 			LOGGER.info("Setting RomPreset to : {}", pre.getRomName());
+
 			systemUIDrawableFolderCombo.setSelectedItem(pre.getSystemUIDrawableFolder());
 			frameworkDrawableFolderCombo.setSelectedItem(pre.getFrameworkDrawableFolder());
 			filepattern.setText(pre.getFilePattern());
@@ -164,10 +177,13 @@ public class RomSettingsPanel extends SettingsPanel {
 			emoSize.setValue(pre.getEmoSize());
 			sliderBattSize.setValue(pre.getBattsize());
 			cboxUseLidroid.setSelected(pre.isUseLidroid());
-			lidroidDrawableFolderCombo.setEnabled(pre.isUseLidroid());
 			templateChooser.setSelectedItem(pre.getTemplate());
 			cboxPreload.setSelected(pre.isUsePreload());
 			cboxVRTheme.setSelected(pre.isUseVRThemeTemplate());
+			cboxMMSForEmos.setSelected(pre.isUseMMSforEmoticons());
+			validateControls();
+
+			// lidroidDrawableFolderCombo.setEnabled(pre.isUseLidroid());
 		}
 	}
 
@@ -563,6 +579,7 @@ public class RomSettingsPanel extends SettingsPanel {
 
 	@Override
 	protected void validateControls() {
+		LOGGER.info("validating Rom-Copntrols");
 		lidroidDrawableFolderCombo.setEnabled(cboxUseLidroid.isSelected());
 		morphLidroidWidget.setEnabled(cboxUseLidroid.isSelected());
 

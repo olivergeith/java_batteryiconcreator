@@ -1,0 +1,18 @@
+#Paramterdaten
+#Sun May 12 20:35:51 CEST 2013
+FrameworkDrawableFolder=drawable-xhdpi
+UseVRThemeTemplate=false
+UsePreload=false
+NotificationHeight=4
+FilePatternCharge=stat_sys_battery_circle_charge_anim
+UseMMSforEmoticons=true
+SystemUIDrawableFolder=drawable-xhdpi
+Battsize=36
+LockHandleSize=216
+RomName=(S2 i9100) Resurrection Remix 3.1.3 and above
+WeatherSize=128
+ToggleSize=64
+Template=./template/template.zip
+EmoSize=44
+FilePattern=stat_sys_battery_circle_
+UseLidroid=false

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import og.basics.gui.file.FileDialogs;
+import og.basics.util.KPropertyReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,8 @@ public class SettingsPersistor {
 	private static final String	SETTINGS_WIFI_EXTENSION	= ".wcfg";
 	private static final String	SETTINGS_DIR			= "./stylSettings/";
 	private static final String	SETTINGS_DIR_GLOBAL		= "./settings/";
+	public static final String	ROMSETTINGS_DIR			= "./rompresets/";
+	public static final String	ROMSETTINGS_EXTENSION	= ".rompreset";
 
 	// ###############################################################################
 	// Persisting Settings
@@ -203,4 +206,52 @@ public class SettingsPersistor {
 		}
 		return null;
 	}
+
+	// ###############################################################################
+	// Persisting Settings
+	// ###############################################################################
+	public static void writePreset(final RomPreset pre) {
+		LOGGER.debug("Writing RomPreset: {}", pre.getRomName());
+		final KPropertyReader reader = new KPropertyReader(ROMSETTINGS_DIR + pre.getRomName() + ROMSETTINGS_EXTENSION, true);
+		reader.writeProperty("RomName", pre.getRomName());
+		reader.writeProperty("FilePattern", pre.getFilePattern());
+		reader.writeProperty("FilePatternCharge", pre.getFilePatternCharge());
+		reader.writeProperty("FrameworkDrawableFolder", pre.getFrameworkDrawableFolder());
+		reader.writeProperty("SystemUIDrawableFolder", pre.getSystemUIDrawableFolder());
+		reader.writeProperty("Template", pre.getTemplate());
+		reader.writeIntProperty("Battsize", pre.getBattsize());
+		reader.writeIntProperty("EmoSize", pre.getEmoSize());
+		reader.writeIntProperty("LockHandleSize", pre.getLockHandleSize());
+		reader.writeIntProperty("NotificationHeight", pre.getNotificationHeight());
+		reader.writeIntProperty("ToggleSize", pre.getToggleSize());
+		reader.writeIntProperty("WeatherSize", pre.getWeatherSize());
+		reader.writeBooleanProperty("UseLidroid", pre.isUseLidroid());
+		reader.writeBooleanProperty("UseMMSforEmoticons", pre.isUseMMSforEmoticons());
+		reader.writeBooleanProperty("UsePreload", pre.isUsePreload());
+		reader.writeBooleanProperty("UseVRThemeTemplate", pre.isUseVRThemeTemplate());
+	}
+
+	public static RomPreset readPreset(final File fi) {
+		LOGGER.debug("Reading RomPreset: {}", fi.getPath());
+		final KPropertyReader reader = new KPropertyReader(fi.getPath(), false);
+		final String romName = reader.readProperty("RomName", "xxx");
+		final String filePattern = reader.readProperty("FilePattern", RomPreset.BATT_ICON_NAME_AOKP);
+		final String filePatternCharge = reader.readProperty("FilePatternCharge", RomPreset.BATT_ICON_CHARGE_NAME_AOKP);
+		final String frameworkDrawableFolder = reader.readProperty("FrameworkDrawableFolder", RomPreset.DRAWABLE_HDPI);
+		final String systemUIDrawableFolder = reader.readProperty("SystemUIDrawableFolder", RomPreset.DRAWABLE_HDPI);
+		final String template = reader.readProperty("Template", RomPreset.templateS2);
+		final int battsize = reader.readIntProperty("Battsize", RomPreset.BATT_ICON_HEIGHT_HDPI);
+		final int emoSize = reader.readIntProperty("EmoSize", RomPreset.EMO_HDPI);
+		final int lockHandleSize = reader.readIntProperty("LockHandleSize", RomPreset.LOCK_HDPI);
+		final int notificationHeight = reader.readIntProperty("NotificationHeight", RomPreset.NOTIFICATION_HDPI);
+		final int toggleSize = reader.readIntProperty("ToggleSize", RomPreset.TOGGLE_HDPI);
+		final int weatherSize = reader.readIntProperty("WeatherSize", RomPreset.WEATHER_HDPI);
+		final boolean useLidroid = reader.readBooleanProperty("UseLidroid", false);
+		final boolean useMMSforEmoticons = reader.readBooleanProperty("UseMMSforEmoticons", true);
+		final boolean usePreload = reader.readBooleanProperty("UsePreload", false);
+		final boolean useVRThemeTemplate = reader.readBooleanProperty("UseVRThemeTemplate", false);
+		return new RomPreset(romName, systemUIDrawableFolder, battsize, frameworkDrawableFolder, filePattern, filePatternCharge, lockHandleSize,
+				notificationHeight, toggleSize, useLidroid, weatherSize, emoSize, template, useVRThemeTemplate, usePreload, useMMSforEmoticons);
+	}
+
 }
