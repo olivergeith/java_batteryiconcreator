@@ -26,8 +26,7 @@ import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.DrawableComboBox;
-import de.og.batterycreator.gui.widgets.MorphpathFrameWorkComboBox;
-import de.og.batterycreator.gui.widgets.MorphpathSystemUIComboBox;
+import de.og.batterycreator.gui.widgets.MorphPathWidget;
 import de.og.batterycreator.gui.widgets.SliderAndLabel;
 import de.og.batterycreator.gui.widgets.TemplateChooser;
 
@@ -40,6 +39,12 @@ public class RomSettingsPanel extends SettingsPanel {
 	JCheckBox						cboxUseAdvResize				= createCheckbox("Use advanced Resize-Algorithm",
 																			"(Experimental) Advanced Resize-Algorith...might give better results on small imagesizes!?");
 
+	JCheckBox						cboxVRTheme						= createCheckbox("is VRTheme Template", "Check this if you choose vrtheme template");
+	JCheckBox						cboxPreload						= createCheckbox("Rom uses /preload partition",
+																			"Check this if you have a Samsung Stock Rom with preload partition");
+	JCheckBox						cboxMMSForEmos					= createCheckbox("use Mms.apk for emoticons",
+																			"Check this if you want to flash emoticons to Mms.apk");
+
 	// Presets
 	JComboBox<RomPreset>			romPresetCombo					= new JComboBox<RomPreset>(RomPreset.getPresets());
 
@@ -47,10 +52,13 @@ public class RomSettingsPanel extends SettingsPanel {
 	DrawableComboBox				frameworkDrawableFolderCombo	= new DrawableComboBox();
 	DrawableComboBox				systemUIDrawableFolderCombo		= new DrawableComboBox();
 	DrawableComboBox				lidroidDrawableFolderCombo		= new DrawableComboBox();
+	DrawableComboBox				emoticonsDrawableFolderCombo	= new DrawableComboBox();
 
-	// Morphpathes
-	MorphpathSystemUIComboBox		morphpathSystemUIComboBox		= new MorphpathSystemUIComboBox();
-	MorphpathFrameWorkComboBox		morphpathFrameworkComboBox		= new MorphpathFrameWorkComboBox();
+	MorphPathWidget					morphSystemUIWidget				= new MorphPathWidget("system/app/SystemUI.apk/res/");
+	MorphPathWidget					morphFrameworkWidget			= new MorphPathWidget("system/framework/framework-res.apk/res/");
+	MorphPathWidget					morphLidroidWidget				= new MorphPathWidget("system/framework/lidroid-res.apk/res/");
+	MorphPathWidget					morphMMSWidget					= new MorphPathWidget("system/app/Mms.apk/res/");
+
 	// Battery
 	SliderAndLabel					sliderBattSize					= systemUIDrawableFolderCombo.getSliderBattSize();
 	JTextField						filepattern						= new JTextField();
@@ -68,9 +76,7 @@ public class RomSettingsPanel extends SettingsPanel {
 	// Weather
 	SliderAndLabel					weatherSize						= frameworkDrawableFolderCombo.getSliderWeatherSize();
 	// Emoticons
-	SliderAndLabel					emoSize							= frameworkDrawableFolderCombo.getSliderEmoSize();
-	JCheckBox						cboxUseMms						= createCheckbox("Morph to Mms.apk",
-																			"Morph Emoticons to Mms.apk instead of framework-res.apk");
+	SliderAndLabel					emoSize							= emoticonsDrawableFolderCombo.getSliderEmoSize();
 
 	// Notification
 	JTextField						notificationFileName			= new JTextField();
@@ -160,10 +166,8 @@ public class RomSettingsPanel extends SettingsPanel {
 			cboxUseLidroid.setSelected(pre.isUseLidroid());
 			lidroidDrawableFolderCombo.setEnabled(pre.isUseLidroid());
 			templateChooser.setSelectedItem(pre.getTemplate());
-			morphpathSystemUIComboBox.setSelectedItem(pre.getMorphPath2SystemUIRes());
-			morphpathFrameworkComboBox.setSelectedItem(pre.getMorphPath2FrameworkRes());
-
-			// romPresetCombo.setSelectedIndex(0);
+			cboxPreload.setSelected(pre.isUsePreload());
+			cboxVRTheme.setSelected(pre.isUseVRThemeTemplate());
 		}
 	}
 
@@ -218,10 +222,18 @@ public class RomSettingsPanel extends SettingsPanel {
 
 		builder.add(JGoodiesHelper.createBlackLabel("TemplateFile for flashable-Zip"), cc.xyw(2, ++row, 3));
 		builder.add(templateChooser, cc.xyw(2, ++row, 3));
+		builder.add(cboxVRTheme, cc.xyw(6, row, 3));
+		builder.add(cboxPreload, cc.xyw(6, ++row, 3));
 
-		builder.add(JGoodiesHelper.createBlackLabel("Morph-Path"), cc.xyw(2, ++row, 3));
-		builder.add(morphpathSystemUIComboBox, cc.xyw(2, ++row, 7));
-		builder.add(morphpathFrameworkComboBox, cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Morph-Path to SystemUI"), cc.xyw(2, ++row, 3));
+		builder.add(morphSystemUIWidget, cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Morph-Path to Framework"), cc.xyw(2, ++row, 3));
+		builder.add(morphFrameworkWidget, cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Morph-Path to Lidroid.apk"), cc.xyw(2, ++row, 3));
+		builder.add(morphLidroidWidget, cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Morph-Path to Mms.apk"), cc.xyw(2, ++row, 3));
+		builder.add(morphMMSWidget, cc.xyw(2, ++row, 7));
+
 		builder.add(JGoodiesHelper.createBlackLabel("Choose your SystemUI's resolution"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("Choose your Framework's resolution"), cc.xyw(6, row, 3));
 		builder.add(systemUIDrawableFolderCombo, cc.xyw(2, ++row, 3));
@@ -316,7 +328,8 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(JGoodiesHelper.createBlackLabel("Emoticon Size (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
 		builder.add(emoSize, cc.xyw(2, ++row, 1));
 		builder.add(emoSize.getValueLabel(), cc.xyw(4, row, 1));
-		builder.add(cboxUseMms, cc.xyw(6, row, 3));
+		builder.add(emoticonsDrawableFolderCombo, cc.xyw(6, row, 3));
+		builder.add(cboxMMSForEmos, cc.xyw(2, ++row, 3));
 
 		final JPanel hide = new HidePanel("Emoticons", builder.getPanel());
 		return hide;
@@ -395,14 +408,20 @@ public class RomSettingsPanel extends SettingsPanel {
 			this.settings = settings;
 
 			cboxUseAdvResize.setSelected(settings.isUseAdvancedResize());
+			cboxVRTheme.setSelected(settings.isUseVRThemeTemplate());
+			cboxPreload.setSelected(settings.isUsePreload());
+			cboxMMSForEmos.setSelected(settings.isUseMMSForEmoticons());
 
 			// Drawables
 			systemUIDrawableFolderCombo.setSelectedItem(settings.getSystemUIDrawableFolder());
 			frameworkDrawableFolderCombo.setSelectedItem(settings.getFrameworkDrawableFolder());
 			lidroidDrawableFolderCombo.setSelectedItem(settings.getLidroidDrawableFolder());
+			emoticonsDrawableFolderCombo.setSelectedItem(settings.getEmoticonsDrawableFolder());
 			// Morphpath
-			morphpathSystemUIComboBox.setSelectedItem(settings.getMorphPath2SystemUIRes());
-			morphpathFrameworkComboBox.setSelectedItem(settings.getMorphPath2FrameworkRes());
+			// morphSystemUIComboBox.setSelectedItem(settings.getMorphPath2SystemUIRes());
+			// morphpathFrameworkComboBox.setSelectedItem(settings.getMorphPath2FrameworkRes());
+			// morphpathLidroidComboBox.setSelectedItem(settings.getMorphPath2SystemUIRes());
+			// morphpathEmosComboBox.setSelectedItem(settings.getMorphPath2Emoticons());
 			// Battery
 			filepattern.setText(settings.getFilePattern());
 			filepatternCharge.setText(settings.getFilePatternCharge());
@@ -435,7 +454,6 @@ public class RomSettingsPanel extends SettingsPanel {
 			weatherSize.setValue(settings.getWeatherSize());
 			// emoticon
 			emoSize.setValue(settings.getEmoSize());
-			cboxUseMms.setSelected(settings.isUseMmsForEmoticons());
 			// template
 			templateChooser.setSelectedItem(settings.getTemplate());
 
@@ -446,13 +464,19 @@ public class RomSettingsPanel extends SettingsPanel {
 
 	public RomSettings getSettings() {
 		settings.setUseAdvancedResize(cboxUseAdvResize.isSelected());
-
+		settings.setUseVRThemeTemplate(cboxVRTheme.isSelected());
+		settings.setUsePreload(cboxPreload.isSelected());
+		settings.setUseMMSForEmoticons(cboxMMSForEmos.isSelected());
 		// Drawables
 		settings.setSystemUIDrawableFolder((String) systemUIDrawableFolderCombo.getSelectedItem());
 		settings.setFrameworkDrawableFolder((String) frameworkDrawableFolderCombo.getSelectedItem());
 		settings.setLidroidDrawableFolder((String) lidroidDrawableFolderCombo.getSelectedItem());
-		settings.setMorphPath2SystemUIRes((String) morphpathSystemUIComboBox.getSelectedItem());
-		settings.setMorphPath2Framework((String) morphpathFrameworkComboBox.getSelectedItem());
+		settings.setEmoticonsDrawableFolder((String) emoticonsDrawableFolderCombo.getSelectedItem());
+		// Morphpath
+		settings.setMorphPath2SystemUIRes(morphSystemUIWidget.getText());
+		settings.setMorphPath2Framework(morphFrameworkWidget.getText());
+		settings.setMorphPath2Lidroid(morphLidroidWidget.getText());
+		settings.setMorphPath2MMS(morphMMSWidget.getText());
 		// Battery
 		settings.setFilePattern(filepattern.getText());
 		settings.setFilePatternCharge(filepatternCharge.getText());
@@ -483,7 +507,6 @@ public class RomSettingsPanel extends SettingsPanel {
 		settings.setWeatherSize(weatherSize.getValue());
 		// Emo
 		settings.setEmoSize(emoSize.getValue());
-		settings.setUseMmsForEmoticons(cboxUseMms.isSelected());
 
 		// template
 		settings.setTemplate((String) templateChooser.getSelectedItem());
@@ -541,5 +564,21 @@ public class RomSettingsPanel extends SettingsPanel {
 	@Override
 	protected void validateControls() {
 		lidroidDrawableFolderCombo.setEnabled(cboxUseLidroid.isSelected());
+		morphLidroidWidget.setEnabled(cboxUseLidroid.isSelected());
+
+		emoticonsDrawableFolderCombo.setEnabled(cboxMMSForEmos.isSelected());
+		morphMMSWidget.setEnabled(cboxMMSForEmos.isSelected());
+
+		morphSystemUIWidget.setUsePreload(cboxPreload.isSelected());
+		morphSystemUIWidget.setUseVRTheme(cboxVRTheme.isSelected());
+
+		morphFrameworkWidget.setUsePreload(cboxPreload.isSelected());
+		morphFrameworkWidget.setUseVRTheme(cboxVRTheme.isSelected());
+
+		morphLidroidWidget.setUsePreload(cboxPreload.isSelected());
+		morphLidroidWidget.setUseVRTheme(cboxVRTheme.isSelected());
+
+		morphMMSWidget.setUsePreload(cboxPreload.isSelected());
+		morphMMSWidget.setUseVRTheme(cboxVRTheme.isSelected());
 	}
 }

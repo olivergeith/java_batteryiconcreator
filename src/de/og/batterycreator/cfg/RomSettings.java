@@ -9,12 +9,17 @@ public class RomSettings implements Serializable {
 	 */
 	private static final long	serialVersionUID			= 6675299018043274221L;
 
+	private boolean				useVRThemeTemplate			= false;
+	private boolean				usePreload					= false;
+	private boolean				useMMSForEmoticons			= true;
+
 	private String				fileBattPattern				= RomPreset.BATT_ICON_NAME_AOKP;
 	private String				fileBattPatternCharge		= RomPreset.BATT_ICON_CHARGE_NAME_AOKP;
 
 	private String				frameworkDrawableFolder		= RomPreset.DRAWABLE_HDPI;
 	private String				systemUIDrawableFolder		= RomPreset.DRAWABLE_HDPI;
 	private String				lidroidDrawableFolder		= RomPreset.DRAWABLE_HDPI;
+	private String				emoticonsDrawableFolder		= RomPreset.DRAWABLE_HDPI;
 
 	private String				morphPath2SystemUIRes		= RomPreset.MORPHPATH_SYSTEMUI;
 	private String				folderSystemUIInZip			= morphPath2SystemUIRes + RomPreset.DRAWABLE_HDPI + "/";
@@ -22,8 +27,11 @@ public class RomSettings implements Serializable {
 	private String				morphPath2Framework			= RomPreset.MORPHPATH_FRAMEWORK;
 	private String				folderFrameworkInZip		= morphPath2Framework + RomPreset.DRAWABLE_HDPI + "/";
 
-	private String				folderLidroidInZip			= RomPreset.MORPHPATH_LIDROID + RomPreset.DRAWABLE_HDPI + "/";
-	private String				folderEmoticonsInZip		= RomPreset.MORPHPATH_MMS + RomPreset.DRAWABLE_HDPI + "/";
+	private String				morphPath2Lidroid			= RomPreset.MORPHPATH_LIDROID;
+	private String				folderLidroidInZip			= morphPath2Lidroid + RomPreset.DRAWABLE_HDPI + "/";
+
+	private String				morphPath2MMS			= RomPreset.MORPHPATH_MMS;
+	private String				folderEmoticonsInZip		= morphPath2MMS + RomPreset.DRAWABLE_HDPI + "/";
 
 	private int					battIconSize				= RomPreset.BATT_ICON_HEIGHT_HDPI;
 	private boolean				useAdvancedResize			= true;
@@ -38,7 +46,7 @@ public class RomSettings implements Serializable {
 	private int					weatherSize					= RomPreset.WEATHER_HDPI;
 	// EMoticons
 	private int					emoSize						= RomPreset.EMO_HDPI;
-	private boolean				useMmsForEmoticons			= false;
+	// private boolean useMmsForEmoticons = true;
 
 	// Notification
 	private String				notificationBGFilename		= RomPreset.NOTIFICATION_BG_FILENME;
@@ -58,14 +66,6 @@ public class RomSettings implements Serializable {
 	private String				fileWifiInOut				= RomPreset.WIFI_ICON_NAME_INOUT;
 
 	private String				template					= new String("./template/template.zip");
-
-	public String getFolderSystemUIInZip() {
-		return folderSystemUIInZip;
-	}
-
-	public String getFolderFrameworkInZip() {
-		return folderFrameworkInZip;
-	}
 
 	/**
 	 * @return the filePattern
@@ -97,21 +97,9 @@ public class RomSettings implements Serializable {
 		fileBattPatternCharge = filePatternCharge;
 	}
 
-	/**
-	 * @return the systemUIDrawableFolder
-	 */
-	public String getSystemUIDrawableFolder() {
-		return systemUIDrawableFolder;
-	}
-
-	/**
-	 * @return the frameworkDrawableFolder
-	 */
-	public String getFrameworkDrawableFolder() {
-		return frameworkDrawableFolder;
-	}
-
-	// Systemui
+	// ##########################################
+	// SystemUI stuff
+	// ##########################################
 	public void setSystemUIDrawableFolder(final String systemUIDrawableFolder) {
 		this.systemUIDrawableFolder = systemUIDrawableFolder;
 		setFolderSystemUIInZip();
@@ -126,7 +114,17 @@ public class RomSettings implements Serializable {
 		folderSystemUIInZip = morphPath2SystemUIRes + systemUIDrawableFolder + "/";
 	}
 
-	// framework
+	public String getSystemUIDrawableFolder() {
+		return systemUIDrawableFolder;
+	}
+
+	public String getFolderSystemUIInZip() {
+		return folderSystemUIInZip;
+	}
+
+	// ##########################################
+	// Framework stuff
+	// ##########################################
 	public void setMorphPath2Framework(final String morphPath2Framework) {
 		this.morphPath2Framework = morphPath2Framework;
 		setFolderFrameworkInZip();
@@ -141,26 +139,100 @@ public class RomSettings implements Serializable {
 		folderFrameworkInZip = morphPath2Framework + frameworkDrawableFolder + "/";
 	}
 
-	/**
-	 * @param lidroidDrawableFolder
-	 *            the lidroidDrawableFolder to set
-	 */
-	public void setLidroidDrawableFolder(final String lidroidDrawableFolder) {
-		this.lidroidDrawableFolder = lidroidDrawableFolder;
-		folderLidroidInZip = RomPreset.MORPHPATH_LIDROID + lidroidDrawableFolder + "/";
+	public String getFrameworkDrawableFolder() {
+		return frameworkDrawableFolder;
 	}
 
-	/**
-	 * @return the iconSize
-	 */
+	public String getFolderFrameworkInZip() {
+		return folderFrameworkInZip;
+	}
+
+	// ##########################################
+	// Lidroid stuff
+	// ##########################################
+	private void setFolderLidroidInZip() {
+		folderLidroidInZip = morphPath2Lidroid + lidroidDrawableFolder + "/";
+	}
+
+	public void setLidroidDrawableFolder(final String lidroidDrawableFolder) {
+		this.lidroidDrawableFolder = lidroidDrawableFolder;
+		setFolderLidroidInZip();
+	}
+
+	public String getMorphPath2Lidroid() {
+		return morphPath2Lidroid;
+	}
+
+	public void setMorphPath2Lidroid(final String morphPath2Lidroid) {
+		this.morphPath2Lidroid = morphPath2Lidroid;
+		setFolderLidroidInZip();
+	}
+
+	public String getFolderLidroidInZip() {
+		return folderLidroidInZip;
+	}
+
+	public String getLidroidDrawableFolder() {
+		return lidroidDrawableFolder;
+	}
+
+	public boolean isUseLidroid() {
+		return useLidroid;
+	}
+
+	public void setUseLidroid(final boolean useLidroid) {
+		this.useLidroid = useLidroid;
+	}
+
+	// ##########################################
+	// Emoticons stuff
+	// ##########################################
+	private void setFolderEmoticonsInZip() {
+		if (useMMSForEmoticons)
+			this.folderEmoticonsInZip = morphPath2MMS + emoticonsDrawableFolder + "/";
+		else
+			this.folderEmoticonsInZip = morphPath2Framework + emoticonsDrawableFolder + "/";
+
+	}
+
+	public String getFolderEmoticonsInZip() {
+		return folderEmoticonsInZip;
+	}
+
+	public String getEmoticonsDrawableFolder() {
+		return emoticonsDrawableFolder;
+	}
+
+	public void setEmoticonsDrawableFolder(final String emoticonsDrawableFolder) {
+		this.emoticonsDrawableFolder = emoticonsDrawableFolder;
+		setFolderEmoticonsInZip();
+	}
+
+	public String getMorphPath2MMS() {
+		return morphPath2MMS;
+	}
+
+	public void setMorphPath2MMS(final String morphPath2Emoticons) {
+		this.morphPath2MMS = morphPath2Emoticons;
+		setFolderEmoticonsInZip();
+	}
+
+	public boolean isUseMMSForEmoticons() {
+		return useMMSForEmoticons;
+	}
+
+	public void setUseMMSForEmoticons(final boolean useMMSForEmoticons) {
+		this.useMMSForEmoticons = useMMSForEmoticons;
+		setFolderEmoticonsInZip();
+	}
+
+	// ##########################################
+	// Batt Size
+	// ##########################################
 	public int getBattIconSize() {
 		return battIconSize;
 	}
 
-	/**
-	 * @param targetIconSize
-	 *            the iconSize to set
-	 */
 	public void setBattIconSize(final int targetIconSize) {
 		battIconSize = targetIconSize;
 	}
@@ -421,43 +493,6 @@ public class RomSettings implements Serializable {
 	}
 
 	/**
-	 * @return the folderLidroidInZip
-	 */
-	public String getFolderLidroidInZip() {
-		return folderLidroidInZip;
-	}
-
-	/**
-	 * @param folderLidroidInZip
-	 *            the folderLidroidInZip to set
-	 */
-	public void setFolderLidroidInZip(final String folderLidroidInZip) {
-		this.folderLidroidInZip = folderLidroidInZip;
-	}
-
-	/**
-	 * @return the useLidroid
-	 */
-	public boolean isUseLidroid() {
-		return useLidroid;
-	}
-
-	/**
-	 * @param useLidroid
-	 *            the useLidroid to set
-	 */
-	public void setUseLidroid(final boolean useLidroid) {
-		this.useLidroid = useLidroid;
-	}
-
-	/**
-	 * @return the lidroidDrawableFolder
-	 */
-	public String getLidroidDrawableFolder() {
-		return lidroidDrawableFolder;
-	}
-
-	/**
 	 * @return the template
 	 */
 	public String getTemplate() {
@@ -488,25 +523,20 @@ public class RomSettings implements Serializable {
 		this.emoSize = emoSize;
 	}
 
-	public void setFolderEmoticonsInZip(final String folderMMSInZip) {
-		this.folderEmoticonsInZip = folderMMSInZip;
+	public boolean isUseVRThemeTemplate() {
+		return useVRThemeTemplate;
 	}
 
-	public String getFolderEmoticonsInZip() {
-		return folderEmoticonsInZip;
+	public void setUseVRThemeTemplate(final boolean useVRThemeTemplate) {
+		this.useVRThemeTemplate = useVRThemeTemplate;
 	}
 
-	public boolean isUseMmsForEmoticons() {
-		return useMmsForEmoticons;
+	public boolean isUsePreload() {
+		return usePreload;
 	}
 
-	public void setUseMmsForEmoticons(final boolean useMmsForEmoticons) {
-		this.useMmsForEmoticons = useMmsForEmoticons;
-		if (useMmsForEmoticons == true)
-			this.folderEmoticonsInZip = RomPreset.MORPHPATH_MMS + frameworkDrawableFolder + "/";
-		else
-			this.folderEmoticonsInZip = folderFrameworkInZip;
-
+	public void setUsePreload(final boolean usePreload) {
+		this.usePreload = usePreload;
 	}
 
 }

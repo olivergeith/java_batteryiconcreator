@@ -10,11 +10,22 @@ public class RomPreset implements Serializable {
 	public static final String			LOCKHANDLE_FILENAME_DEFAULT				= "ic_lockscreen_handle_normal.png";
 
 	public static final String			MORPHPATH_SYSTEMUI						= "MORPH/system/app/SystemUI.apk/res/";
-	public static final String			MORPHPATH_SYSTEMUI_SAMSUNG_JB			= "MORPH/preload/symlink/system/app/SystemUI.apk/res/";
+	public static final String			MORPHPATH_SYSTEMUI_PRELOAD				= "MORPH/preload/symlink/system/app/SystemUI.apk/res/";
 	public static final String			MORPHPATH_FRAMEWORK						= "MORPH/system/framework/framework-res.apk/res/";
-	public static final String			MORPHPATH_FRAMEWORK_SAMSUNG_JB			= "MORPH/preload/symlink/system/framework/framework-res.apk/res/";
+	public static final String			MORPHPATH_FRAMEWORK_PRELOAD				= "MORPH/preload/symlink/system/framework/framework-res.apk/res/";
 	public static final String			MORPHPATH_LIDROID						= "MORPH/system/framework/lidroid-res.apk/res/";
+	public static final String			MORPHPATH_LIDROID_PRELOAD				= "MORPH/preload/symlink/system/framework/lidroid-res.apk/res/";
 	public static final String			MORPHPATH_MMS							= "MORPH/system/app/Mms.apk/res/";
+	public static final String			MORPHPATH_MMS_PRELOAD					= "MORPH/preload/symlink/system/app/Mms.apk/res/";
+
+	public static final String			MORPHPATH_VRTHEME_SYSTEMUI				= "vrtheme/system/app/SystemUI.apk/res/";
+	public static final String			MORPHPATH_VRTHEME_SYSTEMUI_PRELOAD		= "vrtheme/preload/symlink/system/app/SystemUI.apk/res/";
+	public static final String			MORPHPATH_VRTHEME_FRAMEWORK				= "vrtheme/system/framework/framework-res.apk/res/";
+	public static final String			MORPHPATH_VRTHEME_FRAMEWORK_PRELOAD		= "vrtheme/preload/symlink/system/framework/framework-res.apk/res/";
+	public static final String			MORPHPATH_VRTHEME_LIDROID				= "vrtheme/system/framework/lidroid-res.apk/res/";
+	public static final String			MORPHPATH_VRTHEME_LIDROID_PRELOAD		= "vrtheme/preload/symlink/system/framework/lidroid-res.apk/res/";
+	public static final String			MORPHPATH_VRTHEME_MMS					= "vrtheme/system/app/Mms.apk/res/";
+	public static final String			MORPHPATH_VRTHEME_MMS_PRELOAD			= "vrtheme/preload/symlink/system/app/Mms.apk/res/";
 
 	public static final String			WIFI_ICON_NAME							= "stat_sys_wifi_signal_";
 	public static final String			WIFI_ICON_EXTENSION_FULLY				= "_fully";
@@ -49,7 +60,7 @@ public class RomPreset implements Serializable {
 	public static final int				WEATHER_600DP_XHDPI						= 162;
 	public static final int				WEATHER_600DP_HDPI						= 144;
 
-	public static final int				EMO_XXHDPI								= 55;
+	public static final int				EMO_XXHDPI								= 66;
 	public static final int				EMO_XHDPI								= 44;
 	public static final int				EMO_HDPI								= 33;
 	public static final int				EMO_MDPI								= 22;
@@ -102,7 +113,6 @@ public class RomPreset implements Serializable {
 	public static final String			DRAWABLE_XXHDPI							= "drawable-xxhdpi";
 	public static final String			DRAWABLE_XHDPI							= "drawable-xhdpi";
 	public static final String			DRAWABLE_HDPI							= "drawable-hdpi";
-	public static final String			DRAWABLE_HDPI_S3						= "drawable-hdpi";
 	public static final String			DRAWABLE_720DP_XHDPI					= "drawable-sw720dp-xhdpi";
 	public static final String			DRAWABLE_600DP_XHDPI					= "drawable-sw600dp-xhdpi";
 	public static final String			DRAWABLE_720DP_HDPI						= "drawable-sw720dp-hdpi";
@@ -118,45 +128,36 @@ public class RomPreset implements Serializable {
 
 	static {
 		presets.add(new RomPreset(APPLY, DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP, BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI,
-				NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 
 		presets.add(new RomPreset("Default (xhdpi AOKP)", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS2, false, false));
 		presets.add(new RomPreset("Default (hdpi AOKP)", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP, BATT_ICON_CHARGE_NAME_AOKP,
-				LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 		presets.add(new RomPreset("Default (mhdpi AOKP)", DRAWABLE_MDPI, BATT_ICON_HEIGHT_MDPI, DRAWABLE_MDPI, BATT_ICON_NAME_AOKP, BATT_ICON_CHARGE_NAME_AOKP,
-				LOCK_MDPI, NOTIFICATION_MDPI, TOGGLE_MDPI, false, WEATHER_MDPI, EMO_MDPI, templateS2, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				LOCK_MDPI, NOTIFICATION_MDPI, TOGGLE_MDPI, false, WEATHER_MDPI, EMO_MDPI, templateS2, false, false));
 		presets.add(new RomPreset("Default (xxhdpi AOKP)", DRAWABLE_XXHDPI, BATT_ICON_HEIGHT_XXHDPI, DRAWABLE_XXHDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XXHDPI, NOTIFICATION_XXHDPI, TOGGLE_XXHDPI, false, WEATHER_XXHDPI, EMO_XXHDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XXHDPI, NOTIFICATION_XXHDPI, TOGGLE_XXHDPI, false, WEATHER_XXHDPI, EMO_XXHDPI, templateS2, false, false));
 
 		// Rootbox
 		presets.add(new RomPreset("(S2 i9100) ### RootBox 3.x", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 		presets.add(new RomPreset("(S2 i9100) ### RootBox 3.x (Speedometer)", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_ROOTBOX_ALT,
-				BATT_ICON_CHARGE_NAME_ROOTBOX_ALT, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_ROOTBOX_ALT, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 		presets.add(new RomPreset("(S2 i9100) ### RootBox 3.x (Square)", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_ROOTBOX_SQUARE,
-				BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 
 		// Resurrection
 		presets.add(new RomPreset("(S2 i9100) Resurrection Remix 3.1.3 and above", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS2, false, false));
 
 		// other
 		presets.add(new RomPreset("(S2 i9100) JellyBam 4.x - 5.x", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 		presets.add(new RomPreset("(S2 i9100) Chameleon v3.0 AOKP hybrid", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 		presets.add(new RomPreset("(S2 i9100) Original AOKP", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 		// presets.add(new RomPreset("(S2 i9100) Neat Rom", DRAWABLE_HDPI,
 		// BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_STOCK_ICS_JKAY,
 		// BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_HDPI, NOTIFICATION_HDPI,
@@ -164,58 +165,52 @@ public class RomPreset implements Serializable {
 		// MORPHPATH_SYSTEMUI_SAMSUNG_JB));
 
 		presets.add(new RomPreset("(S2 i9100) HydraH2O ICS 1.x", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 
 		presets.add(new RomPreset("(S2 i9100) Original CM9/CM10/10.1 + 1%-Mod!!!", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 
 		presets.add(new RomPreset("(S2 i9100) Stock ROM incl. JKay", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI, BATT_ICON_NAME_STOCK_ICS_JKAY,
-				BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI, templateS2, false, false));
 
 		presets.add(new RomPreset("(S2 i9100) Presets for 1%Mod from shayne77 Mod-Tool", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI, DRAWABLE_HDPI,
 				BATT_ICON_NAME_STOCK_ICS_JKAY, BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_HDPI, NOTIFICATION_HDPI, TOGGLE_HDPI, false, WEATHER_HDPI, EMO_HDPI,
-				templateS2, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				templateS2, false, false));
 
 		// Note2 Presets
 		presets.add(new RomPreset("(Note II) Lab Rats ROM", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI, BATT_ICON_NAME_STOCK_ICS_JKAY,
-				BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI_S3, true, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus,
-				MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI_S3, true, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus, false,
+				false));
 
 		// S3 Presets
 		presets.add(new RomPreset("(S3 i9300) [MORPHOLOGY SOCIETY]", DRAWABLE_HDPI, BATT_ICON_HEIGHT_HDPI_S3, DRAWABLE_HDPI, BATT_ICON_NAME_STOCK_ICS_JKAY,
-				BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI_S3, true, WEATHER_XHDPI, EMO_XHDPI, templateS2,
-				MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI_S3, true, WEATHER_XHDPI, EMO_XHDPI, templateS2, false, false));
 		presets.add(new RomPreset("(S3 i9300) Stock [sdcard under /data/media]", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI,
 				BATT_ICON_NAME_STOCK_ICS_JKAY, BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI_S3, true, WEATHER_XHDPI,
-				EMO_XHDPI, templateS3Nexus, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				EMO_XHDPI, templateS3Nexus, false, false));
 		presets.add(new RomPreset("(S3 i9300) Omega Rom", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI_S3, DRAWABLE_XHDPI, BATT_ICON_NAME_STOCK_ICS_JKAY,
-				BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus,
-				MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_STOCK_ICS_JKAY, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus, false,
+				false));
 		presets.add(new RomPreset("(S3 i9300) ### RootBox 3.x ", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus, false, false));
 		presets.add(new RomPreset("(S3 i9300) ### RootBox 3.x (Speedometer)", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI,
 				BATT_ICON_NAME_ROOTBOX_ALT, BATT_ICON_CHARGE_NAME_ROOTBOX_ALT, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI,
-				templateS3Nexus, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				templateS3Nexus, false, false));
 		presets.add(new RomPreset("(S3 i9300) ### RootBox 3.x (Square)", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI, BATT_ICON_NAME_ROOTBOX_SQUARE,
-				BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus,
-				MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus, false,
+				false));
 		presets.add(new RomPreset("(S3 i9300/i747) Pacman Rom", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI, BATT_ICON_NAME_ROOTBOX_SQUARE,
-				BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus43,
-				MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus43, false,
+				false));
 		// Galaxy Nexus Presets
 		presets.add(new RomPreset("(Galaxy Nexus) ### RootBox 3.x ", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI, BATT_ICON_NAME_AOKP,
-				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus, MORPHPATH_SYSTEMUI,
-				MORPHPATH_FRAMEWORK));
+				BATT_ICON_CHARGE_NAME_AOKP, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI, templateS3Nexus, false, false));
 		presets.add(new RomPreset("(Galaxy Nexus) ### RootBox 3.x (Speedometer)", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI,
 				BATT_ICON_NAME_ROOTBOX_ALT, BATT_ICON_CHARGE_NAME_ROOTBOX_ALT, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI, EMO_XHDPI,
-				templateS3Nexus, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				templateS3Nexus, false, false));
 		presets.add(new RomPreset("(Galaxy Nexus) ### RootBox 3.x (Sqare)", DRAWABLE_XHDPI, BATT_ICON_HEIGHT_XHDPI, DRAWABLE_XHDPI,
 				BATT_ICON_NAME_ROOTBOX_SQUARE, BATT_ICON_CHARGE_NAME_ROOTBOX_SQUARE, LOCK_XHDPI, NOTIFICATION_XHDPI, TOGGLE_XHDPI, false, WEATHER_XHDPI,
-				EMO_XHDPI, templateS3Nexus, MORPHPATH_SYSTEMUI, MORPHPATH_FRAMEWORK));
+				EMO_XHDPI, templateS3Nexus, false, false));
 	}
 
 	private final String				romName;
@@ -231,13 +226,14 @@ public class RomPreset implements Serializable {
 	private final int					battsize;
 	private final boolean				useLidroid;
 	private final String				template;
-	private final String				morphPath2SystemUIRes;
-	private final String				morphPath2FrameworkRes;
+
+	private final boolean				useVRThemeTemplate;
+	private final boolean				usePreload;
 
 	public RomPreset(final String romName, final String systemUIDrawableFolder, final int battsize, final String frameworkDrawableFolder,
 			final String filePattern, final String filePatternCharge, final int lockHandleSize, final int notificationHeight, final int toggleSize,
-			final boolean useLidroid, final int weatherSize, final int emoSize, final String template, final String morphPath2SystemUIRes,
-			final String morphPath2FrameworkRes) {
+			final boolean useLidroid, final int weatherSize, final int emoSize, final String template, final boolean useVRThemeTemplate,
+			final boolean usePreload) {
 		super();
 		this.romName = romName;
 		this.systemUIDrawableFolder = systemUIDrawableFolder;
@@ -252,8 +248,8 @@ public class RomPreset implements Serializable {
 		this.weatherSize = weatherSize;
 		this.emoSize = emoSize;
 		this.template = template;
-		this.morphPath2SystemUIRes = morphPath2SystemUIRes;
-		this.morphPath2FrameworkRes = morphPath2FrameworkRes;
+		this.usePreload = usePreload;
+		this.useVRThemeTemplate = useVRThemeTemplate;
 	}
 
 	public static Vector<RomPreset> getPresets() {
@@ -331,14 +327,6 @@ public class RomPreset implements Serializable {
 		return template;
 	}
 
-	public String getMorphPath2SystemUIRes() {
-		return morphPath2SystemUIRes;
-	}
-
-	public Object getMorphPath2FrameworkRes() {
-		return morphPath2FrameworkRes;
-	}
-
 	public int getEmoSize() {
 		return emoSize;
 	}
@@ -366,6 +354,14 @@ public class RomPreset implements Serializable {
 		} else if (!romName.equals(other.romName))
 			return false;
 		return true;
+	}
+
+	public boolean isUseVRThemeTemplate() {
+		return useVRThemeTemplate;
+	}
+
+	public boolean isUsePreload() {
+		return usePreload;
 	}
 
 }
