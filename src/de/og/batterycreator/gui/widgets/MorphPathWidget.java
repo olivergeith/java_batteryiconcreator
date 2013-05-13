@@ -1,9 +1,11 @@
 package de.og.batterycreator.gui.widgets;
 
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 
-public class MorphPathWidget extends JLabel {
+public class MorphPathWidget extends JTextField {
 	private static final long	serialVersionUID	= -3686797491233353351L;
 
 	private boolean				usePreload			= false;
@@ -24,12 +26,22 @@ public class MorphPathWidget extends JLabel {
 		if (usePreload)
 			path += "preload/symlink/";
 		path += apkPath;
-		this.setText(path);
+		setText(path);
 		return path;
 	}
 
 	private void initUI() {
-		this.setForeground(Color.blue.darker());
+		setForeground(Color.blue.darker());
+		setEditable(false);
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent e) {
+				if (e.getClickCount() == 3) {
+					setEditable(!isEditable());
+				}
+			}
+		});
+		setToolTipText("Trippleclick me to make me editable...Only for experts! :-)");
 		createMorphPath();
 	}
 
