@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import javax.swing.JOptionPane;
 import og.basics.gui.file.FileDialogs;
 import og.basics.util.KPropertyReader;
 import org.slf4j.Logger;
@@ -18,8 +19,8 @@ public class SettingsPersistor {
 	private static final String	SETTINGS_WIFI_EXTENSION	= ".wcfg";
 	private static final String	SETTINGS_DIR			= "./stylSettings/";
 	private static final String	SETTINGS_DIR_GLOBAL		= "./settings/";
-	public static final String	ROMSETTINGS_DIR			= "./rompresets/";
-	public static final String	ROMSETTINGS_EXTENSION	= ".rompreset";
+	public static final String	ROMPRESETS_DIR			= "./rompresets/";
+	public static final String	ROMPRESETS_EXTENSION	= ".rompreset";
 
 	// ###############################################################################
 	// Persisting Settings
@@ -212,7 +213,7 @@ public class SettingsPersistor {
 	// ###############################################################################
 	public static void writePreset(final RomPreset pre) {
 		LOGGER.debug("Writing RomPreset: {}", pre.getRomName());
-		final KPropertyReader reader = new KPropertyReader(ROMSETTINGS_DIR + pre.getRomName() + ROMSETTINGS_EXTENSION, true);
+		final KPropertyReader reader = new KPropertyReader(ROMPRESETS_DIR + pre.getRomName() + ROMPRESETS_EXTENSION, true);
 		reader.writeProperty("RomName", pre.getRomName());
 		reader.writeProperty("FilePattern", pre.getFilePattern());
 		reader.writeProperty("FilePatternCharge", pre.getFilePatternCharge());
@@ -258,6 +259,43 @@ public class SettingsPersistor {
 		return new RomPreset(romName, systemUIDrawableFolder, battsize, frameworkDrawableFolder, lidroidDrawableFolder, mmsDrawableFolder, filePattern,
 				filePatternCharge, lockHandleSize, notificationHeight, toggleSize, useLidroid, weatherSize, emoSize, template, useVRThemeTemplate, usePreload,
 				useMMSforEmoticons);
+	}
+
+	public static void saveRomPresetFromRomSettings(final RomSettings rs) {
+		// Pfad anlegen falls nicht vorhanden
+		final File pa = new File(ROMPRESETS_DIR);
+		if (!pa.exists())
+			pa.mkdirs();
+		final String filename = ROMPRESETS_DIR + "(Device) Name" + ROMPRESETS_EXTENSION;
+		final File saveFile = FileDialogs.saveFile(pa, new File(filename), ROMPRESETS_EXTENSION, "Rom Presets");
+
+		if (saveFile != null) {
+			final String romName = SettingsPersistor.stripExtension(saveFile.getName());
+			LOGGER.info("Exporting RomPreset = {}", romName);
+			final RomPreset pre = new RomPreset(romName, rs.getSystemUIDrawableFolder(), rs.getBattIconSize(), rs.getFrameworkDrawableFolder(),
+					rs.getLidroidDrawableFolder(), rs.getEmoticonsDrawableFolder(), rs.getFilePattern(), rs.getFilePatternCharge(), rs.getLockHandleSize(),
+					rs.getNotificationHeight(), rs.getToggleSize(), rs.isUseLidroid(), rs.getWeatherSize(), rs.getEmoSize(), rs.getTemplate(),
+					rs.isUseVRThemeTemplate(), rs.isUsePreload(), rs.isUseMMSForEmoticons());
+			SettingsPersistor.writePreset(pre);
+			JOptionPane
+					.showMessageDialog(null, "RomPreset " + saveFile.getName()
+							+ " was saved successfully!\nRestart 'Rom Fumbler' to make it appear in Dropdown-Box!", "RomPreset saving",
+							JOptionPane.INFORMATION_MESSAGE);
+			LOGGER.info("Exporting RomPreset = {} finished!", romName);
+		}
+	}
+
+	public static String stripExtension(final String str) {
+		// Handle null case specially.
+		if (str == null)
+			return null;
+		// Get position of last '.'.
+		final int pos = str.lastIndexOf(".");
+		// If there wasn't any '.' just return the string as is.
+		if (pos == -1)
+			return str;
+		// Otherwise return the string, up to the dot.
+		return str.substring(0, pos);
 	}
 
 }

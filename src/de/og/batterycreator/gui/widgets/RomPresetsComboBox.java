@@ -37,19 +37,19 @@ public class RomPresetsComboBox extends JComboBox<RomPreset> {
 	}
 
 	private void addAdditionalRomPresetsFromFilesystem() {
-		final File dir = new File(SettingsPersistor.ROMSETTINGS_DIR);
+		final File dir = new File(SettingsPersistor.ROMPRESETS_DIR);
 		if (dir.exists() && dir.isDirectory()) {
 			final File[] presets = dir.listFiles(new FilenameFilter() {
 
 				@Override
 				public boolean accept(final File dir, final String name) {
-					return name.toLowerCase().endsWith(SettingsPersistor.ROMSETTINGS_EXTENSION);
+					return name.toLowerCase().endsWith(SettingsPersistor.ROMPRESETS_EXTENSION);
 				}
 			});
 			for (final File fi : presets) {
 				final RomPreset pre = SettingsPersistor.readPreset(fi);
 				if (pre != null) {
-					LOGGER.info("Found RomPreset in Filesystem: {}", fi.getPath());
+					LOGGER.debug("Found RomPreset in Filesystem: {}", fi.getPath());
 					addItem(pre);
 				}
 			}

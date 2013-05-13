@@ -5,8 +5,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import javax.swing.AbstractAction;
-import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -36,6 +35,10 @@ import de.og.batterycreator.gui.widgets.TemplateChooser;
 public class RomSettingsPanel extends SettingsPanel {
 	private static final long		serialVersionUID				= 1L;
 	private static final Logger		LOGGER							= LoggerFactory.getLogger(RomSettingsPanel.class);
+
+	private final JButton			loadButton						= new JButton(CommonIconProvider.BUTTON_ICON_OPEN);
+	private final JButton			saveButton						= new JButton(CommonIconProvider.BUTTON_ICON_SAVE);
+	private final JButton			exportButton					= new JButton("Export RomPreset", IconStore.presetExport);
 
 	private RomSettings				settings						= new RomSettings();
 
@@ -130,6 +133,28 @@ public class RomSettingsPanel extends SettingsPanel {
 		// romPresetCombo.setSelectedIndex(7);
 		romPresetCombo.setSelectedIndex(0);
 		romPresetCombo.setMaximumRowCount(20);
+
+		loadButton.setToolTipText("Load Rom Settings");
+		loadButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				setSettings(SettingsPersistor.loadRomSettings());
+			}
+		});
+		saveButton.setToolTipText("Save Rom Settings");
+		saveButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				SettingsPersistor.saveRomSettings("MyRomSettings", getSettings());
+			}
+		});
+		exportButton.setToolTipText("Export Rom Settings --> RomPreset");
+		exportButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				SettingsPersistor.saveRomPresetFromRomSettings(getSettings());
+			}
+		});
 	}
 
 	private void myInit() {
@@ -543,47 +568,12 @@ public class RomSettingsPanel extends SettingsPanel {
 	 * Creating buttonbar
 	 */
 	private void makeButtonBar() {
-		final LoadSettingsAktion loadAktion = new LoadSettingsAktion("Load Rom-Settings", CommonIconProvider.BUTTON_ICON_OPEN);
-		final SaveSettingsAktion saveAktion = new SaveSettingsAktion("Save Rom-Settings", CommonIconProvider.BUTTON_ICON_SAVE);
 		final JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
-		toolBar.add(loadAktion);
-		toolBar.add(saveAktion);
+		toolBar.add(loadButton);
+		toolBar.add(saveButton);
+		toolBar.add(exportButton);
 		add(toolBar, BorderLayout.NORTH);
-	}
-
-	/**
-	 * Load Settings Action
-	 * 
-	 */
-	private class LoadSettingsAktion extends AbstractAction {
-		private static final long	serialVersionUID	= 1L;
-
-		public LoadSettingsAktion(final String arg0, final Icon arg1) {
-			super(arg0, arg1);
-		}
-
-		@Override
-		public void actionPerformed(final ActionEvent arg0) {
-			setSettings(SettingsPersistor.loadRomSettings());
-		}
-	}
-
-	/**
-	 * Save Settings Action
-	 * 
-	 */
-	private class SaveSettingsAktion extends AbstractAction {
-		private static final long	serialVersionUID	= 1L;
-
-		public SaveSettingsAktion(final String arg0, final Icon arg1) {
-			super(arg0, arg1);
-		}
-
-		@Override
-		public void actionPerformed(final ActionEvent arg0) {
-			SettingsPersistor.saveRomSettings("MyRomSettings", getSettings());
-		}
 	}
 
 	@Override

@@ -49,6 +49,7 @@ public class IconStore {
 	public static final ImageIcon	presetS2			= new ImageIcon(IconStore.class.getResource("preset_S2.png"));
 	public static final ImageIcon	presetS3			= new ImageIcon(IconStore.class.getResource("preset_S3.png"));
 	public static final ImageIcon	presetGN			= new ImageIcon(IconStore.class.getResource("preset_GN.png"));
+	public static final ImageIcon	presetExport		= new ImageIcon(IconStore.class.getResource("preset_export.png"));
 
 	public IconStore() {
 	}

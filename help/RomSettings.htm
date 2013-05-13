@@ -5,80 +5,88 @@
 	<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
 </head>
 <body>
-<h2 pbzloc="0">Rom Settings</h2>
+<h2 pbzloc="120">Rom Settings</h2>
 
 <hr />
-<h3>Overview</h3>
+<h2>Overview</h2>
 
-<p pbzloc="9">In the Rom Settings, you configure all the things, that the Rom Fumbler needs to know about your Rom.<br />
+<p>In the Rom Settings, you configure all the things, that the Rom Fumbler needs to know about your Rom.<br />
 All this is needed&nbsp;to create icons in the correct size&nbsp;and finally build a flashable-zips that fits your Rom!</p>
 
 <p><a class="0" href="http://forum.xda-developers.com/showpost.php?p=38272787&amp;postcount=364">Learn how to find the right Rom Settings</a></p>
 
-<hr />
-<h3>Rom Presets</h3>
+<p>Rom Settings can be saved and loaded from config-files.</p>
 
-<p pbzloc="13">Each Rom has its specialties. For example: Roms on Galaxy S2 are normally hdpi (exception Ressurrection Remix --&gt; xhdpi).<br />
+<p>And new since Version 25.0 <em>Rom Settings </em>can be exported into a <em>Rom Preset </em>(for details see next paragraph)</p>
+
+<hr />
+<h2>Rom Presets</h2>
+
+<p>Each Rom has its specialties. For example: Roms on Galaxy S2 are normally hdpi (exception Ressurrection Remix --&gt; xhdpi).<br />
 Roms on Galaxy S3 are xhdpi and on Galaxy S4 xxhdpi! Filename-patterns are slightly different and so on.</p>
 
-<p pbzloc="14">So, <em>Rom Presets&nbsp;</em>bundle&nbsp;all these settings that need to be done for a special Rom.&nbsp;And you can apply this bunch of settings just by choosing the right <em>Rom Presets </em>for your Rom!</p>
+<p>So, <em>Rom Presets&nbsp;</em>bundle&nbsp;all these settings that need to be done for a special Rom.&nbsp;And you can apply this bunch of settings just by choosing the right <em>Rom Presets </em>for your Rom!</p>
 
-<p pbzloc="15">If your Rom is not in the Dropdownbox...you have two options...</p>
+<p>If your Rom is not in the Dropdownbox...you have two options...</p>
 
-<p pbzloc="19">1. Set up everything manually (<a class="0" href="http://forum.xda-developers.com/showpost.php?p=38272787&amp;postcount=364">Learn how to find the right Rom Settings</a>)<br />
+<p>1. Set up everything manually (<a class="0" href="http://forum.xda-developers.com/showpost.php?p=38272787&amp;postcount=364">Learn how to find the right Rom Settings</a>)<br />
 2. add your own <em>Rom Presets</em></p>
 
-<p pbzloc="20"><strong>Howto add your own <em>RomPresets</em>:</strong><br />
-<em>Rom Presets </em>are stored in the subfolder <span style="color: #008000"><strong><span style="font-family: courier new,courier,monospace">./rompresets/&lt;presetname&gt;</span></strong></span>.<br />
+<p><u><strong>Howto add your own <em>RomPresets</em>:</strong></u></p>
+
+<p><em>1. the smart way..</em></p>
+
+<p>Set up the <em>Rom Settings </em>you need and export them to a new&nbsp;<em>Rom Preset</em>! (Use the &quot;export save-button&quot;...the one with the <span style="color: #b22222">red arrow</span>)<br />
+Restart the Romfumbler after that to have the new <em>Rom Preset </em>available in the dropdownbox!</p>
+
+<p><em>2. the manual way...</em></p>
+
+<p><em>Rom Presets </em>are stored in the subfolder <span style="color: #008000"><strong><span style="font-family: courier new,courier,monospace">./rompresets/&lt;presetname&gt;</span></strong></span>.<br />
 These files are plain textfiles!</p>
 
-<ul pbzloc="25">
+<ul>
 	<li>Open an existing&nbsp;file with a simple texteditor,</li>
 	<li>edit all entries</li>
 	<li>and save it into a new file!</li>
-	<li pbzloc="21"><strong>Make sure you change the field &quot;RomName&quot; to a unique name!</strong></li>
-	<li pbzloc="22">Restart the Rom Fumbler and you will find your new <em>Rom Preset </em>in the dropdownbox!</li>
+	<li><strong>Make sure you change the field &quot;RomName&quot; to a unique name!</strong></li>
+	<li>Restart the Rom Fumbler and you will find your new <em>Rom Preset </em>in the dropdownbox!</li>
 </ul>
 
-<p pbzloc="26"><span style="color: #0000ff"><strong pbzloc="330">Hint:</strong></span><br />
+<p><span style="color: #0000ff"><strong>Hint:</strong></span><br />
 If you want the Rom Fumbler to start with a special <em>Rom Preset </em>every time, then go to &quot;Global Settings&quot; and choose your <em>Rom Preset</em> there.<br />
 With the next start of the Rom Fumbler, everything will be configured for your Rom.</p>
 
-<p pbzloc="28"><span style="color: #b22222"><strong><span style="background-color: #d3d3d3">Request: </span></strong></span><span style="background-color: #d3d3d3">If you have a working <em>Rom Preset </em>for a Rom not yet supported...</span><a href="http://forum.xda-developers.com/showthread.php?t=1918500" pbzloc="346"><span style="background-color: #d3d3d3">please upload the textfile to the Rom Fumblers XDA Thread</span></a><span pbzloc="6" style="background-color: #d3d3d3">!<br />
+<p><span style="color: #b22222"><strong><span style="background-color: #d3d3d3">Request: </span></strong></span><br />
+<span style="background-color: #d3d3d3">If you have a working <em>Rom Preset </em>for a Rom not yet supported...</span><a href="http://forum.xda-developers.com/showthread.php?t=1918500"><span style="background-color: #d3d3d3">please upload the textfile to the Rom Fumblers XDA Thread</span></a><span style="background-color: #d3d3d3">!<br />
 I will then make it available for everybody by adding it to the next Release!</span></p>
 
 <hr />
-<h3>Main Rom Settings</h3>
+<h2 pbzloc="127">Main Rom Settings</h2>
 
 <p>Here you can choose different templates that are used to create flashable-zips. There are two different kind of templates.</p>
 
 <ol>
-	<li pbzloc="323"><a href="http://www.htcmania.com/showthread.php?t=258333" pbzloc="326">UniversalFlasherTool (UTF)</a></li>
-	<li pbzloc="328"><a href="http://forum.xda-developers.com/showthread.php?t=1207017" pbzloc="324">Villian Theme System (vtheme)</a> (template-names must contain &quot;vrtheme&quot;)</li>
+	<li><a href="http://www.htcmania.com/showthread.php?t=258333">UniversalFlasherTool (UTF)</a><br />
+	+ The UTF Templates create a flashable-zip as backup. In case you dont like the new icons or something went wrong, you can simply flash the backup.zip!<br />
+	+ You find theses backup.zips on your internal or external sdcard in the subfolder<span style="font-family: courier new,courier,monospace"><strong> /UniversalFlasher/...</strong></span><br />
+	-&nbsp;the templates are big (around 2MB)<br />
+	- they might&nbsp;have problems flashing Samsung Stock Roms with /preload partition!</li>
+	<li><a href="http://forum.xda-developers.com/showthread.php?t=1207017">Villian Theme System (vtheme)</a> (template-names must contain &quot;vrtheme&quot;)<br />
+	+ small template file (0.6MB)<br />
+	- no flashabel Backup...it just backups the apks into a subfolder of your sdcard&nbsp;<span style="font-family: courier new,courier,monospace"><strong>./vrtheme-backup/...</strong></span></li>
 </ol>
+<strong><span style="color: #ff0000">I recommend using UTF Templates!</span></strong>
 
-<p>Both have their advantages:</p>
-
-<ul>
-	<li>The UTF Templates create a flashable-zip as&nbsp;backup. In case you dont like the new icons or something went wrong, you can simply flash the backup.zip!<br />
-	You find theses backup.zips on your internal or external sdcard in the Subfolder<span style="font-family: courier new,courier,monospace"><strong> /UniversalFlasher/...</strong></span><br />
-	<span style="color: #ff0000">I recomend using UTF Templates!!! They are perfect for all CM and AOKP Roms!</span></li>
-	<li>The vrtheme templates seem to be able to flash on Samsung stock Roms with the new /preload partition.<br />
-	But the backup is not so comfortable... it just backups the apk into a subfolder <span style="font-family: courier new,courier,monospace"><strong>./vrtheme-backup/...</strong></span></li>
-</ul>
-
-<p>Dependiung on the template you choose the checkboxes for preload ans vrtheme are set accordingly!</p>
-
-<p><strong>Howto Add your own templates:</strong></p>
+<p><u><strong pbzloc="122">Howto Add your own templates:</strong></u></p>
 
 <ul>
 	<li>goto the subfolder ./template of the Romfumbler</li>
 	<li>and put your zip in that folder too</li>
 	<li>the&nbsp; name should contain &quot;vrtheme&quot; if it is a vrtheme-template</li>
 	<li>and the name should contain &quot;preload&quot; if it is supposed to flash to Samsung stock roms with preload partition.</li>
-	<li><span pbzloc="315" style="color: #ff0000">if you follow those naming conventions, the checkboxes for vrtheme and preload will be set accordingly and the Morphpath will be adjusted automaticly!</span></li>
+	<li><span style="color: #ff0000">if you follow those naming conventions, the checkboxes for vrtheme and preload will be set accordingly and the Morphpath will be adjusted automaticly!</span></li>
 </ul>
 
-<p pbzloc="314">&nbsp;</p>
+<p>&nbsp;</p>
 </body>
 </html>

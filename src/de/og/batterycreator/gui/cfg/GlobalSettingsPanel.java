@@ -3,11 +3,13 @@ package de.og.batterycreator.gui.cfg;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.widgets.hidepanel.HidePanel;
 import og.basics.jgoodies.JGoodiesHelper;
 import org.slf4j.Logger;
@@ -60,7 +62,13 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		cfgScroller.getViewport().setView(cfg);
 		cfgScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(cfgScroller, BorderLayout.WEST);
-		this.add(label, BorderLayout.CENTER);
+		this.add(label, BorderLayout.EAST);
+		// Adding Howto, if Helpfile exists !
+		final File help = new File("./help/GlobalSettings.htm");
+		if (help.exists()) {
+			this.add(new HTMLFileDisplay(help), BorderLayout.CENTER);
+		}
+
 	}
 
 	private JPanel createSettingsPanel() {
