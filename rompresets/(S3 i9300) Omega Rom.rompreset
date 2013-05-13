@@ -16,3 +16,5 @@ Template=./template/templateS3Nexus.zip
 EmoSize=44
 FilePattern=stat_sys_battery_
 UseLidroid=false
+LidroidDrawableFolder=drawable-xhdpi
+MmsDrawableFolder=drawable-xhdpi

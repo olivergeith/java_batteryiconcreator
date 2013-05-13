@@ -16,3 +16,5 @@ Template=./template/template.zip
 EmoSize=33
 FilePattern=stat_sys_battery_
 UseLidroid=false
+LidroidDrawableFolder=drawable-hdpi
+MmsDrawableFolder=drawable-hdpi

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JCheckBox;
@@ -13,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.icon.CommonIconProvider;
 import og.basics.gui.widgets.hidepanel.HidePanel;
 import og.basics.jgoodies.JGoodiesHelper;
@@ -137,7 +139,8 @@ public class RomSettingsPanel extends SettingsPanel {
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
 				final String template = (String) templateChooser.getSelectedItem();
-				cboxVRTheme.setSelected(template.contains("vrtheme"));
+				cboxVRTheme.setSelected(template.contains("vrtheme") || template.contains("VRTheme"));
+				cboxPreload.setSelected(template.contains("preload"));
 				validateControls();
 			}
 		});
@@ -153,9 +156,12 @@ public class RomSettingsPanel extends SettingsPanel {
 		// cfgScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		cfgScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(cfgScroller, BorderLayout.WEST);
-
-		// this.add(createSettingsPanel(), BorderLayout.WEST);
-		this.add(label, BorderLayout.CENTER);
+		this.add(label, BorderLayout.EAST);
+		// Adding Howto, if Helpfile exists !
+		final File help = new File("./help/RomSettings.htm");
+		if (help.exists()) {
+			this.add(new HTMLFileDisplay(help), BorderLayout.CENTER);
+		}
 	}
 
 	/**
@@ -255,6 +261,14 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(systemUIDrawableFolderCombo, cc.xyw(2, ++row, 3));
 		builder.add(frameworkDrawableFolderCombo, cc.xyw(6, row, 3));
 
+		builder.add(JGoodiesHelper.createBlackLabel("Choose your lidroid-res's resolution"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Choose your Mms.apk's resolution"), cc.xyw(6, row, 3));
+		builder.add(lidroidDrawableFolderCombo, cc.xyw(2, ++row, 3));
+		builder.add(emoticonsDrawableFolderCombo, cc.xyw(6, row, 3));
+
+		builder.add(cboxUseLidroid, cc.xyw(2, ++row, 3));
+		builder.add(cboxMMSForEmos, cc.xyw(6, row, 3));
+
 		final JPanel hide = new HidePanel("Main Rom Settings...", builder.getPanel());
 		return hide;
 	}
@@ -309,9 +323,6 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(JGoodiesHelper.createBlackLabel("ToggleSize (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
 		builder.add(toggleSize, cc.xyw(2, ++row, 1));
 		builder.add(toggleSize.getValueLabel(), cc.xyw(4, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Choose your lidroid-res's resolution"), cc.xyw(6, ++row, 3));
-		builder.add(cboxUseLidroid, cc.xyw(2, ++row, 3));
-		builder.add(lidroidDrawableFolderCombo, cc.xyw(6, row, 3));
 
 		final JPanel hide = new HidePanel("Toggles", builder.getPanel());
 		return hide;
@@ -344,8 +355,6 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(JGoodiesHelper.createBlackLabel("Emoticon Size (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
 		builder.add(emoSize, cc.xyw(2, ++row, 1));
 		builder.add(emoSize.getValueLabel(), cc.xyw(4, row, 1));
-		builder.add(emoticonsDrawableFolderCombo, cc.xyw(6, row, 3));
-		builder.add(cboxMMSForEmos, cc.xyw(2, ++row, 3));
 
 		final JPanel hide = new HidePanel("Emoticons", builder.getPanel());
 		return hide;

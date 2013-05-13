@@ -218,6 +218,8 @@ public class SettingsPersistor {
 		reader.writeProperty("FilePatternCharge", pre.getFilePatternCharge());
 		reader.writeProperty("FrameworkDrawableFolder", pre.getFrameworkDrawableFolder());
 		reader.writeProperty("SystemUIDrawableFolder", pre.getSystemUIDrawableFolder());
+		reader.writeProperty("LidroidDrawableFolder", pre.getLidroidDrawableFolder());
+		reader.writeProperty("MmsDrawableFolder", pre.getMmsDrawableFolder());
 		reader.writeProperty("Template", pre.getTemplate());
 		reader.writeIntProperty("Battsize", pre.getBattsize());
 		reader.writeIntProperty("EmoSize", pre.getEmoSize());
@@ -229,6 +231,7 @@ public class SettingsPersistor {
 		reader.writeBooleanProperty("UseMMSforEmoticons", pre.isUseMMSforEmoticons());
 		reader.writeBooleanProperty("UsePreload", pre.isUsePreload());
 		reader.writeBooleanProperty("UseVRThemeTemplate", pre.isUseVRThemeTemplate());
+
 	}
 
 	public static RomPreset readPreset(final File fi) {
@@ -239,6 +242,8 @@ public class SettingsPersistor {
 		final String filePatternCharge = reader.readProperty("FilePatternCharge", RomPreset.BATT_ICON_CHARGE_NAME_AOKP);
 		final String frameworkDrawableFolder = reader.readProperty("FrameworkDrawableFolder", RomPreset.DRAWABLE_HDPI);
 		final String systemUIDrawableFolder = reader.readProperty("SystemUIDrawableFolder", RomPreset.DRAWABLE_HDPI);
+		final String lidroidDrawableFolder = reader.readProperty("LidroidDrawableFolder", RomPreset.DRAWABLE_HDPI);
+		final String mmsDrawableFolder = reader.readProperty("MmsDrawableFolder", RomPreset.DRAWABLE_HDPI);
 		final String template = reader.readProperty("Template", RomPreset.templateS2);
 		final int battsize = reader.readIntProperty("Battsize", RomPreset.BATT_ICON_HEIGHT_HDPI);
 		final int emoSize = reader.readIntProperty("EmoSize", RomPreset.EMO_HDPI);
@@ -250,8 +255,9 @@ public class SettingsPersistor {
 		final boolean useMMSforEmoticons = reader.readBooleanProperty("UseMMSforEmoticons", true);
 		final boolean usePreload = reader.readBooleanProperty("UsePreload", false);
 		final boolean useVRThemeTemplate = reader.readBooleanProperty("UseVRThemeTemplate", false);
-		return new RomPreset(romName, systemUIDrawableFolder, battsize, frameworkDrawableFolder, filePattern, filePatternCharge, lockHandleSize,
-				notificationHeight, toggleSize, useLidroid, weatherSize, emoSize, template, useVRThemeTemplate, usePreload, useMMSforEmoticons);
+		return new RomPreset(romName, systemUIDrawableFolder, battsize, frameworkDrawableFolder, lidroidDrawableFolder, mmsDrawableFolder, filePattern,
+				filePatternCharge, lockHandleSize, notificationHeight, toggleSize, useLidroid, weatherSize, emoSize, template, useVRThemeTemplate, usePreload,
+				useMMSforEmoticons);
 	}
 
 }

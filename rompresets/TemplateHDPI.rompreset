@@ -1,12 +1,12 @@
 #Paramterdaten
 #Sun May 12 20:26:26 CEST 2013
-FrameworkDrawableFolder=drawable-xhdpi
+FrameworkDrawableFolder=drawable-hdpi
 UseVRThemeTemplate=false
 UsePreload=false
 NotificationHeight=4
 FilePatternCharge=stat_sys_battery_circle_charge_anim
 UseMMSforEmoticons=true
-SystemUIDrawableFolder=drawable-xhdpi
+SystemUIDrawableFolder=drawable-hdpi
 Battsize=36
 LockHandleSize=216
 RomName=TemplateFromFileSystemAOKP_HDPI 
@@ -16,3 +16,5 @@ Template=./template/templateS3Nexus.zip
 EmoSize=44
 FilePattern=stat_sys_battery_circle_
 UseLidroid=false
+LidroidDrawableFolder=drawable-hdpi
+MmsDrawableFolder=drawable-hdpi
