@@ -25,7 +25,6 @@ import de.og.batterycreator.main.IconCreatorFrame;
 public class GlobalSettingsPanel extends SettingsPanel {
 	private static final long		serialVersionUID		= 1L;
 
-	private GlobalSettings			settings				= new GlobalSettings();
 	// Presets
 	private JComboBox<RomPreset>	romPresetCombo;
 	private final JCheckBox			cboxShowAdvancedButton	= createCheckbox("Show 'Advanced Button' on startup (requires restart to take effect)",
@@ -99,7 +98,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 
 	public void setSettings(final GlobalSettings settings) {
 		if (settings != null) {
-			this.settings = settings;
+			IconCreatorFrame.globalSettings = settings;
 			romPresetCombo.setSelectedItem(settings.getRomPreset());
 			cboxShowAdvancedButton.setSelected(settings.isShowAdvancedButton());
 			this.repaint();
@@ -107,9 +106,9 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	}
 
 	public GlobalSettings getSettings() {
-		settings.setRomPreset((RomPreset) romPresetCombo.getSelectedItem());
-		settings.setShowAdvancedButton(cboxShowAdvancedButton.isSelected());
-		return settings;
+		IconCreatorFrame.globalSettings.setRomPreset((RomPreset) romPresetCombo.getSelectedItem());
+		IconCreatorFrame.globalSettings.setShowAdvancedButton(cboxShowAdvancedButton.isSelected());
+		return IconCreatorFrame.globalSettings;
 	}
 
 	@Override
@@ -128,7 +127,6 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	}
 
 	/**
-	 * TODO comment debugGlobalSettings
 	 * 
 	 * @param set
 	 */

@@ -58,7 +58,7 @@ public class RomPresetsComboBox extends JComboBox<RomPreset> {
 	}
 
 	/**
-	 * Renderer for BattCreator-Combo
+	 * Renderer for Combo
 	 */
 	private class MyListCellRenderer implements ListCellRenderer<RomPreset> {
 		protected DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
@@ -69,15 +69,17 @@ public class RomPresetsComboBox extends JComboBox<RomPreset> {
 			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 			if (value instanceof RomPreset) {
 				final RomPreset pre = value;
-				if (pre != null && !pre.getRomName().equals(RomPreset.APPLY)) {
-					if (pre.getRomName().startsWith("(S2"))
-						renderer.setIcon(IconStore.presetS2);
-					else if (pre.getRomName().startsWith("(S3"))
-						renderer.setIcon(IconStore.presetS3);
-					else if (pre.getRomName().startsWith("(Galaxy Nexus"))
-						renderer.setIcon(IconStore.presetGN);
-					else
-						renderer.setIcon(IconStore.preset);
+				if (renderer.getIcon() == null) {
+					if (pre != null && !pre.getRomName().equals(RomPreset.APPLY)) {
+						if (pre.getRomName().contains("i9100"))
+							renderer.setIcon(IconStore.presetS2);
+						else if (pre.getRomName().contains("i9300"))
+							renderer.setIcon(IconStore.presetS3);
+						else if (pre.getRomName().contains("Galaxy Nexus"))
+							renderer.setIcon(IconStore.presetGN);
+						else
+							renderer.setIcon(IconStore.preset);
+					}
 				}
 			}
 			return renderer;
@@ -93,7 +95,7 @@ public class RomPresetsComboBox extends JComboBox<RomPreset> {
 
 		final JFrame f = new JFrame();
 		f.setTitle("Hallo Emmy!!!!!!!");
-		f.setBounds(200, 200, 800, 200);
+		f.setBounds(200, 200, 800, 80);
 		f.setLayout(new BorderLayout());
 		final RomPresetsComboBox combo = new RomPresetsComboBox();
 		combo.setSelectedIndex(0);

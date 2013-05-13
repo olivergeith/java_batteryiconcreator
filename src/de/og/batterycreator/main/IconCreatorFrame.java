@@ -11,6 +11,7 @@ import og.basics.gui.about.VersionDetails;
 import og.basics.gui.icon.CommonIconProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import de.og.batterycreator.cfg.GlobalSettings;
 import de.og.batterycreator.gui.IconCreatingPanelNew;
 import de.og.batterycreator.gui.iconstore.IconStore;
 
@@ -27,6 +28,8 @@ public class IconCreatorFrame extends JFrame {
 	private static IconCreatorFrame		frame;
 	private final IconCreatingPanelNew	iconCreatingPanel	= new IconCreatingPanelNew(this);
 	LToolBar							toolBar				= iconCreatingPanel.getToolBar();
+
+	public static GlobalSettings		globalSettings		= new GlobalSettings();
 
 	public static void main(final String[] args) {
 		LOGGER.info("Java Version:" + VersionDetails.javaVendor + " " + VersionDetails.javaVersion);
