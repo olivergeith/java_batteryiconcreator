@@ -1,40 +1,42 @@
 [B][SIZE="3"]New Version out of [URL="http://forum.xda-developers.com/showthread.php?t=1918500"]"The Rom Fumbler" aka "The Battery Icon Creator"[/URL][/SIZE][/B]
 
-This tool is growing up...check out the new Features...
-Big thanks for giving me so much input, new ideas and donations :-) belong to:
-NadMaj
-black_horse_88
-fryingpan0613
-studentjunk
+This tool is growing so much!!!...Check out all the new features!!! 
+I never imagined that it would develope this much...
+
+Big thanks for giving me so much input and new ideas :) belong to:
+ [MENTION=4309610]NadMaj[/MENTION]
+ [MENTION=2757720]fryingpan0613[/MENTION]
+ [MENTION=621512]studentjunk[/MENTION]
+ [MENTION=4368076]black_horse_88[/MENTION]
 
 
 [SIZE="4"][B]Changelog:[/B][/SIZE]
 [COLOR="Blue"][B]May-13-2013[/B] : Release 25.0[/COLOR]
 [LIST]
-[*]A lot of changes in Rom Settings and Rom Presets
+[*][B]A lot of changes in Rom Settings and Rom Presets[/B]
 [*]...Rom Presets are no longer hard coded! Now stored in plain textfiles in ./rompresets/...
 [*]...Rom Settings can be exported into a Rom Preset (available in dropdownbox after restart)
 [*]...if you created a Rom Preset for your Rom...share it and upload it here...I will add it to the next version!
-[*]...colored icons in the RomPreset-dropdownbox...parses the name and if it finds something like "i9100" or "i9300" it uses special icons
-[*]Support for VRTheme Templates
+[*]...colored icons in the RomPreset-dropdownbox...
+[*]...Morphpath is no dropdown-box any more...instead it is (automaticly) generated.
+[*][B]Support for VRTheme Templates[/B]
 [*]...new vrtheme template...
-[*]Support for /preload partition in Samsung Galaxy S2 Stock Roms (Still WIP...but some things already work)
+[*][B]Support for /preload partition in Samsung Galaxy S2 Stock Roms (Still WIP...but some things already work)[/B]
 [*]...another new vrtheme template, that supports the /preload partition (Seems to work!)
 [*]...new UniversalFlasher template for /preload  (Need someone to test this!!!!) 
-[*]Global Settings
+[*][B]Global Settings[/B]
 [*]...define what Rom Preset to apply on startup of the Rom Fumbler!
-[*]...by this you can overwrite the (hdpi)defaults to your needs!!! This should bring relief to all "non S2" Users ;-)
+[*]...by this you can overwrite the (hdpi)defaults to your needs!!! This should bring relief to all "non S2" Users ;)
 [*]...define if you want to see the Advanced Button in Toolbar (by default it is invisible) Turn it on here and restart Rom Fumbler!
-[*]Help-pages for Rom Settings and Global Settings 
+[*][B]Help-pages for Rom Settings and Global Settings [/B]
 [*]...read them carefully, in case you want to add your own Rom Presets or Templates...
-[*]New Battery Renderer
+[*][B]New Battery Renderer[/B]
 [*]...new Faecher.Wide Battery
-[*]Support vor xxhdpi like in Galaxy S4
+[*][B]Support vor xxhdpi like in Galaxy S4[/B]
 [*]...Some Battery Renderers already render in xxhdpi without resizing! (the white ones in the chooser dropdownbox)
-[*]...watch for tooltips in the above dropdownbox :-)
-[*]New Rom Preset for Note 2 Labrats Rom
-[*]Animator at the bottom of the Battery, Wifi and Signal Renderer...see how your icons animate, when played in sequence!
+[*]...watch for tooltips in the above dropdownbox :)
+[*][B]New Rom Preset for Note 2 Labrats Rom[/B]
+[*][B]Animator[/B] at the bottom of the Battery, Wifi and Signal Renderer...see how your icons animate, when played in sequence!
 [/LIST]
 
 Happy modding & flashing :)
-
