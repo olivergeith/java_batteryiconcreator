@@ -1,0 +1,20 @@
+#Paramterdaten
+#Mon May 13 10:46:29 CEST 2013
+Battsize=27
+WeatherSize=98
+NotificationHeight=3
+ToggleSize=48
+SystemUIDrawableFolder=drawable-hdpi
+FilePattern=stat_sys_battery_square_
+FilePatternCharge=stat_sys_battery_square_charge_anim
+UsePreload=false
+MmsDrawableFolder=drawable-hdpi
+UseVRThemeTemplate=false
+UseLidroid=false
+EmoSize=33
+RomName=(S2 i9100) \#\#\# RootBox 3.x (Square)
+LockHandleSize=162
+LidroidDrawableFolder=drawable-hdpi
+FrameworkDrawableFolder=drawable-hdpi
+Template=./template/template.zip
+UseMMSforEmoticons=true

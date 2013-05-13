@@ -1,0 +1,20 @@
+#Paramterdaten
+#Mon May 13 10:46:29 CEST 2013
+Battsize=36
+WeatherSize=128
+NotificationHeight=4
+ToggleSize=64
+SystemUIDrawableFolder=drawable-xhdpi
+FilePattern=stat_sys_battery_circle_
+FilePatternCharge=stat_sys_battery_circle_charge_anim
+UsePreload=false
+MmsDrawableFolder=drawable-xhdpi
+UseVRThemeTemplate=false
+UseLidroid=false
+EmoSize=44
+RomName=(S3 i9300) \#\#\# RootBox 3.x (CircleMod)
+LockHandleSize=216
+LidroidDrawableFolder=drawable-xhdpi
+FrameworkDrawableFolder=drawable-xhdpi
+Template=./template/templateS3Nexus.zip
+UseMMSforEmoticons=true

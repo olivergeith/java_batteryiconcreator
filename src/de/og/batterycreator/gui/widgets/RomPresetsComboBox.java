@@ -31,7 +31,7 @@ public class RomPresetsComboBox extends JComboBox<RomPreset> {
 
 		for (final RomPreset pre : RomPreset.getPresets()) {
 			addItem(pre);
-			// writePreset(pre);
+			// SettingsPersistor.writePreset(pre);
 		}
 		addAdditionalRomPresetsFromFilesystem();
 	}
@@ -70,7 +70,14 @@ public class RomPresetsComboBox extends JComboBox<RomPreset> {
 			if (value instanceof RomPreset) {
 				final RomPreset pre = value;
 				if (pre != null && !pre.getRomName().equals(RomPreset.APPLY)) {
-					renderer.setIcon(IconStore.preset);
+					if (pre.getRomName().startsWith("(S2"))
+						renderer.setIcon(IconStore.presetS2);
+					else if (pre.getRomName().startsWith("(S3"))
+						renderer.setIcon(IconStore.presetS3);
+					else if (pre.getRomName().startsWith("(Galaxy Nexus"))
+						renderer.setIcon(IconStore.presetGN);
+					else
+						renderer.setIcon(IconStore.preset);
 				}
 			}
 			return renderer;
