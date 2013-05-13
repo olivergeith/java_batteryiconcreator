@@ -1,14 +1,20 @@
 package de.og.batterycreator.gui.widgets;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.io.File;
 import java.io.FilenameFilter;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import de.og.batterycreator.cfg.RomPreset;
 import de.og.batterycreator.cfg.SettingsPersistor;
+import de.og.batterycreator.gui.iconstore.IconStore;
 
 public class RomPresetsComboBox extends JComboBox<RomPreset> {
 	private static final long	serialVersionUID	= 1L;
@@ -21,6 +27,8 @@ public class RomPresetsComboBox extends JComboBox<RomPreset> {
 	}
 
 	private void initUI() {
+		setRenderer(new MyListCellRenderer());
+
 		for (final RomPreset pre : RomPreset.getPresets()) {
 			addItem(pre);
 			// writePreset(pre);
@@ -47,6 +55,26 @@ public class RomPresetsComboBox extends JComboBox<RomPreset> {
 			}
 		}
 
+	}
+
+	/**
+	 * Renderer for BattCreator-Combo
+	 */
+	private class MyListCellRenderer implements ListCellRenderer<RomPreset> {
+		protected DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
+
+		@Override
+		public Component getListCellRendererComponent(final JList<? extends RomPreset> list, final RomPreset value, final int index, final boolean isSelected,
+				final boolean cellHasFocus) {
+			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+			if (value instanceof RomPreset) {
+				final RomPreset pre = value;
+				if (pre != null && !pre.getRomName().equals(RomPreset.APPLY)) {
+					renderer.setIcon(IconStore.preset);
+				}
+			}
+			return renderer;
+		}
 	}
 
 	/**
