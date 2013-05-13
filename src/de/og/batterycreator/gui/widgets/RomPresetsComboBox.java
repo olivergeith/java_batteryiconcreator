@@ -1,6 +1,7 @@
 package de.og.batterycreator.gui.widgets;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -71,13 +72,16 @@ public class RomPresetsComboBox extends JComboBox<RomPreset> {
 				final RomPreset pre = value;
 				if (renderer.getIcon() == null) {
 					if (pre != null && !pre.getRomName().equals(RomPreset.APPLY)) {
-						if (pre.getRomName().contains("i9100"))
+						if (pre.getRomName().contains("i9100")) {
 							renderer.setIcon(IconStore.presetS2);
-						else if (pre.getRomName().contains("i9300"))
+							renderer.setBackground(new Color(240, 240, 255)); // rosa
+						} else if (pre.getRomName().contains("i9300")) {
 							renderer.setIcon(IconStore.presetS3);
-						else if (pre.getRomName().contains("Galaxy Nexus"))
+							renderer.setBackground(new Color(255, 240, 240)); // rosa
+						} else if (pre.getRomName().contains("Galaxy Nexus")) {
 							renderer.setIcon(IconStore.presetGN);
-						else
+							renderer.setBackground(Color.lightGray.brighter());
+						} else
 							renderer.setIcon(IconStore.preset);
 					}
 				}
