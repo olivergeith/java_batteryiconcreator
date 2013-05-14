@@ -5,7 +5,7 @@
 	<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
 </head>
 <body>
-<h2 pbzloc="120">Rom Settings</h2>
+<h2 pbzloc="0">Rom Settings</h2>
 
 <hr />
 <h2>Overview</h2>
@@ -57,7 +57,7 @@ If you want the Rom Fumbler to start with a special <em>Rom Preset </em>every ti
 With the next start of the Rom Fumbler, everything will be configured for your Rom.</p>
 
 <p><span style="color: #b22222"><strong><span style="background-color: #d3d3d3">Request: </span></strong></span><br />
-<span style="background-color: #d3d3d3">If you have a working <em>Rom Preset </em>for a Rom not yet supported...</span><a href="http://forum.xda-developers.com/showthread.php?t=1918500"><span style="background-color: #d3d3d3">please upload the textfile to the Rom Fumblers XDA Thread</span></a><span style="background-color: #d3d3d3">!<br />
+<span style="background-color: #d3d3d3">If you have a working <em>Rom Preset </em>for a Rom not yet supported...</span><a href="http://forum.xda-developers.com/showthread.php?t=1918500"><span style="background-color: #d3d3d3">please upload the textfile to the Rom Fumblers XDA Thread</span></a><span pbzloc="1" style="background-color: #d3d3d3">!<br />
 I will then make it available for everybody by adding it to the next Release!</span></p>
 
 <hr />
@@ -66,27 +66,77 @@ I will then make it available for everybody by adding it to the next Release!</s
 <p>Here you can choose different templates that are used to create flashable-zips. There are two different kind of templates.</p>
 
 <ol>
-	<li><a href="http://www.htcmania.com/showthread.php?t=258333">UniversalFlasherTool (UTF)</a><br />
+	<li><a href="http://www.htcmania.com/showthread.php?t=258333" pbzloc="35">UniversalFlasherTool (UTF)</a><br />
 	+ The UTF Templates create a flashable-zip as backup. In case you dont like the new icons or something went wrong, you can simply flash the backup.zip!<br />
 	+ You find theses backup.zips on your internal or external sdcard in the subfolder<span style="font-family: courier new,courier,monospace"><strong> /UniversalFlasher/...</strong></span><br />
 	-&nbsp;the templates are big (around 2MB)<br />
 	- they might&nbsp;have problems flashing Samsung Stock Roms with /preload partition!</li>
-	<li><a href="http://forum.xda-developers.com/showthread.php?t=1207017">Villian Theme System (vtheme)</a> (template-names must contain &quot;vrtheme&quot;)<br />
+	<li pbzloc="26"><a href="http://forum.xda-developers.com/showthread.php?t=1207017">Villian Theme System (vtheme)</a> (template-names must contain &quot;vrtheme&quot;)<br />
 	+ small template file (0.6MB)<br />
 	- no flashabel Backup...it just backups the apks into a subfolder of your sdcard&nbsp;<span style="font-family: courier new,courier,monospace"><strong>./vrtheme-backup/...</strong></span></li>
 </ol>
-<strong><span style="color: #ff0000">I recommend using UTF Templates!</span></strong>
+<strong><span pbzloc="4" style="color: #ff0000">I recommend using UTF Templates!</span></strong>
 
-<p><u><strong pbzloc="122">Howto Add your own templates:</strong></u></p>
+<p pbzloc="14"><u><strong pbzloc="43">Howto add your own templates:</strong></u></p>
 
-<ul>
+<ul pbzloc="50">
 	<li>goto the subfolder ./template of the Romfumbler</li>
 	<li>and put your zip in that folder too</li>
 	<li>the&nbsp; name should contain &quot;vrtheme&quot; if it is a vrtheme-template</li>
-	<li>and the name should contain &quot;preload&quot; if it is supposed to flash to Samsung stock roms with preload partition.</li>
-	<li><span style="color: #ff0000">if you follow those naming conventions, the checkboxes for vrtheme and preload will be set accordingly and the Morphpath will be adjusted automaticly!</span></li>
+	<li pbzloc="90">and the name should contain &quot;preload&quot; if it is supposed to flash to Samsung stock roms with preload partition.</li>
+	<li><span pbzloc="22" style="color: #ff0000">if you follow those naming conventions, the checkboxes for vrtheme and preload will be set accordingly and the Morphpath will be adjusted automaticly!</span></li>
 </ul>
 
-<p>&nbsp;</p>
+<p pbzloc="52"><u><strong>&nbsp;What is a MorphPath ?</strong></u></p>
+
+<p pbzloc="100">The Morphpath is the path within the flashable zip, where your icons are stored!<br />
+Depending on the template-type the path is a little bit different.<br />
+To generate the Morphpath fitting the choosen template-type...there is the checkbox <strong>&quot;is VRTheme Template&quot;</strong><br />
+...click it and you will see how the Morphpath changes!</p>
+
+<p pbzloc="70">The Checkbax <strong pbzloc="32">&quot;is VRTheme Template&quot;</strong>&nbsp;is set automatically, if the template-name contains the substring <em>&quot;vrtheme&quot;</em> (see <strong><u pbzloc="28">Howto add your own templates</u></strong>)</p>
+
+<p pbzloc="55"><u><strong>What else submits to the Morphpath ?</strong></u></p>
+
+<p pbzloc="85">On Galaxy S2 Samsung Stock Roms (and custom Roms&nbsp;based on Samsung&nbsp;Stock Rom) there is a specialty!<br />
+Samsung invented a new partition /preload ...they should have named ist /bloatload...because the /system partition has grown so much, that they needed more space! So they &quot;invented&quot; the /preload partition and changed the path to the system/apps :-(</p>
+
+<p pbzloc="152">So if you click the <strong>&quot;Rom uses Preload Partition&quot; </strong>checkbox...the Morphpath is set accordingly.<br />
+The Checkbax <strong pbzloc="32">&quot;Rom uses Preload Partition&quot;</strong> is set automatically, if the template-name contains the substring <em pbzloc="83">&quot;preload&quot;</em> (see <strong><u pbzloc="28">Howto add your own templates</u></strong>)</p>
+
+<p pbzloc="95"><span style="color: #ff0000"><strong>Attention</strong></span>: So far only vrtheme templates can flash Preload-Roms!</p>
+
+<p pbzloc="97"><u><strong>Is that all for Morphpath ?</strong></u></p>
+
+<p pbzloc="172">Almost ! ... there are the <strong>&quot;drawable&quot; comboboxes</strong>...they define the folder under the Morphpath where the icons are actually stored within the zip and later within the apk.</p>
+
+<p pbzloc="132">So the Morphpath + drawable are the complete path to the icons within the zip!</p>
+
+<p pbzloc="134"><u><strong>Why &quot;Morph&quot; ?</strong></u></p>
+
+<p pbzloc="135">Morph means that the icons are morphed into the target apk&#39;s on your Rom. Apk&#39;s are like zips (check it out and open an apk with Winzip or 7zip!)<br />
+During flashing the icons within the target apk are replaced by those stored&nbsp;in the Morphpath. The rest of the apk is untouched!</p>
+
+<p pbzloc="136"><span style="color: #006400"><em>This has a big advantage!</em> </span>The flashable zips created with the Rom Fumbler are compatible to your Rom, even if you update your Rom with a new version. Just flash the Zip again!<br />
+As long the folder- and filenaming-structure within the target apk is not changed the flashable zips are always compatible and can be flashed to the new version of your Rom as well!</p>
+
+<p pbzloc="175">If you look around at XDA you find a lot of people sharing flashable-zips as &quot;Themes&quot; that contain a complete SystemUI.apk...<br />
+You can imagine, that you need to have the exact Rom-version from where this SystemUI has been taken and modified.<br />
+If not, you are doomed ans will probably end up with a bootlooping device!</p>
+
+<p pbzloc="174"><span style="font-size: 16px"><strong pbzloc="138"><span style="background-color: #00ff00">This can not happen with Zips created by the Rom Fumbler!!!!</span></strong></span></p>
+
+<p pbzloc="143"><u><strong pbzloc="153">What can go wrong with the Morphpath ?</strong></u></p>
+
+<p pbzloc="154">Well the worst that can happen, is that you dont see your icons after flashing!<br />
+This has probably the following reasons:</p>
+
+<ul>
+	<li pbzloc="176">you chose the wrong drawable folder</li>
+	<li pbzloc="168">you are on a &quot;Preload Rom&quot; (so far only known on Galaxy S2 Stock) and&nbsp; used a non preload template!</li>
+	<li pbzloc="166">you are on a &quot;Preload Rom&quot; and used an UTF template (preload or not...I still need to figure out how to use UTF templates on &quot;Preload Roms&quot;)</li>
+</ul>
+
+<p pbzloc="167">&nbsp;</p>
 </body>
 </html>
