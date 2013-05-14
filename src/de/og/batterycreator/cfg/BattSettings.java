@@ -84,6 +84,8 @@ public class BattSettings implements Serializable {
 
 	// this is transient because it should not be serialized
 	private transient ImageIcon	chargeIcon					= null;
+	// this is transient because it should not be serialized
+	private transient ImageIcon	xorIcon						= null;
 
 	public Color getFontColor() {
 		return fontColor;
@@ -746,6 +748,14 @@ public class BattSettings implements Serializable {
 
 	public void setExtraColor2(final Color extraColor2) {
 		this.extraColor2 = extraColor2;
+	}
+
+	public ImageIcon getXorIcon() {
+		return xorIcon;
+	}
+
+	public void setXorIcon(final ImageIcon xorIcon) {
+		this.xorIcon = xorIcon;
 	}
 
 }

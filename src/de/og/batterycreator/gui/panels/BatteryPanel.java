@@ -23,6 +23,7 @@ import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.batt.AOKPCircleModCreator;
+import de.og.batterycreator.creators.batt.XORCircleCreator;
 import de.og.batterycreator.creators.batt.AbstractIconCreator;
 import de.og.batterycreator.creators.batt.AppleBatteryCreator;
 import de.og.batterycreator.creators.batt.ArcCreator;
@@ -116,6 +117,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new ArcDecimalCreator(romSettings));
 		combo.addItem(new HoneycombCreator(romSettings));
 		combo.addItem(new AOKPCircleModCreator(romSettings));
+		combo.addItem(new XORCircleCreator(romSettings));
 		combo.addItem(new BoxCreator(romSettings));
 		combo.addItem(new Box2Creator(romSettings));
 		combo.addItem(new BubbleCreator(romSettings));
@@ -178,7 +180,7 @@ public class BatteryPanel extends JPanel {
 					activBattCreator = cre;
 					settingsPanel.setSettings(cre.getBattSettings());
 					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(), cre.supportsGradient(),
-							cre.supportsExtraColor1(), cre.supportsExtraColor2());
+							cre.supportsExtraColor1(), cre.supportsExtraColor2(), cre.supportsXOrIcon());
 					create();
 				}
 			}

@@ -71,6 +71,10 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		return false;
 	}
 
+	public boolean supportsXOrIcon() {
+		return false;
+	}
+
 	// ###############################################################################
 	// Creating Images
 	// ###############################################################################
