@@ -1,0 +1,4 @@
+Copy your own backgroundicons here...
+They need to be 64x64 pixel
+
+To be uses as Background the icon needs to be dark gray RGB = 64, 64, 64!

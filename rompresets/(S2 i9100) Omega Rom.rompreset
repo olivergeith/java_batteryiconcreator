@@ -1,0 +1,20 @@
+#Paramterdaten
+#Tue May 14 17:05:07 AST 2013
+Battsize=27
+WeatherSize=98
+NotificationHeight=3
+ToggleSize=48
+SystemUIDrawableFolder=drawable-hdpi
+FilePattern=stat_sys_battery_
+FilePatternCharge=stat_sys_battery_charge_anim
+UsePreload=true
+MmsDrawableFolder=drawable-hdpi
+UseVRThemeTemplate=true
+UseLidroid=false
+EmoSize=33
+RomName=(S2 i9100) Omega Rom
+LockHandleSize=162
+LidroidDrawableFolder=drawable-hdpi
+FrameworkDrawableFolder=drawable-hdpi
+UseMMSforEmoticons=true
+Template=./template/template_vrtheme_preload_S2.zip

@@ -288,10 +288,11 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(sliderBattGradientLevel, cc.xyw(4, row, 1));
 		builder.add(sliderBattGradientLevel.getValueLabel(), cc.xyw(6, row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Extra Colors"), cc.xyw(2, ++row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("BackgroundIcon"), cc.xyw(6, row, 1));
 		builder.add(extraColor1, cc.xyw(2, ++row, 1));
 		builder.add(extraColor2, cc.xyw(4, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("BackgroundIcon"), cc.xyw(6, row, 1));
-		builder.add(xorIconSeletor, cc.xyw(8, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("BackgroundIcon"), cc.xyw(2, ++row, 1));
+		builder.add(xorIconSeletor, cc.xyw(2, ++row, 1));
 
 		final JPanel hide = new HidePanel("Misc Options (only work in some renderes)", builder.getPanel());
 		return hide;
