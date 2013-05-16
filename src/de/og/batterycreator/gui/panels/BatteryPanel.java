@@ -73,14 +73,9 @@ import de.og.batterycreator.creators.batt.TachoCreatorWideV2;
 import de.og.batterycreator.creators.batt.TachoCreatorWideV3;
 import de.og.batterycreator.creators.batt.TachoCreatorWideV4;
 import de.og.batterycreator.creators.batt.TwoBarsCreator;
-import de.og.batterycreator.creators.batt.XORAndroidCreator;
 import de.og.batterycreator.creators.batt.XORApfelCreator;
-import de.og.batterycreator.creators.batt.XORBattCreator;
 import de.og.batterycreator.creators.batt.XORCircleCreator;
-import de.og.batterycreator.creators.batt.XORScalaCreator;
-import de.og.batterycreator.creators.batt.XORSkullCreator;
 import de.og.batterycreator.creators.batt.XORSquareCreator;
-import de.og.batterycreator.creators.batt.XORVnvCreator;
 import de.og.batterycreator.gui.cfg.BattSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
@@ -158,12 +153,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new FaecherCreatorWide(romSettings));
 		combo.addItem(new TachoCreator3Quater(romSettings));
 		combo.addItem(new ScalaBatteryCreator(romSettings));
-		combo.addItem(new XORAndroidCreator(romSettings));
 		combo.addItem(new XORApfelCreator(romSettings));
-		combo.addItem(new XORSkullCreator(romSettings));
-		combo.addItem(new XORVnvCreator(romSettings));
-		combo.addItem(new XORScalaCreator(romSettings));
-		combo.addItem(new XORBattCreator(romSettings));
 		combo.addItem(new FontOnlyCreator(romSettings));
 	}
 
@@ -182,7 +172,7 @@ public class BatteryPanel extends JPanel {
 					activBattCreator = cre;
 					settingsPanel.setSettings(cre.getBattSettings());
 					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(), cre.supportsGradient(),
-							cre.supportsExtraColor1(), cre.supportsExtraColor2(), cre.supportsXOrIcon());
+							cre.supportsExtraColor1(), cre.supportsExtraColor2(), cre.supportsXOrIcon(), cre.supportsXOrSquareIcon());
 					create();
 				}
 			}

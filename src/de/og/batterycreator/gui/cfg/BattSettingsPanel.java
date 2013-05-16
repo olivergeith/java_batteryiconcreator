@@ -24,7 +24,8 @@ import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.gui.widgets.SliderAndLabel;
 import de.og.batterycreator.gui.widgets.iconselector.chargeiconselector.ChargeIconSelector;
-import de.og.batterycreator.gui.widgets.iconselector.xoriconselector.XorIconSelector;
+import de.og.batterycreator.gui.widgets.iconselector.xorcircleselector.XorCircleSelector;
+import de.og.batterycreator.gui.widgets.iconselector.xorsquareselector.XorSquareSelector;
 
 public class BattSettingsPanel extends SettingsPanel {
 	private static final long			serialVersionUID			= 1L;
@@ -39,7 +40,8 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JColorSelectButton	fontColorMedBatt			= new JColorSelectButton("MedBatt", "Color when Med battery");
 	private final JColorSelectButton	fontColorCharge				= new JColorSelectButton("Charge Color", "Color when charging");
 	private final ChargeIconSelector	chargeIconSeletor			= new ChargeIconSelector(36);
-	private final XorIconSelector		xorIconSelector				= new XorIconSelector(36);
+	private final XorCircleSelector		xorIconSelector				= new XorCircleSelector(36);
+	private final XorSquareSelector		xorSquareIconSelector		= new XorSquareSelector(36);
 
 	private final JCheckBox				cboxUseChargeColor			= createCheckbox("Use charge color",
 																			"Use ChargeColor (green), else use normal battery colors");
@@ -291,8 +293,9 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(JGoodiesHelper.createBlackLabel("BackgroundIcon"), cc.xyw(6, row, 1));
 		builder.add(extraColor1, cc.xyw(2, ++row, 1));
 		builder.add(extraColor2, cc.xyw(4, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("BackgroundIcon"), cc.xyw(2, ++row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Background Icons"), cc.xyw(2, ++row, 1));
 		builder.add(xorIconSelector, cc.xyw(2, ++row, 1));
+		builder.add(xorSquareIconSelector, cc.xyw(4, row, 1));
 
 		final JPanel hide = new HidePanel("Misc Options (only work in some renderes)", builder.getPanel());
 		return hide;
@@ -351,6 +354,11 @@ public class BattSettingsPanel extends SettingsPanel {
 				xorIconSelector.setSelectedItem(settings.getXorIcon());
 			else
 				xorIconSelector.setSelectedIndex(0);
+
+			if (settings.getXorSquareIcon() != null)
+				xorSquareIconSelector.setSelectedItem(settings.getXorSquareIcon());
+			else
+				xorSquareIconSelector.setSelectedIndex(0);
 
 			cboxUseGradientMediumLevels.setSelected(settings.isUseGradiantForMediumColor());
 			cboxUseGradientNormalLevels.setSelected(settings.isUseGradiantForNormalColor());
@@ -419,6 +427,7 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		settings.setChargeIcon((ImageIcon) chargeIconSeletor.getSelectedItem());
 		settings.setXorIcon((ImageIcon) xorIconSelector.getSelectedItem());
+		settings.setXorSquareIcon((ImageIcon) xorSquareIconSelector.getSelectedItem());
 		settings.setUseGradiantForMediumColor(cboxUseGradientMediumLevels.isSelected());
 		settings.setUseGradiantForNormalColor(cboxUseGradientNormalLevels.isSelected());
 
@@ -470,7 +479,7 @@ public class BattSettingsPanel extends SettingsPanel {
 	}
 
 	public void enableSupportedFeatures(final boolean supportsFlip, final boolean suppoertsStrokewidth, final boolean noBG, final boolean battGradient,
-			final boolean extra1, final boolean extra2, final boolean xorBackground) {
+			final boolean extra1, final boolean extra2, final boolean xorBackground, final boolean xorSquareBackground) {
 		cboxFlip.setEnabled(supportsFlip);
 		sliderStroke.setEnabled(suppoertsStrokewidth);
 		cboxNoBG.setEnabled(noBG);
@@ -478,7 +487,10 @@ public class BattSettingsPanel extends SettingsPanel {
 		sliderBattGradientLevel.setEnabled(battGradient);
 		extraColor1.setEnabled(extra1);
 		extraColor2.setEnabled(extra2);
-		xorIconSelector.setVisible(xorBackground);
+		// xorIconSelector.setVisible(xorBackground);
+		// xorSquareIconSelector.setVisible(xorSquareBackground);
+		xorIconSelector.setEnabled(xorBackground);
+		xorSquareIconSelector.setEnabled(xorSquareBackground);
 	}
 
 	/**

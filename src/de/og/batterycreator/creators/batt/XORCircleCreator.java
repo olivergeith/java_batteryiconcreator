@@ -8,10 +8,11 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
+import de.og.batterycreator.gui.widgets.iconselector.xorcircleselector.XorCircleSelector;
 
 public class XORCircleCreator extends AbstractIconCreator {
 
-	public static final ImageIcon	myIcon	= new ImageIcon(AbstractIconXORCreator.class.getResource("aokp.png"));
+	public static final ImageIcon	myIcon	= XorCircleSelector.icon01;	;
 	protected static String			name	= "XorCircleBattery";
 
 	public XORCircleCreator(final RomSettings romSettings) {

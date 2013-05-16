@@ -33,6 +33,11 @@ import de.og.batterycreator.gui.widgets.SliderAndLabel;
 import de.og.batterycreator.gui.widgets.TemplateChooser;
 
 public class RomSettingsPanel extends SettingsPanel {
+	private static final int		ROW_1							= 2;
+	private static final int		ROW_2							= 4;
+	private static final int		ROW_3							= 6;
+	private static final int		ROW_4							= 8;
+
 	private static final long		serialVersionUID				= 1L;
 	private static final Logger		LOGGER							= LoggerFactory.getLogger(RomSettingsPanel.class);
 
@@ -326,9 +331,9 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(JGoodiesHelper.createBlackLabel("Lockhandle Filename"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Size"), cc.xyw(6, row, 3));
-		builder.add(lockHandleSize, cc.xyw(2, +row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Size"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Lockhandle Filename"), cc.xyw(6, row, 3));
+		builder.add(lockHandleSize, cc.xyw(2, ++row, 1));
 		builder.add(lockHandleSize.getValueLabel(), cc.xyw(4, row, 1));
 		builder.add(lockHandleFileName, cc.xyw(6, row, 3));
 
@@ -345,7 +350,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		int row = 1;
 
 		builder.addSeparator("", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("ToggleSize (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("ToggleSize"), cc.xyw(2, ++row, 3));
 		builder.add(toggleSize, cc.xyw(2, ++row, 1));
 		builder.add(toggleSize.getValueLabel(), cc.xyw(4, row, 1));
 
@@ -361,7 +366,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(JGoodiesHelper.createBlackLabel("WeatherSize (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("WeatherSize"), cc.xyw(2, ++row, 3));
 		builder.add(weatherSize, cc.xyw(2, ++row, 1));
 		builder.add(weatherSize.getValueLabel(), cc.xyw(4, row, 1));
 
@@ -377,7 +382,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(JGoodiesHelper.createBlackLabel("Emoticon Size (is set via Rom Presets)"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Emoticon Size"), cc.xyw(2, ++row, 3));
 		builder.add(emoSize, cc.xyw(2, ++row, 1));
 		builder.add(emoSize.getValueLabel(), cc.xyw(4, row, 1));
 
@@ -393,9 +398,8 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(JGoodiesHelper.createBlackLabel("Notification BG Filename"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Size (height)"), cc.xyw(6, row, 3));
-		builder.add(notificationFileName, cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Size (height)"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Notification BG Filename"), cc.xyw(6, ++row, 3));
 		builder.add(notificationHeight, cc.xyw(2, ++row, 1));
 		builder.add(notificationHeight.getValueLabel(), cc.xyw(4, row, 1));
 		builder.add(notificationFileName, cc.xyw(6, row, 3));

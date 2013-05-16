@@ -7,10 +7,11 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import de.og.batterycreator.cfg.RomSettings;
+import de.og.batterycreator.gui.widgets.iconselector.xorsquareselector.XorSquareSelector;
 
 public class XORSquareCreator extends AbstractIconCreator {
 
-	public static final ImageIcon	myIcon	= new ImageIcon(AbstractIconXORCreator.class.getResource("aokp.png"));
+	public static final ImageIcon	myIcon	= XorSquareSelector.icon01;
 	protected static String			name	= "XorSquareBattery";
 
 	public XORSquareCreator(final RomSettings romSettings) {
@@ -31,7 +32,7 @@ public class XORSquareCreator extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsXOrIcon() {
+	public boolean supportsXOrSquareIcon() {
 		return true;
 	}
 
@@ -51,7 +52,7 @@ public class XORSquareCreator extends AbstractIconCreator {
 	 */
 	@Override
 	public ImageIcon createImage(final int percentage, final boolean charge) {
-		ImageIcon xorIcon = settings.getXorIcon();
+		ImageIcon xorIcon = settings.getXorSquareIcon();
 		if (xorIcon == null) {
 			xorIcon = myIcon;
 		}
