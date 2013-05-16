@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import og.basics.gui.html.HTMLFileDisplay;
+import og.basics.gui.lookandfeel.LookendfeelCombobox;
 import og.basics.gui.widgets.hidepanel.HidePanel;
 import og.basics.jgoodies.JGoodiesHelper;
 import org.slf4j.Logger;
@@ -25,17 +26,19 @@ import de.og.batterycreator.gui.widgets.RomPresetsComboBox;
 import de.og.batterycreator.main.IconCreatorFrame;
 
 public class GlobalSettingsPanel extends SettingsPanel {
-	private static final long		serialVersionUID			= 1L;
+	private static final long			serialVersionUID			= 1L;
 
 	// Presets
-	private JComboBox<RomPreset>	romPresetCombo;
-	private final JCheckBox			cboxShowAdvancedButton		= createCheckbox("Show 'Advanced Button' on startup (requires restart to take effect)",
-																		"Show 'Advanced Button' in buttonbar (requires restart to take effect)");
+	private JComboBox<RomPreset>		romPresetCombo;
+	private final JCheckBox				cboxShowAdvancedButton		= createCheckbox("Show 'Advanced Button' on startup (requires restart to take effect)",
+																			"Show 'Advanced Button' in buttonbar (requires restart to take effect)");
 
-	private final JCheckBox			cboxAlwaysWriteOverviews	= createCheckbox("Always write Overview-Png's",
-																		"If selected, overviews are written to filesystem, even it the overview already exists! (May take more time on startup of the Rom Fumbler)");
+	private final JCheckBox				cboxAlwaysWriteOverviews	= createCheckbox("Always write Overview-Png's",
+																			"If selected, overviews are written to filesystem, even it the overview already exists! (May take more time on startup of the Rom Fumbler)");
 
-	private static final Logger		LOGGER						= LoggerFactory.getLogger(GlobalSettingsPanel.class);
+	private final LookendfeelCombobox	looks						= new LookendfeelCombobox();
+
+	private static final Logger			LOGGER						= LoggerFactory.getLogger(GlobalSettingsPanel.class);
 
 	// Construktor
 	public GlobalSettingsPanel() {
@@ -104,6 +107,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		builder.add(JGoodiesHelper.createBlackLabel("Load this Rom Preset:"), cc.xyw(2, ++row, 7));
 		builder.add(romPresetCombo, cc.xyw(2, ++row, 7));
 		builder.add(cboxShowAdvancedButton, cc.xyw(2, ++row, 7));
+		builder.add(cboxAlwaysWriteOverviews, cc.xyw(2, ++row, 7));
 
 		final JPanel hide = new HidePanel("What to do on startup of " + IconCreatorFrame.APP_NAME, builder.getPanel());
 		return hide;
@@ -117,7 +121,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(cboxAlwaysWriteOverviews, cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Change Look&Feel to:"), cc.xyw(2, ++row, 7));
+		builder.add(looks, cc.xyw(2, ++row, 7));
 
 		final JPanel hide = new HidePanel("Misc Settings", builder.getPanel());
 		return hide;

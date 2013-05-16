@@ -328,9 +328,9 @@ public class RomSettingsPanel extends SettingsPanel {
 
 		builder.add(JGoodiesHelper.createBlackLabel("Lockhandle Filename"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("Size"), cc.xyw(6, row, 3));
-		builder.add(lockHandleFileName, cc.xyw(2, ++row, 3));
-		builder.add(lockHandleSize, cc.xyw(6, row, 1));
-		builder.add(lockHandleSize.getValueLabel(), cc.xyw(8, row, 1));
+		builder.add(lockHandleSize, cc.xyw(2, +row, 1));
+		builder.add(lockHandleSize.getValueLabel(), cc.xyw(4, row, 1));
+		builder.add(lockHandleFileName, cc.xyw(6, row, 3));
 
 		final JPanel hide = new HidePanel("Lockhandle Filename & Size ...", builder.getPanel(), false);
 		return hide;
@@ -396,8 +396,9 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(JGoodiesHelper.createBlackLabel("Notification BG Filename"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("Size (height)"), cc.xyw(6, row, 3));
 		builder.add(notificationFileName, cc.xyw(2, ++row, 3));
-		builder.add(notificationHeight, cc.xyw(6, row, 1));
-		builder.add(notificationHeight.getValueLabel(), cc.xyw(8, row, 1));
+		builder.add(notificationHeight, cc.xyw(2, ++row, 1));
+		builder.add(notificationHeight.getValueLabel(), cc.xyw(4, row, 1));
+		builder.add(notificationFileName, cc.xyw(6, row, 3));
 
 		final JPanel hide = new HidePanel("Notification BG Filename & Size ...", builder.getPanel(), false);
 		return hide;

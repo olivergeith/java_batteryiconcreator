@@ -1,3 +1,0 @@
-Copy your own backgroundicons here...
-They need to be 64x64 pixel
-
