@@ -3,6 +3,7 @@ package de.og.batterycreator.creators.batt;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
@@ -46,6 +47,11 @@ public class XORCircleCreator extends AbstractIconCreator {
 		return myIcon;
 	}
 
+	@Override
+	public boolean supportsGradient() {
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -68,9 +74,16 @@ public class XORCircleCreator extends AbstractIconCreator {
 		final int w = xorIcon.getIconWidth();
 		final int x = img.getWidth() / 2 - w / 2;
 		g2d.drawImage(xorIcon.getImage(), x, 0, null);
-		final Color col = settings.getActivIconColor(percentage, charge);
 
-		g2d.setPaint(col);
+		if (settings.isBattGradient()) {
+			final Color col1 = settings.getActivIconColor(percentage, charge);
+			final Color col2 = getBattGardientSecondColor(col1);
+			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, 0, col1);
+			g2d.setPaint(gradientFill);
+		} else {
+			final Color col = settings.getActivIconColor(percentage, charge);
+			g2d.setPaint(col);
+		}
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
 
 		if (settings.isFlip())
