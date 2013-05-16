@@ -7,6 +7,7 @@ public class GlobalSettings implements Serializable {
 
 	private RomPreset			romPreset;
 	private boolean				showAdvancedButton	= false;
+	private boolean				alwaysWriteOverview	= false;
 
 	public RomPreset getRomPreset() {
 		return romPreset;
@@ -21,7 +22,15 @@ public class GlobalSettings implements Serializable {
 	}
 
 	public void setShowAdvancedButton(final boolean showAdvancedTab) {
-		this.showAdvancedButton = showAdvancedTab;
+		showAdvancedButton = showAdvancedTab;
+	}
+
+	public boolean isAlwaysWriteOverview() {
+		return alwaysWriteOverview;
+	}
+
+	public void setAlwaysWriteOverview(final boolean alwaysWriteOverview) {
+		this.alwaysWriteOverview = alwaysWriteOverview;
 	}
 
 }

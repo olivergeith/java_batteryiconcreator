@@ -4,13 +4,14 @@ import java.awt.BorderLayout;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Vector;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 import og.basics.gui.image.StaticImageHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import de.og.batterycreator.gui.widgets.overview.OverviewCreator;
+import de.og.batterycreator.main.IconCreatorFrame;
 
 /**
  * {@link IconSet} is a collection of Icons in One Folder that are flashed
@@ -23,13 +24,18 @@ import de.og.batterycreator.gui.widgets.overview.OverviewCreator;
  */
 public class IconSet {
 
-	private final Vector<String> filenamesAndPath = new Vector<String>();
-	private final Vector<ImageIcon> icons = new Vector<ImageIcon>();
+	private final Vector<String>	filenamesAndPath	= new Vector<String>();
+	private final Vector<ImageIcon>	icons				= new Vector<ImageIcon>();
 
-	private ImageIcon overview;
-	private ImageIcon overviewsmall;
-	private ImageIcon iconStripe;
-	private final File rootDir;
+	private ImageIcon				overview;
+	private ImageIcon				overviewsmall;
+	private ImageIcon				iconStripe;
+	private final File				rootDir;
+
+	/**
+	 * the Logger for this Class
+	 */
+	private static final Logger		LOG					= LoggerFactory.getLogger(IconSet.class);
 
 	public IconSet(final File rootDir) {
 		super();
@@ -70,8 +76,10 @@ public class IconSet {
 	private void writeOverview(final ImageIcon over, final String name) {
 		final String filename = rootDir.getPath() + File.separator + "overview_" + name + ".png";
 		final File overFile = new File(filename);
-		if (!overFile.exists())
+		if (!overFile.exists() || IconCreatorFrame.globalSettings.isAlwaysWriteOverview()) {
+			LOG.info("  Writing overview to filesystem {}", overFile.getPath());
 			StaticImageHelper.writePNG(over, overFile);
+		}
 	}
 
 	/**

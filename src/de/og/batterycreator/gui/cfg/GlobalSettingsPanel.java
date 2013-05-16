@@ -25,13 +25,17 @@ import de.og.batterycreator.gui.widgets.RomPresetsComboBox;
 import de.og.batterycreator.main.IconCreatorFrame;
 
 public class GlobalSettingsPanel extends SettingsPanel {
-	private static final long		serialVersionUID		= 1L;
+	private static final long		serialVersionUID			= 1L;
 
 	// Presets
 	private JComboBox<RomPreset>	romPresetCombo;
-	private final JCheckBox			cboxShowAdvancedButton	= createCheckbox("Show 'Advanced Button' on startup (requires restart to take effect)",
-																	"Show 'Advanced Button' in buttonbar (requires restart to take effect)");
-	private static final Logger		LOGGER					= LoggerFactory.getLogger(GlobalSettingsPanel.class);
+	private final JCheckBox			cboxShowAdvancedButton		= createCheckbox("Show 'Advanced Button' on startup (requires restart to take effect)",
+																		"Show 'Advanced Button' in buttonbar (requires restart to take effect)");
+
+	private final JCheckBox			cboxAlwaysWriteOverviews	= createCheckbox("Always write Overview-Png's",
+																		"If selected, overviews written to filesystem, even it the overview already exists! (May take more time on startup of the Rom Fumbler)");
+
+	private static final Logger		LOGGER						= LoggerFactory.getLogger(GlobalSettingsPanel.class);
 
 	// Construktor
 	public GlobalSettingsPanel() {
@@ -79,7 +83,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(createCfgPaneRomPresets(), cc.xyw(1, ++row, 9));
+		builder.add(createOnStartSettings(), cc.xyw(1, ++row, 9));
+		builder.add(createGeneralSettings(), cc.xyw(1, ++row, 9));
 
 		final JPanel cfp = builder.getPanel();
 		// cfp.setBorder(BorderFactory.createLineBorder(Color.black, 2));
@@ -88,7 +93,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		return out;
 	}
 
-	private JPanel createCfgPaneRomPresets() {
+	private JPanel createOnStartSettings() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
 				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
@@ -104,11 +109,26 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		return hide;
 	}
 
+	private JPanel createGeneralSettings() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(cboxAlwaysWriteOverviews, cc.xyw(2, ++row, 7));
+
+		final JPanel hide = new HidePanel("Misc Settings", builder.getPanel());
+		return hide;
+	}
+
 	public void setSettings(final GlobalSettings settings) {
 		if (settings != null) {
 			IconCreatorFrame.globalSettings = settings;
 			romPresetCombo.setSelectedItem(settings.getRomPreset());
 			cboxShowAdvancedButton.setSelected(settings.isShowAdvancedButton());
+			cboxAlwaysWriteOverviews.setSelected(settings.isAlwaysWriteOverview());
 			this.repaint();
 		}
 	}
@@ -116,6 +136,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	public GlobalSettings getSettings() {
 		IconCreatorFrame.globalSettings.setRomPreset((RomPreset) romPresetCombo.getSelectedItem());
 		IconCreatorFrame.globalSettings.setShowAdvancedButton(cboxShowAdvancedButton.isSelected());
+		IconCreatorFrame.globalSettings.setAlwaysWriteOverview(cboxAlwaysWriteOverviews.isSelected());
 		return IconCreatorFrame.globalSettings;
 	}
 
@@ -141,6 +162,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	public void debugGlobalSettings(final GlobalSettings set) {
 		LOGGER.info("--> RomPreset to load on start: {}", set.getRomPreset().getRomName());
 		LOGGER.info("--> showAdvanced Button on start: {}", set.isShowAdvancedButton());
+		LOGGER.info("--> alwaysWriteOverviews {}", set.isAlwaysWriteOverview());
 	}
 
 	private void saveSettingsToFilesystem() {
