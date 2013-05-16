@@ -1,4 +1,4 @@
-package de.og.batterycreator.gui.widgets.chargeiconselector;
+package de.og.batterycreator.gui.widgets.iconselector.chargeiconselector;
 
 import javax.swing.ImageIcon;
 import org.slf4j.Logger;

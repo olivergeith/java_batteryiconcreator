@@ -23,8 +23,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.gui.widgets.SliderAndLabel;
-import de.og.batterycreator.gui.widgets.chargeiconselector.ChargeIconSelector;
-import de.og.batterycreator.gui.widgets.xoriconselector.XorIconSelector;
+import de.og.batterycreator.gui.widgets.iconselector.chargeiconselector.ChargeIconSelector;
+import de.og.batterycreator.gui.widgets.iconselector.xoriconselector.XorIconSelector;
 
 public class BattSettingsPanel extends SettingsPanel {
 	private static final long			serialVersionUID			= 1L;

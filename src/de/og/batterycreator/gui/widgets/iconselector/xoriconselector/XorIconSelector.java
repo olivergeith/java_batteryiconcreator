@@ -1,4 +1,4 @@
-package de.og.batterycreator.gui.widgets.xoriconselector;
+package de.og.batterycreator.gui.widgets.iconselector.xoriconselector;
 
 import javax.swing.ImageIcon;
 import de.og.batterycreator.gui.widgets.iconselector.IconSelector;

@@ -25,7 +25,7 @@ public abstract class IconSelector extends JComboBox<ImageIcon> {
 	abstract public void fillStaticIcons();
 
 	public void initUI() {
-		LOGGER.info("Loading Custom XOr Icons!");
+		LOGGER.info("Loading Custom Icons from {}", customPath);
 		fillStaticIcons();
 		addAdditionalIconsFromFilesystem();
 	}

@@ -33,7 +33,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 																		"Show 'Advanced Button' in buttonbar (requires restart to take effect)");
 
 	private final JCheckBox			cboxAlwaysWriteOverviews	= createCheckbox("Always write Overview-Png's",
-																		"If selected, overviews written to filesystem, even it the overview already exists! (May take more time on startup of the Rom Fumbler)");
+																		"If selected, overviews are written to filesystem, even it the overview already exists! (May take more time on startup of the Rom Fumbler)");
 
 	private static final Logger		LOGGER						= LoggerFactory.getLogger(GlobalSettingsPanel.class);
 
