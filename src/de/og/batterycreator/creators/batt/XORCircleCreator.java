@@ -14,10 +14,12 @@ public class XORCircleCreator extends AbstractIconCreator {
 
 	public XORCircleCreator(final RomSettings romSettings) {
 		super(romSettings);
+		settings.setIconXOffset(-1);
+		settings.setIconYOffset(-1);
 		settings.setFontXOffset(-1);
 		settings.setFontYOffset(1);
 		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 26));
-		settings.setResizeChargeSymbolHeight(35);
+		settings.setResizeChargeSymbolHeight(33);
 		settings.setLowBattTheshold(0);
 		settings.setUseGradiantForMediumColor(true);
 	}

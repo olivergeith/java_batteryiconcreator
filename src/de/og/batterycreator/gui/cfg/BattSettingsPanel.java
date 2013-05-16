@@ -38,8 +38,8 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JColorSelectButton	fontColorLowBatt			= new JColorSelectButton("LowBatt", "Color when low battery");
 	private final JColorSelectButton	fontColorMedBatt			= new JColorSelectButton("MedBatt", "Color when Med battery");
 	private final JColorSelectButton	fontColorCharge				= new JColorSelectButton("Charge Color", "Color when charging");
-	private final ChargeIconSelector	chargeIconSeletor			= new ChargeIconSelector();
-	private final XorIconSelector		xorIconSeletor				= new XorIconSelector();
+	private final ChargeIconSelector	chargeIconSeletor			= new ChargeIconSelector(36);
+	private final XorIconSelector		xorIconSeletor				= new XorIconSelector(36);
 
 	private final JCheckBox				cboxUseChargeColor			= createCheckbox("Use charge color",
 																			"Use ChargeColor (green), else use normal battery colors");
