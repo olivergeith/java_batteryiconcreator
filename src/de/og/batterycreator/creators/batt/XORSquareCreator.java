@@ -6,15 +6,14 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
-import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class XORCircleCreator extends AbstractIconCreator {
+public class XORSquareCreator extends AbstractIconCreator {
 
 	public static final ImageIcon	myIcon	= new ImageIcon(AbstractIconXORCreator.class.getResource("aokp.png"));
-	protected static String			name	= "XorCircleBattery";
+	protected static String			name	= "XorSquareBattery";
 
-	public XORCircleCreator(final RomSettings romSettings) {
+	public XORSquareCreator(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setIconXOffset(-1);
 		settings.setIconYOffset(-1);
@@ -62,20 +61,19 @@ public class XORCircleCreator extends AbstractIconCreator {
 		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
 		final Graphics2D g2d = initGrafics2D(img);
 
-		g2d.setColor(settings.getIconColorInActiv());
+		g2d.drawImage(xorIcon.getImage(), 0, 0, null);
 
-		final int w = xorIcon.getIconWidth();
-		final int x = img.getWidth() / 2 - w / 2;
-		g2d.drawImage(xorIcon.getImage(), x, 0, null);
+		// Farbe
 		final Color col = settings.getActivIconColor(percentage, charge);
-
 		g2d.setPaint(col);
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
 
-		if (settings.isFlip())
-			Draw2DFunktions.fillCircle(g2d, imgWidth / 2, imgHeight / 2, imgWidth, 90, -Math.round(percentage * (360f / 100f)));
+		final int h = Math.round(imgHeight / 100f * percentage);
+		final int y = img.getHeight() - h;
+		if (!settings.isFlip())
+			g2d.fillRect(0, y, imgWidth, h);
 		else
-			Draw2DFunktions.fillCircle(g2d, imgWidth / 2, imgHeight / 2, imgWidth, 90, +Math.round(percentage * (360f / 100f)));
+			g2d.fillRect(0, 0, h, imgHeight);
 
 		g2d.setPaintMode();
 

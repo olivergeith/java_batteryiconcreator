@@ -39,7 +39,7 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JColorSelectButton	fontColorMedBatt			= new JColorSelectButton("MedBatt", "Color when Med battery");
 	private final JColorSelectButton	fontColorCharge				= new JColorSelectButton("Charge Color", "Color when charging");
 	private final ChargeIconSelector	chargeIconSeletor			= new ChargeIconSelector(36);
-	private final XorIconSelector		xorIconSeletor				= new XorIconSelector(36);
+	private final XorIconSelector		xorIconSelector				= new XorIconSelector(36);
 
 	private final JCheckBox				cboxUseChargeColor			= createCheckbox("Use charge color",
 																			"Use ChargeColor (green), else use normal battery colors");
@@ -292,7 +292,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(extraColor1, cc.xyw(2, ++row, 1));
 		builder.add(extraColor2, cc.xyw(4, row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("BackgroundIcon"), cc.xyw(2, ++row, 1));
-		builder.add(xorIconSeletor, cc.xyw(2, ++row, 1));
+		builder.add(xorIconSelector, cc.xyw(2, ++row, 1));
 
 		final JPanel hide = new HidePanel("Misc Options (only work in some renderes)", builder.getPanel());
 		return hide;
@@ -348,9 +348,9 @@ public class BattSettingsPanel extends SettingsPanel {
 				chargeIconSeletor.setSelectedIndex(1);
 
 			if (settings.getXorIcon() != null)
-				xorIconSeletor.setSelectedItem(settings.getXorIcon());
+				xorIconSelector.setSelectedItem(settings.getXorIcon());
 			else
-				xorIconSeletor.setSelectedIndex(0);
+				xorIconSelector.setSelectedIndex(0);
 
 			cboxUseGradientMediumLevels.setSelected(settings.isUseGradiantForMediumColor());
 			cboxUseGradientNormalLevels.setSelected(settings.isUseGradiantForNormalColor());
@@ -418,7 +418,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setLowBattTheshold(sliderLowBatt.getValue());
 
 		settings.setChargeIcon((ImageIcon) chargeIconSeletor.getSelectedItem());
-		settings.setXorIcon((ImageIcon) xorIconSeletor.getSelectedItem());
+		settings.setXorIcon((ImageIcon) xorIconSelector.getSelectedItem());
 		settings.setUseGradiantForMediumColor(cboxUseGradientMediumLevels.isSelected());
 		settings.setUseGradiantForNormalColor(cboxUseGradientNormalLevels.isSelected());
 
@@ -478,7 +478,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		sliderBattGradientLevel.setEnabled(battGradient);
 		extraColor1.setEnabled(extra1);
 		extraColor2.setEnabled(extra2);
-		xorIconSeletor.setEnabled(xorBackground);
+		xorIconSelector.setVisible(xorBackground);
 	}
 
 	/**
