@@ -25,6 +25,7 @@ public class XORSquareCreator extends AbstractIconCreator {
 		settings.setResizeChargeSymbolHeight(33);
 		settings.setLowBattTheshold(0);
 		settings.setUseGradiantForMediumColor(true);
+		settings.setBattGradient(true);
 	}
 
 	@Override
