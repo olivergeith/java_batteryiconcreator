@@ -23,6 +23,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.gui.widgets.SliderAndLabel;
+import de.og.batterycreator.gui.widgets.iconpositioner.IconPositioner;
 import de.og.batterycreator.gui.widgets.iconselector.chargeiconselector.ChargeIconSelector;
 import de.og.batterycreator.gui.widgets.iconselector.xorcircleselector.XorCircleSelector;
 import de.og.batterycreator.gui.widgets.iconselector.xorsquareselector.XorSquareSelector;
@@ -84,10 +85,17 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final SliderAndLabel		sliderLowBatt				= new SliderAndLabel(0, 30);
 	private final SliderAndLabel		sliderMedBatt				= new SliderAndLabel(0, 100);
 
-	private final SliderAndLabel		sliderFontXOffset			= new SliderAndLabel(-20, 20);
-	private final SliderAndLabel		sliderFontYOffset			= new SliderAndLabel(-20, 20);
-	private final SliderAndLabel		slidericonXOffset			= new SliderAndLabel(-20, 20);
-	private final SliderAndLabel		slidericonYOffset			= new SliderAndLabel(-20, 20);
+	// private final SliderAndLabel sliderFontXOffset = new SliderAndLabel(-20,
+	// 20);
+	// private final SliderAndLabel sliderFontYOffset = new SliderAndLabel(-20,
+	// 20);
+	// private final SliderAndLabel slidericonXOffset = new SliderAndLabel(-20,
+	// 20);
+	// private final SliderAndLabel slidericonYOffset = new SliderAndLabel(-20,
+	// 20);
+
+	private final IconPositioner		iconPos						= new IconPositioner(-20, 20);
+	private final IconPositioner		fontPos						= new IconPositioner(-20, 20);
 
 	private final SliderAndLabel		sliderReduceOn100			= new SliderAndLabel(-5, 0);
 
@@ -177,17 +185,13 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(fontColorLowBatt, cc.xyw(6, row, 1));
 		builder.add(fontColorMedBatt, cc.xyw(8, row, 1));
 
-		builder.add(JGoodiesHelper.createBlackLabel("Reduce font on 100% by <x> pixel"), cc.xyw(6, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Font Position Offsets (drag red square"), cc.xyw(6, ++row, 3));
 		builder.add(fontButton, cc.xyw(2, ++row, 3));
-		builder.add(sliderReduceOn100, cc.xyw(6, row, 1));
-		builder.add(sliderReduceOn100.getValueLabel(), cc.xyw(8, row, 1));
+		builder.add(fontPos, cc.xyw(6, row, 3));
 
-		builder.add(JGoodiesHelper.createBlackLabel("Font Pixel Position Offsets X"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Font Pixel Position Offsets Y"), cc.xyw(6, row, 3));
-		builder.add(sliderFontXOffset, cc.xyw(2, ++row, 1));
-		builder.add(sliderFontXOffset.getValueLabel(), cc.xyw(4, row, 1));
-		builder.add(sliderFontYOffset, cc.xyw(6, row, 1));
-		builder.add(sliderFontYOffset.getValueLabel(), cc.xyw(8, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Reduce font on 100% by <x> pixel"), cc.xyw(2, ++row, 3));
+		builder.add(sliderReduceOn100, cc.xyw(2, ++row, 1));
+		builder.add(sliderReduceOn100.getValueLabel(), cc.xyw(4, row, 1));
 
 		builder.add(JGoodiesHelper.createBlackLabel("Glow behind"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius"), cc.xyw(4, row, 3));
@@ -208,15 +212,10 @@ public class BattSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
+		builder.add(JGoodiesHelper.createBlackLabel("ChargeIcon Position Offsets (drag red square"), cc.xyw(6, row, 3));
 		builder.add(cboxShowChargeSymbol, cc.xyw(2, ++row, 1));
 		builder.add(chargeIconSeletor, cc.xyw(4, row, 1));
-
-		builder.add(JGoodiesHelper.createBlackLabel("ChargeIcon Pixel Position Offsets X"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("ChargeIcon Pixel Position Offsets Y"), cc.xyw(6, row, 3));
-		builder.add(slidericonXOffset, cc.xyw(2, ++row, 1));
-		builder.add(slidericonXOffset.getValueLabel(), cc.xyw(4, row, 1));
-		builder.add(slidericonYOffset, cc.xyw(6, row, 1));
-		builder.add(slidericonYOffset.getValueLabel(), cc.xyw(8, row, 1));
+		builder.add(iconPos, cc.xyw(6, row, 3));
 
 		builder.add(cboxResizeChargeSymbol, cc.xyw(2, ++row, 3));
 		builder.add(sliderResizeChargeSymbol, cc.xyw(6, row, 1));
@@ -242,7 +241,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(cboxTransparentBgrnd, cc.xyw(2, ++row, 5));
 		builder.add(backgroundColor, cc.xyw(8, row, 1));
 
-		final JPanel hide = new HidePanel("Icon...", builder.getPanel());
+		final JPanel hide = new HidePanel("Charge Icon...", builder.getPanel());
 		return hide;
 	}
 
@@ -364,11 +363,9 @@ public class BattSettingsPanel extends SettingsPanel {
 			cboxUseGradientNormalLevels.setSelected(settings.isUseGradiantForNormalColor());
 			fontButton.setFont(settings.getFont());
 
-			slidericonXOffset.setValue(settings.getIconXOffset());
-			slidericonYOffset.setValue(settings.getIconYOffset());
+			iconPos.setPosition(settings.getIconXOffset(), settings.getIconYOffset());
+			fontPos.setPosition(settings.getFontXOffset(), settings.getFontYOffset());
 
-			sliderFontXOffset.setValue(settings.getFontXOffset());
-			sliderFontYOffset.setValue(settings.getFontYOffset());
 			sliderReduceOn100.setValue(settings.getReduceFontOn100());
 
 			sliderResizeChargeSymbol.setValue(settings.getResizeChargeSymbolHeight());
@@ -432,11 +429,12 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setUseGradiantForNormalColor(cboxUseGradientNormalLevels.isSelected());
 
 		settings.setFont(fontButton.getFont());
-		settings.setFontXOffset(sliderFontXOffset.getValue());
-		settings.setFontYOffset(sliderFontYOffset.getValue());
+		settings.setFontXOffset(fontPos.getPosition().x);
+		settings.setFontYOffset(fontPos.getPosition().y);
 		settings.setReduceFontOn100(sliderReduceOn100.getValue());
-		settings.setIconXOffset(slidericonXOffset.getValue());
-		settings.setIconYOffset(slidericonYOffset.getValue());
+
+		settings.setIconXOffset(iconPos.getPosition().x);
+		settings.setIconYOffset(iconPos.getPosition().y);
 
 		settings.setResizeChargeSymbol(cboxResizeChargeSymbol.isSelected());
 		settings.setResizeChargeSymbolHeight(sliderResizeChargeSymbol.getValue());
@@ -457,10 +455,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		iconColorCharge.setEnabled(cboxUseChargeColor.isSelected());
 		chargeIconSeletor.setEnabled(cboxShowChargeSymbol.isSelected());
 		fontButton.setEnabled(cboxShowFont.isSelected());
-		slidericonXOffset.setEnabled(cboxShowChargeSymbol.isSelected());
-		slidericonYOffset.setEnabled(cboxShowChargeSymbol.isSelected());
-		sliderFontXOffset.setEnabled(cboxShowFont.isSelected());
-		sliderFontYOffset.setEnabled(cboxShowFont.isSelected());
+		iconPos.setEnabled(cboxShowChargeSymbol.isSelected());
+		fontPos.setEnabled(cboxShowFont.isSelected());
 		sliderReduceOn100.setEnabled(cboxShowFont.isSelected());
 		sliderResizeChargeSymbol.setEnabled(cboxShowChargeSymbol.isSelected() && cboxResizeChargeSymbol.isSelected());
 		cboxResizeChargeSymbol.setEnabled(cboxShowChargeSymbol.isSelected());

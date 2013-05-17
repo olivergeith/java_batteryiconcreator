@@ -78,7 +78,7 @@ public class XORCircleCreator extends AbstractIconCreator {
 		if (settings.isBattGradient()) {
 			final Color col1 = settings.getActivIconColor(percentage, charge);
 			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, 0, col1);
+			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, imgHeight, col1);
 			g2d.setPaint(gradientFill);
 		} else {
 			final Color col = settings.getActivIconColor(percentage, charge);
