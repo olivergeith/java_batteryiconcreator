@@ -8,9 +8,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class SimpleStockBatteryCreator extends AbstractIconCreator {
+public class SamsungStockBatteryCreator extends AbstractIconCreator {
 
-	public SimpleStockBatteryCreator(final RomSettings romSettings) {
+	public SamsungStockBatteryCreator(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
 		settings.setReduceFontOn100(-5);
@@ -25,13 +25,13 @@ public class SimpleStockBatteryCreator extends AbstractIconCreator {
 		settings.setStrokewidth(2);
 		settings.setIconXOffset(-1);
 		settings.setIconYOffset(3);
-		settings.setIconColor(Color.green.darker());
-		settings.setIconChargeColor(Color.yellow);
+		settings.setIconColor(new Color(142, 205, 0));
+		settings.setIconChargeColor(new Color(142, 205, 0));
 		settings.setResizeChargeSymbolHeight(33);
 
 	}
 
-	protected static String	name	= "Stock.JellyBean";
+	protected static String	name	= "Samsung.Stock.JellyBean";
 
 	@Override
 	public boolean supportsGradient() {
@@ -55,9 +55,8 @@ public class SimpleStockBatteryCreator extends AbstractIconCreator {
 	 */
 	@Override
 	public ImageIcon createImage(final int percentage, final boolean charge) {
-		final int imgWidth = 54;
+		final int imgWidth = 48;
 		final int imgHeight = 54;
-		final int rand = settings.getStrokewidth();
 
 		// Create a graphics contents on the buffered image
 		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
@@ -71,12 +70,13 @@ public class SimpleStockBatteryCreator extends AbstractIconCreator {
 		} else {
 			g2d.setColor(settings.getIconColorInActiv());
 		}
-		final int xoff = 9 + rand;
-		final int yoff = 2;
-		g2d.fillRect(xoff, yoff, imgWidth - 2 * xoff, imgHeight - 2 * yoff);
+		final int xoff = 6;
+		final int yoffunten = 2;
+		final int yoffoben = 1;
+		g2d.fillRect(xoff, yoffoben, imgWidth - 2 * xoff, imgHeight - yoffoben - yoffunten);
 
 		// level
-		int h = Math.round((imgHeight - 2 * yoff) / 100f * percentage);
+		int h = Math.round((imgHeight - yoffoben - yoffunten) / 100f * percentage);
 		if (h < 2)
 			h = 2;
 
@@ -88,10 +88,10 @@ public class SimpleStockBatteryCreator extends AbstractIconCreator {
 		} else {
 			g2d.setColor(settings.getActivIconColor(percentage, charge));
 		}
-		g2d.fillRect(xoff, imgHeight - yoff - h, imgWidth - 2 * xoff, h);
+		g2d.fillRect(xoff, imgHeight - yoffunten - h, imgWidth - 2 * xoff, h);
 
 		// ClearingKnob
-		final int knobxoff = 16 + rand;
+		final int knobxoff = 18;
 		final int knobyoff = 7;
 		g2d.setBackground(new Color(255, 255, 255, 0));
 		g2d.clearRect(0, 0, knobxoff, knobyoff);

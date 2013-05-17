@@ -66,7 +66,7 @@ import de.og.batterycreator.creators.batt.NoBattIcons;
 import de.og.batterycreator.creators.batt.ScalaBatteryCreator;
 import de.og.batterycreator.creators.batt.SimpleBatteryCreator;
 import de.og.batterycreator.creators.batt.SimpleBatteryCreatorV2;
-import de.og.batterycreator.creators.batt.SimpleStockBatteryCreator;
+import de.og.batterycreator.creators.batt.SamsungStockBatteryCreator;
 import de.og.batterycreator.creators.batt.TachoCreator;
 import de.og.batterycreator.creators.batt.TachoCreator3Quater;
 import de.og.batterycreator.creators.batt.TachoCreatorWide;
@@ -131,7 +131,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new DecimalBar3Creator(romSettings));
 		combo.addItem(new BinaryBarsCreator(romSettings));
 		combo.addItem(new BinarySquaresCreator(romSettings));
-		combo.addItem(new SimpleStockBatteryCreator(romSettings));
+		combo.addItem(new SamsungStockBatteryCreator(romSettings));
 		combo.addItem(new SimpleBatteryCreator(romSettings));
 		combo.addItem(new SimpleBatteryCreatorV2(romSettings));
 		combo.addItem(new BatterySymbolCreator(romSettings));
