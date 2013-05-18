@@ -1,42 +1,33 @@
 [B][SIZE="3"]New Version out of [URL="http://forum.xda-developers.com/showthread.php?t=1918500"]"The Rom Fumbler" aka "The Battery Icon Creator"[/URL][/SIZE][/B]
 
-This tool is growing so much!!!...Check out all the new features!!! 
-I never imagined that it would develope this much...
-
-Big thanks for giving me so much input and new ideas :) belong to:
- [MENTION=4309610]NadMaj[/MENTION]
- [MENTION=2757720]fryingpan0613[/MENTION]
- [MENTION=621512]studentjunk[/MENTION]
- [MENTION=4368076]black_horse_88[/MENTION]
-
+This one is getting better and better...I still cant believe how fast it grows! I have a lot of fun developing it...so guys...give me more ideas...what should be implemented next ?!
 
 [SIZE="4"][B]Changelog:[/B][/SIZE]
-[COLOR="Blue"][B]May-13-2013[/B] : Release 25.0[/COLOR]
+[COLOR="Blue"][B]May-17-2013[/B] : Release 26.0[/COLOR]
 [LIST]
-[*][B]A lot of changes in Rom Settings and Rom Presets[/B]
-[*]...Rom Presets are no longer hard coded! Now stored in plain textfiles in ./rompresets/...
-[*]...Rom Settings can be exported into a Rom Preset (available in dropdownbox after restart)
-[*]...if you created a Rom Preset for your Rom...share it and upload it here...I will add it to the next version!
-[*]...colored icons in the RomPreset-dropdownbox...
-[*]...Morphpath is no dropdown-box any more...instead it is (automaticly) generated.
-[*][B]Support for VRTheme Templates[/B]
-[*]...new vrtheme template...
-[*][B]Support for /preload partition in Samsung Galaxy S2 Stock Roms (Still WIP...but some things already work)[/B]
-[*]...another new vrtheme template, that supports the /preload partition (Seems to work!)
-[*]...new UniversalFlasher template for /preload  (Need someone to test this!!!!) 
-[*][B]Global Settings[/B]
-[*]...define what Rom Preset to apply on startup of the Rom Fumbler!
-[*]...by this you can overwrite the (hdpi)defaults to your needs!!! This should bring relief to all "non S2" Users ;)
-[*]...define if you want to see the Advanced Button in Toolbar (by default it is invisible) Turn it on here and restart Rom Fumbler!
-[*][B]Help-pages for Rom Settings and Global Settings [/B]
-[*]...read them carefully, in case you want to add your own Rom Presets or Templates...
-[*][B]New Battery Renderer[/B]
-[*]...new Faecher.Wide Battery
-[*][B]Support vor xxhdpi like in Galaxy S4[/B]
-[*]...Some Battery Renderers already render in xxhdpi without resizing! (the white ones in the chooser dropdownbox)
-[*]...watch for tooltips in the above dropdownbox :)
-[*][B]New Rom Preset for Note 2 Labrats Rom[/B]
-[*][B]Animator[/B] at the bottom of the Battery, Wifi and Signal Renderer...see how your icons animate, when played in sequence!
+[*][B]A lot of changes in all Settings[/B]
+[*]...new "Positioner" to finetune the position of numbers and charge-icon [URL="http://forum.xda-developers.com/showpost.php?p=41518488&postcount=583"]What is the "Positioner"...howto use it?[/URL]
+[*]...rearranged GUI
+[*]...new option in Global settings to write overviews in custom area on every start of the Rom Fumbler (will take more time to start)
+[*][B]DropShadow Feature for percentage numbers[/B]
+[*]...add a blurry shadow behind the percentage numbers
+[*]...choose color, position and intensity of shadow
+[*]...[URL="http://forum.xda-developers.com/showpost.php?p=41565092&postcount=600"]What are Dropshadows in the Rom Fumbler?[/URL]
+[*][B]New Xor-Batteries replacing a lot of X... Batteries that were there before![/B]
+[*]...these new Xor-Batteries offer great possibilities to customize your battery design by adding your own backgrounds!
+[*]...[URL="http://forum.xda-developers.com/showpost.php?p=41495369&postcount=581"]XorCircleBattery and XorSquareBattery...howto customize them !![/URL]
+[*]...if you created new great background-pngs...post them in the Rom Fumbler Thread for others to use!!!
+[*][B]New Battery looking like Samsung green Stock Battery[/B]
+[*][B]More custom charge icons[/B]
+[*][B]Updated FAQ on OP[/B]
 [/LIST]
 
+
+Check out the new Xor-Batteries and the DropShadow feature!! These offer great new possibilities!!!
+
+
 Happy modding & flashing :)
+
+[B]Attention:[/B]
+I will be on a business trip the next days/week...so don't expect me to answer questions here!!! 
+How many Thanks will I have, when I return ? Press [B]Thanks [/B]if you like the new Version :)
