@@ -44,8 +44,8 @@ public class BattSettingsPanel extends SettingsPanel {
 
 	private final JCheckBox				cboxDropShadow				= createCheckbox("DropShadow", "DropShadow behind PercentageText");
 	private final JColorSelectButton	dropShadowColor				= new JColorSelectButton("DropShadow Color", "Color of Shadow behind Percentage-Text");
-	private final IconPositioner		dropShadowPos				= new IconPositioner(-3, 3);
-	private final SliderAndLabel		sliderDropShadowOpacity		= new SliderAndLabel(1, 4);
+	private final IconPositioner		dropShadowPos				= new IconPositioner(-5, 5);
+	private final SliderAndLabel		sliderDropShadowOpacity		= new SliderAndLabel(1, 6);
 
 	private final XorCircleSelector		xorIconSelector				= new XorCircleSelector(36);
 	private final XorSquareSelector		xorSquareIconSelector		= new XorSquareSelector(36);

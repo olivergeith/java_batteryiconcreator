@@ -180,7 +180,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		// Drawing Blurring the font
 		for (int i = 1; i <= settings.getDropShadowOpacity(); i++) {
 			g2dblurr.drawString(str, strxpos, strypos);
-			blurrimg = StaticImageHelper.blurImage25(blurrimg);
+			blurrimg = StaticImageHelper.blurImage25a(blurrimg);
 		}
 
 		// blurredImag in img malen
