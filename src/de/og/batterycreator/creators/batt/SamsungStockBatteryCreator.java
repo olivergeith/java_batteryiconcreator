@@ -28,6 +28,7 @@ public class SamsungStockBatteryCreator extends AbstractIconCreator {
 		settings.setIconColor(new Color(142, 205, 0));
 		settings.setIconChargeColor(new Color(142, 205, 0));
 		settings.setResizeChargeSymbolHeight(33);
+		settings.setDropShadowFont(true);
 
 	}
 
