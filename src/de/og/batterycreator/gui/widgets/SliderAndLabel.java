@@ -1,24 +1,29 @@
 package de.og.batterycreator.gui.widgets;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JSlider;
+import javax.swing.JToolBar;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class SliderAndLabel extends JSlider {
 
-	private static final long serialVersionUID = -5143738798997636241L;
-	private final JLabel valueLabel = new JLabel();
+	private static final long	serialVersionUID	= -5143738798997636241L;
+	private final JLabel		valueLabel			= new JLabel();
+
+	private final JToolBar		toolbar				= new JToolBar();
+
+	public JToolBar getToolbar() {
+		return toolbar;
+	}
 
 	public JLabel getValueLabel() {
 		return valueLabel;
 	}
 
-	Dimension prefsize = new Dimension(130, 25);
+	Dimension	prefsize	= new Dimension(30, 25);
 
 	public SliderAndLabel(final int min, final int max) {
 		super(min, max);
@@ -26,9 +31,9 @@ public class SliderAndLabel extends JSlider {
 	}
 
 	private void initUI() {
-		setLayout(new BorderLayout());
-		setPreferredSize(prefsize);
-		setSize(prefsize);
+		valueLabel.setPreferredSize(prefsize);
+		valueLabel.setSize(prefsize);
+		valueLabel.setMinimumSize(prefsize);
 		addChangeListener(new ChangeListener() {
 
 			@Override
@@ -36,6 +41,9 @@ public class SliderAndLabel extends JSlider {
 				valueLabel.setText("" + getValue());
 			}
 		});
+		toolbar.setFloatable(false);
+		toolbar.add(this);
+		toolbar.add(valueLabel);
 		valueLabel.setBorder(new BevelBorder(1));
 	}
 
@@ -45,4 +53,14 @@ public class SliderAndLabel extends JSlider {
 		valueLabel.setText("" + value);
 
 	}
+
+	@Override
+	public void setEnabled(final boolean arg0) {
+		super.setEnabled(arg0);
+		if (valueLabel != null)
+			valueLabel.setEnabled(arg0);
+		if (toolbar != null)
+			toolbar.setEnabled(arg0);
+	}
+
 }
