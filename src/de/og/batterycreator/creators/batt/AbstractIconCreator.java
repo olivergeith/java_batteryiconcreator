@@ -118,36 +118,90 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		drawGlow(g2d, percentage, charge, img);
 		drawGlowOnChargeAnimation(g2d, percentage, charge, img);
 		if (settings.isShowFont()) {
-			int yoff = 8;
 			if (charge && settings.isShowChargeSymbol()) {
 				drawChargeIcon(g2d, img);
 			} else {
-				// Sonderbehandlung bei 100% --> Schrift kleiner machen
-				if (percentage == 100 && settings.getReduceFontOn100() < 0) {
-					final Font font = settings.getFont();
-					final Font newfont = new Font(font.getName(), font.getStyle(), font.getSize() + settings.getReduceFontOn100());
-					g2d.setFont(newfont);
-					// offset extra berechnen proportional zur verkleinerten
-					// Font
-					yoff = 8 + Math.round(settings.getReduceFontOn100() / 2f);
+				if (settings.isDropShadowFont()) {
+					drawDropShadowForPercentageText(g2d, percentage, charge, img);
 				}
-				final FontMetrics metrix = g2d.getFontMetrics();
-				// Farbe für Schrift
-				g2d.setColor(settings.getActivFontColor(percentage, charge));
-				String str = "" + percentage;
-				if (settings.isAddPercent())
-					str += "%";
-				final Rectangle2D strRect = metrix.getStringBounds(str, g2d);
-				final int strxpos = 1 + settings.getFontXOffset() + (int) (Math.round(img.getWidth() / 2) - Math.round(strRect.getWidth() / 2));
-				final int strypos = img.getHeight() / 2 + yoff + settings.getFontYOffset();
-
-				g2d.drawString(str, strxpos, strypos);
-				// Schrift wieder normal machen!!!
-				g2d.setFont(settings.getFont());
+				drawPercentageText(g2d, percentage, charge, img);
 			}
 		} else if (charge && settings.isShowChargeSymbol()) {
 			drawChargeIcon(g2d, img);
 		}
+	}
+
+	private void drawPercentageText(final Graphics2D g2d, final int percentage, final boolean charge, final BufferedImage img) {
+		int yoff = 8;
+		// Schrift wieder normal machen!!!
+		g2d.setFont(settings.getFont());
+		// Sonderbehandlung bei 100% --> Schrift kleiner machen
+		if (percentage == 100 && settings.getReduceFontOn100() < 0) {
+			yoff = handleSmallerFontFor100Percent(g2d);
+		}
+		final FontMetrics metrix = g2d.getFontMetrics();
+		// Farbe für Schrift
+		g2d.setColor(settings.getActivFontColor(percentage, charge));
+		String str = "" + percentage;
+		if (settings.isAddPercent())
+			str += "%";
+		final Rectangle2D strRect = metrix.getStringBounds(str, g2d);
+		final int strxpos = 1 + settings.getFontXOffset() + (int) (Math.round(img.getWidth() / 2) - Math.round(strRect.getWidth() / 2));
+		final int strypos = img.getHeight() / 2 + yoff + settings.getFontYOffset();
+
+		g2d.drawString(str, strxpos, strypos);
+	}
+
+	private void drawDropShadowForPercentageText(final Graphics2D g2dout, final int percentage, final boolean charge, final BufferedImage img) {
+		// Create a graphics contents on the buffered image
+		BufferedImage blurrimg = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		final Graphics2D g2dblurr = initGrafics2D(blurrimg);
+
+		int yoff = 8;
+		// Schrift wieder normal machen!!!
+		g2dblurr.setFont(settings.getFont());
+		// Sonderbehandlung bei 100% --> Schrift kleiner machen
+		if (percentage == 100 && settings.getReduceFontOn100() < 0) {
+			yoff = handleSmallerFontFor100Percent(g2dblurr);
+		}
+		final FontMetrics metrix = g2dblurr.getFontMetrics();
+		// Farbe für Schatten
+		g2dblurr.setColor(settings.getDropShadowColor());
+		String str = "" + percentage;
+		if (settings.isAddPercent())
+			str += "%";
+		final Rectangle2D strRect = metrix.getStringBounds(str, g2dblurr);
+		int strxpos = 1 + settings.getFontXOffset() + (int) (Math.round(img.getWidth() / 2) - Math.round(strRect.getWidth() / 2));
+		int strypos = img.getHeight() / 2 + yoff + settings.getFontYOffset();
+
+		// Shadowoffsets
+		strxpos += settings.getDropShadowOffsetX();
+		strypos += settings.getDropShadowOffsetY();
+		// Drawing Blurring the font
+		for (int i = 1; i <= settings.getDropShadowOpacity(); i++) {
+			g2dblurr.drawString(str, strxpos, strypos);
+			blurrimg = StaticImageHelper.blurImage25(blurrimg);
+		}
+
+		// blurredImag in img malen
+		g2dout.drawImage(blurrimg, 0, 0, null);
+
+	}
+
+	/**
+	 * 
+	 * @param g2d
+	 * @return
+	 */
+	private int handleSmallerFontFor100Percent(final Graphics2D g2d) {
+		int yoff;
+		final Font font = settings.getFont();
+		final Font newfont = new Font(font.getName(), font.getStyle(), font.getSize() + settings.getReduceFontOn100());
+		g2d.setFont(newfont);
+		// offset extra berechnen proportional zur verkleinerten
+		// Font
+		yoff = 8 + Math.round(settings.getReduceFontOn100() / 2f);
+		return yoff;
 	}
 
 	/**
@@ -418,6 +472,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		final Graphics2D g2d = img.createGraphics();
 		g2d.setFont(settings.getFont());
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.setStroke(new BasicStroke(settings.getStrokewidth()));
 		if (!forceTransparent) {
 			if (!settings.isTransparentBackground()) {

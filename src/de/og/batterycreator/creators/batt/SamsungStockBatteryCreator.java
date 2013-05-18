@@ -39,11 +39,6 @@ public class SamsungStockBatteryCreator extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsStrokeWidth() {
-		return true;
-	}
-
-	@Override
 	public boolean isNativeXXHDPI() {
 		return true;
 	}

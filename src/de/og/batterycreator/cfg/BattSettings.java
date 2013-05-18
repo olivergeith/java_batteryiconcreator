@@ -34,6 +34,13 @@ public class BattSettings implements Serializable {
 	private Color				fontColorMedBatt			= COLOR_Med_BATT;
 	private Color				fontChargeColor				= COLOR_FONT;
 
+	// Font Blurr
+	private Color				dropShadowColor				= COLOR_BGRND;
+	private boolean				dropShadowFont				= false;
+	private int					dropShadowOffsetX			= 0;
+	private int					dropShadowOffsetY			= 0;
+	private int					dropShadowOpacity			= 1;
+
 	private boolean				useChargeColor				= true;
 
 	private Color				extraColor1					= COLOR_AOKP_BLUE;
@@ -766,6 +773,46 @@ public class BattSettings implements Serializable {
 
 	public void setXorSquareIcon(final ImageIcon xorSquareIcon) {
 		this.xorSquareIcon = xorSquareIcon;
+	}
+
+	public Color getDropShadowColor() {
+		return dropShadowColor;
+	}
+
+	public void setDropShadowColor(final Color dropShadowColor) {
+		this.dropShadowColor = dropShadowColor;
+	}
+
+	public boolean isDropShadowFont() {
+		return dropShadowFont;
+	}
+
+	public void setDropShadowFont(final boolean dropShadowFont) {
+		this.dropShadowFont = dropShadowFont;
+	}
+
+	public int getDropShadowOffsetX() {
+		return dropShadowOffsetX;
+	}
+
+	public void setDropShadowOffsetX(final int dropShadowOffsetX) {
+		this.dropShadowOffsetX = dropShadowOffsetX;
+	}
+
+	public int getDropShadowOffsetY() {
+		return dropShadowOffsetY;
+	}
+
+	public void setDropShadowOffsetY(final int dropShadowOffsetY) {
+		this.dropShadowOffsetY = dropShadowOffsetY;
+	}
+
+	public int getDropShadowOpacity() {
+		return dropShadowOpacity;
+	}
+
+	public void setDropShadowOpacity(final int dropShadowOpacity) {
+		this.dropShadowOpacity = dropShadowOpacity;
 	}
 
 }
