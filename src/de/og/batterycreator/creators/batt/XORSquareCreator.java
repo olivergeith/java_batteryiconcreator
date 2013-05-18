@@ -69,8 +69,24 @@ public class XORSquareCreator extends AbstractIconCreator {
 		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
 		final Graphics2D g2d = initGrafics2D(img);
 
+		// Hintergrund icon malen
 		g2d.drawImage(xorIcon.getImage(), 0, 0, null);
 
+		// Composite COlor setzen
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
+
+		// Hintergrund icon umfärben in Hintergrundfarbe
+		if (settings.isBattGradient()) {
+			final Color col1 = settings.getIconColorInActiv();
+			final Color col2 = getBattGardientSecondColor(col1);
+			final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
+			g2d.setPaint(gradientFill);
+		} else {
+			g2d.setPaint(settings.getIconColorInActiv());
+		}
+		g2d.fillRect(0, 0, imgWidth, imgHeight);
+
+		// Level malen
 		if (settings.isBattGradient()) {
 			final Color col1 = settings.getActivIconColor(percentage, charge);
 			final Color col2 = getBattGardientSecondColor(col1);
@@ -81,17 +97,19 @@ public class XORSquareCreator extends AbstractIconCreator {
 			g2d.setPaint(col);
 		}
 
-		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
-
-		final int h = Math.round(imgHeight / 100f * percentage);
+		int h = Math.round(imgHeight / 100f * percentage);
+		if (h < 2)
+			h = 2;
 		final int y = img.getHeight() - h;
 		if (!settings.isFlip())
 			g2d.fillRect(0, y, imgWidth, h);
 		else
 			g2d.fillRect(0, 0, h, imgHeight);
 
+		// Zurück auf normales paint
 		g2d.setPaintMode();
 
+		// % malen
 		drawPercentage(g2d, percentage, charge, img);
 
 		// Filewriting
