@@ -23,7 +23,7 @@ public class SliderAndLabel extends JSlider {
 		return valueLabel;
 	}
 
-	Dimension	prefsize	= new Dimension(30, 25);
+	Dimension	prefsize	= new Dimension(32, 25);
 
 	public SliderAndLabel(final int min, final int max) {
 		super(min, max);

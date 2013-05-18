@@ -1,6 +1,7 @@
 package de.og.batterycreator.gui.widgets.iconpositioner;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -30,7 +31,7 @@ class IconPositionerCanvasLabel extends JLabel {
 	private boolean					quickedit			= true;
 
 	public IconPositionerCanvasLabel() {
-		// this.setSize(dim);
+		this.setSize(new Dimension(back.getIconWidth(), back.getIconWidth()));
 		setIcon(back);
 	}
 
@@ -43,25 +44,26 @@ class IconPositionerCanvasLabel extends JLabel {
 	private void drawHorizontalZeigerInstrument(final Graphics g, final int yPosition) {
 		final Graphics2D g2d = (Graphics2D) g;
 
-		// g2d.drawImage(back.getImage(), 0, 0, null);
-		// hintergrund
-		// final Color c1 = new Color(192, 200, 255, 255);
-		// final Color c2 = new Color(255, 255, 255, 255);
-		// final GradientPaint gradientFill = new GradientPaint(0, 0, c1,
-		// getWidth(), getHeight(), c2);
-		// g2d.setPaint(gradientFill);
-		// g2d.fillRect(0, 0, getWidth(), getHeight());
+		// Touch rect berechnen
+		touchRect.setLocation(position.x - 3, position.y - 3);
+		touchRect.setSize(6, 6);
 
-		// rahmen + schatten
-		// g2d.setColor(new Color(128, 128, 128, 25));
-		// g2d.fillRect(0, 0, 3, getHeight());
-		// g2d.fillRect(3, 0, getWidth(), 3);
+		// Fadenkreuz
+		g2d.setColor(new Color(0, 0, 0, 40));
+		g2d.fillRect(position.x - 1, 0, 2, getHeight());
+		g2d.fillRect(0, position.y, getWidth(), 2);
+
+		// Shadow under knob
+		g2d.setColor(new Color(0, 0, 0, 15));
+		g2d.fillRect(touchRect.x, touchRect.y, touchRect.width + 3, touchRect.height + 3);
+		g2d.setColor(new Color(0, 0, 0, 60));
+		g2d.fillRect(touchRect.x + 1, touchRect.y + 1, touchRect.width + 1, touchRect.height + 1);
 
 		// Zeiger + schatten
-		touchRect.setLocation(position.x - 2, position.y - 2);
-		touchRect.setSize(4, 4);
 		g2d.setColor(Color.red);
 		g2d.fillRect(touchRect.x, touchRect.y, touchRect.width, touchRect.height);
+		g2d.setColor(Color.darkGray);
+		g2d.drawRect(touchRect.x - 1, touchRect.y - 1, touchRect.width + 1, touchRect.height + 1);
 
 	}
 

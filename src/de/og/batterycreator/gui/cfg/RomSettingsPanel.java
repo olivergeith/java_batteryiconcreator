@@ -33,10 +33,6 @@ import de.og.batterycreator.gui.widgets.SliderAndLabel;
 import de.og.batterycreator.gui.widgets.TemplateChooser;
 
 public class RomSettingsPanel extends SettingsPanel {
-	private static final int		ROW_1							= 2;
-	private static final int		ROW_2							= 4;
-	private static final int		ROW_3							= 6;
-	private static final int		ROW_4							= 8;
 
 	private static final long		serialVersionUID				= 1L;
 	private static final Logger		LOGGER							= LoggerFactory.getLogger(RomSettingsPanel.class);
@@ -235,9 +231,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(createCfgPaneRomSettings(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneBattery(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneLockhandle(), cc.xyw(1, ++row, 9));
-		builder.add(createCfgPaneToggle(), cc.xyw(1, ++row, 9));
-		builder.add(createCfgPaneWeather(), cc.xyw(1, ++row, 9));
-		builder.add(createCfgPaneEmos(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneToggleWeatherEmos(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneNotification(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneWifi(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneSignal(), cc.xyw(1, ++row, 9));
@@ -332,16 +326,15 @@ public class RomSettingsPanel extends SettingsPanel {
 		int row = 1;
 
 		builder.add(JGoodiesHelper.createBlackLabel("Size"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Lockhandle Filename"), cc.xyw(6, row, 3));
-		builder.add(lockHandleSize, cc.xyw(2, ++row, 1));
-		builder.add(lockHandleSize.getValueLabel(), cc.xyw(4, row, 1));
-		builder.add(lockHandleFileName, cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Lockhandle Filename"), cc.xyw(4, row, 3));
+		builder.add(lockHandleSize.getToolbar(), cc.xyw(2, ++row, 1));
+		builder.add(lockHandleFileName, cc.xyw(4, row, 3));
 
 		final JPanel hide = new HidePanel("Lockhandle Filename & Size ...", builder.getPanel(), false);
 		return hide;
 	}
 
-	private JPanel createCfgPaneToggle() {
+	private JPanel createCfgPaneToggleWeatherEmos() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
 				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
@@ -349,44 +342,14 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("ToggleSize"), cc.xyw(2, ++row, 3));
-		builder.add(toggleSize, cc.xyw(2, ++row, 1));
-		builder.add(toggleSize.getValueLabel(), cc.xyw(4, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("ToggleSize"), cc.xyw(2, ++row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("WeatherSize"), cc.xyw(4, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Emoticon Size"), cc.xyw(6, row, 1));
+		builder.add(toggleSize.getToolbar(), cc.xyw(2, ++row, 1));
+		builder.add(weatherSize.getToolbar(), cc.xyw(4, row, 1));
+		builder.add(emoSize.getToolbar(), cc.xyw(6, row, 1));
 
-		final JPanel hide = new HidePanel("Toggles", builder.getPanel());
-		return hide;
-	}
-
-	private JPanel createCfgPaneWeather() {
-		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
-		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
-				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
-		final CellConstraints cc = new CellConstraints();
-		final PanelBuilder builder = new PanelBuilder(layout);
-		int row = 1;
-
-		builder.add(JGoodiesHelper.createBlackLabel("WeatherSize"), cc.xyw(2, ++row, 3));
-		builder.add(weatherSize, cc.xyw(2, ++row, 1));
-		builder.add(weatherSize.getValueLabel(), cc.xyw(4, row, 1));
-
-		final JPanel hide = new HidePanel("Weather", builder.getPanel());
-		return hide;
-	}
-
-	private JPanel createCfgPaneEmos() {
-		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
-		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
-				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
-		final CellConstraints cc = new CellConstraints();
-		final PanelBuilder builder = new PanelBuilder(layout);
-		int row = 1;
-
-		builder.add(JGoodiesHelper.createBlackLabel("Emoticon Size"), cc.xyw(2, ++row, 3));
-		builder.add(emoSize, cc.xyw(2, ++row, 1));
-		builder.add(emoSize.getValueLabel(), cc.xyw(4, row, 1));
-
-		final JPanel hide = new HidePanel("Emoticons", builder.getPanel());
+		final JPanel hide = new HidePanel("Toggles, Weather, Emoticons", builder.getPanel());
 		return hide;
 	}
 
@@ -399,10 +362,9 @@ public class RomSettingsPanel extends SettingsPanel {
 		int row = 1;
 
 		builder.add(JGoodiesHelper.createBlackLabel("Size (height)"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Notification BG Filename"), cc.xyw(6, ++row, 3));
-		builder.add(notificationHeight, cc.xyw(2, ++row, 1));
-		builder.add(notificationHeight.getValueLabel(), cc.xyw(4, row, 1));
-		builder.add(notificationFileName, cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Notification BG Filename"), cc.xyw(4, row, 3));
+		builder.add(notificationHeight.getToolbar(), cc.xyw(2, ++row, 1));
+		builder.add(notificationFileName, cc.xyw(4, row, 3));
 
 		final JPanel hide = new HidePanel("Notification BG Filename & Size ...", builder.getPanel(), false);
 		return hide;

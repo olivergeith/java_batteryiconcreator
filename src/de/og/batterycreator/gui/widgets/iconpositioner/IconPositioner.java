@@ -161,7 +161,7 @@ public class IconPositioner extends JToolBar implements MouseListener, MouseMoti
 		spinnerY.setEnabled(enabled);
 		canvas.setEnabled(enabled);
 		setUpMousListener(enabled);
-
+		repaintCanvas();
 	}
 
 	private void setUpMousListener(final boolean enabled) {

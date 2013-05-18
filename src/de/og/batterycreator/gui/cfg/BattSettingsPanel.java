@@ -250,7 +250,7 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		builder.add(cboxShowChargeSymbol, cc.xyw(2, ++row, 1));
 		builder.add(cboxResizeChargeSymbol, cc.xyw(4, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("ChargeIcon Position Offsets (drag red square"), cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("ChargeIcon Offset (drag red square"), cc.xyw(6, row, 3));
 		builder.add(chargeIconSeletor, cc.xyw(2, ++row, 1));
 		builder.add(sliderResizeChargeSymbol.getToolbar(), cc.xyw(4, row, 1));
 		builder.add(iconPos, cc.xyw(6, row, 3));
