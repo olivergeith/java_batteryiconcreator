@@ -39,7 +39,14 @@ public class BattSettings implements Serializable {
 	private boolean				dropShadowFont				= false;
 	private int					dropShadowOffsetX			= 0;
 	private int					dropShadowOffsetY			= 0;
-	private int					dropShadowOpacity			= 1;
+	/**
+	 * 0-6 Adjusting the filter to be more "black"
+	 */
+	private int					dropShadowOpacity			= 3;
+	/**
+	 * 1-6 How often should be blurred ?
+	 */
+	private int					dropShadowBlurryness		= 3;
 
 	private boolean				useChargeColor				= true;
 
@@ -813,6 +820,14 @@ public class BattSettings implements Serializable {
 
 	public void setDropShadowOpacity(final int dropShadowOpacity) {
 		this.dropShadowOpacity = dropShadowOpacity;
+	}
+
+	public int getDropShadowBlurryness() {
+		return dropShadowBlurryness;
+	}
+
+	public void setDropShadowBlurryness(final int dropShadowBlurryness) {
+		this.dropShadowBlurryness = dropShadowBlurryness;
 	}
 
 }

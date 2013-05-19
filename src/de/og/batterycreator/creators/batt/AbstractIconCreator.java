@@ -178,9 +178,9 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		strxpos += settings.getDropShadowOffsetX();
 		strypos += settings.getDropShadowOffsetY();
 		// Drawing Blurring the font
-		for (int i = 1; i <= settings.getDropShadowOpacity(); i++) {
+		for (int i = 1; i <= settings.getDropShadowBlurryness(); i++) {
 			g2dblurr.drawString(str, strxpos, strypos);
-			blurrimg = StaticImageHelper.blurImage25a(blurrimg);
+			blurrimg = StaticImageHelper.blurImage25b(blurrimg, settings.getDropShadowOpacity());
 		}
 
 		// blurredImag in img malen

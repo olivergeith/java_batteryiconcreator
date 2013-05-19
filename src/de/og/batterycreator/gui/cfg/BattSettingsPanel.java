@@ -45,7 +45,8 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JCheckBox				cboxDropShadow				= createCheckbox("DropShadow", "DropShadow behind PercentageText");
 	private final JColorSelectButton	dropShadowColor				= new JColorSelectButton("DropShadow Color", "Color of Shadow behind Percentage-Text");
 	private final IconPositioner		dropShadowPos				= new IconPositioner(-5, 5);
-	private final SliderAndLabel		sliderDropShadowOpacity		= new SliderAndLabel(1, 6);
+	private final SliderAndLabel		sliderDropShadowOpacity		= new SliderAndLabel(0, 6);
+	private final SliderAndLabel		sliderDropShadowBlurryness	= new SliderAndLabel(1, 6);
 
 	private final XorCircleSelector		xorIconSelector				= new XorCircleSelector(36);
 	private final XorSquareSelector		xorSquareIconSelector		= new XorSquareSelector(36);
@@ -235,6 +236,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(dropShadowColor, cc.xyw(2, ++row, 1));
 		builder.add(sliderDropShadowOpacity.getToolbar(), cc.xyw(4, row, 1));
 		builder.add(dropShadowPos, cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("DropShadow Blurring"), cc.xyw(4, ++row, 1));
+		builder.add(sliderDropShadowBlurryness.getToolbar(), cc.xyw(4, ++row, 1));
 
 		final JPanel hide = new HidePanel("DropShadow behind Percentage#", builder.getPanel());
 		return hide;
@@ -349,6 +352,7 @@ public class BattSettingsPanel extends SettingsPanel {
 			dropShadowPos.setPosition(settings.getDropShadowOffsetX(), settings.getDropShadowOffsetY());
 			cboxDropShadow.setSelected(settings.isDropShadowFont());
 			sliderDropShadowOpacity.setValue(settings.getDropShadowOpacity());
+			sliderDropShadowBlurryness.setValue(settings.getDropShadowBlurryness());
 
 			extraColor1.setColor(settings.getExtraColor1());
 			extraColor2.setColor(settings.getExtraColor2());
@@ -429,6 +433,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setDropShadowOffsetX(dropShadowPos.getPosition().x);
 		settings.setDropShadowOffsetY(dropShadowPos.getPosition().y);
 		settings.setDropShadowOpacity(sliderDropShadowOpacity.getValue());
+		settings.setDropShadowBlurryness(sliderDropShadowBlurryness.getValue());
 
 		settings.setExtraColor1(extraColor1.getColor());
 		settings.setExtraColor2(extraColor2.getColor());
@@ -525,6 +530,7 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		cboxDropShadow.setEnabled(cboxShowFont.isSelected());
 		sliderDropShadowOpacity.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
+		sliderDropShadowBlurryness.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
 		dropShadowColor.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
 		dropShadowPos.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
 
