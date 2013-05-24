@@ -29,7 +29,7 @@ public class BallCreator extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

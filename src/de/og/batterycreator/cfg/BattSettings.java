@@ -2,6 +2,8 @@ package de.og.batterycreator.cfg;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.LinearGradientPaint;
+import java.awt.geom.Point2D;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
 
@@ -95,6 +97,8 @@ public class BattSettings implements Serializable {
 	private int					MedBattTheshold				= 30;
 
 	private boolean				addPercent					= false;
+
+	private boolean				linearGradient				= false;
 
 	// this is transient because it should not be serialized
 	private transient ImageIcon	chargeIcon					= null;
@@ -255,6 +259,36 @@ public class BattSettings implements Serializable {
 
 		final Color col = new Color(r, g, b);
 		return col;
+	}
+
+	/**
+	 * creates a LinearGradientPaint
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public LinearGradientPaint createLinearGradientPaint(final Point2D start, final Point2D end) {
+		// getting the Colors right...
+		final Color col1 = getIconColorLowBatt();
+		final Color col2 = getIconColorLowBatt();
+		final Color col3 = getIconColorMedBatt();
+		final Color col4 = getIconColor();
+
+		final float f1 = 0.0f;
+		final float f2 = getLowBattTheshold() / 100f + 0.00001f;
+		final float f3 = getMedBattTheshold() / 100f;
+		final float f4 = 1.0f;
+
+		// creating paint
+		final float[] dist = {
+				f1, f2, f3, f4
+		};
+		final Color[] colors = {
+				col1, col2, col3, col4
+		};
+		final LinearGradientPaint p = new LinearGradientPaint(start, end, dist, colors);
+		return p;
 	}
 
 	/**
@@ -828,6 +862,14 @@ public class BattSettings implements Serializable {
 
 	public void setDropShadowBlurryness(final int dropShadowBlurryness) {
 		this.dropShadowBlurryness = dropShadowBlurryness;
+	}
+
+	public boolean isLinearGradient() {
+		return linearGradient;
+	}
+
+	public void setLinearGradient(final boolean linearGradient) {
+		this.linearGradient = linearGradient;
 	}
 
 }

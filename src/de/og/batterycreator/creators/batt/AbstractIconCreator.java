@@ -47,7 +47,11 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	// ###############################################################################
 	// Special features
 	// ###############################################################################
-	public boolean supportsGradient() {
+	public boolean supportsLinearGradient() {
+		return false;
+	}
+
+	public boolean supportsBattGradient() {
 		return false;
 	}
 

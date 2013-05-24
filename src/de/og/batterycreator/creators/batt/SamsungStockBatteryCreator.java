@@ -35,7 +35,7 @@ public class SamsungStockBatteryCreator extends AbstractIconCreator {
 	protected static String	name	= "Samsung.Stock.JellyBean";
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

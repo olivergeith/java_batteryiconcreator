@@ -37,7 +37,7 @@ public class FaecherCreatorWide extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

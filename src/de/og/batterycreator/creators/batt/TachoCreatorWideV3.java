@@ -45,7 +45,7 @@ public class TachoCreatorWideV3 extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

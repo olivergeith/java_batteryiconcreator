@@ -18,7 +18,7 @@ public class BrickDecimal3Creator extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

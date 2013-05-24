@@ -35,7 +35,7 @@ public class ArcCreator4 extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

@@ -28,7 +28,7 @@ public class SimpleBatteryCreatorV2 extends AbstractIconCreator {
 	protected static String	name	= "SimpleBattery.V2";
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

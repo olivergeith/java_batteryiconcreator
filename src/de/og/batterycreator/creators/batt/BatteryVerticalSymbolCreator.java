@@ -33,7 +33,7 @@ public class BatteryVerticalSymbolCreator extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

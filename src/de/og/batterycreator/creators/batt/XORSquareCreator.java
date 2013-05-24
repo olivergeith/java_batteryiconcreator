@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
+import java.awt.LinearGradientPaint;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import de.og.batterycreator.cfg.RomSettings;
@@ -48,7 +50,12 @@ public class XORSquareCreator extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsLinearGradient() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsBattGradient() {
 		return true;
 	}
 
@@ -88,10 +95,21 @@ public class XORSquareCreator extends AbstractIconCreator {
 
 		// Level malen
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getActivIconColor(percentage, charge);
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, 0, col1);
-			g2d.setPaint(gradientFill);
+			if (settings.isLinearGradient() && !charge) {
+				Point2D start = new Point2D.Float(0, imgHeight);
+				Point2D end = new Point2D.Float(0, 0);
+				if (settings.isFlip()) {
+					start = new Point2D.Float(0, 0);
+					end = new Point2D.Float(imgWidth, 0);
+				}
+				final LinearGradientPaint gradientFill = settings.createLinearGradientPaint(start, end);
+				g2d.setPaint(gradientFill);
+			} else {
+				final Color col1 = settings.getActivIconColor(percentage, charge);
+				final Color col2 = getBattGardientSecondColor(col1);
+				final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, 0, col1);
+				g2d.setPaint(gradientFill);
+			}
 		} else {
 			final Color col = settings.getActivIconColor(percentage, charge);
 			g2d.setPaint(col);

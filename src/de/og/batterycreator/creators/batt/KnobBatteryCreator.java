@@ -30,7 +30,7 @@ public class KnobBatteryCreator extends AbstractIconCreator {
 	protected static String	name	= "KnobBattery";
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

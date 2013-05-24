@@ -16,7 +16,7 @@ public class ArcQuaterCreator2 extends AbstractIconCreator {
 	protected static String	name	= "ArcQuaterBattery";
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

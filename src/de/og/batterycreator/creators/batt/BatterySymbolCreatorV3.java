@@ -30,7 +30,7 @@ public class BatterySymbolCreatorV3 extends AbstractIconCreator {
 	protected static String	name	= "BatterySymbol.V3";
 
 	@Override
-	public boolean supportsGradient() {
+	public boolean supportsBattGradient() {
 		return true;
 	}
 

@@ -63,10 +63,10 @@ import de.og.batterycreator.creators.batt.FontOnlyCreator;
 import de.og.batterycreator.creators.batt.HoneycombCreator;
 import de.og.batterycreator.creators.batt.KnobBatteryCreator;
 import de.og.batterycreator.creators.batt.NoBattIcons;
+import de.og.batterycreator.creators.batt.SamsungStockBatteryCreator;
 import de.og.batterycreator.creators.batt.ScalaBatteryCreator;
 import de.og.batterycreator.creators.batt.SimpleBatteryCreator;
 import de.og.batterycreator.creators.batt.SimpleBatteryCreatorV2;
-import de.og.batterycreator.creators.batt.SamsungStockBatteryCreator;
 import de.og.batterycreator.creators.batt.TachoCreator;
 import de.og.batterycreator.creators.batt.TachoCreator3Quater;
 import de.og.batterycreator.creators.batt.TachoCreatorWide;
@@ -173,8 +173,9 @@ public class BatteryPanel extends JPanel {
 				if (cre != null) {
 					activBattCreator = cre;
 					settingsPanel.setSettings(cre.getBattSettings());
-					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(), cre.supportsGradient(),
-							cre.supportsExtraColor1(), cre.supportsExtraColor2(), cre.supportsXOrIcon(), cre.supportsXOrSquareIcon());
+					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(), cre.supportsBattGradient(),
+							cre.supportsExtraColor1(), cre.supportsExtraColor2(), cre.supportsXOrIcon(), cre.supportsXOrSquareIcon(),
+							cre.supportsLinearGradient());
 					create();
 				}
 			}

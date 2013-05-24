@@ -102,6 +102,9 @@ public class BattSettingsPanel extends SettingsPanel {
 
 	private final JCheckBox				cboxAddPercent				= createCheckbox("Add '%'", "Add '%' behind numbers");
 
+	private final JCheckBox				cboxLinearGradient			= createCheckbox("LinearGradient",
+																			"Linear Gradients within Icon (BattGradients will have no effect then!");
+
 	// Construktor
 	public BattSettingsPanel() {
 		initComponents();
@@ -199,29 +202,6 @@ public class BattSettingsPanel extends SettingsPanel {
 		return hide;
 	}
 
-	// private JPanel createGlowPane() {
-	// //
-	// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
-	// final FormLayout layout = new
-	// FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
-	// "p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
-	// final CellConstraints cc = new CellConstraints();
-	// final PanelBuilder builder = new PanelBuilder(layout);
-	// int row = 1;
-	//
-	// builder.add(JGoodiesHelper.createBlackLabel("Glow behind"), cc.xyw(4,
-	// ++row, 1));
-	// builder.add(JGoodiesHelper.createBlackLabel("Glow Radius"), cc.xyw(6,
-	// row, 1));
-	// builder.add(cboxGlow, cc.xyw(4, ++row, 1));
-	// builder.add(sliderGlowRadius.getToolbar(), cc.xyw(6, row, 1));
-	// builder.add(cboxGlowForChargeToo, cc.xyw(8, row, 1));
-	//
-	// final JPanel hide = new HidePanel("Glow behind Percentage#",
-	// builder.getPanel());
-	// return hide;
-	// }
-
 	private JPanel createDropShadowPane() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
@@ -298,9 +278,6 @@ public class BattSettingsPanel extends SettingsPanel {
 		final CellConstraints cc = new CellConstraints();
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
-		// builder.add(JGoodiesHelper.createGroupLabel("Thresholds..."),
-		// cc.xyw(2, ++row, 7));
-		// builder.addSeparator("", cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("...for Low Battery-Levels"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("...for Med Battery-Levels"), cc.xyw(6, row, 3));
 		builder.add(sliderLowBatt.getToolbar(), cc.xyw(2, ++row, 1));
@@ -319,15 +296,15 @@ public class BattSettingsPanel extends SettingsPanel {
 		final CellConstraints cc = new CellConstraints();
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
-		// builder.add(JGoodiesHelper.createGroupLabel("Misc Options (only work in some renderes)"),
-		// cc.xyw(2, ++row, 7));
-		// builder.addSeparator("", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Stroke Width"), cc.xyw(6, ++row, 1));
-		builder.add(cboxBattGradient, cc.xyw(8, row, 1));
+		builder.add(JGoodiesHelper.createGroupLabel("Misc Options (only work in some renderes)"), cc.xyw(2, ++row, 7));
+		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		builder.add(cboxNoBG, cc.xyw(2, ++row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Stroke Width"), cc.xyw(4, row, 1));
+		builder.add(cboxBattGradient, cc.xyw(6, row, 1));
+		builder.add(cboxLinearGradient, cc.xyw(8, row, 1));
 		builder.add(cboxFlip, cc.xyw(2, ++row, 1));
-		builder.add(cboxNoBG, cc.xyw(4, row, 1));
-		builder.add(sliderStroke.getToolbar(), cc.xyw(6, row, 1));
-		builder.add(sliderBattGradientLevel.getToolbar(), cc.xyw(8, row, 1));
+		builder.add(sliderStroke.getToolbar(), cc.xyw(4, row, 1));
+		builder.add(sliderBattGradientLevel.getToolbar(), cc.xyw(6, row, 1));
 
 		builder.add(JGoodiesHelper.createBlackLabel("Extra Colors"), cc.xyw(2, ++row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Background Icons"), cc.xyw(6, row, 1));
@@ -417,6 +394,8 @@ public class BattSettingsPanel extends SettingsPanel {
 			sliderResizeChargeSymbol.setValue(settings.getResizeChargeSymbolHeight());
 			cboxResizeChargeSymbol.setSelected(settings.isResizeChargeSymbol());
 
+			cboxLinearGradient.setSelected(settings.isLinearGradient());
+
 			validateControls();
 			this.repaint();
 		}
@@ -492,6 +471,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setResizeChargeSymbol(cboxResizeChargeSymbol.isSelected());
 		settings.setResizeChargeSymbolHeight(sliderResizeChargeSymbol.getValue());
 
+		settings.setLinearGradient(cboxLinearGradient.isSelected());
+
 		return settings;
 	}
 
@@ -533,11 +514,10 @@ public class BattSettingsPanel extends SettingsPanel {
 		sliderDropShadowBlurryness.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
 		dropShadowColor.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
 		dropShadowPos.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
-
 	}
 
 	public void enableSupportedFeatures(final boolean supportsFlip, final boolean suppoertsStrokewidth, final boolean noBG, final boolean battGradient,
-			final boolean extra1, final boolean extra2, final boolean xorBackground, final boolean xorSquareBackground) {
+			final boolean extra1, final boolean extra2, final boolean xorBackground, final boolean xorSquareBackground, final boolean linearGradient) {
 		cboxFlip.setEnabled(supportsFlip);
 		sliderStroke.setEnabled(suppoertsStrokewidth);
 		cboxNoBG.setEnabled(noBG);
@@ -545,10 +525,9 @@ public class BattSettingsPanel extends SettingsPanel {
 		sliderBattGradientLevel.setEnabled(battGradient);
 		extraColor1.setEnabled(extra1);
 		extraColor2.setEnabled(extra2);
-		// xorIconSelector.setVisible(xorBackground);
-		// xorSquareIconSelector.setVisible(xorSquareBackground);
 		xorIconSelector.setEnabled(xorBackground);
 		xorSquareIconSelector.setEnabled(xorSquareBackground);
+		cboxLinearGradient.setEnabled(linearGradient);
 	}
 
 	/**
