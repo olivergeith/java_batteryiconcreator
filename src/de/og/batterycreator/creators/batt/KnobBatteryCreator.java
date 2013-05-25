@@ -13,21 +13,27 @@ public class KnobBatteryCreator extends AbstractIconCreator {
 
 	public KnobBatteryCreator(final RomSettings romSettings) {
 		super(romSettings);
-		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
 		settings.setBattGradient(true);
-		settings.setBattGradientLevel(1);
+		settings.setBattGradientLevel(2);
 		settings.setUseGradiantForMediumColor(true);
 		settings.setUseGradiantForNormalColor(false);
 		settings.setLowBattTheshold(1);
 		settings.setMedBattTheshold(30);
-		settings.setFontXOffset(0);
-		settings.setFontYOffset(-2);
-		settings.setIconXOffset(0);
-		settings.setIconYOffset(1);
-
+		settings.setFontXOffset(-1);
+		settings.setFontYOffset(0);
+		settings.setIconXOffset(-1);
+		settings.setIconYOffset(0);
+		settings.setResizeChargeSymbolHeight(30);
+		settings.setStrokewidth(3);
 	}
 
 	protected static String	name	= "KnobBattery";
+
+	@Override
+	public boolean isNativeXXHDPI() {
+		return true;
+	}
 
 	@Override
 	public boolean supportsBattGradient() {
@@ -44,6 +50,11 @@ public class KnobBatteryCreator extends AbstractIconCreator {
 		return true;
 	}
 
+	@Override
+	public boolean supportsStrokeWidth() {
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -53,60 +64,57 @@ public class KnobBatteryCreator extends AbstractIconCreator {
 	public ImageIcon createImage(final int percentage, final boolean charge) {
 
 		// Create a graphics contents on the buffered image
-		final int imgWidth = 41;
-		final int imgHeight = 41;
+		final int imgWidth = 64;
+		final int imgHeight = 64;
 
-		final int radius = 20;
-		final int mitteX = 21;
-		final int mitteY = 21;
+		final int radius1 = 31; // aussen
+		final int radius2 = 29; // innen
+		final int radius3 = 27; // level
+		final int radius4 = 21 - settings.getStrokewidth(); // Bubble border
+		final int radius5 = 19 - settings.getStrokewidth(); // Bubble
+		final int mitteX = imgWidth / 2;
+		final int mitteY = imgHeight / 2;
 
 		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
 		final Graphics2D g2d = initGrafics2D(img);
 
-		g2d.setColor(settings.getIconColorInActiv().brighter().brighter());
 		// Batt Border
-		Draw2DFunktions.fillCircle(g2d, mitteX, mitteY, radius, 0, 360);
+		g2d.setColor(settings.getIconColorInActiv().brighter().brighter());
+		Draw2DFunktions.fillCircle(g2d, mitteX, mitteY, radius1, 0, 360);
 
 		// Inner Battery
 		if (settings.isBattGradient()) {
 			final Color col1 = settings.getIconColorInActiv().darker();
 			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(5, 5, col2, 35, 35, col1);
+			final GradientPaint gradientFill = new GradientPaint(10, 10, col2, imgWidth - 10, imgHeight - 10, col1);
 			g2d.setPaint(gradientFill);
 		} else {
 			g2d.setColor(settings.getIconColorInActiv().darker());
 		}
-		Draw2DFunktions.fillCircle(g2d, mitteX, mitteY, radius - 1, 0, 360);
+		Draw2DFunktions.fillCircle(g2d, mitteX, mitteY, radius2, 0, 360);
 
 		// level
 		final int winkel = Math.round(3.6f * percentage);
-		// if (settings.isBattGradient()) {
-		// final Color col1 = settings.getActivIconColor(percentage, charge);
-		// final Color col2 = getBattGardientSecondColor(col1);
-		// final GradientPaint gradientFill = new GradientPaint(5, 5, col2, 35,
-		// 35, col1);
-		// g2d.setPaint(gradientFill);
-		// } else {
 		g2d.setColor(settings.getActivIconColor(percentage, charge));
-		// }
-		Draw2DFunktions.fillCircle(g2d, mitteX, mitteY, radius - 2, 90, winkel);
+		Draw2DFunktions.fillCircle(g2d, mitteX, mitteY, radius3, 90, winkel);
+
+		// Bubble Rand
+		g2d.setColor(settings.getIconColorInActiv().darker().darker());
+		Draw2DFunktions.fillCircle(g2d, mitteX, mitteY, radius4, 0, 360);
 
 		// Bubble
-		g2d.setColor(Color.darkGray.darker());
-		Draw2DFunktions.fillCircle(g2d, mitteX, mitteY, radius - 7, 0, 360);
-
 		Color col1 = settings.getActivIconColor(percentage, charge);
 		if (settings.isNoBG()) {
 			col1 = settings.getExtraColor1();
 		}
 		if (settings.isBattGradient()) {
 			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(5, 5, col1, 35, 35, col2);
+			final GradientPaint gradientFill = new GradientPaint(10, 10, col1, imgWidth - 10, imgHeight - 10, col2);
 			g2d.setPaint(gradientFill);
 		} else {
 			g2d.setColor(col1);
 		}
-		Draw2DFunktions.fillCircle(g2d, mitteX, mitteY, radius - 9, 0, 360);
+		Draw2DFunktions.fillCircle(g2d, mitteX, mitteY, radius5, 0, 360);
 
 		// Schrift
 		drawPercentage(g2d, percentage, charge, img);
