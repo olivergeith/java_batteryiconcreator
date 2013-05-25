@@ -63,6 +63,7 @@ import de.og.batterycreator.creators.batt.FontOnlyCreator;
 import de.og.batterycreator.creators.batt.HoneycombCreator;
 import de.og.batterycreator.creators.batt.KnobBatteryCreator;
 import de.og.batterycreator.creators.batt.NoBattIcons;
+import de.og.batterycreator.creators.batt.PlanetCreator;
 import de.og.batterycreator.creators.batt.SamsungStockBatteryCreator;
 import de.og.batterycreator.creators.batt.ScalaBatteryCreator;
 import de.og.batterycreator.creators.batt.SimpleBatteryCreator;
@@ -108,6 +109,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new ArcCreator2(romSettings));
 		combo.addItem(new ArcCreator3(romSettings));
 		combo.addItem(new ArcCreator4(romSettings));
+		combo.addItem(new PlanetCreator(romSettings));
 		combo.addItem(new ArcGradientCreator(romSettings));
 		combo.addItem(new ArcSunCreator(romSettings));
 		combo.addItem(new ArcQuaterCreator2(romSettings));
