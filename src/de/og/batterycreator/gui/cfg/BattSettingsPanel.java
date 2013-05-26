@@ -105,7 +105,7 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JCheckBox				cboxAddPercent				= createCheckbox("Add '%'", "Add '%' behind numbers");
 
 	private final ButtonGroup			radiogroup					= new ButtonGroup();
-	private final JRadioButton			cboxNoFilling				= createRadioButton("No special filling", "No special filling");
+	private final JRadioButton			cboxNoFilling				= createRadioButton("No special fill", "No special filling");
 	private final JRadioButton			cboxBattGradient			= createRadioButton("BattGradient", "Gradients within Iconcolor (Level below)");
 	private final JRadioButton			cboxLinearGradient			= createRadioButton("LinearGradient",
 																			"Linear Gradients within Icon (BattGradients will have no effect then!");

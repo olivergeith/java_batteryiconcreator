@@ -5,9 +5,12 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.LinearGradientPaint;
+import java.awt.Rectangle;
+import java.awt.TexturePaint;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
+import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 
 public class Box2Creator extends AbstractIconCreator {
@@ -51,6 +54,11 @@ public class Box2Creator extends AbstractIconCreator {
 		return true;
 	}
 
+	@Override
+	public boolean supportsTexture() {
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -72,7 +80,7 @@ public class Box2Creator extends AbstractIconCreator {
 		g2d.fillRect(imgWidth - w, 0, w, imgHeight);
 
 		if (!settings.isNoBG()) {
-			if (settings.isBattGradient()) {
+			if (settings.isBattGradient() || settings.isUseTexture() || settings.isLinearGradient()) {
 				final Color col1 = settings.getIconColorInActiv();
 				final Color col2 = getBattGardientSecondColor(col1);
 				final GradientPaint gradientFill = new GradientPaint(w, w, col2, imgWidth - w, imgHeight - w, col1);
@@ -87,18 +95,21 @@ public class Box2Creator extends AbstractIconCreator {
 		if (h < 2)
 			h = 2;
 
-		if (settings.isBattGradient()) {
-			if (settings.isLinearGradient() && !charge) {
-				final Point2D start = new Point2D.Float(w, imgHeight - w);
-				final Point2D end = new Point2D.Float(w, w);
-				final LinearGradientPaint gradientFill = settings.createLinearGradientPaint(start, end);
-				g2d.setPaint(gradientFill);
-			} else {
-				final Color col1 = settings.getActivIconColor(percentage, charge);
-				final Color col2 = getBattGardientSecondColor(col1);
-				final GradientPaint gradientFill = new GradientPaint(w, w, col1, imgWidth - w, w, col2);
-				g2d.setPaint(gradientFill);
-			}
+		if (settings.isLinearGradient()) {
+			final Point2D start = new Point2D.Float(w, imgHeight - w);
+			final Point2D end = new Point2D.Float(w, w);
+			final LinearGradientPaint gradientFill = settings.createLinearGradientPaint(start, end);
+			g2d.setPaint(gradientFill);
+		} else if (settings.isUseTexture()) {
+			final TexturePaint slatetp = new TexturePaint(StaticImageHelper.convertImageIcon(settings.getTextureIcon()), new Rectangle(0, 0, 64, 64));
+			g2d.setPaint(slatetp);
+		} else if (settings.isBattGradient()) {
+
+			final Color col1 = settings.getActivIconColor(percentage, charge);
+			final Color col2 = getBattGardientSecondColor(col1);
+			final GradientPaint gradientFill = new GradientPaint(w, w, col1, imgWidth - w, w, col2);
+			g2d.setPaint(gradientFill);
+
 		} else {
 			g2d.setColor(settings.getActivIconColor(percentage, charge));
 		}
