@@ -84,7 +84,7 @@ public class XORCircleCreator extends AbstractIconCreator {
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
 
 		// Hintergrund icon umfärben in Hintergrundfarbe
-		if (settings.isBattGradient()) {
+		if (settings.isBattGradient() || settings.isUseTexture()) {
 			final Color col1 = settings.getIconColorInActiv();
 			final Color col2 = getBattGardientSecondColor(col1);
 			final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);

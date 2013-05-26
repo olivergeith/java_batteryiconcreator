@@ -175,10 +175,10 @@ public class BatteryPanel extends JPanel {
 
 				if (cre != null) {
 					activBattCreator = cre;
-					settingsPanel.setSettings(cre.getBattSettings());
 					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(), cre.supportsBattGradient(),
 							cre.supportsExtraColor1(), cre.supportsExtraColor2(), cre.supportsXOrIcon(), cre.supportsXOrSquareIcon(),
 							cre.supportsLinearGradient(), cre.supportsTexture());
+					settingsPanel.setSettings(cre.getBattSettings());
 					create();
 				}
 			}
