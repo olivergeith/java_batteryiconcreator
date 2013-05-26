@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
+import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 
 public class BatterySymbolCreatorV2 extends AbstractIconCreator {
@@ -17,17 +20,29 @@ public class BatterySymbolCreatorV2 extends AbstractIconCreator {
 		settings.setUseGradiantForNormalColor(false);
 		settings.setLowBattTheshold(1);
 		settings.setMedBattTheshold(30);
-		settings.setFontXOffset(0);
-		settings.setFontYOffset(3);
+		settings.setFontXOffset(-1);
+		settings.setFontYOffset(6);
 		settings.setIconXOffset(-1);
-		settings.setIconYOffset(3);
-		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+		settings.setIconYOffset(6);
+		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 26));
+		settings.setResizeChargeSymbolHeight(33);
+
 	}
 
 	protected static String	name	= "BatterySymbol.V2";
 
 	@Override
 	public boolean supportsBattGradient() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsTexture() {
+		return true;
+	}
+
+	@Override
+	public boolean isNativeXXHDPI() {
 		return true;
 	}
 
@@ -40,17 +55,17 @@ public class BatterySymbolCreatorV2 extends AbstractIconCreator {
 	public ImageIcon createImage(final int percentage, final boolean charge) {
 
 		// Create a graphics contents on the buffered image
-		final int imgWidth = 41;
-		final int imgHeight = 41;
+		final int imgWidth = 64;
+		final int imgHeight = 64;
 
-		final int battXOffset = 7;
-		final int battYOffset = 6;
-		final int battWidth = 27;
-		final int battHeight = 35;
-		final int cornerRad = 7;
+		final int battXOffset = 12;
+		final int battYOffset = 9;
+		final int battWidth = 40;
+		final int battHeight = 55;
+		final int cornerRad = 9;
 
-		final int knobHeight = 4;
-		final int knobOffset = 7;
+		final int knobHeight = 6;
+		final int knobOffset = 12;
 
 		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
 		final Graphics2D g2d = initGrafics2D(img);
@@ -62,30 +77,33 @@ public class BatterySymbolCreatorV2 extends AbstractIconCreator {
 		g2d.fillRoundRect(battXOffset + knobOffset, 1, battWidth - (2 * knobOffset), knobHeight, cornerRad - 2, cornerRad - 2);
 
 		// Inner Battery
-		if (settings.isBattGradient()) {
+		if (settings.isBattGradient() || settings.isUseTexture()) {
 			final Color col1 = settings.getIconColorInActiv();
 			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(7, 5, col2, 7 + 27, 5, col1);
+			final GradientPaint gradientFill = new GradientPaint(battXOffset + 3, battYOffset, col2, battXOffset + battWidth, battYOffset, col1);
 			g2d.setPaint(gradientFill);
 		} else {
 			g2d.setColor(settings.getIconColorInActiv());
 		}
-		g2d.fillRoundRect(battXOffset + 2, battYOffset + 2, battWidth - 4, battHeight - 4, cornerRad, cornerRad);
+		g2d.fillRoundRect(battXOffset + 3, battYOffset + 3, battWidth - 6, battHeight - 6, cornerRad, cornerRad);
 
 		// level rect
-		int h = Math.round((battHeight - 6) / 100f * percentage);
+		int h = Math.round((battHeight - 8) / 100f * percentage);
 		if (h < 2)
 			h = 2;
 
-		if (settings.isBattGradient()) {
+		if (settings.isUseTexture()) {
+			final TexturePaint slatetp = new TexturePaint(StaticImageHelper.convertImageIcon(settings.getTextureIcon()), new Rectangle(0, 0, 64, 64));
+			g2d.setPaint(slatetp);
+		} else if (settings.isBattGradient()) {
 			final Color col1 = settings.getActivIconColor(percentage, charge);
 			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(8, h, col1, 8 + 25, h, col2);
+			final GradientPaint gradientFill = new GradientPaint(battXOffset + 3, battYOffset, col1, battXOffset + battWidth, battYOffset, col2);
 			g2d.setPaint(gradientFill);
 		} else {
 			g2d.setColor(settings.getActivIconColor(percentage, charge));
 		}
-		g2d.fillRoundRect(battXOffset + 3, (battYOffset + 3) + (battHeight - 6) - h, battWidth - 6, h, cornerRad - 2, cornerRad - 2); // Battery
+		g2d.fillRoundRect(battXOffset + 4, (battYOffset + 4) + (battHeight - 8) - h, battWidth - 8, h, cornerRad - 2, cornerRad - 2); // Battery
 																																		// Border
 
 		// Schrift
