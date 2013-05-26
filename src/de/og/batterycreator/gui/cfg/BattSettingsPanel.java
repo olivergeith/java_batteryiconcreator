@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.event.ChangeEvent;
@@ -25,6 +27,7 @@ import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.gui.widgets.SliderAndLabel;
 import de.og.batterycreator.gui.widgets.iconpositioner.IconPositioner;
 import de.og.batterycreator.gui.widgets.iconselector.chargeiconselector.ChargeIconSelector;
+import de.og.batterycreator.gui.widgets.iconselector.textureselector.TextureSelector;
 import de.og.batterycreator.gui.widgets.iconselector.xorcircleselector.XorCircleSelector;
 import de.og.batterycreator.gui.widgets.iconselector.xorsquareselector.XorSquareSelector;
 
@@ -74,7 +77,6 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final SliderAndLabel		sliderStroke				= new SliderAndLabel(1, 10);
 	private final JCheckBox				cboxFlip					= createCheckbox("Flip Icon", "Mirror's the Icon...ony has effect on a few styls!");
 	private final JCheckBox				cboxNoBG					= createCheckbox("No Backgr.", "Removes the -normally gray- background!");
-	private final JCheckBox				cboxBattGradient			= createCheckbox("BattGradient", "Gradients within Iconcolor (Level below)");
 	private final SliderAndLabel		sliderBattGradientLevel		= new SliderAndLabel(1, 5);
 
 	private final JCheckBox				cboxColoredFont				= createCheckbox("Low battery Colors", "...");
@@ -102,8 +104,20 @@ public class BattSettingsPanel extends SettingsPanel {
 
 	private final JCheckBox				cboxAddPercent				= createCheckbox("Add '%'", "Add '%' behind numbers");
 
-	private final JCheckBox				cboxLinearGradient			= createCheckbox("LinearGradient",
+	private final ButtonGroup			radiogroup					= new ButtonGroup();
+	private final JRadioButton			cboxNoFilling				= createRadioButton("No special filling", "No special filling");
+	private final JRadioButton			cboxBattGradient			= createRadioButton("BattGradient", "Gradients within Iconcolor (Level below)");
+	private final JRadioButton			cboxLinearGradient			= createRadioButton("LinearGradient",
 																			"Linear Gradients within Icon (BattGradients will have no effect then!");
+	private final JRadioButton			cboxTexture					= createRadioButton("Use Texture", "Use Texture instead of colors");
+	// private final JCheckBox cboxBattGradient = createCheckbox("BattGradient",
+	// "Gradients within Iconcolor (Level below)");
+	// private final JCheckBox cboxLinearGradient =
+	// createCheckbox("LinearGradient",
+	// "Linear Gradients within Icon (BattGradients will have no effect then!");
+	// private final JCheckBox cboxTexture = createCheckbox("Use Texture",
+	// "Use Texture instead of colors");
+	private final TextureSelector		textureSelector				= new TextureSelector(36);
 
 	// Construktor
 	public BattSettingsPanel() {
@@ -112,6 +126,12 @@ public class BattSettingsPanel extends SettingsPanel {
 	}
 
 	private void initComponents() {
+		radiogroup.add(cboxNoFilling);
+		radiogroup.add(cboxBattGradient);
+		radiogroup.add(cboxTexture);
+		radiogroup.add(cboxLinearGradient);
+		cboxNoFilling.setSelected(true);
+
 		sliderLowBatt.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -161,6 +181,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(createCfgPaneChargeIcon(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneIconColors(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneThresholds(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneFilling(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneMisc(), cc.xyw(1, ++row, 9));
 		final JPanel cfp = builder.getPanel();
 		return cfp;
@@ -219,7 +240,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(JGoodiesHelper.createBlackLabel("DropShadow Blurring"), cc.xyw(4, ++row, 1));
 		builder.add(sliderDropShadowBlurryness.getToolbar(), cc.xyw(4, ++row, 1));
 
-		final JPanel hide = new HidePanel("DropShadow behind Percentage#", builder.getPanel());
+		final JPanel hide = new HidePanel("DropShadow behind Percentage#", builder.getPanel(), false);
 		return hide;
 	}
 
@@ -289,6 +310,25 @@ public class BattSettingsPanel extends SettingsPanel {
 		return hide;
 	}
 
+	private JPanel createCfgPaneFilling() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(cboxNoFilling, cc.xyw(2, ++row, 1));
+		builder.add(cboxTexture, cc.xyw(4, row, 1));
+		builder.add(cboxBattGradient, cc.xyw(6, row, 1));
+		builder.add(cboxLinearGradient, cc.xyw(8, row, 1));
+		builder.add(textureSelector, cc.xyw(4, ++row, 1));
+		builder.add(sliderBattGradientLevel.getToolbar(), cc.xyw(6, row, 1));
+
+		final JPanel hide = new HidePanel("Special Paint Options (only work in some batteries)", builder.getPanel());
+		return hide;
+	}
+
 	private JPanel createCfgPaneMisc() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
@@ -296,15 +336,11 @@ public class BattSettingsPanel extends SettingsPanel {
 		final CellConstraints cc = new CellConstraints();
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
-		builder.add(JGoodiesHelper.createGroupLabel("Misc Options (only work in some renderes)"), cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
+
 		builder.add(cboxNoBG, cc.xyw(2, ++row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Stroke Width"), cc.xyw(4, row, 1));
-		builder.add(cboxBattGradient, cc.xyw(6, row, 1));
-		builder.add(cboxLinearGradient, cc.xyw(8, row, 1));
 		builder.add(cboxFlip, cc.xyw(2, ++row, 1));
 		builder.add(sliderStroke.getToolbar(), cc.xyw(4, row, 1));
-		builder.add(sliderBattGradientLevel.getToolbar(), cc.xyw(6, row, 1));
 
 		builder.add(JGoodiesHelper.createBlackLabel("Extra Colors"), cc.xyw(2, ++row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Background Icons"), cc.xyw(6, row, 1));
@@ -313,13 +349,14 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(xorIconSelector, cc.xyw(6, row, 1));
 		builder.add(xorSquareIconSelector, cc.xyw(8, row, 1));
 
-		final JPanel hide = new HidePanel("Misc Options (only work in some renderes)", builder.getPanel());
+		final JPanel hide = new HidePanel("Misc Options (only work in some batteries)", builder.getPanel());
 		return hide;
 	}
 
 	public void setSettings(final BattSettings settings) {
 		if (settings != null) {
 			this.settings = settings;
+			cboxNoFilling.setSelected(true);
 			fontColor.setColor(settings.getFontColor());
 			fontColorLowBatt.setColor(settings.getFontColorLowBatt());
 			fontColorMedBatt.setColor(settings.getFontColorMedBatt());
@@ -395,9 +432,14 @@ public class BattSettingsPanel extends SettingsPanel {
 			cboxResizeChargeSymbol.setSelected(settings.isResizeChargeSymbol());
 
 			cboxLinearGradient.setSelected(settings.isLinearGradient());
+			cboxTexture.setSelected(settings.isUseTexture());
+			if (settings.getTextureIcon() != null)
+				textureSelector.setSelectedItem(settings.getTextureIcon());
+			else
+				textureSelector.setSelectedIndex(0);
 
-			validateControls();
 			this.repaint();
+			validateControls();
 		}
 	}
 
@@ -473,6 +515,9 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		settings.setLinearGradient(cboxLinearGradient.isSelected());
 
+		settings.setUseTexture(cboxTexture.isSelected());
+		settings.setTextureIcon((ImageIcon) textureSelector.getSelectedItem());
+
 		return settings;
 	}
 
@@ -514,10 +559,12 @@ public class BattSettingsPanel extends SettingsPanel {
 		sliderDropShadowBlurryness.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
 		dropShadowColor.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
 		dropShadowPos.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
+		textureSelector.setEnabled(cboxTexture.isSelected());
 	}
 
 	public void enableSupportedFeatures(final boolean supportsFlip, final boolean suppoertsStrokewidth, final boolean noBG, final boolean battGradient,
-			final boolean extra1, final boolean extra2, final boolean xorBackground, final boolean xorSquareBackground, final boolean linearGradient) {
+			final boolean extra1, final boolean extra2, final boolean xorBackground, final boolean xorSquareBackground, final boolean linearGradient,
+			final boolean useTexture) {
 		cboxFlip.setEnabled(supportsFlip);
 		sliderStroke.setEnabled(suppoertsStrokewidth);
 		cboxNoBG.setEnabled(noBG);
@@ -528,6 +575,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		xorIconSelector.setEnabled(xorBackground);
 		xorSquareIconSelector.setEnabled(xorSquareBackground);
 		cboxLinearGradient.setEnabled(linearGradient);
+		textureSelector.setEnabled(useTexture);
+		cboxTexture.setEnabled(useTexture);
 	}
 
 	/**

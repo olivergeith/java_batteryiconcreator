@@ -99,6 +99,7 @@ public class BattSettings implements Serializable {
 	private boolean				addPercent					= false;
 
 	private boolean				linearGradient				= false;
+	private boolean				useTexture					= false;
 
 	// this is transient because it should not be serialized
 	private transient ImageIcon	chargeIcon					= null;
@@ -106,6 +107,8 @@ public class BattSettings implements Serializable {
 	private transient ImageIcon	xorIcon						= null;
 	// this is transient because it should not be serialized
 	private transient ImageIcon	xorSquareIcon				= null;
+	// this is transient because it should not be serialized
+	private transient ImageIcon	textureIcon					= null;
 
 	public Color getFontColor() {
 		return fontColor;
@@ -870,6 +873,22 @@ public class BattSettings implements Serializable {
 
 	public void setLinearGradient(final boolean linearGradient) {
 		this.linearGradient = linearGradient;
+	}
+
+	public boolean isUseTexture() {
+		return useTexture;
+	}
+
+	public void setUseTexture(final boolean useTexture) {
+		this.useTexture = useTexture;
+	}
+
+	public ImageIcon getTextureIcon() {
+		return textureIcon;
+	}
+
+	public void setTextureIcon(final ImageIcon textureIcon) {
+		this.textureIcon = textureIcon;
 	}
 
 }

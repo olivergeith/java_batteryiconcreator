@@ -79,7 +79,6 @@ import de.og.batterycreator.creators.batt.TwoBarsCreator;
 import de.og.batterycreator.creators.batt.XORApfelCreator;
 import de.og.batterycreator.creators.batt.XORCircleCreator;
 import de.og.batterycreator.creators.batt.XORSquareCreatorV2;
-import de.og.batterycreator.creators.batt.XORSquareCreator;
 import de.og.batterycreator.gui.cfg.BattSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
@@ -120,7 +119,6 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new AOKPCircleModCreator(romSettings));
 		combo.addItem(new XORCircleCreator(romSettings));
 		combo.addItem(new XORSquareCreatorV2(romSettings));
-		combo.addItem(new XORSquareCreator(romSettings));
 		combo.addItem(new BoxCreator(romSettings));
 		combo.addItem(new Box2Creator(romSettings));
 		combo.addItem(new BubbleCreator(romSettings));
@@ -181,7 +179,7 @@ public class BatteryPanel extends JPanel {
 					settingsPanel.setSettings(cre.getBattSettings());
 					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(), cre.supportsBattGradient(),
 							cre.supportsExtraColor1(), cre.supportsExtraColor2(), cre.supportsXOrIcon(), cre.supportsXOrSquareIcon(),
-							cre.supportsLinearGradient());
+							cre.supportsLinearGradient(), cre.supportsTexture());
 					create();
 				}
 			}

@@ -2,12 +2,12 @@ package de.og.batterycreator.gui.cfg;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public abstract class SettingsPanel extends JPanel {
-	private static final long serialVersionUID = -8551445643956173908L;
+	private static final long	serialVersionUID	= -8551445643956173908L;
 
 	protected abstract void validateControls();
 
@@ -31,6 +31,25 @@ public abstract class SettingsPanel extends JPanel {
 			}
 		});
 		return cbox;
+	}
+
+	/**
+	 * @param text
+	 *            Text der Checkbox
+	 * @param defaultselection
+	 *            Defaultselection
+	 * @return
+	 */
+	protected JRadioButton createRadioButton(final String text, final String tooltip) {
+		final JRadioButton radio = new JRadioButton(text);
+		radio.setToolTipText(tooltip);
+		radio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				validateControls();
+			}
+		});
+		return radio;
 	}
 
 }
