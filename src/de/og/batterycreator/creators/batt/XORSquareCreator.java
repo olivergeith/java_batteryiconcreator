@@ -15,12 +15,12 @@ import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.gui.widgets.iconselector.xorsquareselector.XorSquareSelector;
 
-public class XORSquareCreatorV2 extends AbstractIconCreator {
+public class XORSquareCreator extends AbstractIconCreator {
 
 	public static final ImageIcon	myIcon	= XorSquareSelector.icon01;
-	protected static String			name	= "XorSquareBattery.V2";
+	protected static String			name	= "XorSquareBattery";
 
-	public XORSquareCreatorV2(final RomSettings romSettings) {
+	public XORSquareCreator(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setIconXOffset(-1);
 		settings.setIconYOffset(-1);
