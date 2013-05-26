@@ -285,10 +285,10 @@ public class BatteryPanel extends JPanel {
 					final BufferedImage bimg = StaticImageHelper.resize2Height(StaticImageHelper.convertImageIcon(icon), 32);
 					renderer.setIcon(new ImageIcon(bimg));
 					if (creator.isNativeXXHDPI()) {
-						renderer.setToolTipText(getTooltip(creator.isNativeXXHDPI()));
+						renderer.setToolTipText(getTooltip(creator));
 						renderer.setForeground(Color.white);
 					} else {
-						renderer.setToolTipText(getTooltip(creator.isNativeXXHDPI()));
+						renderer.setToolTipText(getTooltip(creator));
 					}
 
 				}
@@ -296,30 +296,32 @@ public class BatteryPanel extends JPanel {
 			return renderer;
 		}
 
-		private String getTooltip(final boolean xxhdpi) {
+		private String getTooltip(final AbstractIconCreator creator) {
 			String html = "<html>";
 
-			if (xxhdpi) {
+			if (creator.isNativeXXHDPI()) {
 				html += "<font size=5 color=green>";
 				html += "<b>" + "This Battery Renderer is native xxhdpi" + "</b><br><hr>";
-				html += "</font>";
-				html += "<font size=3 color=black>";
-				html += "That means, that the icons are rendered in xxhdpi<br>";
-				html += "and resized to the height defined in Rom Settings<br>";
-				html += "<b>They will not be blurry in xxhdpi!</b><br>";
 				html += "</font>";
 			} else {
 				html += "<font size=5 color=blue>";
 				html += "<b>" + "This Battery Renderer is native xhdpi" + "</b><br><hr>";
 				html += "</font>";
-				html += "<font size=3 color=black>";
-				html += "That means, that the icons are rendered in <b>xhdpi</b><br>";
-				html += "and resized to the height defined in Rom Settings<br>";
-				html += "They will be slightly blurry in xxhdpi, because<br>";
-				html += "they have to be 'blown up' to 54pixel for xxhdpi<br>";
-				html += "</font>";
 			}
+			html += "<font size=3 color=black>";
 
+			if (creator.supportsNoBg())
+				html += "has No Background-Support<br>";
+			if (creator.supportsFlip())
+				html += "has Flip-Support<br>";
+			if (creator.supportsLinearGradient())
+				html += "has LinearGradient-Support<br>";
+			if (creator.supportsBattGradient())
+				html += "has BattGradient-Support<br>";
+			if (creator.supportsTexture())
+				html += "has Texture-Support<br>";
+
+			html += "</font>";
 			html += "</html>";
 			return html;
 		}
