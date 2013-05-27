@@ -21,8 +21,8 @@ public class IconCreatorFrame extends JFrame {
 	private final JButton				aboutButton			= new JButton(CommonIconProvider.BUTTON_ICON_INFO);
 	private final JButton				exitButton			= new JButton(CommonIconProvider.BUTTON_ICON_EXIT);
 	public static final String			APP_NAME			= "'The Rom Fumbler'";
-	public static final String			VERSION_NR			= "27.0 beta";
-	private static final String			VERSION_DATE		= "dd.mmmy.2013";
+	public static final String			VERSION_NR			= "27.0";
+	private static final String			VERSION_DATE		= "27.May.2013";
 	public static final String			HOMEPAGE_URL		= "http://forum.xda-developers.com/showthread.php?t=1918500";
 	private static final long			serialVersionUID	= 1L;
 	private static IconCreatorFrame		frame;

@@ -1,0 +1,6 @@
+Copy your own textures here...
+They need to be 64x64 pixel PNG's!
+
+Hint: Play with transparency in the textures to create great effects!
+
+

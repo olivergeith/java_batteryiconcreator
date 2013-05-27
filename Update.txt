@@ -1,33 +1,35 @@
 [B][SIZE="3"]New Version out of [URL="http://forum.xda-developers.com/showthread.php?t=1918500"]"The Rom Fumbler" aka "The Battery Icon Creator"[/URL][/SIZE][/B]
 
-This one is getting better and better...I still cant believe how fast it grows! I have a lot of fun developing it...so guys...give me more ideas...what should be implemented next ?!
+Wow, another Version with a long changelog! Thanks guys for the ideas and feedback!
 
 [SIZE="4"][B]Changelog:[/B][/SIZE]
-[COLOR="Blue"][B]May-17-2013[/B] : Release 26.0[/COLOR]
+[COLOR="Blue"][B]May-27-2013[/B] : Release 27.0[/COLOR]
 [LIST]
-[*][B]A lot of changes in all Settings[/B]
-[*]...new "Positioner" to finetune the position of numbers and charge-icon [URL="http://forum.xda-developers.com/showpost.php?p=41518488&postcount=583"]What is the "Positioner"...howto use it?[/URL]
-[*]...rearranged GUI
-[*]...new option in Global settings to write overviews in custom area on every start of the Rom Fumbler (will take more time to start)
-[*][B]DropShadow Feature for percentage numbers[/B]
-[*]...add a blurry shadow behind the percentage numbers
-[*]...choose color, position and intensity of shadow
-[*]...[URL="http://forum.xda-developers.com/showpost.php?p=41565092&postcount=600"]What are Dropshadows in the Rom Fumbler?[/URL]
-[*][B]New Xor-Batteries replacing a lot of X... Batteries that were there before![/B]
-[*]...these new Xor-Batteries offer great possibilities to customize your battery design by adding your own backgrounds!
-[*]...[URL="http://forum.xda-developers.com/showpost.php?p=41495369&postcount=581"]XorCircleBattery and XorSquareBattery...howto customize them !![/URL]
-[*]...if you created new great background-pngs...post them in the Rom Fumbler Thread for others to use!!!
-[*][B]New Battery looking like Samsung green Stock Battery[/B]
-[*][B]More custom charge icons[/B]
-[*][B]Updated FAQ on OP[/B]
+[*][B]New feature: Textures as Battery Icons in following batteries...[/B]
+...XorCircleBattery, XorSquareBattery, BoxBattery.V2, ArcBattery.V2, BatterySymbol.V2
+...Add your own texture png's to ./custom/textures
+...[URL="http://forum.xda-developers.com/showpost.php?p=41864762&postcount=647"]here is an example how to use it...[/URL]
+...[URL="http://forum.xda-developers.com/showpost.php?p=41850391&postcount=646"]And some more examples[/URL]
+[*]rearranged GUI in BatterySettings
+[*][B]DropShadow Feature with another parameter to play with![/B]
+[*][B]New Feature Linear Gradient for some batteries[/B]
+...XorCircleBattery, XorSquareBattery
+[*][B]Some Batteries updated to xxhdpi[/B]
+...KnobBattery, ArcBattery.V2, BoxBattery.2, BatterySymbol.V2
+[*][B]New Battery styles (all with xxhdpi support)[/B]
+...PlanetBattery
+...SliderBattery
+[*][B]AOKP-Battery removed, because it is replaced by the XorCircleBattery, that has much more options to customize[/B]
+[*][B]More Backgrounds for Xor-Batteries[/B]
+[*][B]More Charge Icons[/B]
+[*][B]Better tooltips in the batteries dropdownbox[/B]
+[*][B]Updated Help-Pages[/B]
 [/LIST]
 
-
-Check out the new Xor-Batteries and the DropShadow feature!! These offer great new possibilities!!!
-
+[B]Check out the new Texture Feature! [/B]
+This offers great new possibilities!!! Specially, when you use it together with the XorBatteries! 
+Be creative and play with your own textures and backgrounds! 
+... Share your textures and xor-backgrounds here if you found some new possibilities and designs!
 
 Happy modding & flashing :)
-
-[B]Attention:[/B]
-I will be on a business trip the next days/week...so don't expect me to answer questions here!!! 
-How many Thanks will I have, when I return ? Press [B]Thanks [/B]if you like the new Version :)
+Press [B]Thanks [/B]if you like the new Version :)
