@@ -67,6 +67,11 @@ public class XORSquareCreator extends AbstractIconCreator {
 		return true;
 	}
 
+	@Override
+	public boolean supportsNoBg() {
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -90,17 +95,18 @@ public class XORSquareCreator extends AbstractIconCreator {
 		// Composite COlor setzen
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
 
-		// Hintergrund icon umfärben in Hintergrundfarbe
-		if (settings.isBattGradient()) {
-			final Color col1 = settings.getIconColorInActiv();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
-			g2d.setPaint(gradientFill);
-		} else {
-			g2d.setPaint(settings.getIconColorInActiv());
+		if (!settings.isNoBG()) {
+			// Hintergrund icon umfärben in Hintergrundfarbe
+			if (settings.isBattGradient() || settings.isUseTexture() || settings.isLinearGradient()) {
+				final Color col1 = settings.getIconColorInActiv();
+				final Color col2 = getBattGardientSecondColor(col1);
+				final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
+				g2d.setPaint(gradientFill);
+			} else {
+				g2d.setPaint(settings.getIconColorInActiv());
+			}
+			g2d.fillRect(0, 0, imgWidth, imgHeight);
 		}
-		g2d.fillRect(0, 0, imgWidth, imgHeight);
-
 		// Paint zusammenbasteln
 		if (settings.isLinearGradient()) {
 			Point2D start = new Point2D.Float(0, imgHeight);

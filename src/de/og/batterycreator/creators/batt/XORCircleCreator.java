@@ -60,6 +60,11 @@ public class XORCircleCreator extends AbstractIconCreator {
 		return true;
 	}
 
+	@Override
+	public boolean supportsNoBg() {
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -83,17 +88,18 @@ public class XORCircleCreator extends AbstractIconCreator {
 		// Composite COlor setzen
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
 
-		// Hintergrund icon umfärben in Hintergrundfarbe
-		if (settings.isBattGradient() || settings.isUseTexture()) {
-			final Color col1 = settings.getIconColorInActiv();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
-			g2d.setPaint(gradientFill);
-		} else {
-			g2d.setPaint(settings.getIconColorInActiv());
+		if (!settings.isNoBG()) {
+			// Hintergrund icon umfärben in Hintergrundfarbe
+			if (settings.isBattGradient() || settings.isUseTexture()) {
+				final Color col1 = settings.getIconColorInActiv();
+				final Color col2 = getBattGardientSecondColor(col1);
+				final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
+				g2d.setPaint(gradientFill);
+			} else {
+				g2d.setPaint(settings.getIconColorInActiv());
+			}
+			g2d.fillRect(0, 0, imgWidth, imgHeight);
 		}
-		g2d.fillRect(0, 0, imgWidth, imgHeight);
-
 		// Level malen
 		if (settings.isUseTexture()) {
 			final TexturePaint slatetp = new TexturePaint(StaticImageHelper.convertImageIcon(settings.getTextureIcon()), new Rectangle(0, 0, 64, 64));
