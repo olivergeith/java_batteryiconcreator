@@ -1,0 +1,20 @@
+#Paramterdaten
+#Mon May 27 22:46:04 PDT 2013
+Battsize=36
+WeatherSize=128
+NotificationHeight=4
+ToggleSize=64
+SystemUIDrawableFolder=drawable-xhdpi
+FilePattern=stat_sys_battery_axiom_droid_
+FilePatternCharge=stat_sys_battery_axiom_droid_charge_anim
+UsePreload=false
+MmsDrawableFolder=drawable-hdpi
+UseVRThemeTemplate=false
+UseLidroid=false
+EmoSize=44
+RomName=(S3 i747) LOTK PAC-Man Rom (Axiom Droid)
+LockHandleSize=216
+LidroidDrawableFolder=drawable-hdpi
+FrameworkDrawableFolder=drawable-xhdpi
+UseMMSforEmoticons=true
+Template=./template/templateS3Nexus-4.3.zip

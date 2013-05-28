@@ -1,0 +1,20 @@
+#Paramterdaten
+#Mon May 27 22:47:17 PDT 2013
+Battsize=36
+WeatherSize=128
+NotificationHeight=4
+ToggleSize=64
+SystemUIDrawableFolder=drawable-xhdpi
+FilePattern=stat_sys_battery_full_circle_
+FilePatternCharge=stat_sys_battery_full_circle_charge_anim
+UsePreload=false
+MmsDrawableFolder=drawable-hdpi
+UseVRThemeTemplate=false
+UseLidroid=false
+EmoSize=44
+RomName=(S3 i747) LOTK PAC-Man Rom (CM CircleMOD)
+LockHandleSize=216
+LidroidDrawableFolder=drawable-hdpi
+FrameworkDrawableFolder=drawable-xhdpi
+UseMMSforEmoticons=true
+Template=./template/templateS3Nexus-4.3.zip
