@@ -307,7 +307,9 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			final Color col3 = new Color(col.getRed(), col.getGreen(), col.getBlue(), 0);
 
 			// creating paint
-			final Point2D center = new Point2D.Float(img.getWidth() / 2, img.getHeight() / 2);
+			final int centerX = settings.getFontXOffset() + img.getWidth() / 2;
+			final int centerY = settings.getFontYOffset() + img.getHeight() / 2;
+			final Point2D center = new Point2D.Float(centerX, centerY);
 			final float radius = settings.getGlowRadius();
 			final float[] dist = {
 					0.0f, 1.0f
@@ -319,8 +321,6 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 
 			// painting
 			g2d.setPaint(p);
-			final int centerX = settings.getFontXOffset() + img.getWidth() / 2;
-			final int centerY = settings.getFontYOffset() + img.getHeight() / 2;
 			final int r = img.getHeight();
 			Draw2DFunktions.fillCircle(g2d, centerX, centerY, r, 0, 360);
 		}
