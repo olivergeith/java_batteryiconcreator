@@ -26,6 +26,7 @@ import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.gui.widgets.SliderAndLabel;
 import de.og.batterycreator.gui.widgets.iconpositioner.IconPositioner;
+import de.og.batterycreator.gui.widgets.iconpositioner.IconPositionerListener;
 import de.og.batterycreator.gui.widgets.iconselector.chargeiconselector.ChargeIconSelector;
 import de.og.batterycreator.gui.widgets.iconselector.textureselector.TextureSelector;
 import de.og.batterycreator.gui.widgets.iconselector.xorcircleselector.XorCircleSelector;
@@ -72,7 +73,7 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JColorSelectButton	iconColorCharge				= new JColorSelectButton("Charge Color", "Color when charging");
 
 	private final JColorSelectButton	iconColorGlowCharge			= new JColorSelectButton("Charge Glow Color", "Glow Color when charging");
-	private final JCheckBox				cboxChargeGlow				= createCheckbox("ChargeGlow", "Pulsing glow Animation behind charge symbol or number");
+	private final JCheckBox				cboxChargeGlow				= createCheckbox("ChargeGlow", "Pulsing glow Animation behind Charge-Icon or number");
 	private final SliderAndLabel		sliderChargGlowRadius		= new SliderAndLabel(10, 50);
 
 	private final SliderAndLabel		sliderStroke				= new SliderAndLabel(1, 10);
@@ -83,23 +84,25 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JCheckBox				cboxColoredFont				= createCheckbox("Low battery Colors", "...");
 	private final JCheckBox				cboxColoredIcon				= createCheckbox("Low battery Colors", "...");
 	private final JCheckBox				cboxShowFont				= createCheckbox("Show percentages", "...");
-	private final JCheckBox				cboxShowChargeSymbol		= createCheckbox("Charge-Symbol", "Show Charge-Symbol when charging");
+	private final JCheckBox				cboxShowChargeSymbol		= createCheckbox("Charge-Icon", "Show Charge-Icon when charging");
 	private final JCheckBox				cboxUseGradientMediumLevels	= createCheckbox("Gradient", "Use Gradient Colors between Low and Med Batterylevels");
 	private final JCheckBox				cboxUseGradientNormalLevels	= createCheckbox("Gradient", "Use Gradient Colors between Med and 100% Batterylevels");
 	private final JCheckBox				cboxGlow					= createCheckbox("Glow", "Glow behind percentages");
 	private final SliderAndLabel		sliderGlowRadius			= new SliderAndLabel(10, 50);
-	private final JCheckBox				cboxGlowForChargeToo		= createCheckbox("Also for Charge", "Glow behind charge icon too!");
+	private final JCheckBox				cboxGlowForChargeToo		= createCheckbox("Also for Charge", "Glow behind Charge-Icon too!");
 
 	private final SliderAndLabel		sliderLowBatt				= new SliderAndLabel(0, 30);
 	private final SliderAndLabel		sliderMedBatt				= new SliderAndLabel(0, 100);
 
 	private final IconPositioner		iconPos						= new IconPositioner(-20, 20);
+	private final IconPositioner		glowPos						= new IconPositioner(-20, 20);
 	private final IconPositioner		fontPos						= new IconPositioner(-20, 20);
+	private final JCheckBox				cboxMoveIconWithText		= createCheckbox("Lock to Font-Position-Offset", "Move Charge-Icon with Font-Position");
+	private final JCheckBox				cboxMoveGlowWithText		= createCheckbox("Lock to Font-Position-Offset", "Move Glow with Font-Position");
 
 	private final SliderAndLabel		sliderReduceOn100			= new SliderAndLabel(-5, 0);
 
 	private final SliderAndLabel		sliderResizeChargeSymbol	= new SliderAndLabel(15, 40);
-	private final JCheckBox				cboxResizeChargeSymbol		= createCheckbox("Resize Symbol", " Resize the Charge Symbol to make it fit better");
 
 	private final JFontChooserButton	fontButton					= new JFontChooserButton("Font", fontSizes);
 
@@ -154,6 +157,20 @@ public class BattSettingsPanel extends SettingsPanel {
 					sliderLowBatt.setValue(med);
 			}
 		});
+
+		fontPos.addIconPositionerListener(new IconPositionerListener() {
+
+			@Override
+			public void positionChanged(final int x, final int y) {
+				// validateControls();
+				if (cboxMoveGlowWithText.isSelected() == true) {
+					glowPos.setPosition(x, y);
+				}
+				if (cboxMoveIconWithText.isSelected() == true) {
+					iconPos.setPosition(x, y);
+				}
+			}
+		});
 	}
 
 	private void myInit() {
@@ -176,7 +193,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 		builder.add(createCfgPanePercentages(), cc.xyw(1, ++row, 9));
-		// builder.add(createGlowPane(), cc.xyw(1, ++row, 9));
+		builder.add(createGlowPane(), cc.xyw(1, ++row, 9));
 		builder.add(createDropShadowPane(), cc.xyw(1, ++row, 9));
 
 		builder.add(createCfgPaneChargeIcon(), cc.xyw(1, ++row, 9));
@@ -195,9 +212,6 @@ public class BattSettingsPanel extends SettingsPanel {
 		final CellConstraints cc = new CellConstraints();
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
-		// builder.add(JGoodiesHelper.createGroupLabel("Percentages..."),
-		// cc.xyw(2, ++row, 7));
-		// builder.addSeparator("", cc.xyw(2, ++row, 7));
 
 		builder.add(cboxShowFont, cc.xyw(2, ++row, 1));
 		builder.add(cboxAddPercent, cc.xyw(4, row, 1));
@@ -210,17 +224,34 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		builder.add(JGoodiesHelper.createBlackLabel("Font"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("Reduce font on 100%"), cc.xyw(4, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Font Position Offsets (drag red square)"), cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Font-Position-Offsets (drag red square)"), cc.xyw(6, row, 3));
 		builder.add(fontButton, cc.xyw(2, ++row, 1));
 		builder.add(sliderReduceOn100.getToolbar(), cc.xyw(4, row, 1));
 		builder.add(fontPos, cc.xyw(6, row, 3));
 
-		builder.add(cboxGlow, cc.xyw(2, ++row, 1));
-		builder.add(cboxGlowForChargeToo, cc.xyw(4, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius: "), cc.xyw(6, row, 1));
-		builder.add(sliderGlowRadius.getToolbar(), cc.xyw(8, row, 1));
-
 		final JPanel hide = new HidePanel("Percentages...", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createGlowPane() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(cboxGlow, cc.xyw(2, ++row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius: "), cc.xyw(4, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Glow Offset (drag red square)"), cc.xyw(6, row, 3));
+
+		builder.add(sliderGlowRadius.getToolbar(), cc.xyw(4, ++row, 1));
+		builder.add(glowPos, cc.xyw(6, row, 3));
+
+		builder.add(cboxGlowForChargeToo, cc.xyw(2, ++row, 1));
+		builder.add(cboxMoveGlowWithText, cc.xyw(6, row, 3));
+
+		final JPanel hide = new HidePanel("Glow behind Percentage#", builder.getPanel(), true);
 		return hide;
 	}
 
@@ -254,20 +285,22 @@ public class BattSettingsPanel extends SettingsPanel {
 		int row = 1;
 
 		builder.add(cboxShowChargeSymbol, cc.xyw(2, ++row, 1));
-		builder.add(cboxResizeChargeSymbol, cc.xyw(4, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("ChargeIcon Offset (drag red square"), cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Charge-Icon size"), cc.xyw(4, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Charge-Icon Offset (drag red square)"), cc.xyw(6, row, 3));
 		builder.add(chargeIconSeletor, cc.xyw(2, ++row, 1));
 		builder.add(sliderResizeChargeSymbol.getToolbar(), cc.xyw(4, row, 1));
 		builder.add(iconPos, cc.xyw(6, row, 3));
+		builder.add(cboxMoveIconWithText, cc.xyw(6, ++row, 3));
 
 		builder.addSeparator("", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Pulsing glow behind Chargesymbol"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius"), cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Pulsing ChargeGlow"), cc.xyw(2, ++row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius"), cc.xyw(4, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Glow Color"), cc.xyw(6, row, 1));
 		builder.add(cboxChargeGlow, cc.xyw(2, ++row, 1));
-		builder.add(iconColorGlowCharge, cc.xyw(4, row, 1));
-		builder.add(sliderChargGlowRadius.getToolbar(), cc.xyw(6, row, 1));
+		builder.add(sliderChargGlowRadius.getToolbar(), cc.xyw(4, row, 1));
+		builder.add(iconColorGlowCharge, cc.xyw(6, row, 1));
 
-		final JPanel hide = new HidePanel("Charge Icon...", builder.getPanel());
+		final JPanel hide = new HidePanel("Charge-Icon...", builder.getPanel());
 		return hide;
 	}
 
@@ -426,11 +459,15 @@ public class BattSettingsPanel extends SettingsPanel {
 
 			iconPos.setPosition(settings.getIconXOffset(), settings.getIconYOffset());
 			fontPos.setPosition(settings.getFontXOffset(), settings.getFontYOffset());
+			glowPos.setPosition(settings.getGlowXOffset(), settings.getGlowYOffset());
+
+			cboxMoveIconWithText.setSelected(settings.isMoveIconWithText());
+			cboxMoveGlowWithText.setSelected(settings.isMoveGlowWithText());
 
 			sliderReduceOn100.setValue(settings.getReduceFontOn100());
 
 			sliderResizeChargeSymbol.setValue(settings.getResizeChargeSymbolHeight());
-			cboxResizeChargeSymbol.setSelected(settings.isResizeChargeSymbol());
+			// cboxResizeChargeSymbol.setSelected(settings.isResizeChargeSymbol());
 
 			cboxLinearGradient.setSelected(settings.isLinearGradient());
 			cboxTexture.setSelected(settings.isUseTexture());
@@ -508,10 +545,15 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setFontYOffset(fontPos.getPosition().y);
 		settings.setReduceFontOn100(sliderReduceOn100.getValue());
 
+		settings.setGlowXOffset(glowPos.getPosition().x);
+		settings.setGlowYOffset(glowPos.getPosition().y);
+		settings.setMoveIconWithText(cboxMoveIconWithText.isSelected());
+		settings.setMoveGlowWithText(cboxMoveGlowWithText.isSelected());
+
 		settings.setIconXOffset(iconPos.getPosition().x);
 		settings.setIconYOffset(iconPos.getPosition().y);
 
-		settings.setResizeChargeSymbol(cboxResizeChargeSymbol.isSelected());
+		// settings.setResizeChargeSymbol(cboxResizeChargeSymbol.isSelected());
 		settings.setResizeChargeSymbolHeight(sliderResizeChargeSymbol.getValue());
 
 		settings.setLinearGradient(cboxLinearGradient.isSelected());
@@ -538,8 +580,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		iconPos.setEnabled(cboxShowChargeSymbol.isSelected());
 		fontPos.setEnabled(cboxShowFont.isSelected());
 		sliderReduceOn100.setEnabled(cboxShowFont.isSelected());
-		sliderResizeChargeSymbol.setEnabled(cboxShowChargeSymbol.isSelected() && cboxResizeChargeSymbol.isSelected());
-		cboxResizeChargeSymbol.setEnabled(cboxShowChargeSymbol.isSelected());
+		sliderResizeChargeSymbol.setEnabled(cboxShowChargeSymbol.isSelected());
 		// transparent Backround special behaviour
 		backgroundColor.setEnabled(!cboxTransparentBgrnd.isSelected());
 		backgroundColor.setVisible(!cboxTransparentBgrnd.isSelected());
@@ -561,6 +602,20 @@ public class BattSettingsPanel extends SettingsPanel {
 		dropShadowColor.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
 		dropShadowPos.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
 		textureSelector.setEnabled(cboxTexture.isSelected());
+
+		cboxMoveGlowWithText.setEnabled(cboxGlow.isSelected());
+
+		glowPos.setEnabled(!cboxMoveGlowWithText.isSelected() && cboxGlow.isSelected());
+		if (cboxMoveGlowWithText.isSelected() == true) {
+			glowPos.setPosition(fontPos.getPosition().x, fontPos.getPosition().y);
+		}
+
+		cboxMoveIconWithText.setEnabled(cboxShowChargeSymbol.isSelected());
+		iconPos.setEnabled(!cboxMoveIconWithText.isSelected() && cboxShowChargeSymbol.isSelected());
+		if (cboxMoveIconWithText.isSelected() == true) {
+			iconPos.setPosition(fontPos.getPosition().x, fontPos.getPosition().y);
+		}
+
 	}
 
 	public void enableSupportedFeatures(final boolean supportsFlip, final boolean suppoertsStrokewidth, final boolean noBG, final boolean battGradient,

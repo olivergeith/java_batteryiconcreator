@@ -72,6 +72,10 @@ public class BattSettings implements Serializable {
 	private Color				backgroundColor				= COLOR_BGRND;
 
 	// font and charge icon offset
+	private boolean				moveIconWithText			= true;
+	private boolean				moveGlowWithText			= true;
+	private int					glowXOffset					= 0;
+	private int					glowYOffset					= 0;
 	private int					iconXOffset					= 0;
 	private int					iconYOffset					= 0;
 	private int					fontXOffset					= 0;
@@ -83,7 +87,6 @@ public class BattSettings implements Serializable {
 	private boolean				coloredFont					= false;
 	private boolean				coloredIcon					= true;
 	private boolean				showChargeSymbol			= true;
-	private boolean				resizeChargeSymbol			= true;
 	private int					resizeChargeSymbolHeight	= 24;
 	private boolean				useGradiantForMediumColor	= false;
 	private boolean				useGradiantForNormalColor	= false;
@@ -560,21 +563,6 @@ public class BattSettings implements Serializable {
 	}
 
 	/**
-	 * @return the resizeChargeSymbol
-	 */
-	public boolean isResizeChargeSymbol() {
-		return resizeChargeSymbol;
-	}
-
-	/**
-	 * @param resizeChargeSymbol
-	 *            the resizeChargeSymbol to set
-	 */
-	public void setResizeChargeSymbol(final boolean resizeChargeSymbol) {
-		this.resizeChargeSymbol = resizeChargeSymbol;
-	}
-
-	/**
 	 * @return the resizeChargeSymbolHeight
 	 */
 	public int getResizeChargeSymbolHeight() {
@@ -889,6 +877,38 @@ public class BattSettings implements Serializable {
 
 	public void setTextureIcon(final ImageIcon textureIcon) {
 		this.textureIcon = textureIcon;
+	}
+
+	public int getGlowXOffset() {
+		return glowXOffset;
+	}
+
+	public void setGlowXOffset(final int glowXOffset) {
+		this.glowXOffset = glowXOffset;
+	}
+
+	public int getGlowYOffset() {
+		return glowYOffset;
+	}
+
+	public void setGlowYOffset(final int glowYOffset) {
+		this.glowYOffset = glowYOffset;
+	}
+
+	public boolean isMoveIconWithText() {
+		return moveIconWithText;
+	}
+
+	public void setMoveIconWithText(final boolean moveIconWithText) {
+		this.moveIconWithText = moveIconWithText;
+	}
+
+	public boolean isMoveGlowWithText() {
+		return moveGlowWithText;
+	}
+
+	public void setMoveGlowWithText(final boolean moveGlowWithText) {
+		this.moveGlowWithText = moveGlowWithText;
 	}
 
 }

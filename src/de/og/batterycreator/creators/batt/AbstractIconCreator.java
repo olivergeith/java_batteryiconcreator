@@ -307,8 +307,8 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			final Color col3 = new Color(col.getRed(), col.getGreen(), col.getBlue(), 0);
 
 			// creating paint
-			final int centerX = settings.getFontXOffset() + img.getWidth() / 2;
-			final int centerY = settings.getFontYOffset() + img.getHeight() / 2;
+			final int centerX = settings.getGlowXOffset() + img.getWidth() / 2;
+			final int centerY = settings.getGlowYOffset() + img.getHeight() / 2;
 			final Point2D center = new Point2D.Float(centerX, centerY);
 			final float radius = settings.getGlowRadius();
 			final float[] dist = {
@@ -346,8 +346,8 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			BufferedImage resizedChargeIcon = new BufferedImage(chargeIcon.getIconWidth(), chargeIcon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
 			final Graphics2D g = resizedChargeIcon.createGraphics();
 			g.drawImage(chargeIcon.getImage(), 0, 0, null);
-			if (settings.isResizeChargeSymbol())
-				resizedChargeIcon = StaticImageHelper.resize2Height(resizedChargeIcon, settings.getResizeChargeSymbolHeight());
+			// if (settings.isResizeChargeSymbol())
+			resizedChargeIcon = StaticImageHelper.resize2Height(resizedChargeIcon, settings.getResizeChargeSymbolHeight());
 
 			final int w = resizedChargeIcon.getWidth();
 			final int h = resizedChargeIcon.getHeight();

@@ -254,14 +254,14 @@ public class IconPositioner extends JToolBar implements MouseListener, MouseMoti
 		final int rotation = e.getWheelRotation();
 		if ((e.getModifiers() & InputEvent.CTRL_MASK) == InputEvent.CTRL_MASK) {
 			if (rotation > 0)
-				modelX.stepDown();
-			else
 				modelX.stepUp();
+			else
+				modelX.stepDown();
 		} else {
 			if (rotation > 0)
-				modelY.stepDown();
-			else
 				modelY.stepUp();
+			else
+				modelY.stepDown();
 		}
 		repaintCanvas();
 	}
