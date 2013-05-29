@@ -101,7 +101,7 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final SliderAndLabel		sliderResizeChargeSymbol	= new SliderAndLabel(15, 40);
 	private final JCheckBox				cboxResizeChargeSymbol		= createCheckbox("Resize Symbol", " Resize the Charge Symbol to make it fit better");
 
-	private final JFontChooserButton	fontButton					= new JFontChooserButton("Choose Font", fontSizes);
+	private final JFontChooserButton	fontButton					= new JFontChooserButton("Font", fontSizes);
 
 	private final JCheckBox				cboxAddPercent				= createCheckbox("Add '%'", "Add '%' behind numbers");
 
@@ -209,15 +209,15 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(fontColorMedBatt, cc.xyw(8, row, 1));
 
 		builder.add(JGoodiesHelper.createBlackLabel("Font"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Reduce font on 100%"), cc.xyw(4, row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Font Position Offsets (drag red square)"), cc.xyw(6, row, 3));
-		builder.add(fontButton, cc.xyw(2, ++row, 3));
+		builder.add(fontButton, cc.xyw(2, ++row, 1));
+		builder.add(sliderReduceOn100.getToolbar(), cc.xyw(4, row, 1));
 		builder.add(fontPos, cc.xyw(6, row, 3));
 
-		builder.add(JGoodiesHelper.createBlackLabel("Reduce font on 100% by <x> pixel"), cc.xyw(2, ++row, 3));
-		builder.add(cboxGlow, cc.xyw(6, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius"), cc.xyw(8, row, 1));
-		builder.add(sliderReduceOn100.getToolbar(), cc.xyw(2, ++row, 1));
-		builder.add(cboxGlowForChargeToo, cc.xyw(6, row, 1));
+		builder.add(cboxGlow, cc.xyw(2, ++row, 1));
+		builder.add(cboxGlowForChargeToo, cc.xyw(4, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius: "), cc.xyw(6, row, 1));
 		builder.add(sliderGlowRadius.getToolbar(), cc.xyw(8, row, 1));
 
 		final JPanel hide = new HidePanel("Percentages...", builder.getPanel());
