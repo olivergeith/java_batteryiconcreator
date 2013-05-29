@@ -36,9 +36,10 @@ public class BattSettings implements Serializable {
 	private Color				fontColorMedBatt			= COLOR_Med_BATT;
 	private Color				fontChargeColor				= COLOR_FONT;
 
-	// Font Blurr
-	private Color				dropShadowColor				= COLOR_BGRND;
+	// Dropshadow
+	private boolean				dropShadowIcon				= false;
 	private boolean				dropShadowFont				= false;
+	private Color				dropShadowColor				= COLOR_BGRND;
 	private int					dropShadowOffsetX			= 0;
 	private int					dropShadowOffsetY			= 0;
 	/**
@@ -909,6 +910,14 @@ public class BattSettings implements Serializable {
 
 	public void setMoveGlowWithText(final boolean moveGlowWithText) {
 		this.moveGlowWithText = moveGlowWithText;
+	}
+
+	public boolean isDropShadowIcon() {
+		return dropShadowIcon;
+	}
+
+	public void setDropShadowIcon(final boolean dropShadowIcon) {
+		this.dropShadowIcon = dropShadowIcon;
 	}
 
 }

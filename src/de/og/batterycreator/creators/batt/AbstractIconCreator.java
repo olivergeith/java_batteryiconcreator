@@ -1,5 +1,6 @@
 package de.og.batterycreator.creators.batt;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -129,9 +130,6 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			if (charge && settings.isShowChargeSymbol()) {
 				drawChargeIcon(g2d, img);
 			} else {
-				if (settings.isDropShadowFont()) {
-					drawDropShadowForPercentageText(g2d, percentage, charge, img);
-				}
 				drawPercentageText(g2d, percentage, charge, img);
 			}
 		} else if (charge && settings.isShowChargeSymbol()) {
@@ -140,6 +138,9 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	}
 
 	private void drawPercentageText(final Graphics2D g2d, final int percentage, final boolean charge, final BufferedImage img) {
+		if (settings.isDropShadowFont()) {
+			drawDropShadowForPercentageText(g2d, percentage, charge, img);
+		}
 		int yoff = 8;
 		// Schrift wieder normal machen!!!
 		g2d.setFont(settings.getFont());
@@ -163,7 +164,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	private void drawDropShadowForPercentageText(final Graphics2D g2dout, final int percentage, final boolean charge, final BufferedImage img) {
 		// Create a graphics contents on the buffered image
 		BufferedImage blurrimg = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-		final Graphics2D g2dblurr = initGrafics2D(blurrimg);
+		final Graphics2D g2dblurr = initGrafics2D(blurrimg, true);
 
 		int yoff = 8;
 		// Schrift wieder normal machen!!!
@@ -194,6 +195,41 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		// blurredImag in img malen
 		g2dout.drawImage(blurrimg, 0, 0, null);
 
+	}
+
+	private void drawDropShadowForChargeIcon(final Graphics2D g2dout, final BufferedImage img) {
+		final ImageIcon chargeIcon = settings.getChargeIcon();
+		if (chargeIcon != null) {
+			// Resize Charge Icon
+			BufferedImage resizedChargeIcon = new BufferedImage(chargeIcon.getIconWidth(), chargeIcon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+			final Graphics2D gtemp = initGrafics2D(resizedChargeIcon, true);
+			gtemp.drawImage(chargeIcon.getImage(), 0, 0, null);
+			resizedChargeIcon = StaticImageHelper.resize2Height(resizedChargeIcon, settings.getResizeChargeSymbolHeight());
+
+			// drawing the Icon
+			BufferedImage blurrimg = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+			final Graphics2D gblurr = initGrafics2D(blurrimg, true);
+
+			final int w = resizedChargeIcon.getWidth();
+			final int h = resizedChargeIcon.getHeight();
+			int x = 1 + settings.getIconXOffset() + img.getWidth() / 2 - w / 2;
+			int y = img.getHeight() / 2 - h / 2 + settings.getIconYOffset();
+			x += settings.getDropShadowOffsetX();
+			y += settings.getDropShadowOffsetY();
+
+			for (int i = 1; i <= settings.getDropShadowBlurryness(); i++) {
+				// ChargeIcon malen
+				gblurr.drawImage(resizedChargeIcon, x, y, null);
+				// Composite Clor setzen und chargicon umfärben
+				gblurr.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
+				gblurr.setPaint(settings.getDropShadowColor());
+				gblurr.fillRect(0, 0, img.getWidth(), img.getHeight());
+				// Zurück auf normales paint
+				gblurr.setPaintMode();
+				blurrimg = StaticImageHelper.blurImage25b(blurrimg, settings.getDropShadowOpacity());
+			}
+			g2dout.drawImage(blurrimg, 0, 0, null);
+		}
 	}
 
 	/**
@@ -340,6 +376,10 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	}
 
 	private void drawChargeIcon(final Graphics2D g2d, final BufferedImage img) {
+		if (settings.isDropShadowIcon()) {
+			drawDropShadowForChargeIcon(g2d, img);
+		}
+
 		final ImageIcon chargeIcon = settings.getChargeIcon();
 		if (chargeIcon != null) {
 			// Resize Charge Icon

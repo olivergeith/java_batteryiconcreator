@@ -47,7 +47,8 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JColorSelectButton	fontColorCharge				= new JColorSelectButton("Charge Color", "Color when charging");
 	private final ChargeIconSelector	chargeIconSeletor			= new ChargeIconSelector(36);
 
-	private final JCheckBox				cboxDropShadow				= createCheckbox("DropShadow", "DropShadow behind PercentageText");
+	private final JCheckBox				cboxDropShadowFont			= createCheckbox("DropShadow Font", "DropShadow behind PercentageText");
+	private final JCheckBox				cboxDropShadowIcon			= createCheckbox("DropShadow ChargeIcon", "DropShadow behind Charge-Icon");
 	private final JColorSelectButton	dropShadowColor				= new JColorSelectButton("DropShadow Color", "Color of Shadow behind Percentage-Text");
 	private final IconPositioner		dropShadowPos				= new IconPositioner(-5, 5);
 	private final SliderAndLabel		sliderDropShadowOpacity		= new SliderAndLabel(0, 6);
@@ -263,14 +264,16 @@ public class BattSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(cboxDropShadow, cc.xyw(2, ++row, 1));
+		builder.add(cboxDropShadowFont, cc.xyw(2, ++row, 3));
+		builder.add(cboxDropShadowIcon, cc.xyw(6, row, 3));
+
+		builder.add(JGoodiesHelper.createBlackLabel("DropShadow Blurring"), cc.xyw(2, ++row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("DropShadow Intensity"), cc.xyw(4, row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("DropShadow Offset (drag red square)"), cc.xyw(6, row, 3));
-		builder.add(dropShadowColor, cc.xyw(2, ++row, 1));
+		builder.add(sliderDropShadowBlurryness.getToolbar(), cc.xyw(2, ++row, 1));
 		builder.add(sliderDropShadowOpacity.getToolbar(), cc.xyw(4, row, 1));
 		builder.add(dropShadowPos, cc.xyw(6, row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("DropShadow Blurring"), cc.xyw(4, ++row, 1));
-		builder.add(sliderDropShadowBlurryness.getToolbar(), cc.xyw(4, ++row, 1));
+		builder.add(dropShadowColor, cc.xyw(2, ++row, 1));
 
 		final JPanel hide = new HidePanel("DropShadow behind Percentage#", builder.getPanel(), false);
 		return hide;
@@ -398,7 +401,8 @@ public class BattSettingsPanel extends SettingsPanel {
 
 			dropShadowColor.setColor(settings.getDropShadowColor());
 			dropShadowPos.setPosition(settings.getDropShadowOffsetX(), settings.getDropShadowOffsetY());
-			cboxDropShadow.setSelected(settings.isDropShadowFont());
+			cboxDropShadowFont.setSelected(settings.isDropShadowFont());
+			cboxDropShadowIcon.setSelected(settings.isDropShadowIcon());
 			sliderDropShadowOpacity.setValue(settings.getDropShadowOpacity());
 			sliderDropShadowBlurryness.setValue(settings.getDropShadowBlurryness());
 
@@ -488,7 +492,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setFontChargeColor(fontColorCharge.getColor());
 
 		settings.setDropShadowColor(dropShadowColor.getColor());
-		settings.setDropShadowFont(cboxDropShadow.isSelected());
+		settings.setDropShadowFont(cboxDropShadowFont.isSelected());
+		settings.setDropShadowIcon(cboxDropShadowIcon.isSelected());
 		settings.setDropShadowOffsetX(dropShadowPos.getPosition().x);
 		settings.setDropShadowOffsetY(dropShadowPos.getPosition().y);
 		settings.setDropShadowOpacity(sliderDropShadowOpacity.getValue());
@@ -596,15 +601,15 @@ public class BattSettingsPanel extends SettingsPanel {
 		sliderGlowRadius.setEnabled(cboxGlow.isSelected());
 		cboxGlowForChargeToo.setEnabled(cboxGlow.isSelected());
 
-		cboxDropShadow.setEnabled(cboxShowFont.isSelected());
-		sliderDropShadowOpacity.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
-		sliderDropShadowBlurryness.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
-		dropShadowColor.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
-		dropShadowPos.setEnabled(cboxShowFont.isSelected() && cboxDropShadow.isSelected());
+		cboxDropShadowFont.setEnabled(cboxShowFont.isSelected());
+		sliderDropShadowOpacity.setEnabled(cboxShowFont.isSelected() && (cboxDropShadowFont.isSelected() || cboxDropShadowIcon.isSelected()));
+		sliderDropShadowBlurryness.setEnabled(cboxShowFont.isSelected() && (cboxDropShadowFont.isSelected() || cboxDropShadowIcon.isSelected()));
+		dropShadowColor.setEnabled(cboxShowFont.isSelected() && (cboxDropShadowFont.isSelected() || cboxDropShadowIcon.isSelected()));
+		dropShadowPos.setEnabled(cboxShowFont.isSelected() && (cboxDropShadowFont.isSelected() || cboxDropShadowIcon.isSelected()));
+
 		textureSelector.setEnabled(cboxTexture.isSelected());
 
 		cboxMoveGlowWithText.setEnabled(cboxGlow.isSelected());
-
 		glowPos.setEnabled(!cboxMoveGlowWithText.isSelected() && cboxGlow.isSelected());
 		if (cboxMoveGlowWithText.isSelected() == true) {
 			glowPos.setPosition(fontPos.getPosition().x, fontPos.getPosition().y);
