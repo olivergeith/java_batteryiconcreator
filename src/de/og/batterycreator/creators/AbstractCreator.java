@@ -3,19 +3,17 @@ package de.og.batterycreator.creators;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Vector;
-
 import javax.swing.ImageIcon;
-
 import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 
 public abstract class AbstractCreator implements IconProviderInterface {
 
-	protected final Vector<ImageIcon> iconMap = new Vector<ImageIcon>();
-	protected final Vector<String> filenames = new Vector<String>();
-	protected final Vector<String> filenamesAndPath = new Vector<String>();
-	protected ImageIcon overview = null;
-	protected RomSettings romSettings = new RomSettings();
+	protected final Vector<ImageIcon>	iconMap				= new Vector<ImageIcon>();
+	protected final Vector<String>		filenames			= new Vector<String>();
+	protected final Vector<String>		filenamesAndPath	= new Vector<String>();
+	protected ImageIcon					overview			= null;
+	protected RomSettings				romSettings			= new RomSettings();
 
 	public AbstractCreator(final RomSettings romSettings) {
 		this.romSettings = romSettings;
@@ -74,9 +72,15 @@ public abstract class AbstractCreator implements IconProviderInterface {
 		StaticImageHelper.writePNG(overview, file);
 	}
 
+	protected void writeOverviewSmallFile(final BufferedImage overview) {
+		final File file = new File(getPath() + File.separator + "overview_small_" + getCreatorName() + ".png");
+		StaticImageHelper.writePNG(overview, file);
+	}
+
 	// ###############################################################################
 	// All filenames and Icons
 	// ###############################################################################
+	@Override
 	public Vector<String> getAllFilenamesAndPath() {
 		return filenamesAndPath;
 	}
@@ -100,38 +104,18 @@ public abstract class AbstractCreator implements IconProviderInterface {
 		return toString();
 	}
 
+	@Override
 	public String getProviderName() {
 		return toString();
 	}
 
-	// protected Graphics2D initGrafics2D(final BufferedImage img) {
-	// return initGrafics2D(img, false);
-	// }
-
-	// //
-	// ###############################################################################
-	// // Grafics2D
-	// //
-	// ###############################################################################
-	// protected Graphics2D initGrafics2D(final BufferedImage img, final boolean
-	// forceTransparent) {
-	// final Graphics2D g2d = img.createGraphics();
-	// g2d.setFont(romSettings.getFont());
-	// g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-	// RenderingHints.VALUE_ANTIALIAS_ON);
-	// g2d.setStroke(new BasicStroke(romSettings.getStrokewidth()));
-	// if (!forceTransparent) {
-	// if (!romSettings.isTransparentBackground()) {
-	// g2d.setColor(romSettings.getBackgroundColor());
-	// g2d.fillRect(0, 0, img.getWidth(), img.getHeight());
-	// }
-	// }
-	// return g2d;
-	// }
-
 	@Override
 	public boolean isActiv() {
 		return true;
+	}
+
+	public ImageIcon getOverviewIcon() {
+		return overview;
 	}
 
 }

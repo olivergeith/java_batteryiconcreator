@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.AbstractCreator;
-import de.og.batterycreator.main.IconCreatorFrame;
+import de.og.batterycreator.gui.widgets.overview.BatteryOverviewCreator;
 
 /**
  * @author Oliver
@@ -28,13 +28,13 @@ import de.og.batterycreator.main.IconCreatorFrame;
  */
 public abstract class AbstractIconCreator extends AbstractCreator {
 
-	private static final Logger	LOGGER	= LoggerFactory.getLogger(AbstractIconCreator.class);
+	private static final Logger	LOGGER			= LoggerFactory.getLogger(AbstractIconCreator.class);
+	protected ImageIcon			overviewSmall	= null;
+	protected BattSettings		settings		= new BattSettings();
 
 	public AbstractIconCreator(final RomSettings romSettings) {
 		super(romSettings);
 	}
-
-	protected BattSettings	settings	= new BattSettings();
 
 	// ###############################################################################
 	// Abstracte Methoden
@@ -102,6 +102,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		createChargeImages();
 		LOGGER.info("Battery: Creating Overview!");
 		overview = createOverview();
+		overviewSmall = createSmallOverview2();
 	}
 
 	private void createChargeImages() {
@@ -456,57 +457,26 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	@Override
 	public ImageIcon createOverview() {
 		LOGGER.info("Battery: Creating Overview!");
-		if (iconMap != null && iconMap.size() > 100) {
-			final ImageIcon img1 = iconMap.get(0);
-			final int iw = img1.getIconWidth();
-			final int ih = img1.getIconHeight();
-			final int w = iw * 20 + 21;
-			final int offsetOben = 50;
-			final int offsetUnten = 35;
-			final int h = ih * 11 + 12 + offsetOben + offsetUnten;
+		final BufferedImage over = BatteryOverviewCreator.createOverview(iconMap, getCreatorName());
+		if (over != null)
+			writeOverviewSmallFile(over);
+		return new ImageIcon(over);
+	}
 
-			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-			final Graphics2D g2d = over.createGraphics();
-			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 19));
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			g2d.setColor(Color.black);
-			g2d.fillRect(0, 0, w, h);
-			g2d.setColor(Color.white);
-			g2d.drawString(getCreatorName(), 2, 20);
-			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-			g2d.setColor(Color.gray);
-			g2d.drawString("Created with ''The Battery Icon Creator'' V" + IconCreatorFrame.VERSION_NR + " by OlliG", 2, 32);
-			g2d.drawString("http://forum.xda-developers.com/showthread.php?t=1918500", 2, h - offsetUnten + 20);
-			g2d.setColor(Color.white);
-			g2d.fillRect(0, 40, w, 2);
-			g2d.fillRect(0, h - offsetUnten, w, 2);
-			g2d.fillRect(0, h - 2, w, 2);
+	public ImageIcon createSmallOverview() {
+		LOGGER.info("Battery: Creating Small Overview!");
+		final BufferedImage over = BatteryOverviewCreator.createSmallBatteryOverview(iconMap, getCreatorName());
+		if (over != null)
+			writeOverviewSmallFile(over);
+		return new ImageIcon(over);
+	}
 
-			for (int z = 0; z < 10; z++) {
-				for (int e = 0; e < 10; e++) {
-					final int index = z * 10 + e;
-					final ImageIcon img = iconMap.elementAt(index);
-					g2d.drawImage(img.getImage(), 1 + e * (iw + 1), 1 + z * (ih + 1) + offsetOben, null);
-				}
-			}
-			final ImageIcon img = iconMap.elementAt(100);
-			g2d.drawImage(img.getImage(), 1 + 0 * iw, 1 + 10 * (ih + 1) + offsetOben, null);
-
-			// // Charge Icons
-			for (int z = 0; z < 10; z++) {
-				for (int e = 0; e < 10; e++) {
-					final int index = 101 + z * 10 + e;
-					final ImageIcon imgc = iconMap.elementAt(index);
-					g2d.drawImage(imgc.getImage(), 1 + 10 * (iw + 1) + e * (iw + 1), 1 + z * (ih + 1) + offsetOben, null);
-				}
-			}
-			final ImageIcon img100c = iconMap.elementAt(201);
-			g2d.drawImage(img100c.getImage(), 1 + 10 * (iw + 1) + 0 * iw, 1 + 10 * (ih + 1) + offsetOben, null);
-
-			writeOverviewFile(over);
-			return new ImageIcon(over);
-		}
-		return null;
+	public ImageIcon createSmallOverview2() {
+		LOGGER.info("Battery: Creating Small OverviewV2!");
+		final BufferedImage over = BatteryOverviewCreator.createSmallBatteryOverview2(iconMap, getCreatorName());
+		if (over != null)
+			writeOverviewSmallFile(over);
+		return new ImageIcon(over);
 	}
 
 	// ###############################################################################
@@ -531,8 +501,8 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		return g2d;
 	}
 
-	public ImageIcon getOverviewIcon() {
-		return overview;
+	public ImageIcon getOverviewSmallIcon() {
+		return overviewSmall;
 	}
 
 	/**

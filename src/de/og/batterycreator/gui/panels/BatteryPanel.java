@@ -84,17 +84,18 @@ import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
 import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
 
 public class BatteryPanel extends JPanel {
-	private static final long						serialVersionUID	= -5956664471952448919L;
+	private static final long						serialVersionUID		= -5956664471952448919L;
 
-	private final JComboBox<AbstractIconCreator>	combo				= new JComboBox<AbstractIconCreator>();
+	private final JComboBox<AbstractIconCreator>	combo					= new JComboBox<AbstractIconCreator>();
 
-	private final JList<String>						battIconList		= new JList<String>();
-	private AbstractIconCreator						activBattCreator	= null;
-	private final OverviewPanel						battOverviewPanel	= new OverviewPanel();
+	private final JList<String>						battIconList			= new JList<String>();
+	private AbstractIconCreator						activBattCreator		= null;
+	private final OverviewPanel						battOverviewPanel		= new OverviewPanel();
+	private final OverviewPanel						battSmallOverviewPanel	= new OverviewPanel();
 
-	private final BattSettingsPanel					settingsPanel		= new BattSettingsPanel();
+	private final BattSettingsPanel					settingsPanel			= new BattSettingsPanel();
 
-	private final AnimatorBar						anibar				= new AnimatorBar(80);					// millies
+	private final AnimatorBar						anibar					= new AnimatorBar(80);					// millies
 
 	public BatteryPanel(final RomSettings romSettings) {
 		super();
@@ -203,6 +204,7 @@ public class BatteryPanel extends JPanel {
 
 		// battTabPane.setTabPlacement(JTabbedPane.LEFT);
 		tabPane.addTab("Overview", IconStore.overIcon, battOverviewPanel, "Get an Overview of your icons");
+		tabPane.addTab("Small Overview", IconStore.overSmallIcon, battSmallOverviewPanel, "Get an Overview of your icons");
 		tabPane.addTab("List", IconStore.listIcon, scroller, "Get an Overview of your icons");
 		// Adding Howto, if Helpfile exists !
 		final File howto = new File("./help/Howto-Render-Battery.htm");
@@ -252,10 +254,14 @@ public class BatteryPanel extends JPanel {
 			cre.setRomSettings(romSettings);
 
 		cre.createAllImages();
-		if (cre.getOverviewIcon().equals(IconStore.nothingIcon))
+		if (cre.getOverviewIcon().equals(IconStore.nothingIcon)) {
+			battSmallOverviewPanel.setText("Choose your Battery Style in dropdown box");
 			battOverviewPanel.setText("Choose your Battery Style in dropdown box");
-		else
+		} else {
+			battSmallOverviewPanel.setText("");
 			battOverviewPanel.setText("");
+		}
+		battSmallOverviewPanel.setOverview(cre.getOverviewSmallIcon(), 100);
 		battOverviewPanel.setOverview(cre.getOverviewIcon(), 100);
 		battIconList.removeAll();
 		battIconList.setListData(cre.getFilenames());

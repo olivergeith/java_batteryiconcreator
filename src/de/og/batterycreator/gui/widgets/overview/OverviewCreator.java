@@ -125,4 +125,51 @@ public class OverviewCreator {
 		return null;
 	}
 
+	public static BufferedImage createSmallBatteryOverview(final List<ImageIcon> iconMap, final String name) {
+		if (iconMap != null && iconMap.size() > 100) {
+			final ImageIcon img1 = iconMap.get(0);
+			final int iw = img1.getIconWidth();
+			final int ih = img1.getIconHeight();
+			int w = iw * 6 + 7;
+			if (w < 300)
+				w = 300;
+			final int offsetOben = 50;
+			final int offsetUnten = 35;
+			final int h = ih * 2 + 12 + offsetOben + offsetUnten;
+
+			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			final Graphics2D g2d = over.createGraphics();
+			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g2d.setColor(new Color(0, 0, 0));
+			g2d.fillRect(0, 0, w, h);
+			g2d.setColor(Color.white);
+			g2d.drawString(name, 2, 20);
+			g2d.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 10));
+			g2d.setColor(Color.LIGHT_GRAY);
+			g2d.drawString("Created with '" + IconCreatorFrame.APP_NAME + "' V" + IconCreatorFrame.VERSION_NR + " by OlliG", 2, 32);
+			g2d.drawString(IconCreatorFrame.HOMEPAGE_URL, 2, h - offsetUnten + 20);
+			g2d.setColor(Color.white);
+			g2d.fillRect(0, 40, w, 2);
+			g2d.fillRect(0, h - offsetUnten, w, 2);
+			g2d.fillRect(0, h - 2, w, 2);
+
+			for (int z = 0; z <= 5; z++) {
+				final int index = z * 20;
+				final ImageIcon img = iconMap.get(index);
+				g2d.drawImage(img.getImage(), 1 + z * (iw + 1), 1 + offsetOben, null);
+			}
+
+			// // Charge Icons
+			for (int z = 0; z <= 5; z++) {
+				final int index = 101 + z * 20;
+				final ImageIcon imgc = iconMap.get(index);
+				g2d.drawImage(imgc.getImage(), 1 + z * (iw + 1), 1 + 1 * (ih + 1) + offsetOben, null);
+			}
+
+			return over;
+		}
+		return null;
+	}
+
 }

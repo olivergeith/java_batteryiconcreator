@@ -1,15 +1,13 @@
 package de.og.batterycreator.creators.batt;
 
 import java.util.Vector;
-
 import javax.swing.ImageIcon;
-
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.gui.iconstore.IconStore;
 
 public class NoBattIcons extends AbstractIconCreator {
-	public static String name = "No Battery Icons";
-	private final ImageIcon nada = IconStore.nothingIcon;
+	public static String	name	= "No Battery Icons";
+	private final ImageIcon	nada	= IconStore.nothingIcon;
 
 	public NoBattIcons(final RomSettings romSettings) {
 		super(romSettings);
@@ -26,6 +24,11 @@ public class NoBattIcons extends AbstractIconCreator {
 
 	@Override
 	public ImageIcon createOverview() {
+		return nada;
+	}
+
+	@Override
+	public ImageIcon createSmallOverview() {
 		return nada;
 	}
 
@@ -51,6 +54,11 @@ public class NoBattIcons extends AbstractIconCreator {
 
 	@Override
 	public ImageIcon getOverviewIcon() {
+		return nada;
+	}
+
+	@Override
+	public ImageIcon getOverviewSmallIcon() {
 		return nada;
 	}
 
