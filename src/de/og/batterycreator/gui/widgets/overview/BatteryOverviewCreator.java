@@ -12,6 +12,8 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import javax.swing.ImageIcon;
+import og.basics.gui.image.StaticImageHelper;
+import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.main.IconCreatorFrame;
 
 public class BatteryOverviewCreator {
@@ -74,7 +76,94 @@ public class BatteryOverviewCreator {
 		return null;
 	}
 
-	public static BufferedImage createSmallBatteryOverview2(final List<ImageIcon> iconMap, final String name) {
+	public static BufferedImage createSmallBatteryOverview(final List<ImageIcon> iconMap, final String name) {
+		if (true)
+			return createOneLineOverview(iconMap, name);
+		else
+			return createTwoLineOverview(iconMap, name);
+	}
+
+	public static BufferedImage createOneLineOverview(final List<ImageIcon> iconMap, final String name) {
+		if (iconMap != null && iconMap.size() > 100) {
+			final ImageIcon img1 = iconMap.get(0);
+			final int iw = img1.getIconWidth();
+			final int ih = img1.getIconHeight();
+
+			// Logo basteln
+			BufferedImage logo = StaticImageHelper.convertImageIcon(IconStore.logoIcon);
+			logo = StaticImageHelper.resizeAdvanced2Height(logo, Math.round(ih * 1.5f));
+			final BufferedImage logoflip = StaticImageHelper.createReflectionImage(logo, true);
+
+			// offsets berechnen
+			final int offsetX = 10;
+			final int neededWidth = logo.getWidth() + iw * 12 + 11 + 2 * offsetX;
+			int w = neededWidth + 10;
+			if (w < 350)
+				w = 350;
+			final int offsetOben = 40;
+			final int offsetUnten = 30;
+			final int h = ih * 2 + offsetOben + offsetUnten;
+
+			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			final Graphics2D g2d = over.createGraphics();
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+			switch (IconCreatorFrame.globalSettings.getSmallBackgroundStyle()) {
+				default:
+				case 0:
+					drawBackground01(w, h, g2d);
+					break;
+				case 1:
+					drawBackground02(w, h, g2d);
+					break;
+			}
+
+			// Name Text
+			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+			FontMetrics metrix = g2d.getFontMetrics();
+			Rectangle2D strRect = metrix.getStringBounds(name, g2d);
+			int strxpos = (int) (Math.round(w / 2) - Math.round(strRect.getWidth() / 2));
+			g2d.setColor(Color.white);
+			g2d.drawString(name, strxpos, 25);
+			// Banner Text
+			g2d.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 10));
+			metrix = g2d.getFontMetrics();
+			strRect = metrix.getStringBounds(banner, g2d);
+			strxpos = (int) (Math.round(w / 2) - Math.round(strRect.getWidth() / 2));
+			g2d.setColor(Color.white);
+			g2d.drawString(banner, strxpos, h - 10);
+
+			int xStart = 5;
+			if (neededWidth < w) {
+				xStart = w / 2 - neededWidth / 2;
+			}
+			g2d.drawImage(logo, offsetX + xStart, offsetOben + ih - logo.getHeight(), null);
+			g2d.drawImage(logoflip, offsetX + xStart, 1 + 1 * (ih + 1) + offsetOben, null);
+
+			for (int z = 0; z <= 5; z++) {
+				final int index = z * 20;
+				final ImageIcon img = iconMap.get(index);
+				final int x = logo.getWidth() + offsetX + xStart + z * (iw + 1);
+
+				g2d.drawImage(img.getImage(), x, offsetOben, null);
+				final BufferedImage flipimg = StaticImageHelper.createReflectionImage(StaticImageHelper.convertImageIcon(img), true);
+				g2d.drawImage(flipimg, x, 1 + 1 * (ih + 1) + offsetOben, null);
+			}
+			for (int z = 0; z <= 5; z++) {
+				final int index = 101 + z * 20;
+				final int x = logo.getWidth() + offsetX + xStart + (z + 6) * (iw + 1);
+				final ImageIcon img = iconMap.get(index);
+				g2d.drawImage(img.getImage(), x, offsetOben, null);
+				final BufferedImage flipimg = StaticImageHelper.createReflectionImage(StaticImageHelper.convertImageIcon(img), true);
+				g2d.drawImage(flipimg, x, 1 + 1 * (ih + 1) + offsetOben, null);
+			}
+
+			return over;
+		}
+		return null;
+	}
+
+	public static BufferedImage createTwoLineOverview(final List<ImageIcon> iconMap, final String name) {
 		if (iconMap != null && iconMap.size() > 100) {
 			final ImageIcon img1 = iconMap.get(0);
 			final int iw = img1.getIconWidth();
