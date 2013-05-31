@@ -602,10 +602,14 @@ public class BattSettingsPanel extends SettingsPanel {
 		cboxGlowForChargeToo.setEnabled(cboxGlow.isSelected());
 
 		cboxDropShadowFont.setEnabled(cboxShowFont.isSelected());
-		sliderDropShadowOpacity.setEnabled(cboxShowFont.isSelected() && (cboxDropShadowFont.isSelected() || cboxDropShadowIcon.isSelected()));
-		sliderDropShadowBlurryness.setEnabled(cboxShowFont.isSelected() && (cboxDropShadowFont.isSelected() || cboxDropShadowIcon.isSelected()));
-		dropShadowColor.setEnabled(cboxShowFont.isSelected() && (cboxDropShadowFont.isSelected() || cboxDropShadowIcon.isSelected()));
-		dropShadowPos.setEnabled(cboxShowFont.isSelected() && (cboxDropShadowFont.isSelected() || cboxDropShadowIcon.isSelected()));
+		cboxDropShadowIcon.setEnabled(cboxShowChargeSymbol.isSelected());
+
+		final boolean enableDropshadowOptions = (cboxDropShadowFont.isEnabled() && cboxDropShadowFont.isSelected())
+				|| (cboxDropShadowIcon.isEnabled() && cboxDropShadowIcon.isSelected());
+		sliderDropShadowOpacity.setEnabled(enableDropshadowOptions);
+		sliderDropShadowBlurryness.setEnabled(enableDropshadowOptions);
+		dropShadowColor.setEnabled(enableDropshadowOptions);
+		dropShadowPos.setEnabled(enableDropshadowOptions);
 
 		textureSelector.setEnabled(cboxTexture.isSelected());
 

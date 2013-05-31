@@ -459,7 +459,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		LOGGER.info("Battery: Creating Overview!");
 		final BufferedImage over = BatteryOverviewCreator.createOverview(iconMap, getCreatorName());
 		if (over != null)
-			writeOverviewSmallFile(over);
+			writeOverviewFile(over);
 		return new ImageIcon(over);
 	}
 
