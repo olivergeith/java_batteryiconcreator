@@ -76,6 +76,7 @@ import de.og.batterycreator.creators.batt.TachoCreatorWideV3;
 import de.og.batterycreator.creators.batt.TachoCreatorWideV4;
 import de.og.batterycreator.creators.batt.TwoBarsCreator;
 import de.og.batterycreator.creators.batt.XORApfelCreator;
+import de.og.batterycreator.creators.batt.XORCenterCreator;
 import de.og.batterycreator.creators.batt.XORCircleCreator;
 import de.og.batterycreator.creators.batt.XORSquareCreator;
 import de.og.batterycreator.gui.cfg.BattSettingsPanel;
@@ -119,6 +120,7 @@ public class BatteryPanel extends JPanel {
 		// combo.addItem(new AOKPCircleModCreator(romSettings));
 		combo.addItem(new XORCircleCreator(romSettings));
 		combo.addItem(new XORSquareCreator(romSettings));
+		combo.addItem(new XORCenterCreator(romSettings));
 		combo.addItem(new BoxCreator(romSettings));
 		combo.addItem(new Box2Creator(romSettings));
 		combo.addItem(new BubbleCreator(romSettings));

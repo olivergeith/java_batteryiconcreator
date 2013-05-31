@@ -8,6 +8,7 @@ public class XorSquareSelector extends IconSelector {
 	private static final long		serialVersionUID	= -7712530632645291404L;
 
 	public static final ImageIcon	icon01				= new ImageIcon(XorSquareSelector.class.getResource("icon1.png"));
+	public static final ImageIcon	icon02				= new ImageIcon(XorSquareSelector.class.getResource("icon2.png"));
 	private final static String		customPath			= "./custom/xorSquare";
 
 	public XorSquareSelector(final int height) {
@@ -17,6 +18,7 @@ public class XorSquareSelector extends IconSelector {
 	@Override
 	public void fillStaticIcons() {
 		addItem(icon01);
+		addItem(icon02);
 	}
 
 	// /**

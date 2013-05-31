@@ -8,6 +8,7 @@ public class TextureSelector extends IconSelector {
 	private static final long		serialVersionUID	= -7712530632645291404L;
 
 	public static final ImageIcon	icon01				= new ImageIcon(TextureSelector.class.getResource("icon1.png"));
+	public static final ImageIcon	icon02				= new ImageIcon(TextureSelector.class.getResource("icon2.png"));
 	private final static String		customPath			= "./custom/textures";
 
 	public TextureSelector(final int height) {
@@ -17,6 +18,7 @@ public class TextureSelector extends IconSelector {
 	@Override
 	public void fillStaticIcons() {
 		addItem(icon01);
+		addItem(icon02);
 	}
 
 	// /**
