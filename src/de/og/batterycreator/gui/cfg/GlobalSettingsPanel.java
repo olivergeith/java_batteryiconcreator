@@ -38,6 +38,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 
 	private final LookendfeelCombobox	looks						= new LookendfeelCombobox();
 
+	private final JComboBox<String>		backgroundStyleCombo		= new JComboBox<String>();
+
 	private static final Logger			LOGGER						= LoggerFactory.getLogger(GlobalSettingsPanel.class);
 
 	// Construktor
@@ -49,6 +51,16 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		// Components
 		romPresetCombo = new RomPresetsComboBox();
 		romPresetCombo.setMaximumRowCount(20);
+		backgroundStyleCombo.addItem("Fancy Tile");
+		backgroundStyleCombo.addItem("Television");
+
+		backgroundStyleCombo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				saveSettingsToFilesystem();
+			}
+		});
 
 		// reading and saving settings
 		loadSettingsFromFilesystem();
@@ -87,7 +99,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		int row = 1;
 
 		builder.add(createOnStartSettings(), cc.xyw(1, ++row, 9));
-		builder.add(createGeneralSettings(), cc.xyw(1, ++row, 9));
+		builder.add(createMiscSettings(), cc.xyw(1, ++row, 9));
 
 		final JPanel cfp = builder.getPanel();
 		// cfp.setBorder(BorderFactory.createLineBorder(Color.black, 2));
@@ -113,7 +125,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		return hide;
 	}
 
-	private JPanel createGeneralSettings() {
+	private JPanel createMiscSettings() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
 				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
@@ -123,6 +135,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 
 		builder.add(JGoodiesHelper.createBlackLabel("Change Look&Feel to:"), cc.xyw(2, ++row, 7));
 		builder.add(looks, cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Background for small battery overviews"), cc.xyw(2, ++row, 7));
+		builder.add(backgroundStyleCombo, cc.xyw(2, ++row, 7));
 
 		final JPanel hide = new HidePanel("Misc Settings", builder.getPanel());
 		return hide;
@@ -134,6 +148,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 			romPresetCombo.setSelectedItem(settings.getRomPreset());
 			cboxShowAdvancedButton.setSelected(settings.isShowAdvancedButton());
 			cboxAlwaysWriteOverviews.setSelected(settings.isAlwaysWriteOverview());
+			backgroundStyleCombo.setSelectedIndex(settings.getSmallBackgroundStyle());
 			this.repaint();
 		}
 	}
@@ -142,6 +157,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		IconCreatorFrame.globalSettings.setRomPreset((RomPreset) romPresetCombo.getSelectedItem());
 		IconCreatorFrame.globalSettings.setShowAdvancedButton(cboxShowAdvancedButton.isSelected());
 		IconCreatorFrame.globalSettings.setAlwaysWriteOverview(cboxAlwaysWriteOverviews.isSelected());
+		IconCreatorFrame.globalSettings.setSmallBackgroundStyle(backgroundStyleCombo.getSelectedIndex());
 		return IconCreatorFrame.globalSettings;
 	}
 
@@ -168,6 +184,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		LOGGER.info("--> RomPreset to load on start: {}", set.getRomPreset().getRomName());
 		LOGGER.info("--> showAdvanced Button on start: {}", set.isShowAdvancedButton());
 		LOGGER.info("--> alwaysWriteOverviews {}", set.isAlwaysWriteOverview());
+		LOGGER.info("--> SmallBackgroundStyle {}", set.getSmallBackgroundStyle());
 	}
 
 	private void saveSettingsToFilesystem() {

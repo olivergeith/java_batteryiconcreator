@@ -102,7 +102,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		createChargeImages();
 		LOGGER.info("Battery: Creating Overview!");
 		overview = createOverview();
-		overviewSmall = createSmallOverview2();
+		overviewSmall = createSmallOverview();
 	}
 
 	private void createChargeImages() {
@@ -464,14 +464,6 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	}
 
 	public ImageIcon createSmallOverview() {
-		LOGGER.info("Battery: Creating Small Overview!");
-		final BufferedImage over = BatteryOverviewCreator.createSmallBatteryOverview(iconMap, getCreatorName());
-		if (over != null)
-			writeOverviewSmallFile(over);
-		return new ImageIcon(over);
-	}
-
-	public ImageIcon createSmallOverview2() {
 		LOGGER.info("Battery: Creating Small OverviewV2!");
 		final BufferedImage over = BatteryOverviewCreator.createSmallBatteryOverview2(iconMap, getCreatorName());
 		if (over != null)
