@@ -398,8 +398,8 @@ public class BatteryOverviewCreator {
 			g2d.fillRoundRect(10, 32, w - 20, h - 42, radius, radius);
 		}
 		// fläche
-		col1 = new Color(48, 48, 48, 255);
-		col2 = new Color(22, 22, 22, 255);
+		col1 = new Color(32, 32, 32, 255);
+		col2 = new Color(16, 16, 16, 255);
 		gradientFill = new GradientPaint(0, 0, col1, w / 2, h, col2);
 		g2d.setPaint(gradientFill);
 		if (smallframe) {
