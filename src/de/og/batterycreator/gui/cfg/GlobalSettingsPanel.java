@@ -26,21 +26,23 @@ import de.og.batterycreator.gui.widgets.RomPresetsComboBox;
 import de.og.batterycreator.main.IconCreatorFrame;
 
 public class GlobalSettingsPanel extends SettingsPanel {
-	private static final long			serialVersionUID			= 1L;
+	private static final long			serialVersionUID				= 1L;
 
 	// Presets
 	private JComboBox<RomPreset>		romPresetCombo;
-	private final JCheckBox				cboxShowAdvancedButton		= createCheckbox("Show 'Advanced Button' on startup (requires restart to take effect)",
-																			"Show 'Advanced Button' in buttonbar (requires restart to take effect)");
+	private final JCheckBox				cboxShowAdvancedButton			= createCheckbox("Show 'Advanced Button' on startup (requires restart to take effect)",
+																				"Show 'Advanced Button' in buttonbar (requires restart to take effect)");
 
-	private final JCheckBox				cboxAlwaysWriteOverviews	= createCheckbox("Always write Overview-Png's",
-																			"If selected, overviews are written to filesystem, even it the overview already exists! (May take more time on startup of the Rom Fumbler)");
+	private final JCheckBox				cboxAlwaysWriteOverviews		= createCheckbox("Always write Overview-Png's",
+																				"If selected, overviews are written to filesystem, even it the overview already exists! (May take more time on startup of the Rom Fumbler)");
 
-	private final LookendfeelCombobox	looks						= new LookendfeelCombobox();
+	private final LookendfeelCombobox	looks							= new LookendfeelCombobox();
 
-	private final JComboBox<String>		backgroundStyleCombo		= new JComboBox<String>();
+	private final JComboBox<String>		smallBackgroundStyleCombo		= new JComboBox<String>();
+	private final JComboBox<String>		smallOverviewStyleCombo			= new JComboBox<String>();
+	private final JCheckBox				cboxSmallOverviewsOtherNumbers	= createCheckbox("Small Overviews start with #5", "Small Overviews start with #5");
 
-	private static final Logger			LOGGER						= LoggerFactory.getLogger(GlobalSettingsPanel.class);
+	private static final Logger			LOGGER							= LoggerFactory.getLogger(GlobalSettingsPanel.class);
 
 	// Construktor
 	public GlobalSettingsPanel() {
@@ -48,22 +50,36 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	}
 
 	private void myInit() {
+
 		// Components
 		romPresetCombo = new RomPresetsComboBox();
 		romPresetCombo.setMaximumRowCount(20);
-		backgroundStyleCombo.addItem("Fancy Tile");
-		backgroundStyleCombo.addItem("Television");
+		smallBackgroundStyleCombo.addItem("Fancy Tile");
+		smallBackgroundStyleCombo.addItem("Television");
+		smallBackgroundStyleCombo.addItem("Television.V2");
 
-		backgroundStyleCombo.addActionListener(new ActionListener() {
+		smallOverviewStyleCombo.addItem("One line with reflection");
+		smallOverviewStyleCombo.addItem("One line");
+		smallOverviewStyleCombo.addItem("Two line");
+		smallOverviewStyleCombo.addItem("Big");
+		smallOverviewStyleCombo.addItem("Big with charge");
+		// reading and saving settings
+		loadSettingsFromFilesystem();
 
+		smallBackgroundStyleCombo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
 				saveSettingsToFilesystem();
 			}
 		});
 
-		// reading and saving settings
-		loadSettingsFromFilesystem();
+		smallOverviewStyleCombo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				saveSettingsToFilesystem();
+			}
+		});
+
 		romPresetCombo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
@@ -136,7 +152,10 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		builder.add(JGoodiesHelper.createBlackLabel("Change Look&Feel to:"), cc.xyw(2, ++row, 7));
 		builder.add(looks, cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("Background for small battery overviews"), cc.xyw(2, ++row, 7));
-		builder.add(backgroundStyleCombo, cc.xyw(2, ++row, 7));
+		builder.add(smallBackgroundStyleCombo, cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Style for small battery overviews"), cc.xyw(2, ++row, 7));
+		builder.add(smallOverviewStyleCombo, cc.xyw(2, ++row, 7));
+		builder.add(cboxSmallOverviewsOtherNumbers, cc.xyw(2, ++row, 7));
 
 		final JPanel hide = new HidePanel("Misc Settings", builder.getPanel());
 		return hide;
@@ -148,7 +167,9 @@ public class GlobalSettingsPanel extends SettingsPanel {
 			romPresetCombo.setSelectedItem(settings.getRomPreset());
 			cboxShowAdvancedButton.setSelected(settings.isShowAdvancedButton());
 			cboxAlwaysWriteOverviews.setSelected(settings.isAlwaysWriteOverview());
-			backgroundStyleCombo.setSelectedIndex(settings.getSmallBackgroundStyle());
+			smallBackgroundStyleCombo.setSelectedIndex(settings.getSmallBackgroundStyle());
+			smallOverviewStyleCombo.setSelectedIndex(settings.getSmallOverViewStyle());
+			cboxSmallOverviewsOtherNumbers.setSelected(settings.isSmallOverviewsOtherNmbers());
 			this.repaint();
 		}
 	}
@@ -157,7 +178,9 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		IconCreatorFrame.globalSettings.setRomPreset((RomPreset) romPresetCombo.getSelectedItem());
 		IconCreatorFrame.globalSettings.setShowAdvancedButton(cboxShowAdvancedButton.isSelected());
 		IconCreatorFrame.globalSettings.setAlwaysWriteOverview(cboxAlwaysWriteOverviews.isSelected());
-		IconCreatorFrame.globalSettings.setSmallBackgroundStyle(backgroundStyleCombo.getSelectedIndex());
+		IconCreatorFrame.globalSettings.setSmallBackgroundStyle(smallBackgroundStyleCombo.getSelectedIndex());
+		IconCreatorFrame.globalSettings.setSmallOverViewStyle(smallOverviewStyleCombo.getSelectedIndex());
+		IconCreatorFrame.globalSettings.setSmallOverviewsOtherNmbers(cboxSmallOverviewsOtherNumbers.isSelected());
 		return IconCreatorFrame.globalSettings;
 	}
 
@@ -185,6 +208,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		LOGGER.info("--> showAdvanced Button on start: {}", set.isShowAdvancedButton());
 		LOGGER.info("--> alwaysWriteOverviews {}", set.isAlwaysWriteOverview());
 		LOGGER.info("--> SmallBackgroundStyle {}", set.getSmallBackgroundStyle());
+		LOGGER.info("--> SmallOverviewStyle {}", set.getSmallOverViewStyle());
+		LOGGER.info("--> SmallOverviewStartWithOtherNumbers {}", set.isSmallOverviewsOtherNmbers());
 	}
 
 	private void saveSettingsToFilesystem() {

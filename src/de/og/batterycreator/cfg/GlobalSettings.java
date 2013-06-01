@@ -3,12 +3,14 @@ package de.og.batterycreator.cfg;
 import java.io.Serializable;
 
 public class GlobalSettings implements Serializable {
-	private static final long	serialVersionUID		= -1271358085998272369L;
+	private static final long	serialVersionUID			= -1271358085998273369L;
 
 	private RomPreset			romPreset;
-	private boolean				showAdvancedButton		= false;
-	private boolean				alwaysWriteOverview		= false;
-	private int					smallBackgroundStyle	= 1;
+	private boolean				showAdvancedButton			= false;
+	private boolean				alwaysWriteOverview			= false;
+	private int					smallBackgroundStyle		= 1;
+	private int					smallOverViewStyle			= 1;
+	private boolean				smallOverviewsOtherNmbers	= false;
 
 	public RomPreset getRomPreset() {
 		return romPreset;
@@ -47,6 +49,22 @@ public class GlobalSettings implements Serializable {
 	 */
 	public void setSmallBackgroundStyle(final int smallBackgroundStyle) {
 		this.smallBackgroundStyle = smallBackgroundStyle;
+	}
+
+	public int getSmallOverViewStyle() {
+		return smallOverViewStyle;
+	}
+
+	public void setSmallOverViewStyle(final int smallOverViewStyle) {
+		this.smallOverViewStyle = smallOverViewStyle;
+	}
+
+	public boolean isSmallOverviewsOtherNmbers() {
+		return smallOverviewsOtherNmbers;
+	}
+
+	public void setSmallOverviewsOtherNmbers(final boolean smallOverviewsOtherNmbers) {
+		this.smallOverviewsOtherNmbers = smallOverviewsOtherNmbers;
 	}
 
 }
