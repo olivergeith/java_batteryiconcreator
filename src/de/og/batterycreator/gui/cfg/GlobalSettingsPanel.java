@@ -57,6 +57,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		smallBackgroundStyleCombo.addItem("Fancy Tile");
 		smallBackgroundStyleCombo.addItem("Television");
 		smallBackgroundStyleCombo.addItem("Television.V2");
+		smallBackgroundStyleCombo.addItem("Frame");
+		smallBackgroundStyleCombo.addItem("Old Style");
 
 		smallOverviewStyleCombo.addItem("One line with reflection");
 		smallOverviewStyleCombo.addItem("One line");

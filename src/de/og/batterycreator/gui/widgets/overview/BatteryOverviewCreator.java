@@ -28,29 +28,31 @@ public class BatteryOverviewCreator {
 			final BufferedImage iconBlock = createBigIconBlockWithCharge(iconMap);
 			final int iw = iconBlock.getWidth();
 			final int ih = iconBlock.getHeight();
-			final int w = iw;
 			final int offsetOben = 50;
-			final int offsetUnten = 35;
+			final int offsetUnten = 30;
+			final int offsetLinks = 20;
+
+			final int w = iw + 2 * offsetLinks;
 			final int h = ih + offsetOben + offsetUnten;
 
 			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 			final Graphics2D g2d = over.createGraphics();
-			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 19));
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			g2d.setColor(Color.black);
-			g2d.fillRect(0, 0, w, h);
-			g2d.setColor(Color.white);
-			g2d.drawString(name, 2, 20);
-			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-			g2d.setColor(Color.gray);
-			g2d.drawString(banner, 2, 32);
-			g2d.drawString(IconCreatorFrame.HOMEPAGE_URL, 2, h - offsetUnten + 20);
-			g2d.setColor(Color.white);
-			g2d.fillRect(0, 40, w, 2);
-			g2d.fillRect(0, h - offsetUnten, w, 2);
-			g2d.fillRect(0, h - 2, w, 2);
 
-			g2d.drawImage(iconBlock, 1, offsetOben, null);
+			// Background
+			// drawBackgroundOldStyle(w, h, g2d, offsetOben, offsetUnten);
+			drawBackgroundBigTV(w, h, g2d, offsetOben);
+
+			// Text
+			g2d.setColor(Color.white);
+			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+			g2d.drawString(name, 10, 22);
+			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 10));
+			g2d.drawString(banner, 10, 35);
+			g2d.drawString(IconCreatorFrame.HOMEPAGE_URL, 10, 45);
+
+			// iconblock malen
+			g2d.drawImage(iconBlock, offsetLinks, offsetOben + 5, null);
 
 			return over;
 		}
@@ -102,13 +104,19 @@ public class BatteryOverviewCreator {
 			switch (IconCreatorFrame.globalSettings.getSmallBackgroundStyle()) {
 				default:
 				case 0:
-					drawBackground01(w, h, g2d);
+					drawBackground01(w, h, g2d, offsetOben - 10, offsetUnten);
 					break;
 				case 1:
-					drawBackground02(w, h, g2d, false);
+					drawBackgroundTV(w, h, g2d, false);
 					break;
 				case 2:
-					drawBackground02(w, h, g2d, true);
+					drawBackgroundTV(w, h, g2d, true);
+					break;
+				case 3:
+					drawBackgroundFrame(w, h, g2d);
+					break;
+				case 4:
+					drawBackgroundOldStyle(w, h, g2d, offsetOben - 5, offsetUnten);
 					break;
 			}
 
@@ -332,7 +340,7 @@ public class BatteryOverviewCreator {
 	// Backgrounds
 	// #########################################################################
 
-	private static void drawBackground01(final int w, final int h, final Graphics2D g2d) {
+	private static void drawBackground01(final int w, final int h, final Graphics2D g2d, final int offsetOben, final int offsetUnten) {
 		// Zurück auf normales paint
 		g2d.setPaintMode();
 		// Background
@@ -346,15 +354,15 @@ public class BatteryOverviewCreator {
 		final Color col2 = new Color(255, 255, 255, 10);
 		final GradientPaint gradientFill = new GradientPaint(-20, -30, col1, w + 40, -30, col2);
 		g2d.setPaint(gradientFill);
-		g2d.fillArc(-20, -30, w + 40, 60, 0, 360);
+		g2d.fillArc(-20, -offsetOben, w + 40, 2 * offsetOben, 0, 360);
 		g2d.setPaint(new Color(255, 255, 255, 30));
-		g2d.drawArc(-20, -30, w + 40, 60, 0, 360);
+		g2d.drawArc(-20, -offsetOben, w + 40, 2 * offsetOben, 0, 360);
 		// Zurück auf normales paint
 		g2d.setPaintMode();
 
 	}
 
-	private static void drawBackground02(final int w, final int h, final Graphics2D g2d, final boolean smallframe) {
+	private static void drawBackgroundTV(final int w, final int h, final Graphics2D g2d, final boolean smallframe) {
 		// Zurück auf normales paint
 		g2d.setPaintMode();
 		// Background
@@ -375,14 +383,14 @@ public class BatteryOverviewCreator {
 		// Reflektion
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 1f));
 		col1 = new Color(192, 192, 192, 192);
-		col2 = new Color(32, 32, 32, 192);
+		col2 = new Color(32, 32, 32, 0);
 		gradientFill = new GradientPaint(0, 0, col2, w / 2, 0, col1);
 		g2d.setPaint(gradientFill);
 		final Polygon p = new Polygon();
 		p.addPoint(3, 3);
 		p.addPoint(3, h - 3);
-		p.addPoint(w / 2 - 30, h - 3);
-		p.addPoint(w / 2 + 30, 3);
+		p.addPoint((int) Math.round(w * 0.33333), h - 3);
+		p.addPoint((int) Math.round(w * 0.66666), 3);
 		g2d.fillPolygon(p);
 		// Zurück auf normales paint
 		g2d.setPaintMode();
@@ -410,7 +418,124 @@ public class BatteryOverviewCreator {
 
 		// Zurück auf normales paint
 		g2d.setPaintMode();
+	}
 
+	private static void drawBackgroundOldStyle(final int w, final int h, final Graphics2D g2d, final int offsetOben, final int offsetUnten) {
+		// Zurück auf normales paint
+		g2d.setPaintMode();
+
+		// Background
+		g2d.setColor(Color.black);
+		g2d.fillRect(0, 0, w, h);
+
+		// deviderlines
+		g2d.setColor(Color.white);
+		g2d.fillRect(0, offsetOben - 2, w, 2);
+		g2d.fillRect(0, h - offsetUnten, w, 2);
+		g2d.fillRect(0, h - 2, w, 2);
+
+		// Zurück auf normales paint
+		g2d.setPaintMode();
+	}
+
+	private static void drawBackgroundBigTV(final int w, final int h, final Graphics2D g2d, final int offsetOben) {
+		// Zurück auf normales paint
+		g2d.setPaintMode();
+		// Background
+		final int radius = 12;
+
+		Color col1 = new Color(92, 92, 92, 255);
+		Color col2 = new Color(32, 32, 32, 255);
+		GradientPaint gradientFill = new GradientPaint(0, 0, col1, 0, h, col2);
+		g2d.setPaint(gradientFill);
+		g2d.fillRoundRect(1, 1, w - 2, h - 2, radius + 3, radius + 3);
+
+		col1 = new Color(64, 64, 64, 255);
+		col2 = new Color(32, 32, 32, 255);
+		gradientFill = new GradientPaint(0, 0, col1, w, h, col2);
+		g2d.setPaint(gradientFill);
+		g2d.fillRoundRect(3, 3, w - 6, h - 6, radius + 3, radius + 3);
+
+		// Reflektion
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 1f));
+		col1 = new Color(192, 192, 192, 192);
+		col2 = new Color(32, 32, 32, 0);
+		gradientFill = new GradientPaint(0, 0, col2, w / 2, 0, col1);
+		g2d.setPaint(gradientFill);
+		final Polygon p = new Polygon();
+		p.addPoint(3, 3);
+		p.addPoint(3, h - 3);
+		p.addPoint((int) Math.round(w * 0.33333), h - 3);
+		p.addPoint((int) Math.round(w * 0.66666), 3);
+		g2d.fillPolygon(p);
+		// Zurück auf normales paint
+		g2d.setPaintMode();
+
+		// innerer rand
+		col1 = new Color(92, 92, 92, 255);
+		col2 = new Color(32, 32, 32, 255);
+		gradientFill = new GradientPaint(0, 0, col2, 0, h, col1);
+		g2d.setPaint(gradientFill);
+		g2d.fillRoundRect(15, offsetOben, w - 30, h - offsetOben - 15, radius, radius);
+		// fläche
+		col1 = new Color(32, 32, 32, 255);
+		col2 = new Color(16, 16, 16, 255);
+		gradientFill = new GradientPaint(0, 0, col1, w / 2, h, col2);
+		g2d.setPaint(gradientFill);
+		g2d.fillRoundRect(16, offsetOben + 1, w - 32, h - offsetOben - 17, radius, radius);
+
+		// Zurück auf normales paint
+		g2d.setPaintMode();
+	}
+
+	private static void drawBackgroundFrame(final int w, final int h, final Graphics2D g2d) {
+		// Zurück auf normales paint
+		g2d.setPaintMode();
+		// Background
+		final int radius = 20;
+		final int offsetOben = 40;
+
+		g2d.setPaint(Color.gray);
+		g2d.fillRoundRect(1, 1, w - 2, h - 2, radius + 6, radius + 6);
+
+		Color col1 = new Color(32, 32, 32, 255);
+		Color col2 = new Color(92, 92, 92, 255);
+		GradientPaint gradientFill = new GradientPaint(0, h / 2, col1, 0, h, col2);
+		g2d.setPaint(gradientFill);
+		g2d.fillRoundRect(2, 2, w - 4, h - 4, radius + 6, radius + 6);
+
+		gradientFill = new GradientPaint(0, 0, col2, 0, h / 2, col1);
+		g2d.setPaint(gradientFill);
+		g2d.fillRoundRect(8, 8, w - 16, h - 16, radius + 2, radius + 2);
+
+		// Reflektion
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 1f));
+
+		col1 = new Color(192, 192, 192, 255);
+		col2 = new Color(32, 32, 32, 128);
+		gradientFill = new GradientPaint(0, 0, col2, 0, 2 * offsetOben, col1);
+		g2d.setPaint(gradientFill);
+		g2d.fillArc(-50, -offsetOben, w + 100, 3 * offsetOben, 0, 360);
+		g2d.setPaint(new Color(255, 255, 255, 30));
+		g2d.drawArc(-50, -offsetOben, w + 100, 3 * offsetOben, 0, 360);
+		// Zurück auf normales paint
+		g2d.setPaintMode();
+
+		// innerer rand
+		col1 = new Color(64, 64, 64, 64);
+		col2 = new Color(32, 32, 32, 255);
+		gradientFill = new GradientPaint(0, 0, col2, 0, h, col1);
+		g2d.setPaint(gradientFill);
+		g2d.fillRoundRect(10, 10, w - 20, h - 20, radius, radius);
+		// fläche
+		col1 = new Color(32, 32, 32, 255);
+		col2 = new Color(16, 16, 16, 255);
+		gradientFill = new GradientPaint(0, 0, col1, w / 2, h, col2);
+		g2d.setPaint(gradientFill);
+		g2d.fillRoundRect(11, 11, w - 22, h - 22, radius, radius);
+
+		// Zurück auf normales paint
+		g2d.setPaintMode();
 	}
 
 }
