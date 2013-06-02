@@ -11,6 +11,7 @@ public class GlobalSettings implements Serializable {
 	private int					smallBackgroundStyle		= 1;
 	private int					smallOverViewStyle			= 1;
 	private boolean				smallOverviewsOtherNmbers	= false;
+	private int					bigBackgroundStyle			= 0;
 
 	public RomPreset getRomPreset() {
 		return romPreset;
@@ -65,6 +66,14 @@ public class GlobalSettings implements Serializable {
 
 	public void setSmallOverviewsOtherNmbers(final boolean smallOverviewsOtherNmbers) {
 		this.smallOverviewsOtherNmbers = smallOverviewsOtherNmbers;
+	}
+
+	public int getBigBackgroundStyle() {
+		return bigBackgroundStyle;
+	}
+
+	public void setBigBackgroundStyle(final int bigBackgroundStyle) {
+		this.bigBackgroundStyle = bigBackgroundStyle;
 	}
 
 }
