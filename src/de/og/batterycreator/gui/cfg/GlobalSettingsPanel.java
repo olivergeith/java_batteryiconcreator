@@ -41,6 +41,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	private final JComboBox<String>		smallBackgroundStyleCombo		= new JComboBox<String>();
 	private final JComboBox<String>		smallOverviewStyleCombo			= new JComboBox<String>();
 	private final JCheckBox				cboxSmallOverviewsOtherNumbers	= createCheckbox("Small Overviews start with #5", "Small Overviews start with #5");
+	private final JComboBox<String>		bigBackgroundStyleCombo			= new JComboBox<String>();
 
 	private static final Logger			LOGGER							= LoggerFactory.getLogger(GlobalSettingsPanel.class);
 
@@ -54,6 +55,10 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		// Components
 		romPresetCombo = new RomPresetsComboBox();
 		romPresetCombo.setMaximumRowCount(20);
+
+		bigBackgroundStyleCombo.addItem("Oldstyle");
+		bigBackgroundStyleCombo.addItem("Television");
+
 		smallBackgroundStyleCombo.addItem("Fancy Tile");
 		smallBackgroundStyleCombo.addItem("Television");
 		smallBackgroundStyleCombo.addItem("Television.V2");
@@ -67,6 +72,13 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		smallOverviewStyleCombo.addItem("Big with charge");
 		// reading and saving settings
 		loadSettingsFromFilesystem();
+
+		bigBackgroundStyleCombo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				saveSettingsToFilesystem();
+			}
+		});
 
 		smallBackgroundStyleCombo.addActionListener(new ActionListener() {
 			@Override
@@ -153,6 +165,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 
 		builder.add(JGoodiesHelper.createBlackLabel("Change Look&Feel to:"), cc.xyw(2, ++row, 7));
 		builder.add(looks, cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Background for battery overviews"), cc.xyw(2, ++row, 7));
+		builder.add(bigBackgroundStyleCombo, cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("Background for small battery overviews"), cc.xyw(2, ++row, 7));
 		builder.add(smallBackgroundStyleCombo, cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("Style for small battery overviews"), cc.xyw(2, ++row, 7));
@@ -169,6 +183,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 			romPresetCombo.setSelectedItem(settings.getRomPreset());
 			cboxShowAdvancedButton.setSelected(settings.isShowAdvancedButton());
 			cboxAlwaysWriteOverviews.setSelected(settings.isAlwaysWriteOverview());
+			bigBackgroundStyleCombo.setSelectedIndex(settings.getBigBackgroundStyle());
 			smallBackgroundStyleCombo.setSelectedIndex(settings.getSmallBackgroundStyle());
 			smallOverviewStyleCombo.setSelectedIndex(settings.getSmallOverViewStyle());
 			cboxSmallOverviewsOtherNumbers.setSelected(settings.isSmallOverviewsOtherNmbers());
@@ -180,6 +195,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		IconCreatorFrame.globalSettings.setRomPreset((RomPreset) romPresetCombo.getSelectedItem());
 		IconCreatorFrame.globalSettings.setShowAdvancedButton(cboxShowAdvancedButton.isSelected());
 		IconCreatorFrame.globalSettings.setAlwaysWriteOverview(cboxAlwaysWriteOverviews.isSelected());
+		IconCreatorFrame.globalSettings.setBigBackgroundStyle(bigBackgroundStyleCombo.getSelectedIndex());
 		IconCreatorFrame.globalSettings.setSmallBackgroundStyle(smallBackgroundStyleCombo.getSelectedIndex());
 		IconCreatorFrame.globalSettings.setSmallOverViewStyle(smallOverviewStyleCombo.getSelectedIndex());
 		IconCreatorFrame.globalSettings.setSmallOverviewsOtherNmbers(cboxSmallOverviewsOtherNumbers.isSelected());
@@ -209,6 +225,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		LOGGER.info("--> RomPreset to load on start: {}", set.getRomPreset().getRomName());
 		LOGGER.info("--> showAdvanced Button on start: {}", set.isShowAdvancedButton());
 		LOGGER.info("--> alwaysWriteOverviews {}", set.isAlwaysWriteOverview());
+		LOGGER.info("--> BigBackgroundStyle {}", set.getBigBackgroundStyle());
 		LOGGER.info("--> SmallBackgroundStyle {}", set.getSmallBackgroundStyle());
 		LOGGER.info("--> SmallOverviewStyle {}", set.getSmallOverViewStyle());
 		LOGGER.info("--> SmallOverviewStartWithOtherNumbers {}", set.isSmallOverviewsOtherNmbers());

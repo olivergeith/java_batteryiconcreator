@@ -23,6 +23,51 @@ public class BatteryOverviewCreator {
 	}
 
 	public static BufferedImage createOverview(final List<ImageIcon> iconMap, final String name) {
+		switch (IconCreatorFrame.globalSettings.getBigBackgroundStyle()) {
+			default:
+			case 0:
+				return createOverviewOldstyle(iconMap, name);
+			case 1:
+				return createOverviewNewStyle(iconMap, name);
+		}
+	}
+
+	public static BufferedImage createOverviewOldstyle(final List<ImageIcon> iconMap, final String name) {
+		if (iconMap != null && iconMap.size() > 100) {
+
+			final BufferedImage iconBlock = createBigIconBlockWithCharge(iconMap);
+			final int iw = iconBlock.getWidth();
+			final int ih = iconBlock.getHeight();
+			final int w = iw;
+			final int offsetOben = 50;
+			final int offsetUnten = 35;
+			final int h = ih + offsetOben + offsetUnten;
+
+			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			final Graphics2D g2d = over.createGraphics();
+			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 19));
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g2d.setColor(Color.black);
+			g2d.fillRect(0, 0, w, h);
+			g2d.setColor(Color.white);
+			g2d.drawString(name, 2, 20);
+			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+			g2d.setColor(Color.gray);
+			g2d.drawString(banner, 2, 32);
+			g2d.drawString(IconCreatorFrame.HOMEPAGE_URL, 2, h - offsetUnten + 20);
+			g2d.setColor(Color.white);
+			g2d.fillRect(0, 40, w, 2);
+			g2d.fillRect(0, h - offsetUnten, w, 2);
+			g2d.fillRect(0, h - 2, w, 2);
+
+			g2d.drawImage(iconBlock, 1, offsetOben, null);
+
+			return over;
+		}
+		return null;
+	}
+
+	public static BufferedImage createOverviewNewStyle(final List<ImageIcon> iconMap, final String name) {
 		if (iconMap != null && iconMap.size() > 100) {
 
 			final BufferedImage iconBlock = createBigIconBlockWithCharge(iconMap);
