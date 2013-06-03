@@ -118,8 +118,7 @@ public class LockHandlePanel extends JPanel implements IconProviderInterface {
 			overPane.setText("   This will be your lockring");
 		} else {
 			overPane.setText("   Choose Lockring from Dropdownbox");
-			overPane.setOverview(icon);
-			overPane.setOverview(overview);
+			overPane.setOverview(overview, 30);
 		}
 
 	}
@@ -173,7 +172,7 @@ public class LockHandlePanel extends JPanel implements IconProviderInterface {
 			for (final File fi : pngs) {
 				handleList.add(new ImageIcon(fi.getPath()));
 			}
-			overview = OverviewCreator.createResizedOverviewIcon(handleList.subList(1, handleList.size() - 1), "Lockrings", 800);
+			overview = OverviewCreator.createOverviewIcon(handleList.subList(1, handleList.size() - 1), "Lockrings");
 			writeOverview(overview, "Lockrings");
 		}
 		return handleList;

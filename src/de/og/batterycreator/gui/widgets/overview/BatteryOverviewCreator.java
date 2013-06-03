@@ -9,7 +9,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import javax.swing.ImageIcon;
-import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.main.IconCreatorFrame;
 
 public class BatteryOverviewCreator extends OverviewCreator {
@@ -30,7 +29,7 @@ public class BatteryOverviewCreator extends OverviewCreator {
 	public static BufferedImage createOverviewOldstyle(final List<ImageIcon> iconMap, final String name) {
 		if (iconMap != null && iconMap.size() > 100) {
 
-			final BufferedImage iconBlock = createBigIconBlockWithCharge(iconMap);
+			final BufferedImage iconBlock = StaticIconGridCreator.createBatteryIconBlockWithCharge(iconMap);
 			final int iw = iconBlock.getWidth();
 			final int ih = iconBlock.getHeight();
 			final int w = iw;
@@ -65,7 +64,7 @@ public class BatteryOverviewCreator extends OverviewCreator {
 	public static BufferedImage createOverviewNewStyle(final List<ImageIcon> iconMap, final String name) {
 		if (iconMap != null && iconMap.size() > 100) {
 
-			final BufferedImage iconBlock = createBigIconBlockWithCharge(iconMap);
+			final BufferedImage iconBlock = StaticIconGridCreator.createBatteryIconBlockWithCharge(iconMap);
 			final int iw = iconBlock.getWidth();
 			final int ih = iconBlock.getHeight();
 			final int offsetOben = 50;
@@ -107,21 +106,20 @@ public class BatteryOverviewCreator extends OverviewCreator {
 			switch (IconCreatorFrame.globalSettings.getSmallOverViewStyle()) {
 				default:
 				case 0:
-					iconBlock = createOneLineIconBlockWithReflection(iconMap);
+					iconBlock = StaticIconGridCreator.createBatteryOneLineGrid(iconMap, true);
 					break;
 				case 1:
-					iconBlock = createOneLineIconBlock(iconMap);
+					iconBlock = StaticIconGridCreator.createBatteryOneLineGrid(iconMap, false);
 					break;
 				case 2:
-					iconBlock = createTwoLineSmallIconBlock(iconMap);
+					iconBlock = StaticIconGridCreator.createBatteryTwoLineGrid(iconMap);
 					break;
 				case 3:
-					iconBlock = createBigIconBlock(iconMap);
+					iconBlock = StaticIconGridCreator.createBigGrid(iconMap, 101);
 					break;
 				case 4:
-					iconBlock = createBigIconBlockWithCharge(iconMap);
+					iconBlock = StaticIconGridCreator.createBatteryIconBlockWithCharge(iconMap);
 					break;
-
 			}
 
 			// Grössen berechnen
@@ -185,195 +183,13 @@ public class BatteryOverviewCreator extends OverviewCreator {
 	// #########################################################################
 	// IconBlocks
 	// #########################################################################
-	private static BufferedImage createTwoLineSmallIconBlock(final List<ImageIcon> iconMap) {
-		if (iconMap != null && iconMap.size() > 100) {
-			final ImageIcon img1 = iconMap.get(0);
-			final int iw = img1.getIconWidth();
-			final int ih = img1.getIconHeight();
 
-			final int w = iw * 6 + 7;
-			final int h = ih * 2 + 3;
-
-			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-			final Graphics2D g2d = over.createGraphics();
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			// normal Icon
-			for (int z = 0; z <= 5; z++) {
-				int index = z * 20;
-				if (IconCreatorFrame.globalSettings.isSmallOverviewsOtherNmbers())
-					index = index + 5 - z;
-				final ImageIcon img = iconMap.get(index);
-				g2d.drawImage(img.getImage(), 1 + z * (iw + 1), 1, null);
-			}
-
-			// // Charge Icons
-			for (int z = 0; z <= 5; z++) {
-				int index = 101 + z * 20;
-				if (IconCreatorFrame.globalSettings.isSmallOverviewsOtherNmbers())
-					index = index + 5 - z;
-				final ImageIcon imgc = iconMap.get(index);
-				g2d.drawImage(imgc.getImage(), 1 + z * (iw + 1), 1 + 1 * (ih + 1), null);
-			}
-
-			return over;
-		}
-		return null;
-	}
-
-	private static BufferedImage createOneLineIconBlockWithReflection(final List<ImageIcon> iconMap) {
-		if (iconMap != null && iconMap.size() > 100) {
-			final ImageIcon img1 = iconMap.get(0);
-			final int iw = img1.getIconWidth();
-			final int ih = img1.getIconHeight();
-
-			// // Logo basteln
-			// BufferedImage logo =
-			// StaticImageHelper.convertImageIcon(IconStore.logoIcon);
-			// logo = StaticImageHelper.resizeAdvanced2Height(logo,
-			// Math.round(ih * 1.5f));
-			// final BufferedImage logoflip =
-			// StaticImageHelper.createReflectionImage(logo, true);
-
-			// offsets berechnen
-			final int w = iw * 12 + 13;
-			final int h = ih * 2 + 3;
-
-			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-			final Graphics2D g2d = over.createGraphics();
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			// g2d.drawImage(logo, offsetX + xStart, offsetOben + ih -
-			// logo.getHeight(), null);
-			// g2d.drawImage(logoflip, offsetX + xStart, 1 + 1 * (ih + 1) +
-			// offsetOben, null);
-
-			for (int z = 0; z <= 5; z++) {
-				int index = z * 20;
-				if (IconCreatorFrame.globalSettings.isSmallOverviewsOtherNmbers())
-					index = index + 5 - z;
-				final ImageIcon img = iconMap.get(index);
-				final int x = 1 + z * (iw + 1);
-
-				g2d.drawImage(img.getImage(), x, 1, null);
-				final BufferedImage flipimg = StaticImageHelper.createReflectionImage(StaticImageHelper.convertImageIcon(img), true);
-				g2d.drawImage(flipimg, x, 1 + 1 * (ih + 1), null);
-			}
-			for (int z = 0; z <= 5; z++) {
-				int index = 101 + z * 20;
-				if (IconCreatorFrame.globalSettings.isSmallOverviewsOtherNmbers())
-					index = index + 5 - z;
-				final int x = 1 + (z + 6) * (iw + 1);
-				final ImageIcon img = iconMap.get(index);
-				g2d.drawImage(img.getImage(), x, 1, null);
-				final BufferedImage flipimg = StaticImageHelper.createReflectionImage(StaticImageHelper.convertImageIcon(img), true);
-				g2d.drawImage(flipimg, x, 1 + 1 * (ih + 1), null);
-			}
-
-			return over;
-		}
-		return null;
-	}
-
-	private static BufferedImage createOneLineIconBlock(final List<ImageIcon> iconMap) {
-		if (iconMap != null && iconMap.size() > 100) {
-			final ImageIcon img1 = iconMap.get(0);
-			final int iw = img1.getIconWidth();
-			final int ih = img1.getIconHeight();
-
-			// offsets berechnen
-			final int w = iw * 12 + 13;
-			final int h = ih + 2;
-
-			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-			final Graphics2D g2d = over.createGraphics();
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			for (int z = 0; z <= 5; z++) {
-				int index = z * 20;
-				if (IconCreatorFrame.globalSettings.isSmallOverviewsOtherNmbers())
-					index = index + 5 - z;
-				final ImageIcon img = iconMap.get(index);
-				final int x = 1 + z * (iw + 1);
-				g2d.drawImage(img.getImage(), x, 1, null);
-			}
-			for (int z = 0; z <= 5; z++) {
-				int index = 101 + z * 20;
-				if (IconCreatorFrame.globalSettings.isSmallOverviewsOtherNmbers())
-					index = index + 5 - z;
-				final int x = 1 + (z + 6) * (iw + 1);
-				final ImageIcon img = iconMap.get(index);
-				g2d.drawImage(img.getImage(), x, 1, null);
-			}
-
-			return over;
-		}
-		return null;
-	}
-
-	public static BufferedImage createBigIconBlock(final List<ImageIcon> iconMap) {
-		if (iconMap != null && iconMap.size() > 100) {
-			final ImageIcon img1 = iconMap.get(0);
-			final int iw = img1.getIconWidth();
-			final int ih = img1.getIconHeight();
-			final int w = iw * 10 + 12;
-			final int h = ih * 11 + 13;
-
-			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-			final Graphics2D g2d = over.createGraphics();
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			for (int z = 0; z < 10; z++) {
-				for (int e = 0; e < 10; e++) {
-					final int index = z * 10 + e;
-					final ImageIcon img = iconMap.get(index);
-					g2d.drawImage(img.getImage(), 1 + e * (iw + 1), 1 + z * (ih + 1), null);
-				}
-			}
-			final ImageIcon img = iconMap.get(100);
-			g2d.drawImage(img.getImage(), 1 + 0 * iw, 1 + 10 * (ih + 1), null);
-
-			return over;
-		}
-		return null;
-	}
-
-	public static BufferedImage createBigIconBlockWithCharge(final List<ImageIcon> iconMap) {
-		if (iconMap != null && iconMap.size() > 100) {
-			final ImageIcon img1 = iconMap.get(0);
-			final int iw = img1.getIconWidth();
-			final int ih = img1.getIconHeight();
-			final int w = iw * 20 + 22;
-			final int h = ih * 11 + 13;
-
-			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-			final Graphics2D g2d = over.createGraphics();
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			for (int z = 0; z < 10; z++) {
-				for (int e = 0; e < 10; e++) {
-					final int index = z * 10 + e;
-					final ImageIcon img = iconMap.get(index);
-					g2d.drawImage(img.getImage(), 1 + e * (iw + 1), 1 + z * (ih + 1), null);
-				}
-			}
-			final ImageIcon img = iconMap.get(100);
-			g2d.drawImage(img.getImage(), 1 + 0 * iw, 1 + 10 * (ih + 1), null);
-
-			// // Charge Icons
-			for (int z = 0; z < 10; z++) {
-				for (int e = 0; e < 10; e++) {
-					final int index = 101 + z * 10 + e;
-					final ImageIcon imgc = iconMap.get(index);
-					g2d.drawImage(imgc.getImage(), 1 + 10 * (iw + 1) + e * (iw + 1), 1 + z * (ih + 1), null);
-				}
-			}
-			final ImageIcon img100c = iconMap.get(201);
-			g2d.drawImage(img100c.getImage(), 1 + 10 * (iw + 1) + 0 * iw, 1 + 10 * (ih + 1), null);
-
-			return over;
-		}
-		return null;
-	}
+	// // // Logo basteln
+	// // BufferedImage logo =
+	// // StaticImageHelper.convertImageIcon(IconStore.logoIcon);
+	// // logo = StaticImageHelper.resizeAdvanced2Height(logo,
+	// // Math.round(ih * 1.5f));
+	// // final BufferedImage logoflip =
+	// // StaticImageHelper.createReflectionImage(logo, true);
 
 }

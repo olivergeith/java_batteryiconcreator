@@ -23,20 +23,6 @@ public class OverviewCreator {
 	public OverviewCreator() {
 	}
 
-	public static ImageIcon createResizedOverviewIcon(final List<ImageIcon> iconMap, final String name, final int size) {
-		final BufferedImage bimg = createResizedOverviewImage(iconMap, name, size);
-		if (bimg != null)
-			return new ImageIcon(bimg);
-		return null;
-	}
-
-	public static BufferedImage createResizedOverviewImage(final List<ImageIcon> iconMap, final String name, final int size) {
-		final BufferedImage bimg = createOverviewImage(iconMap, name);
-		if (bimg != null)
-			return StaticImageHelper.resizeLongestSide2Size(bimg, size);
-		return null;
-	}
-
 	public static ImageIcon createOverviewIcon(final List<ImageIcon> iconMap, final String name) {
 		final BufferedImage bimg = createOverviewImage(iconMap, name);
 		if (bimg != null)
@@ -148,13 +134,13 @@ public class OverviewCreator {
 			switch (style) {
 				default:
 				case 0:
-					iconBlock = createOneLineIconBlock(iconMap, iconMap.size(), true);
+					iconBlock = StaticIconGridCreator.createBatteryOneLineGrid(iconMap, true);
 					break;
 				case 1:
-					iconBlock = createOneLineIconBlock(iconMap, iconMap.size(), false);
+					iconBlock = StaticIconGridCreator.createBatteryOneLineGrid(iconMap, false);
 					break;
 				case 2:
-					iconBlock = createBigIconBlock(iconMap);
+					iconBlock = StaticIconGridCreator.createBigGrid(iconMap);
 					break;
 
 			}
@@ -217,92 +203,106 @@ public class OverviewCreator {
 		return null;
 	}
 
+	// //
 	// #########################################################################
-	// IconBlocks
+	// // IconBlocks
+	// //
 	// #########################################################################
-
-	public static BufferedImage createOneLineIconBlock(final List<ImageIcon> iconMap, final int maxanz, final boolean drawReflection) {
-		if (iconMap != null && iconMap.size() > 0) {
-			final int anzahl = Math.min(maxanz, iconMap.size());
-
-			final ImageIcon img1 = iconMap.get(0);
-			final int iw = img1.getIconWidth();
-
-			final int ih = img1.getIconHeight();
-
-			// offsets berechnen
-			final int w = iw * anzahl + (anzahl + 2);
-			int h = 1 * ih + 2;
-			if (drawReflection)
-				h = 2 * ih + 3;
-
-			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-			final Graphics2D g2d = over.createGraphics();
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			// Lopp über alle Bilder
-			for (int i = 0; i < anzahl; i++) {
-				final ImageIcon img = iconMap.get(i);
-				final int x = 1 + i * (iw + 1);
-				if (drawReflection) {
-					g2d.drawImage(img.getImage(), x, 1, null);
-					final BufferedImage flipimg = StaticImageHelper.createReflectionImage(StaticImageHelper.convertImageIcon(img), true);
-					g2d.drawImage(flipimg, x, 1 + 1 * (ih + 1), null);
-				}
-			}
-			return over;
-		}
-		return null;
-	}
-
-	public static BufferedImage createBigIconBlock(final List<ImageIcon> iconMap) {
-		if (iconMap != null && iconMap.size() > 0) {
-			final ImageIcon img1 = iconMap.get(0);
-			final int iw = img1.getIconWidth();
-			final int ih = img1.getIconHeight();
-			final int w = iw * 10 + 11;
-			final int volleZehner = iconMap.size() / 10 + 1;
-			final int h = ih * volleZehner + (volleZehner + 1);
-
-			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-			final Graphics2D g2d = over.createGraphics();
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			// Lopp über alle Bilder
-			for (int i = 0; i < iconMap.size(); i++) {
-				final int z = i / 10;
-				final int e = i % 10;
-				final int index = z * 10 + e;
-				final ImageIcon img = iconMap.get(index);
-				g2d.drawImage(img.getImage(), 1 + e * (iw + 1), 1 + z * (ih + 1), null);
-			}
-			return over;
-		}
-		return null;
-	}
-
-	public static BufferedImage createIconBlockWithFilenames(final List<ImageIcon> iconMap, final List<String> filenames, final String name) {
-		if (iconMap != null && iconMap.size() > 0) {
-			final ImageIcon img1 = iconMap.get(0);
-			final int iw = img1.getIconWidth();
-			final int ih = img1.getIconHeight();
-			final int w = iw * 10 + 21;
-			final int h = ih * iconMap.size() + iconMap.size() + 1;
-
-			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-			final Graphics2D g2d = over.createGraphics();
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			g2d.setColor(Color.white);
-			for (int i = 0; i < iconMap.size(); i++) {
-				final ImageIcon img = iconMap.get(i);
-				g2d.drawImage(img.getImage(), 1, 1 + i * (ih + 1), null);
-				g2d.drawString(filenames.get(i), 5 + iw, (i + 1) * (ih + 1) - 4);
-			}
-			return over;
-		}
-		return null;
-	}
+	//
+	// public static BufferedImage createOneLineIconBlock(final List<ImageIcon>
+	// iconMap, final int maxanz, final boolean drawReflection) {
+	// if (iconMap != null && iconMap.size() > 0) {
+	// final int anzahl = Math.min(maxanz, iconMap.size());
+	//
+	// final ImageIcon img1 = iconMap.get(0);
+	// final int iw = img1.getIconWidth();
+	//
+	// final int ih = img1.getIconHeight();
+	//
+	// // offsets berechnen
+	// final int w = iw * anzahl + (anzahl + 2);
+	// int h = 1 * ih + 2;
+	// if (drawReflection)
+	// h = 2 * ih + 3;
+	//
+	// final BufferedImage over = new BufferedImage(w, h,
+	// BufferedImage.TYPE_INT_ARGB);
+	// final Graphics2D g2d = over.createGraphics();
+	// g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+	// RenderingHints.VALUE_ANTIALIAS_ON);
+	//
+	// // Lopp über alle Bilder
+	// for (int i = 0; i < anzahl; i++) {
+	// final ImageIcon img = iconMap.get(i);
+	// final int x = 1 + i * (iw + 1);
+	// if (drawReflection) {
+	// g2d.drawImage(img.getImage(), x, 1, null);
+	// final BufferedImage flipimg =
+	// StaticImageHelper.createReflectionImage(StaticImageHelper.convertImageIcon(img),
+	// true);
+	// g2d.drawImage(flipimg, x, 1 + 1 * (ih + 1), null);
+	// }
+	// }
+	// return over;
+	// }
+	// return null;
+	// }
+	//
+	// public static BufferedImage createBigIconBlock(final List<ImageIcon>
+	// iconMap) {
+	// if (iconMap != null && iconMap.size() > 0) {
+	// final ImageIcon img1 = iconMap.get(0);
+	// final int iw = img1.getIconWidth();
+	// final int ih = img1.getIconHeight();
+	// final int w = iw * 10 + 11;
+	// final int volleZehner = iconMap.size() / 10 + 1;
+	// final int h = ih * volleZehner + (volleZehner + 1);
+	//
+	// final BufferedImage over = new BufferedImage(w, h,
+	// BufferedImage.TYPE_INT_ARGB);
+	// final Graphics2D g2d = over.createGraphics();
+	// g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+	// RenderingHints.VALUE_ANTIALIAS_ON);
+	//
+	// // Lopp über alle Bilder
+	// for (int i = 0; i < iconMap.size(); i++) {
+	// final int z = i / 10;
+	// final int e = i % 10;
+	// final int index = z * 10 + e;
+	// final ImageIcon img = iconMap.get(index);
+	// g2d.drawImage(img.getImage(), 1 + e * (iw + 1), 1 + z * (ih + 1), null);
+	// }
+	// return over;
+	// }
+	// return null;
+	// }
+	//
+	// public static BufferedImage createIconBlockWithFilenames(final
+	// List<ImageIcon> iconMap, final List<String> filenames, final String name)
+	// {
+	// if (iconMap != null && iconMap.size() > 0) {
+	// final ImageIcon img1 = iconMap.get(0);
+	// final int iw = img1.getIconWidth();
+	// final int ih = img1.getIconHeight();
+	// final int w = iw * 10 + 21;
+	// final int h = ih * iconMap.size() + iconMap.size() + 1;
+	//
+	// final BufferedImage over = new BufferedImage(w, h,
+	// BufferedImage.TYPE_INT_ARGB);
+	// final Graphics2D g2d = over.createGraphics();
+	// g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+	// RenderingHints.VALUE_ANTIALIAS_ON);
+	//
+	// g2d.setColor(Color.white);
+	// for (int i = 0; i < iconMap.size(); i++) {
+	// final ImageIcon img = iconMap.get(i);
+	// g2d.drawImage(img.getImage(), 1, 1 + i * (ih + 1), null);
+	// g2d.drawString(filenames.get(i), 5 + iw, (i + 1) * (ih + 1) - 4);
+	// }
+	// return over;
+	// }
+	// return null;
+	// }
 
 	// #########################################################################
 	// Backgrounds

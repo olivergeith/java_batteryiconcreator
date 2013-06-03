@@ -28,7 +28,6 @@ public class IconSet {
 	private final Vector<ImageIcon>	icons				= new Vector<ImageIcon>();
 
 	private ImageIcon				overview;
-	private ImageIcon				overviewsmall;
 	private ImageIcon				iconStripe;
 	private final File				rootDir;
 
@@ -57,7 +56,6 @@ public class IconSet {
 				filenamesAndPath.add(png.getPath());
 			}
 			overview = OverviewCreator.createOverviewIcon(icons, getName());
-			overviewsmall = OverviewCreator.createResizedOverviewIcon(icons, getName(), 600);
 			iconStripe = OverviewCreator.createResizedStripeIcon(icons, getName(), 5, 32);
 			writeOverview(overview, getName());
 		}
@@ -94,13 +92,6 @@ public class IconSet {
 	 */
 	public ImageIcon getOverview() {
 		return overview;
-	}
-
-	/**
-	 * @return the overviewsmall
-	 */
-	public ImageIcon getOverviewsmall() {
-		return overviewsmall;
 	}
 
 	/**
@@ -146,7 +137,7 @@ public class IconSet {
 		// final IconSet set = new IconSet(new
 		// File("./custom/weather/(AOKP) RR Weather HTC Home Weather"));
 		final IconSet set = new IconSet(new File("./custom/lockhandles"));
-		f.add(new JLabel(set.getOverviewsmall()), BorderLayout.CENTER);
+		f.add(new JLabel(set.getOverview()), BorderLayout.CENTER);
 		f.add(new JLabel(set.getOverviewStripe()), BorderLayout.NORTH);
 
 		f.setVisible(true);
