@@ -12,14 +12,12 @@ import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-
 import og.basics.gui.file.FileDialogs;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ZipMaker {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ZipMaker.class);
+	private static final Logger	LOGGER	= LoggerFactory.getLogger(ZipMaker.class);
 
 	public static void main(final String[] args) {
 		final Vector<ZipElement> files2add = new Vector<ZipElement>();
@@ -36,8 +34,8 @@ public class ZipMaker {
 
 	}
 
-	private File template = new File("./template/template.zip");
-	private final static String OUT_DIR = "./flashablezip_out/";
+	private File				template	= new File("./template/template.zip");
+	private final static String	OUT_DIR		= "./flashablezip_out/";
 
 	public ZipMaker(final String templ) {
 		template = new File(templ);
@@ -75,6 +73,12 @@ public class ZipMaker {
 			return false;
 		}
 
+		// checking if some 'idiot' deleted the .zip from filename
+		if (!outzipFile.getPath().endsWith(".zip")) {
+			traceInfo("ZipCreator: Some 'idiot' deleted the .zip  from filename...adding it again!");
+			final String path = outzipFile.getPath() + ".zip";
+			outzipFile = new File(path);
+		}
 		traceInfo("ZipCreator: Opening Output-Zip " + outzipFile.getPath());
 		final ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(outzipFile));
 
