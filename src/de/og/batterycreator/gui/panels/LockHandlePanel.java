@@ -29,6 +29,7 @@ import de.og.batterycreator.creators.IconProviderInterface;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.overview.OverviewCreator;
 import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
+import de.og.batterycreator.main.IconCreatorFrame;
 
 public class LockHandlePanel extends JPanel implements IconProviderInterface {
 	private static final Logger		LOGGER				= LoggerFactory.getLogger(LockHandlePanel.class);
@@ -182,7 +183,7 @@ public class LockHandlePanel extends JPanel implements IconProviderInterface {
 		final File rootDir = new File(CUSTOM_DIR);
 		final String filename = rootDir.getPath() + File.separator + "overview_" + name + ".png";
 		final File overFile = new File(filename);
-		if (!overFile.exists())
+		if (!overFile.exists() || IconCreatorFrame.globalSettings.isAlwaysWriteOverview())
 			StaticImageHelper.writePNG(over, overFile);
 	}
 
