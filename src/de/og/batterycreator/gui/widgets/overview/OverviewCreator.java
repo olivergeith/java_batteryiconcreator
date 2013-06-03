@@ -60,6 +60,7 @@ public class OverviewCreator {
 				final ImageIcon img = iconMap.get(index);
 				g2d.drawImage(img.getImage(), 1 + e * (iw + 1), 1 + z * (ih + 1) + offsetOben, null);
 			}
+			g2d.dispose();
 			return over;
 		}
 		return null;

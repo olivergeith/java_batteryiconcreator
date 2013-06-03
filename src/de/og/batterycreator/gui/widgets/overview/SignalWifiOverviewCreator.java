@@ -76,7 +76,7 @@ public class SignalWifiOverviewCreator extends OverviewCreator {
 			drawCenteredName(g2d, name, w);
 			drawCenteredBanner(g2d, w, h);
 			g2d.drawImage(iconBlock, w / 2 - iw / 2, offsetOben, null);
-
+			g2d.dispose();
 			return over;
 		}
 		return null;

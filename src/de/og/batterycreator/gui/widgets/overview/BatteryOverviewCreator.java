@@ -55,7 +55,7 @@ public class BatteryOverviewCreator extends OverviewCreator {
 			g2d.fillRect(0, h - 2, w, 2);
 
 			g2d.drawImage(iconBlock, 1, offsetOben, null);
-
+			g2d.dispose();
 			return over;
 		}
 		return null;
@@ -92,7 +92,7 @@ public class BatteryOverviewCreator extends OverviewCreator {
 
 			// iconblock malen
 			g2d.drawImage(iconBlock, offsetLinks, offsetOben + 5, null);
-
+			g2d.dispose();
 			return over;
 		}
 		return null;
@@ -168,7 +168,7 @@ public class BatteryOverviewCreator extends OverviewCreator {
 			drawCenteredName(g2d, name, w);
 			drawCenteredBanner(g2d, w, h);
 			g2d.drawImage(iconBlock, w / 2 - iw / 2, offsetOben, null);
-
+			g2d.dispose();
 			return over;
 		}
 		return null;

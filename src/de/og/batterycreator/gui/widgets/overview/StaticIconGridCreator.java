@@ -44,6 +44,7 @@ public class StaticIconGridCreator {
 				final ImageIcon img = iconMap.get(index);
 				g2d.drawImage(img.getImage(), e * (iw + 1), z * (ih + 1), null);
 			}
+			g2d.dispose();
 			return over;
 		}
 		return null;
@@ -81,6 +82,7 @@ public class StaticIconGridCreator {
 					g2d.drawImage(flipimg, x, 1 * (ih + 1), null);
 				}
 			}
+			g2d.dispose();
 			return over;
 		}
 		return null;
@@ -111,7 +113,7 @@ public class StaticIconGridCreator {
 				final ImageIcon img = iconMap2.get(index);
 				g2d.drawImage(img.getImage(), index * (iw + 1), 1 * (ih + 1), null);
 			}
-
+			g2d.dispose();
 			return over;
 		}
 		return null;
@@ -198,7 +200,7 @@ public class StaticIconGridCreator {
 			}
 			final ImageIcon img100c = iconMap.get(201);
 			g2d.drawImage(img100c.getImage(), 10 * (iw + 1) + 0 * iw, 10 * (ih + 1), null);
-
+			g2d.dispose();
 			return over;
 		}
 		return null;

@@ -122,7 +122,7 @@ public class StaticBackgroundCreator {
 		gradientFill = new GradientPaint(0, 0, col1, w / 2, h, col2);
 		g2d.setPaint(gradientFill);
 		g2d.fillRoundRect(11, 11, w - 22, h - 22, radius, radius);
-
+		g2d.dispose();
 		return over;
 	}
 
@@ -150,6 +150,7 @@ public class StaticBackgroundCreator {
 		g2d.fillArc(-20, -offsetOben, w + 40, 2 * offsetOben, 0, 360);
 		g2d.setPaint(new Color(255, 255, 255, 30));
 		g2d.drawArc(-20, -offsetOben, w + 40, 2 * offsetOben, 0, 360);
+		g2d.dispose();
 		return over;
 	}
 
@@ -208,7 +209,7 @@ public class StaticBackgroundCreator {
 		} else {
 			g2d.fillRoundRect(11, 33, w - 22, h - 44, radius, radius);
 		}
-
+		g2d.dispose();
 		return over;
 	}
 
@@ -279,7 +280,6 @@ public class StaticBackgroundCreator {
 		g2d.setPaint(gradientFill);
 		g2d.fillRoundRect(16, offsetOben + 1, w - 32, h - offsetOben - 17, radius, radius);
 
-		// Zurück auf normales paint
 		g2d.dispose();
 		return over;
 	}
