@@ -75,7 +75,7 @@ public class StaticIconGridCreator {
 			for (int i = 0; i < anzahl; i++) {
 				final ImageIcon img = iconMap.get(i);
 				final int x = i * (iw + 1);
-				g2d.drawImage(img.getImage(), x, 1, null);
+				g2d.drawImage(img.getImage(), x, 0, null);
 				if (drawReflection) {
 					final BufferedImage flipimg = StaticImageHelper.createReflectionImage(StaticImageHelper.convertImageIcon(img), true);
 					g2d.drawImage(flipimg, x, 1 * (ih + 1), null);
