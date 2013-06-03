@@ -8,15 +8,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Vector;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
+import javax.swing.border.EmptyBorder;
 import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
@@ -40,13 +43,14 @@ public class SignalPanel extends JPanel {
 	private final WifiSignaleSettingsPanel			settingsPanel		= new WifiSignaleSettingsPanel();
 	private AbstractSignalCreator					activSignalCreator;
 	private RomSettings								romSettings;
-
+	private final JList<String>						iconList			= new JList<String>();
 	private final AnimatorBar						anibar				= new AnimatorBar(250);					// millies
 
 	public SignalPanel(final RomSettings romSettings) {
 		super();
 		setRomSettings(romSettings);
 		fillFillCreatorList();
+		initIconList();
 		initUI();
 	}
 
@@ -57,6 +61,11 @@ public class SignalPanel extends JPanel {
 		combo.addItem(new ForkSignalCreator(romSettings));
 		combo.addItem(new ArcSignalCreator(romSettings));
 		combo.addItem(new TowerSignalCreator(romSettings));
+	}
+
+	private void initIconList() {
+		iconList.setCellRenderer(new IconListCellRenderer());
+		iconList.setBackground(Color.black);
 	}
 
 	private void initUI() {
@@ -79,23 +88,31 @@ public class SignalPanel extends JPanel {
 		combo.setMaximumSize(new Dimension(300, 40));
 		setActivSignalCreator((AbstractSignalCreator) combo.getSelectedItem());
 		setLayout(new BorderLayout());
-		overPane.add(makeButtonBar(), BorderLayout.NORTH);
+
+		// Icon Liste
+		final JScrollPane scroller = new JScrollPane();
+		scroller.add(iconList);
+		scroller.getViewport().setView(iconList);
+		scroller.setPreferredSize(new Dimension(750, 680));
 
 		// Tabbed Pane
 		final JTabbedPane tabPane = new JTabbedPane();
-
 		// battTabPane.setTabPlacement(JTabbedPane.LEFT);
 		tabPane.addTab("Overview", IconStore.overIcon, overPane, "Get an Overview of your icons");
+		tabPane.addTab("List", IconStore.listIcon, scroller, "Get an Overview of your icons");
 		// Adding Howto, if Helpfile exists !
 		final File howto = new File("./help/Howto-Render-SignalWifi.htm");
 		if (howto.exists()) {
 			tabPane.addTab("HowTo & Help", IconStore.helpIcon, new HTMLFileDisplay(howto), "Some things you might want to know :-)");
 		}
 
-		this.add(tabPane, BorderLayout.CENTER);
-		this.add(settingsPanel, BorderLayout.WEST);
-		overPane.add(anibar, BorderLayout.SOUTH);
+		final JPanel p = new JPanel(new BorderLayout());
+		p.add(tabPane, BorderLayout.CENTER);
+		p.add(makeButtonBar(), BorderLayout.NORTH);
+		p.add(anibar, BorderLayout.SOUTH);
 
+		this.add(p, BorderLayout.CENTER);
+		this.add(settingsPanel, BorderLayout.WEST);
 	}
 
 	/**
@@ -121,10 +138,16 @@ public class SignalPanel extends JPanel {
 			overPane.setOverview(activSignalCreator.getOverviewIcon());
 			overPane.setText("");
 			anibar.setIcons(activSignalCreator.getIcons());
+			iconList.removeAll();
+			iconList.setListData(activSignalCreator.getFilenames());
+			iconList.repaint();
 		} else {
 			overPane.setOverview(IconStore.nothingIcon);
 			overPane.setText("    No Signal Icons selected...choose Signal icon style in Toolbar");
 			anibar.setIcons(null);
+			iconList.removeAll();
+			iconList.setListData(new Vector<String>());
+			iconList.repaint();
 		}
 
 	}
@@ -162,6 +185,32 @@ public class SignalPanel extends JPanel {
 			return renderer;
 		}
 
+	}
+
+	/**
+	 * Renderer für IconList
+	 */
+	private class IconListCellRenderer implements ListCellRenderer<Object> {
+		protected DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
+
+		@Override
+		public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected,
+				final boolean cellHasFocus) {
+			String iconName = null;
+
+			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+			if (value instanceof String) {
+				iconName = (String) value;
+				renderer.setBorder(new EmptyBorder(1, 1, 1, 1));
+				renderer.setText(iconName);
+				renderer.setBackground(Color.black);
+				renderer.setForeground(Color.white);
+				renderer.setBorder(new EmptyBorder(1, 1, 1, 1));
+				if (getActivSignalCreator() != null)
+					renderer.setIcon(getActivSignalCreator().getIcons().elementAt(index));
+			}
+			return renderer;
+		}
 	}
 
 	public OverviewPanel getSignalOverviewPanel() {
