@@ -43,6 +43,9 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	private final JCheckBox				cboxSmallOverviewsOtherNumbers	= createCheckbox("Small Overviews start with #5", "Small Overviews start with #5");
 	private final JComboBox<String>		bigBackgroundStyleCombo			= new JComboBox<String>();
 
+	private final JComboBox<String>		signalWifiBackgroundStyleCombo	= new JComboBox<String>();
+	private final JComboBox<String>		signalWifiOverviewStyleCombo	= new JComboBox<String>();
+
 	private static final Logger			LOGGER							= LoggerFactory.getLogger(GlobalSettingsPanel.class);
 
 	// Construktor
@@ -71,8 +74,24 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		smallOverviewStyleCombo.addItem("Big");
 		smallOverviewStyleCombo.addItem("Big with charge");
 
+		signalWifiBackgroundStyleCombo.addItem("Fancy Tile");
+		signalWifiBackgroundStyleCombo.addItem("Television thick top border");
+		signalWifiBackgroundStyleCombo.addItem("Television");
+		signalWifiBackgroundStyleCombo.addItem("Frame");
+		signalWifiBackgroundStyleCombo.addItem("Old Style");
+
+		signalWifiOverviewStyleCombo.addItem("One line with reflection");
+		signalWifiOverviewStyleCombo.addItem("One line");
+
 		// reading and saving settings
 		loadSettingsFromFilesystem();
+
+		romPresetCombo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				saveSettingsToFilesystem();
+			}
+		});
 
 		bigBackgroundStyleCombo.addActionListener(new ActionListener() {
 			@Override
@@ -88,6 +107,19 @@ public class GlobalSettingsPanel extends SettingsPanel {
 			}
 		});
 		smallOverviewStyleCombo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				saveSettingsToFilesystem();
+			}
+		});
+
+		signalWifiBackgroundStyleCombo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				saveSettingsToFilesystem();
+			}
+		});
+		signalWifiOverviewStyleCombo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
 				saveSettingsToFilesystem();
@@ -122,6 +154,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		int row = 1;
 
 		builder.add(createOnStartSettings(), cc.xyw(1, ++row, 9));
+		builder.add(createBatteryOverviewSettings(), cc.xyw(1, ++row, 9));
+		builder.add(createSignalWifiOverviewSettings(), cc.xyw(1, ++row, 9));
 		builder.add(createMiscSettings(), cc.xyw(1, ++row, 9));
 
 		final JPanel cfp = builder.getPanel();
@@ -147,6 +181,46 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		return hide;
 	}
 
+	private JPanel createBatteryOverviewSettings() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(JGoodiesHelper.createGroupLabel("Battery overview"), cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Background"), cc.xyw(2, ++row, 7));
+		builder.add(bigBackgroundStyleCombo, cc.xyw(2, ++row, 3));
+
+		builder.add(JGoodiesHelper.createGroupLabel("Battery overview (small)"), cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Background"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Style"), cc.xyw(6, row, 3));
+		builder.add(smallBackgroundStyleCombo, cc.xyw(2, ++row, 3));
+		builder.add(smallOverviewStyleCombo, cc.xyw(6, row, 3));
+		builder.add(cboxSmallOverviewsOtherNumbers, cc.xyw(2, ++row, 7));
+
+		final JPanel hide = new HidePanel("Overviews Battery Renderer", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createSignalWifiOverviewSettings() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(JGoodiesHelper.createBlackLabel("Background"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Style"), cc.xyw(6, row, 3));
+		builder.add(signalWifiBackgroundStyleCombo, cc.xyw(2, ++row, 3));
+		builder.add(signalWifiOverviewStyleCombo, cc.xyw(6, row, 3));
+
+		final JPanel hide = new HidePanel("Overviews Signal and Wifi Renderer", builder.getPanel());
+		return hide;
+	}
+
 	private JPanel createMiscSettings() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
@@ -157,14 +231,6 @@ public class GlobalSettingsPanel extends SettingsPanel {
 
 		builder.add(JGoodiesHelper.createBlackLabel("Change Look&Feel to:"), cc.xyw(2, ++row, 7));
 		builder.add(looks, cc.xyw(2, ++row, 7));
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Background for battery overviews"), cc.xyw(2, ++row, 7));
-		builder.add(bigBackgroundStyleCombo, cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Background for small battery overviews"), cc.xyw(2, ++row, 7));
-		builder.add(smallBackgroundStyleCombo, cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Style for small battery overviews"), cc.xyw(2, ++row, 7));
-		builder.add(smallOverviewStyleCombo, cc.xyw(2, ++row, 7));
-		builder.add(cboxSmallOverviewsOtherNumbers, cc.xyw(2, ++row, 7));
 
 		final JPanel hide = new HidePanel("Misc Settings", builder.getPanel());
 		return hide;
@@ -180,6 +246,10 @@ public class GlobalSettingsPanel extends SettingsPanel {
 			smallBackgroundStyleCombo.setSelectedIndex(settings.getSmallBackgroundStyle());
 			smallOverviewStyleCombo.setSelectedIndex(settings.getSmallOverViewStyle());
 			cboxSmallOverviewsOtherNumbers.setSelected(settings.isSmallOverviewsOtherNmbers());
+
+			signalWifiBackgroundStyleCombo.setSelectedIndex(settings.getSignalWifiBackgroundStyle());
+			signalWifiOverviewStyleCombo.setSelectedIndex(settings.getSignalWifiOverViewStyle());
+
 			this.repaint();
 		}
 	}
@@ -192,6 +262,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		IconCreatorFrame.globalSettings.setSmallBackgroundStyle(smallBackgroundStyleCombo.getSelectedIndex());
 		IconCreatorFrame.globalSettings.setSmallOverViewStyle(smallOverviewStyleCombo.getSelectedIndex());
 		IconCreatorFrame.globalSettings.setSmallOverviewsOtherNmbers(cboxSmallOverviewsOtherNumbers.isSelected());
+		IconCreatorFrame.globalSettings.setSignalWifiOverViewStyle(signalWifiOverviewStyleCombo.getSelectedIndex());
+		IconCreatorFrame.globalSettings.setSignalWifiBackgroundStyle(signalWifiBackgroundStyleCombo.getSelectedIndex());
 
 		return IconCreatorFrame.globalSettings;
 	}
@@ -223,6 +295,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		LOGGER.info("--> SmallBackgroundStyle {}", set.getSmallBackgroundStyle());
 		LOGGER.info("--> SmallOverviewStyle {}", set.getSmallOverViewStyle());
 		LOGGER.info("--> SmallOverviewStartWithOtherNumbers {}", set.isSmallOverviewsOtherNmbers());
+		LOGGER.info("--> SignalWifiBackgroundStyle {}", set.getSignalWifiBackgroundStyle());
+		LOGGER.info("--> SignalWifiOverViewStyle {}", set.getSignalWifiOverViewStyle());
 	}
 
 	private void saveSettingsToFilesystem() {

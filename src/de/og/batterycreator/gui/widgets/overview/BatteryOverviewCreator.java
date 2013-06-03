@@ -159,25 +159,31 @@ public class BatteryOverviewCreator extends OverviewCreator {
 			}
 
 			// Name Text
-			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-			FontMetrics metrix = g2d.getFontMetrics();
-			Rectangle2D strRect = metrix.getStringBounds(name, g2d);
-			int strxpos = (int) (Math.round(w / 2) - Math.round(strRect.getWidth() / 2));
-			g2d.setColor(Color.white);
-			g2d.drawString(name, strxpos, 25);
-			// Banner Text
-			g2d.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 10));
-			metrix = g2d.getFontMetrics();
-			strRect = metrix.getStringBounds(banner, g2d);
-			strxpos = (int) (Math.round(w / 2) - Math.round(strRect.getWidth() / 2));
-			g2d.setColor(Color.white);
-			g2d.drawString(banner, strxpos, h - 17);
-
+			drawCenteredName(g2d, name, w);
+			drawCenteredBanner(g2d, w, h);
 			g2d.drawImage(iconBlock, w / 2 - iw / 2, offsetOben, null);
 
 			return over;
 		}
 		return null;
+	}
+
+	private static void drawCenteredBanner(final Graphics2D g2d, final int w, final int h) {
+		g2d.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 10));
+		final FontMetrics metrix = g2d.getFontMetrics();
+		final Rectangle2D strRect = metrix.getStringBounds(banner, g2d);
+		final int strxpos = (int) (Math.round(w / 2) - Math.round(strRect.getWidth() / 2));
+		g2d.setColor(Color.white);
+		g2d.drawString(banner, strxpos, h - 17);
+	}
+
+	private static void drawCenteredName(final Graphics2D g2d, final String name, final int w) {
+		g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+		final FontMetrics metrix = g2d.getFontMetrics();
+		final Rectangle2D strRect = metrix.getStringBounds(name, g2d);
+		final int strxpos = (int) (Math.round(w / 2) - Math.round(strRect.getWidth() / 2));
+		g2d.setColor(Color.white);
+		g2d.drawString(name, strxpos, 25);
 	}
 
 	// #########################################################################

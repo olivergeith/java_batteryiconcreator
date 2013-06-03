@@ -11,6 +11,7 @@ import og.basics.gui.image.StaticImageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import de.og.batterycreator.gui.widgets.overview.OverviewCreator;
+import de.og.batterycreator.gui.widgets.overview.StripeviewCreator;
 import de.og.batterycreator.main.IconCreatorFrame;
 
 /**
@@ -56,7 +57,7 @@ public class IconSet {
 				filenamesAndPath.add(png.getPath());
 			}
 			overview = OverviewCreator.createOverviewIcon(icons, getName());
-			iconStripe = OverviewCreator.createResizedStripeIcon(icons, getName(), 5, 32);
+			iconStripe = StripeviewCreator.createResizedStripeIcon(icons, getName(), 5, 32);
 			writeOverview(overview, getName());
 		}
 	}

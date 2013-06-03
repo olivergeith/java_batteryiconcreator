@@ -8,10 +8,13 @@ public class GlobalSettings implements Serializable {
 	private RomPreset			romPreset;
 	private boolean				showAdvancedButton			= false;
 	private boolean				alwaysWriteOverview			= false;
-	private int					smallBackgroundStyle		= 1;
-	private int					smallOverViewStyle			= 1;
+	private int					smallBackgroundStyle		= 0;
+	private int					smallOverViewStyle			= 0;
 	private boolean				smallOverviewsOtherNmbers	= false;
 	private int					bigBackgroundStyle			= 0;
+
+	private int					signalWifiBackgroundStyle	= 0;
+	private int					signalWifiOverViewStyle		= 0;
 
 	public RomPreset getRomPreset() {
 		return romPreset;
@@ -74,6 +77,36 @@ public class GlobalSettings implements Serializable {
 
 	public void setBigBackgroundStyle(final int bigBackgroundStyle) {
 		this.bigBackgroundStyle = bigBackgroundStyle;
+	}
+
+	/**
+	 * @return the signalWifiBackgroundStyle
+	 */
+	public int getSignalWifiBackgroundStyle() {
+		return signalWifiBackgroundStyle;
+	}
+
+	/**
+	 * @param signalWifiBackgroundStyle
+	 *            the signalWifiBackgroundStyle to set
+	 */
+	public void setSignalWifiBackgroundStyle(final int signalWifiBackgroundStyle) {
+		this.signalWifiBackgroundStyle = signalWifiBackgroundStyle;
+	}
+
+	/**
+	 * @return the signalWifiOverViewStyle
+	 */
+	public int getSignalWifiOverViewStyle() {
+		return signalWifiOverViewStyle;
+	}
+
+	/**
+	 * @param signalWifiOverViewStyle
+	 *            the signalWifiOverViewStyle to set
+	 */
+	public void setSignalWifiOverViewStyle(final int signalWifiOverViewStyle) {
+		this.signalWifiOverViewStyle = signalWifiOverViewStyle;
 	}
 
 }
