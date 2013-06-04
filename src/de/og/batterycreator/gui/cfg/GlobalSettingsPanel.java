@@ -63,9 +63,10 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		bigBackgroundStyleCombo.addItem("Television");
 
 		smallBackgroundStyleCombo.addItem("Fancy Tile");
-		smallBackgroundStyleCombo.addItem("Television thick top border");
-		smallBackgroundStyleCombo.addItem("Television");
+		smallBackgroundStyleCombo.addItem("Television.V1");
+		smallBackgroundStyleCombo.addItem("Television.V2");
 		smallBackgroundStyleCombo.addItem("Frame");
+		smallBackgroundStyleCombo.addItem("Glass Frame");
 		smallBackgroundStyleCombo.addItem("Old Style");
 
 		smallOverviewStyleCombo.addItem("One line with reflection");
@@ -78,6 +79,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 		signalWifiBackgroundStyleCombo.addItem("Television thick top border");
 		signalWifiBackgroundStyleCombo.addItem("Television");
 		signalWifiBackgroundStyleCombo.addItem("Frame");
+		signalWifiBackgroundStyleCombo.addItem("Glass Frame");
 		signalWifiBackgroundStyleCombo.addItem("Old Style");
 
 		signalWifiOverviewStyleCombo.addItem("One line with reflection");

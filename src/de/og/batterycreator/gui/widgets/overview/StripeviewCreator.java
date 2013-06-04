@@ -60,6 +60,7 @@ public class StripeviewCreator {
 				final ImageIcon img = iconMap.elementAt(i);
 				g2d.drawImage(img.getImage(), 1 + i * (iw + 1), 1, null);
 			}
+			g2d.dispose();
 			return over;
 		}
 		return null;

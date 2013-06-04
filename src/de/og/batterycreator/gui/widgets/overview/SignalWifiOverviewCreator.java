@@ -48,30 +48,35 @@ public class SignalWifiOverviewCreator extends OverviewCreator {
 			final Graphics2D g2d = over.createGraphics();
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+			BufferedImage backGrnd;
 			switch (IconCreatorFrame.globalSettings.getSignalWifiBackgroundStyle()) {
 				default:
 				case 0:
-					drawBackground01(w, h, g2d, offsetOben - 10, offsetUnten);
+					backGrnd = StaticBackgroundCreator.drawBackground01(w, h, offsetOben - 10, offsetUnten);
 					break;
 				case 1:
-					drawBackgroundTV(w, h, g2d, false);
+					backGrnd = StaticBackgroundCreator.drawBackgroundTV(w, h, false);
 					break;
 				case 2:
-					drawBackgroundTV(w, h, g2d, true);
+					backGrnd = StaticBackgroundCreator.drawBackgroundTV(w, h, true);
 					break;
 				case 3:
-					drawBackgroundFrame(w, h, g2d);
+					backGrnd = StaticBackgroundCreator.drawBackgroundFrame(w, h);
 					break;
 				case 4:
-					drawBackgroundOldStyle(w, h, g2d, offsetOben - 5, offsetUnten);
+					backGrnd = StaticBackgroundCreator.drawBackgroundGlassFrame(w, h);
+					break;
+				case 5:
+					backGrnd = StaticBackgroundCreator.drawBackgroundOldStyle(w, h, offsetOben - 5, offsetUnten);
 					break;
 			}
+			g2d.drawImage(backGrnd, 0, 0, null);
 
 			// Name Text
 			drawCenteredName(g2d, name, w);
 			drawCenteredBanner(g2d, w, h);
 			g2d.drawImage(iconBlock, w / 2 - iw / 2, offsetOben, null);
-
+			g2d.dispose();
 			return over;
 		}
 		return null;
