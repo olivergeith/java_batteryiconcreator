@@ -1,4 +1,4 @@
-package de.og.batterycreator.zipreader;
+package de.og.batterycreator.systemuianalyser.gui;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -30,10 +30,11 @@ public class ZipArchiveExtractor {
 		final Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		final byte[] buffer = new byte[16384];
 		int len;
+		LOG.info(" - Extracting ZipfILE: {}", zipFile);
 		while (entries.hasMoreElements()) {
 			final ZipEntry entry = entries.nextElement();
 			final String entryFileName = entry.getName();
-			LOG.info(" - Extracting ZipEntry: {}", entryFileName);
+			// LOG.debug(" - Extracting ZipEntry: {}", entryFileName);
 
 			// Zielordner anlegen falls noch nicht geschehen!
 			final File dir = buildDirectoryHierarchyFor(entryFileName, destDir);

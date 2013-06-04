@@ -25,11 +25,10 @@ public class StaticIconGridCreator {
 	public static BufferedImage createBigGrid(final List<ImageIcon> iconMap, final int maxanz) {
 		if (iconMap != null && iconMap.size() > 0) {
 			final int anzahl = Math.min(maxanz, iconMap.size());
-
 			final ImageIcon img1 = iconMap.get(0);
 			final int iw = img1.getIconWidth();
 			final int ih = img1.getIconHeight();
-			final int w = iw * 10 + 11;
+			final int w = iw * 10 + 10 - 1;
 			final int volleZehner = anzahl / 10 + 1;
 			final int h = ih * volleZehner + (volleZehner + 1);
 
@@ -40,12 +39,44 @@ public class StaticIconGridCreator {
 			for (int i = 0; i < anzahl; i++) {
 				final int z = i / 10;
 				final int e = i % 10;
-				final int index = z * 10 + e;
+				final int index = i; // z * 10 + e;
 				final ImageIcon img = iconMap.get(index);
 				g2d.drawImage(img.getImage(), e * (iw + 1), z * (ih + 1), null);
 			}
 			g2d.dispose();
 			return over;
+		}
+		return null;
+	}
+
+	public static BufferedImage createTwoBlockGrid(final List<ImageIcon> iconMap1, final List<ImageIcon> iconMap2) {
+		if (iconMap1 != null && iconMap1.size() > 0 && iconMap2 != null && iconMap2.size() > 0) {
+
+			final BufferedImage block1 = createBigGrid(iconMap1);
+			final BufferedImage block2 = createBigGrid(iconMap2);
+			final int blockAbstand = 10;
+			final int w = block1.getWidth() + block2.getWidth() + blockAbstand;
+
+			final int h = Math.max(block1.getHeight(), block2.getHeight());
+
+			final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			final Graphics2D g2d = initGraphics(over);
+			g2d.drawImage(block1, 0, 0, null);
+			g2d.drawImage(block2, block1.getWidth() + blockAbstand, 0, null);
+			return over;
+		}
+		return null;
+	}
+
+	public static BufferedImage createTwoBlockGrid(final List<ImageIcon> iconMap) {
+		if (iconMap != null && iconMap.size() > 0) {
+			final int anzahl = iconMap.size();
+			final int mitte = anzahl / 2;
+
+			final List<ImageIcon> iconMap1 = iconMap.subList(0, mitte);
+			final List<ImageIcon> iconMap2 = iconMap.subList(mitte, anzahl);
+
+			return createTwoBlockGrid(iconMap1, iconMap2);
 		}
 		return null;
 	}
@@ -169,7 +200,7 @@ public class StaticIconGridCreator {
 		return iconMapOut;
 	}
 
-	public static BufferedImage createBatteryIconBlockWithCharge(final List<ImageIcon> iconMap) {
+	public static BufferedImage createBatteryIconBlockWithChargeOld(final List<ImageIcon> iconMap) {
 		if (iconMap != null && iconMap.size() > 100) {
 			final ImageIcon img1 = iconMap.get(0);
 			final int iw = img1.getIconWidth();
@@ -204,6 +235,10 @@ public class StaticIconGridCreator {
 			return over;
 		}
 		return null;
+	}
+
+	public static BufferedImage createBatteryIconBlockWithCharge(final List<ImageIcon> iconMap) {
+		return createTwoBlockGrid(iconMap);
 	}
 
 }

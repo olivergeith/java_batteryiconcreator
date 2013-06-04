@@ -62,7 +62,7 @@ public class BatteryOverviewCreator extends OverviewCreator {
 	}
 
 	public static BufferedImage createOverviewNewStyle(final List<ImageIcon> iconMap, final String name) {
-		if (iconMap != null && iconMap.size() > 100) {
+		if (iconMap != null && iconMap.size() > 0) {
 
 			final BufferedImage iconBlock = StaticIconGridCreator.createBatteryIconBlockWithCharge(iconMap);
 			final int iw = iconBlock.getWidth();
