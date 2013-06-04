@@ -114,4 +114,16 @@ public class BatteryType {
 		return BatteryOverviewCreator.createOverviewNewStyle(iconMap, pattern + " (" + drawableFolder + ")");
 	}
 
+	public boolean isOnPercentMod() {
+		if (icons.size() == 101 && iconsCharge.size() == 101)
+			return true;
+		return false;
+	}
+
+	public int getBattSize() {
+		final ImageIcon icon = icons.get(0);
+		if (icon != null)
+			return icon.getIconHeight();
+		return 0;
+	}
 }

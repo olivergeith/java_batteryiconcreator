@@ -106,8 +106,20 @@ public class RomSettingsPanel extends SettingsPanel {
 	// Template
 	private final TemplateChooser	templateChooser					= new TemplateChooser();
 
+	private final boolean			presetMode;
+
+	// Construktor
+	public RomSettingsPanel(final boolean presetMode) {
+		this.presetMode = presetMode;
+		initComponents();
+		myInit();
+		makeButtonBar();
+		setSettings(settings);
+	}
+
 	// Construktor
 	public RomSettingsPanel() {
+		this.presetMode = false;
 		initComponents();
 		myInit();
 		makeButtonBar();
@@ -182,11 +194,13 @@ public class RomSettingsPanel extends SettingsPanel {
 		// cfgScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		cfgScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(cfgScroller, BorderLayout.WEST);
-		this.add(label, BorderLayout.EAST);
-		// Adding Howto, if Helpfile exists !
-		final File help = new File("./help/RomSettings.htm");
-		if (help.exists()) {
-			this.add(new HTMLFileDisplay(help), BorderLayout.CENTER);
+		if (!presetMode) {
+			this.add(label, BorderLayout.EAST);
+			// Adding Howto, if Helpfile exists !
+			final File help = new File("./help/RomSettings.htm");
+			if (help.exists() && !presetMode) {
+				this.add(new HTMLFileDisplay(help), BorderLayout.CENTER);
+			}
 		}
 	}
 
@@ -227,7 +241,8 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(createCfgPaneRomPresets(), cc.xyw(1, ++row, 9));
+		if (!presetMode)
+			builder.add(createCfgPaneRomPresets(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneRomSettings(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneBattery(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneLockhandle(), cc.xyw(1, ++row, 9));
@@ -479,6 +494,21 @@ public class RomSettingsPanel extends SettingsPanel {
 		}
 	}
 
+	public void setSettingsAutoSizes(final RomSettings settings) {
+		if (settings != null) {
+			this.settings = settings;
+
+			// Drawables
+			systemUIDrawableFolderCombo.setSelectedItem(settings.getSystemUIDrawableFolder());
+			frameworkDrawableFolderCombo.setSelectedItem(settings.getFrameworkDrawableFolder());
+			lidroidDrawableFolderCombo.setSelectedItem(settings.getLidroidDrawableFolder());
+			emoticonsDrawableFolderCombo.setSelectedItem(settings.getEmoticonsDrawableFolder());
+
+			validateControls();
+			this.repaint();
+		}
+	}
+
 	public RomSettings getSettings() {
 		settings.setUseAdvancedResize(cboxUseAdvResize.isSelected());
 		settings.setUseVRThemeTemplate(cboxVRTheme.isSelected());
@@ -537,8 +567,10 @@ public class RomSettingsPanel extends SettingsPanel {
 	private void makeButtonBar() {
 		final JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
-		toolBar.add(loadButton);
-		toolBar.add(saveButton);
+		if (!presetMode) {
+			toolBar.add(loadButton);
+			toolBar.add(saveButton);
+		}
 		toolBar.add(exportButton);
 		add(toolBar, BorderLayout.NORTH);
 	}
@@ -563,5 +595,9 @@ public class RomSettingsPanel extends SettingsPanel {
 
 		morphMMSWidget.setUsePreload(cboxPreload.isSelected());
 		morphMMSWidget.setUseVRTheme(cboxVRTheme.isSelected());
+	}
+
+	private void setPresetMode(final boolean presetMode) {
+
 	}
 }
