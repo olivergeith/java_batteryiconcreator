@@ -130,10 +130,6 @@ public class OverviewPanel extends JPanel {
 		add(leftBar, BorderLayout.EAST);
 	}
 
-	public void setOverview(final ImageIcon overview) {
-		setOverview(overview, 100);
-	}
-
 	public void setOverview(final ImageIcon overview, final boolean autozoom) {
 		if (autozoom)
 			setOverview(overview, calcAutoZoom(overview));
@@ -141,10 +137,16 @@ public class OverviewPanel extends JPanel {
 			setOverview(overview);
 	}
 
+	public void setOverview(final ImageIcon overview) {
+		setOverview(overview, 100);
+	}
+
 	public void setOverview(final ImageIcon overview, final int zoom) {
-		slider.setValue(zoom);
 		this.overview = overview;
-		overbuff = StaticImageHelper.convertImageIcon(overview);
+		if (overview != null) {
+			slider.setValue(zoom);
+			overbuff = StaticImageHelper.convertImageIcon(overview);
+		}
 		showOverview();
 	}
 
@@ -153,13 +155,16 @@ public class OverviewPanel extends JPanel {
 	}
 
 	private void showOverview() {
-		if (overview != null) {
+		if (overview != null && overbuff != null) {
 			final int height100 = overview.getIconHeight();
 			final int value = slider.getValue();
 			final int height = Math.round(height100 / 100f * value);
 			final BufferedImage buff = StaticImageHelper.resize2Height(overbuff, height);
 			overviewLabel.setIcon(new ImageIcon(buff));
 			zoomLabel.setText(createZoomLabelText(value));
+		} else {
+			overviewLabel.setIcon(null);
+			zoomLabel.setText(createZoomLabelText(100));
 		}
 	}
 
@@ -171,20 +176,37 @@ public class OverviewPanel extends JPanel {
 	 * @return
 	 */
 	private int calcAutoZoom(final ImageIcon overview) {
-		int zoom = 100;
+		int zoom1 = 100;
+		int zoom2 = 100;
 		final int overpaneHeight = getHeight();
+		final int overpaneWidth = getWidth();
 		// Wenn der overview höher ist als das Overview Panel
 		if (overview.getIconHeight() > overpaneHeight) {
 			// dann passen wir es genau an!
-			zoom = Math.round(100f * overpaneHeight / overview.getIconHeight());
-			// kleiner als 12 % sollte es nie werden
-			if (zoom < 13)
-				zoom = 13;
-			// ein bißchen weniger... kleiner Offset, dass es sicher
+			zoom1 = Math.round(100f * overpaneHeight / overview.getIconHeight());
+			// kleiner als 10 % sollte es nie werden
+			if (zoom1 < 14)
+				zoom1 = 14;
+			// ein bißchen weniger... kleiner Offset, dass es sicherer
 			// passt!
-			zoom -= 3;
+			zoom1 -= 4;
 		}
-		return zoom;
+		// Now checking width
+		if (overview.getIconWidth() > overpaneWidth) {
+			// dann passen wir es genau an!
+			zoom2 = Math.round(100f * overpaneWidth / overview.getIconWidth());
+			// kleiner als 10 % sollte es nie werden
+			if (zoom2 < 18)
+				zoom2 = 18;
+			// ein bißchen weniger... kleiner Offset, dass es sicherer
+			// passt!
+			zoom2 -= 8;
+		}
+		// System.out.println("Zoom1=" + zoom1);
+		// System.out.println("Zoom2=" + zoom2);
+		if (zoom1 < zoom2)
+			return zoom1;
+		return zoom2;
 	}
 
 	private String createZoomLabelText(final int value) {
