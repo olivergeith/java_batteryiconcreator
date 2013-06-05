@@ -15,6 +15,7 @@ public class IconStore {
 	public static final ImageIcon	cfgIcon				= new ImageIcon(IconStore.class.getResource("cfg.png"));
 	public static final ImageIcon	logoIcon			= new ImageIcon(IconStore.class.getResource("logo.png"));
 	public static final ImageIcon	logoIconCFG			= new ImageIcon(IconStore.class.getResource("logo_cfg.png"));
+	public static final ImageIcon	logoIconAnalyzer	= new ImageIcon(IconStore.class.getResource("logo_analyzer.png"));
 	public static final ImageIcon	nothingIcon			= new ImageIcon(IconStore.class.getResource("nothing.png"));
 	public static final ImageIcon	nothing2Icon		= new ImageIcon(IconStore.class.getResource("nothing2.png"));
 	public static final ImageIcon	toggleIcon			= new ImageIcon(IconStore.class.getResource("toggle.png"));

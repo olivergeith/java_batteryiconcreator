@@ -25,7 +25,7 @@ public class IconCreatorFrame extends JFrame {
 	private static final String			VERSION_DATE		= "xx.yyy.2013";
 	public static final String			HOMEPAGE_URL		= "http://forum.xda-developers.com/showthread.php?t=1918500";
 	private static final long			serialVersionUID	= 1L;
-	private static IconCreatorFrame		frame;
+	public static IconCreatorFrame		MAIN_FRAME_INSTANCE;
 	private final IconCreatingPanelNew	iconCreatingPanel	= new IconCreatingPanelNew(this);
 	LToolBar							toolBar				= iconCreatingPanel.getToolBar();
 
@@ -34,7 +34,7 @@ public class IconCreatorFrame extends JFrame {
 	public static void main(final String[] args) {
 		LOGGER.info("Java Version:" + VersionDetails.javaVendor + " " + VersionDetails.javaVersion);
 		LOGGER.info("Starting " + APP_NAME + " V." + VERSION_NR + "(" + VERSION_DATE + ")");
-		frame = new IconCreatorFrame();
+		MAIN_FRAME_INSTANCE = new IconCreatorFrame();
 
 	}
 
@@ -90,7 +90,7 @@ public class IconCreatorFrame extends JFrame {
 		details.setLogo(IconStore.logoIcon);
 		details.setCopyright("by Oliver Geith");
 		details.setDescription(getDescription());
-		final UniversalAboutDialog aboutDialog = new UniversalAboutDialog(frame, details);
+		final UniversalAboutDialog aboutDialog = new UniversalAboutDialog(MAIN_FRAME_INSTANCE, details);
 		aboutDialog.setVisible(true);
 	}
 

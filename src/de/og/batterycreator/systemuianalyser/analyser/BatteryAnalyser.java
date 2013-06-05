@@ -85,7 +85,7 @@ public class BatteryAnalyser {
 		final File[] pngs = dir.listFiles(new FilenameFilter() {
 
 			public boolean accept(final File dir, final String name) {
-				return name.toLowerCase().endsWith(".png") && name.toLowerCase().startsWith("stat_sys_battery");
+				return name.toLowerCase().endsWith(".png") && name.toLowerCase().startsWith(BatteryType.BATTERY_PREFIX);
 			}
 		});
 		return pngs;

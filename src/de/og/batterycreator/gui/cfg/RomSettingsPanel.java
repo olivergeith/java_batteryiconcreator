@@ -31,6 +31,8 @@ import de.og.batterycreator.gui.widgets.MorphPathWidget;
 import de.og.batterycreator.gui.widgets.RomPresetsComboBox;
 import de.og.batterycreator.gui.widgets.SliderAndLabel;
 import de.og.batterycreator.gui.widgets.TemplateChooser;
+import de.og.batterycreator.main.IconCreatorFrame;
+import de.og.batterycreator.systemuianalyser.gui.APKAnalyzerDialog;
 
 public class RomSettingsPanel extends SettingsPanel {
 
@@ -40,6 +42,7 @@ public class RomSettingsPanel extends SettingsPanel {
 	private final JButton			loadButton						= new JButton(CommonIconProvider.BUTTON_ICON_OPEN);
 	private final JButton			saveButton						= new JButton(CommonIconProvider.BUTTON_ICON_SAVE);
 	private final JButton			exportButton					= new JButton("Export RomPreset", IconStore.presetExport);
+	private final JButton			analyzeButton					= new JButton("Analyze SystemUI", IconStore.androidredIcon);
 
 	private RomSettings				settings						= new RomSettings();
 
@@ -106,20 +109,10 @@ public class RomSettingsPanel extends SettingsPanel {
 	// Template
 	private final TemplateChooser	templateChooser					= new TemplateChooser();
 
-	private final boolean			presetMode;
-
 	// Construktor
-	public RomSettingsPanel(final boolean presetMode) {
-		this.presetMode = presetMode;
-		initComponents();
-		myInit();
-		makeButtonBar();
-		setSettings(settings);
-	}
 
 	// Construktor
 	public RomSettingsPanel() {
-		this.presetMode = false;
 		initComponents();
 		myInit();
 		makeButtonBar();
@@ -168,6 +161,13 @@ public class RomSettingsPanel extends SettingsPanel {
 				SettingsPersistor.saveRomPresetFromRomSettings(getSettings());
 			}
 		});
+		analyzeButton.setToolTipText("Set Settings by analyzing SystemUI.apk");
+		analyzeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				analyze();
+			}
+		});
 	}
 
 	private void myInit() {
@@ -194,13 +194,11 @@ public class RomSettingsPanel extends SettingsPanel {
 		// cfgScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		cfgScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(cfgScroller, BorderLayout.WEST);
-		if (!presetMode) {
-			this.add(label, BorderLayout.EAST);
-			// Adding Howto, if Helpfile exists !
-			final File help = new File("./help/RomSettings.htm");
-			if (help.exists() && !presetMode) {
-				this.add(new HTMLFileDisplay(help), BorderLayout.CENTER);
-			}
+		this.add(label, BorderLayout.EAST);
+		// Adding Howto, if Helpfile exists !
+		final File help = new File("./help/RomSettings.htm");
+		if (help.exists()) {
+			this.add(new HTMLFileDisplay(help), BorderLayout.CENTER);
 		}
 	}
 
@@ -241,8 +239,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		if (!presetMode)
-			builder.add(createCfgPaneRomPresets(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPaneRomPresets(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneRomSettings(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneBattery(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneLockhandle(), cc.xyw(1, ++row, 9));
@@ -509,6 +506,14 @@ public class RomSettingsPanel extends SettingsPanel {
 		}
 	}
 
+	public void forceBattSizes(final int size) {
+		settings.setBattIconSize(size);
+		sliderBattSize.setValue(settings.getBattIconSize());
+
+		validateControls();
+		this.repaint();
+	}
+
 	public RomSettings getSettings() {
 		settings.setUseAdvancedResize(cboxUseAdvResize.isSelected());
 		settings.setUseVRThemeTemplate(cboxVRTheme.isSelected());
@@ -567,10 +572,9 @@ public class RomSettingsPanel extends SettingsPanel {
 	private void makeButtonBar() {
 		final JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
-		if (!presetMode) {
-			toolBar.add(loadButton);
-			toolBar.add(saveButton);
-		}
+		toolBar.add(loadButton);
+		toolBar.add(saveButton);
+		toolBar.add(analyzeButton);
 		toolBar.add(exportButton);
 		add(toolBar, BorderLayout.NORTH);
 	}
@@ -597,7 +601,9 @@ public class RomSettingsPanel extends SettingsPanel {
 		morphMMSWidget.setUseVRTheme(cboxVRTheme.isSelected());
 	}
 
-	private void setPresetMode(final boolean presetMode) {
+	protected void analyze() {
+		final APKAnalyzerDialog analyzer = new APKAnalyzerDialog(IconCreatorFrame.MAIN_FRAME_INSTANCE, this);
+		analyzer.setVisible(true);
 
 	}
 }

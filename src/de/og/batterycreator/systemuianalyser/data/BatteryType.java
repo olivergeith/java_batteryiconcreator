@@ -9,6 +9,7 @@ import de.og.batterycreator.gui.widgets.overview.BatteryOverviewCreator;
 public class BatteryType {
 
 	public static final String		CHARGE_ANIM		= "charge_anim";
+	public static final String		BATTERY_PREFIX	= "stat_sys_battery";
 	private final List<Integer>		numbers			= new ArrayList<Integer>();
 	private final List<Integer>		numbersCharge	= new ArrayList<Integer>();
 	private final String			pattern;

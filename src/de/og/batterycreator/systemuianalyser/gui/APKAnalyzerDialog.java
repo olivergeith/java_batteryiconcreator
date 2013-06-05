@@ -1,6 +1,7 @@
 package de.og.batterycreator.systemuianalyser.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,9 @@ import java.io.File;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -28,33 +31,40 @@ import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.gui.cfg.RomSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
+import de.og.batterycreator.main.IconCreatorFrame;
 import de.og.batterycreator.systemuianalyser.analyser.BatteryAnalyser;
 import de.og.batterycreator.systemuianalyser.data.BatteryType;
 
 public class APKAnalyzerDialog extends JDialog {
-	private static final long			serialVersionUID	= -1605180725450582074L;
-	private File						zipFile				= new File("SystemUI.apk");
-	private final JButton				chooseButton		= new JButton("Load SystemUI.apk", IconStore.androidblueIcon);
-	private final JList<BatteryType>	battTypeList		= new JList<BatteryType>();
-	private final OverviewPanel			overPanel			= new OverviewPanel();
-	private static final Logger			LOG					= LoggerFactory.getLogger(APKAnalyzerDialog.class);
-	private final RomSettingsPanel		settingsPanel		= new RomSettingsPanel(true);
+	private static final long			serialVersionUID		= -1605180725450582074L;
+	private File						zipFile					= new File("SystemUI.apk");
+	private final JButton				chooseButton			= new JButton("Load SystemUI.apk", IconStore.androidblueIcon);
+	private final JList<BatteryType>	battTypeList			= new JList<BatteryType>();
+	private final OverviewPanel			overPanel				= new OverviewPanel();
+	private static final Logger			LOG						= LoggerFactory.getLogger(APKAnalyzerDialog.class);
+	private final RomSettingsPanel		settingsPanel;
+	private final JLabel				battSizeLabel			= new JLabel("Height of selected battery: --");
+	private final JCheckBox				cboxDefaultBatterySizes	= createCheckbox("Use default battery sizes",
+																		"Uncheck to use the sizes within your SystemUI.apk");
 
-	/**
-	 * @param args
-	 */
-	public static void main(final String[] args) {
-		final APKAnalyzerDialog a = new APKAnalyzerDialog(null, "RomPreset creator (by analysing SystemUI.apk)");
-		a.setVisible(true);
-		a.setDefaultCloseOperation(HIDE_ON_CLOSE);
-	}
-
-	public APKAnalyzerDialog(final Window arg0, final String arg1) {
-		super(arg0, arg1, ModalityType.APPLICATION_MODAL);
+	public APKAnalyzerDialog(final Window arg0, final RomSettingsPanel settingsPanel) {
+		super(arg0, "SystemUI - Analyzer", ModalityType.APPLICATION_MODAL);
+		this.settingsPanel = settingsPanel;
 		guiInit();
 	}
 
 	private void guiInit() {
+		// general stuff
+		final int width = 600;
+		final int height = 750;
+		final int x = IconCreatorFrame.MAIN_FRAME_INSTANCE.getBounds().x + 500;
+		final int y = IconCreatorFrame.MAIN_FRAME_INSTANCE.getBounds().y + 10;
+		setPreferredSize(new Dimension(width, height));
+		setMinimumSize(new Dimension(width, height));
+		setBounds(x, y, width, height);
+
+		// components
+		cboxDefaultBatterySizes.setSelected(true);
 		battTypeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		battTypeList.addListSelectionListener(new ListSelectionListener() {
 			@Override
@@ -62,34 +72,25 @@ public class APKAnalyzerDialog extends JDialog {
 				validateControlls();
 			}
 		});
-		setPreferredSize(new Dimension(1024, 600));
-		setMinimumSize(new Dimension(1024, 600));
 		chooseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
 				try {
-					analyse();
+					analyze();
 				} catch (final Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-
-		settingsPanel.setVisible(false);
-		overPanel.setVisible(false);
-
 		setLayout(new BorderLayout());
 		this.add(makeToolBar(), BorderLayout.NORTH);
 		final JPanel p = new JPanel(new BorderLayout());
-		p.add(createSettingsPanel(), BorderLayout.NORTH);
+		p.add(createWestPanel(), BorderLayout.NORTH);
 		p.add(overPanel);
 		this.add(p, BorderLayout.CENTER);
-		this.add(settingsPanel, BorderLayout.EAST);
 	}
 
 	protected void validateControlls() {
-		settingsPanel.setVisible(!battTypeList.isSelectionEmpty());
-		overPanel.setVisible(!battTypeList.isSelectionEmpty());
 		final BatteryType type = battTypeList.getSelectedValue();
 		if (type != null) {
 			final RomSettings set = settingsPanel.getSettings();
@@ -102,16 +103,17 @@ public class APKAnalyzerDialog extends JDialog {
 
 			settingsPanel.setSettings(set);
 			settingsPanel.setSettingsAutoSizes(set);
-			updateOverview();
+			if (!cboxDefaultBatterySizes.isSelected()) {
+				settingsPanel.forceBattSizes(type.getBattSize());
+			}
 
-		}
-
-	}
-
-	protected void updateOverview() {
-		final BatteryType type = battTypeList.getSelectedValue();
-		if (type != null) {
+			battSizeLabel.setText("Height of selected battery: " + type.getBattSize());
 			overPanel.setOverview(new ImageIcon(type.getOverview()), true);
+
+		} else {
+			battSizeLabel.setText("Height of selected battery: --");
+			overPanel.setOverview(null, false);
+
 		}
 
 	}
@@ -133,12 +135,11 @@ public class APKAnalyzerDialog extends JDialog {
 		return null;
 	}
 
-	public void analyse() throws Exception {
+	public void analyze() throws Exception {
 		final File zipFile = chooseZip();
 		LOG.info("Analysing: " + zipFile);
 		if (zipFile != null) {
-			settingsPanel.setVisible(false);
-
+			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			LOG.info("Analysing: " + zipFile.getName());
 			final File extractDir = new File("./analyzer/" + zipFile.getName());
 			// Entpacken
@@ -157,7 +158,7 @@ public class APKAnalyzerDialog extends JDialog {
 			}
 			battTypeList.setListData(types);
 			battTypeList.repaint();
-			battTypeList.setMinimumSize(new Dimension(10, 30));
+			// battTypeList.setMinimumSize(new Dimension(10, 40));
 
 			// Wifi icons suchen
 
@@ -169,23 +170,28 @@ public class APKAnalyzerDialog extends JDialog {
 			// aufräumen
 			LOG.info("Cleaning up...deleting : " + extractDir.getPath());
 			ZipArchiveExtractor.deleteDirRecurse(extractDir);
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
 
-	private JPanel createSettingsPanel() {
+	private JPanel createWestPanel() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
-		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu",
 				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
 		final CellConstraints cc = new CellConstraints();
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(JGoodiesHelper.createBlackLabel("1% Mods in your SystemUI.apk:"), cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("1% BatteryMODs in your SystemUI.apk:"), cc.xyw(2, ++row, 5));
 		final JScrollPane scroller = new JScrollPane();
 		scroller.add(battTypeList);
 		scroller.getViewport().setView(battTypeList);
 		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		builder.add(scroller, cc.xyw(2, ++row, 7));
+		builder.add(scroller, cc.xyw(2, ++row, 5));
+		builder.add(new JLabel(IconStore.logoIconAnalyzer), cc.xyw(8, row, 3));
+
+		builder.add(battSizeLabel, cc.xyw(2, ++row, 3));
+		builder.add(cboxDefaultBatterySizes, cc.xyw(6, row, 3));
 
 		final JPanel cfp = builder.getPanel();
 		final JPanel out = new JPanel(new BorderLayout());
@@ -194,18 +200,22 @@ public class APKAnalyzerDialog extends JDialog {
 	}
 
 	/**
-	 * @return the zipFile
+	 * @param text
+	 *            Text der Checkbox
+	 * @param defaultselection
+	 *            Defaultselection
+	 * @return
 	 */
-	public File getZipFile() {
-		return zipFile;
-	}
-
-	/**
-	 * @param zipFile
-	 *            the zipFile to set
-	 */
-	public void setZipFile(final File zipFile) {
-		this.zipFile = zipFile;
+	protected JCheckBox createCheckbox(final String text, final String tooltip) {
+		final JCheckBox cbox = new JCheckBox(text);
+		cbox.setToolTipText(tooltip);
+		cbox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				validateControlls();
+			}
+		});
+		return cbox;
 	}
 
 }
