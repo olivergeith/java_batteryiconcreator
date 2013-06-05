@@ -31,7 +31,6 @@ import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.gui.cfg.RomSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
-import de.og.batterycreator.main.IconCreatorFrame;
 import de.og.batterycreator.systemuianalyser.analyser.BatteryAnalyser;
 import de.og.batterycreator.systemuianalyser.data.BatteryType;
 
@@ -47,18 +46,23 @@ public class APKAnalyzerDialog extends JDialog {
 	private final JCheckBox				cboxDefaultBatterySizes	= createCheckbox("Use default battery sizes",
 																		"Uncheck to use the sizes within your SystemUI.apk");
 
-	public APKAnalyzerDialog(final Window arg0, final RomSettingsPanel settingsPanel) {
-		super(arg0, "SystemUI - Analyzer", ModalityType.APPLICATION_MODAL);
+	public APKAnalyzerDialog(final Window parentFrame, final RomSettingsPanel settingsPanel) {
+		super(parentFrame, "SystemUI - Analyzer", ModalityType.APPLICATION_MODAL);
 		this.settingsPanel = settingsPanel;
-		guiInit();
+		guiInit(parentFrame);
 	}
 
-	private void guiInit() {
+	private void guiInit(final Window parentFrame) {
 		// general stuff
 		final int width = 600;
 		final int height = 750;
-		final int x = IconCreatorFrame.MAIN_FRAME_INSTANCE.getBounds().x + 500;
-		final int y = IconCreatorFrame.MAIN_FRAME_INSTANCE.getBounds().y + 10;
+		int x = 500;
+		int y = 100;
+		// Positioning releativ to Parent
+		if (parentFrame != null) {
+			x = parentFrame.getBounds().x + 500;
+			y = parentFrame.getBounds().y + 10;
+		}
 		setPreferredSize(new Dimension(width, height));
 		setMinimumSize(new Dimension(width, height));
 		setBounds(x, y, width, height);
