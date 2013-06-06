@@ -65,32 +65,27 @@ public class BatteryAnalyser {
 	}
 
 	private void addToBatteryType(final String filename, final ImageIcon icon, final String drawableFolder) {
-		final int index = indexOfAnyNumber(filename);
+		// suchen nach der Nummer
+		int index = indexOfAnyNumber(filename);
+		// keine nummer gefunden ? dann suchen wir nach "full.png"
+		if (index < 0)
+			index = filename.indexOf("full.png");
+
 		if (index > 0) {
 			String pattern = filename.substring(0, index);
-			final int indexPng = filename.indexOf(".png");
 			final int indexCharge = filename.indexOf(BatteryType.CHARGE_ANIM);
-
 			boolean ischarge = false;
 			if (indexCharge > 0) {
 				ischarge = true;
 				pattern = filename.substring(0, indexCharge);
 			}
-
-			final String number = filename.substring(index, indexPng);
-			try {
-				final int nr = Integer.parseInt(number);
-				BatteryType type = batteryTypeMap.get(pattern);
-				if (type == null) {
-					type = new BatteryType(pattern, drawableFolder);
-					batteryTypeMap.put(pattern, type);
-				}
-				type.addNumber(nr, ischarge);
-				type.addIcon(icon, ischarge);
-			} catch (final NumberFormatException e) {
-				LOG.error("NumberFormatException!");
-
+			BatteryType type = batteryTypeMap.get(pattern);
+			if (type == null) {
+				type = new BatteryType(pattern, drawableFolder);
+				batteryTypeMap.put(pattern, type);
 			}
+			icon.setDescription(filename);
+			type.addIcon(icon, ischarge);
 		}
 	}
 
@@ -101,6 +96,7 @@ public class BatteryAnalyser {
 	private static File[] findBatteryPNGs(final File dir) {
 		final File[] pngs = dir.listFiles(new FilenameFilter() {
 
+			@Override
 			public boolean accept(final File dir, final String name) {
 				return name.toLowerCase().endsWith(".png") && name.toLowerCase().startsWith(BatteryType.BATTERY_PREFIX);
 			}
@@ -116,6 +112,7 @@ public class BatteryAnalyser {
 		// Liste aller Subdirs
 		final File[] subDirs = file.listFiles(new FileFilter() {
 
+			@Override
 			public boolean accept(final File pathname) {
 				return pathname.isDirectory();
 			}

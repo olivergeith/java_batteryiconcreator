@@ -22,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import og.basics.gui.file.FileDialogs;
+import og.basics.gui.image.StaticImageHelper;
 import og.basics.jgoodies.JGoodiesHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,7 @@ import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.gui.cfg.RomSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
+import de.og.batterycreator.main.IconCreatorFrame;
 import de.og.batterycreator.systemuianalyser.analyser.BatteryAnalyser;
 import de.og.batterycreator.systemuianalyser.data.BatteryType;
 
@@ -39,6 +41,7 @@ public class APKAnalyzerDialog extends JDialog {
 	private static final long			serialVersionUID		= -1605180725450582074L;
 	private File						zipFile					= new File("SystemUI.apk");
 	private final JButton				chooseButton			= new JButton("Load SystemUI.apk", IconStore.androidblueIcon);
+	private final JButton				exportIconSetButton		= new JButton("Export selected BatteryMod", IconStore.iconsetsIcon);
 	private final JList<BatteryType>	battTypeList			= new JList<BatteryType>();
 	private final OverviewPanel			overPanel				= new OverviewPanel();
 	private static final Logger			LOG						= LoggerFactory.getLogger(APKAnalyzerDialog.class);
@@ -87,6 +90,18 @@ public class APKAnalyzerDialog extends JDialog {
 				}
 			}
 		});
+		exportIconSetButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				try {
+					exportBatteryIconSet();
+				} catch (final Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		exportIconSetButton.setVisible(false);
+
 		setLayout(new BorderLayout());
 		this.add(makeToolBar(), BorderLayout.NORTH);
 		final JPanel p = new JPanel(new BorderLayout());
@@ -114,10 +129,12 @@ public class APKAnalyzerDialog extends JDialog {
 
 			battSizeLabel.setText("Height of selected battery: " + type.getBattSize());
 			overPanel.setOverview(new ImageIcon(type.getOverview()), true);
+			exportIconSetButton.setVisible(true);
 
 		} else {
 			battSizeLabel.setText("Height of selected battery: --");
 			overPanel.setOverview(null, false);
+			exportIconSetButton.setVisible(false);
 
 		}
 
@@ -127,6 +144,7 @@ public class APKAnalyzerDialog extends JDialog {
 		final JToolBar toolbar = new JToolBar();
 		toolbar.setFloatable(false);
 		toolbar.add(chooseButton);
+		toolbar.add(exportIconSetButton);
 
 		return toolbar;
 	}
@@ -142,7 +160,7 @@ public class APKAnalyzerDialog extends JDialog {
 
 	public void analyze() throws Exception {
 		final File zipFile = chooseZip();
-		LOG.info("Analysing: " + zipFile);
+		LOG.info("Analysing: " + zipFile.getAbsolutePath());
 		if (zipFile != null) {
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			LOG.info("Analysing: " + zipFile.getName());
@@ -233,4 +251,55 @@ public class APKAnalyzerDialog extends JDialog {
 		return cbox;
 	}
 
+	private String	romName	= "MyRomName";
+
+	private void exportBatteryIconSet() {
+		final BatteryType type = battTypeList.getSelectedValue();
+		if (type != null) {
+
+			final String s = (String) JOptionPane.showInputDialog(this, //
+					"Exporting and creating an 'Icon-Set --> Batteries' for you\n"//
+							+ "What is the Name of your Rom ?\n" //
+							+ "The Icon-Set will be named <MyRomName>_" + type.getPattern() //
+					, "What is the Name of the Rom, you extracted this SystemUI from ?", JOptionPane.PLAIN_MESSAGE, IconStore.iconsetsIcon, null, romName);
+
+			// If a string was returned, say so.
+			if ((s != null) && (s.length() > 0)) {
+				romName = s;
+				exportBatteryIconSet(type, romName);
+			}
+		}
+	}
+
+	private void exportBatteryIconSet(final BatteryType type, final String romName) {
+		if (type != null) {
+			final String iconsetFolderName = romName + "_" + type.getPattern();
+			// outfolder anlegen
+			final String outFolder = "./custom/batteries/" + iconsetFolderName + "/";
+			final File folder = new File(outFolder);
+			folder.mkdirs();
+			// loop über alle icons
+			for (final ImageIcon icon : type.getIcons()) {
+				//
+				final String filenameandPath = outFolder + icon.getDescription();
+				LOG.info("Saving: {}", filenameandPath);
+				StaticImageHelper.writePNG(icon, new File(filenameandPath));
+			}
+			// loop über alle chargeicons
+			for (final ImageIcon icon : type.getIconsCharge()) {
+				//
+				final String filenameandPath = outFolder + icon.getDescription();
+				LOG.info("Saving: {}", filenameandPath);
+				StaticImageHelper.writePNG(icon, new File(filenameandPath));
+			}
+			// Erfolg vermelden
+			JOptionPane.showMessageDialog(this, //
+					"This Battery Mod has been saved to:\n" + //
+							outFolder + "\n" + //
+							"Please restart " + IconCreatorFrame.APP_NAME + "to have this new Icon-Set available in 'Icon-Sets --> Batteries'", //
+					getTitle(),//
+					JOptionPane.INFORMATION_MESSAGE);
+
+		}
+	}
 }

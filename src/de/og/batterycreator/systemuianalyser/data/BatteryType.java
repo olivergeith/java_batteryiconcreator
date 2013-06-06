@@ -10,8 +10,6 @@ public class BatteryType {
 
 	public static final String		CHARGE_ANIM		= "charge_anim";
 	public static final String		BATTERY_PREFIX	= "stat_sys_battery";
-	private final List<Integer>		numbers			= new ArrayList<Integer>();
-	private final List<Integer>		numbersCharge	= new ArrayList<Integer>();
 	private final String			pattern;
 	private final String			patternCharge;
 	private final List<ImageIcon>	icons			= new ArrayList<ImageIcon>();
@@ -28,28 +26,12 @@ public class BatteryType {
 		this.drawableFolder = drawableFolder;
 	}
 
-	public List<Integer> getNumbers() {
-		return numbers;
-	}
-
-	public List<Integer> getNumbersCharge() {
-		return numbersCharge;
-	}
-
 	public List<ImageIcon> getIcons() {
 		return icons;
 	}
 
 	public List<ImageIcon> getIconsCharge() {
 		return iconsCharge;
-	}
-
-	public void addNumber(final int nr, final boolean isCharge) {
-		if (isCharge) {
-			numbersCharge.add(nr);
-		} else {
-			numbers.add(nr);
-		}
 	}
 
 	public void addIcon(final ImageIcon icon, final boolean isCharge) {
@@ -90,8 +72,8 @@ public class BatteryType {
 	}
 
 	public String toDebugString() {
-		return "BatteryType pattern=" + pattern + " in " + drawableFolder + " [contains " + numbers.size() + " icons and " + numbersCharge.size()
-				+ " chargeIcons]" + "is 1% MOD: " + isOnPercentMod();
+		return "BatteryType pattern=" + pattern + " in " + drawableFolder + " [contains " + icons.size() + " icons and " + iconsCharge.size() + " chargeIcons]"
+				+ "is 1% MOD: " + isOnPercentMod();
 	}
 
 	/**
@@ -116,7 +98,7 @@ public class BatteryType {
 	}
 
 	public boolean isOnPercentMod() {
-		if (icons.size() == 101 && iconsCharge.size() == 101)
+		if (icons.size() >= 101 && iconsCharge.size() >= 101)
 			return true;
 		return false;
 	}
