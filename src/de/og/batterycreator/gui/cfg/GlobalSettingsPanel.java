@@ -240,7 +240,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 
 	public void setSettings(final GlobalSettings settings) {
 		if (settings != null) {
-			IconCreatorFrame.globalSettings = settings;
+			GlobalSettings.INSTANCE = settings;
 			romPresetCombo.setSelectedItem(settings.getRomPreset());
 			cboxShowAdvancedButton.setSelected(settings.isShowAdvancedButton());
 			cboxAlwaysWriteOverviews.setSelected(settings.isAlwaysWriteOverview());
@@ -257,17 +257,17 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	}
 
 	public GlobalSettings getSettings() {
-		IconCreatorFrame.globalSettings.setRomPreset((RomPreset) romPresetCombo.getSelectedItem());
-		IconCreatorFrame.globalSettings.setShowAdvancedButton(cboxShowAdvancedButton.isSelected());
-		IconCreatorFrame.globalSettings.setAlwaysWriteOverview(cboxAlwaysWriteOverviews.isSelected());
-		IconCreatorFrame.globalSettings.setBigBackgroundStyle(bigBackgroundStyleCombo.getSelectedIndex());
-		IconCreatorFrame.globalSettings.setSmallBackgroundStyle(smallBackgroundStyleCombo.getSelectedIndex());
-		IconCreatorFrame.globalSettings.setSmallOverViewStyle(smallOverviewStyleCombo.getSelectedIndex());
-		IconCreatorFrame.globalSettings.setSmallOverviewsOtherNmbers(cboxSmallOverviewsOtherNumbers.isSelected());
-		IconCreatorFrame.globalSettings.setSignalWifiOverViewStyle(signalWifiOverviewStyleCombo.getSelectedIndex());
-		IconCreatorFrame.globalSettings.setSignalWifiBackgroundStyle(signalWifiBackgroundStyleCombo.getSelectedIndex());
+		GlobalSettings.INSTANCE.setRomPreset((RomPreset) romPresetCombo.getSelectedItem());
+		GlobalSettings.INSTANCE.setShowAdvancedButton(cboxShowAdvancedButton.isSelected());
+		GlobalSettings.INSTANCE.setAlwaysWriteOverview(cboxAlwaysWriteOverviews.isSelected());
+		GlobalSettings.INSTANCE.setBigBackgroundStyle(bigBackgroundStyleCombo.getSelectedIndex());
+		GlobalSettings.INSTANCE.setSmallBackgroundStyle(smallBackgroundStyleCombo.getSelectedIndex());
+		GlobalSettings.INSTANCE.setSmallOverViewStyle(smallOverviewStyleCombo.getSelectedIndex());
+		GlobalSettings.INSTANCE.setSmallOverviewsOtherNmbers(cboxSmallOverviewsOtherNumbers.isSelected());
+		GlobalSettings.INSTANCE.setSignalWifiOverViewStyle(signalWifiOverviewStyleCombo.getSelectedIndex());
+		GlobalSettings.INSTANCE.setSignalWifiBackgroundStyle(signalWifiBackgroundStyleCombo.getSelectedIndex());
 
-		return IconCreatorFrame.globalSettings;
+		return GlobalSettings.INSTANCE;
 	}
 
 	@Override

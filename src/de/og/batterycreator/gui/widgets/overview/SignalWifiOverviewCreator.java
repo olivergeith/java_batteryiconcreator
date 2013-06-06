@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import javax.swing.ImageIcon;
-import de.og.batterycreator.main.IconCreatorFrame;
+import de.og.batterycreator.cfg.GlobalSettings;
 
 public class SignalWifiOverviewCreator extends OverviewCreator {
 
@@ -21,7 +21,7 @@ public class SignalWifiOverviewCreator extends OverviewCreator {
 
 			// Iconblock besorgen
 			BufferedImage iconBlock;
-			switch (IconCreatorFrame.globalSettings.getSignalWifiOverViewStyle()) {
+			switch (GlobalSettings.INSTANCE.getSignalWifiOverViewStyle()) {
 				default:
 				case 0:
 					iconBlock = StaticIconGridCreator.createOneLineGrid(iconMap, true);
@@ -49,7 +49,7 @@ public class SignalWifiOverviewCreator extends OverviewCreator {
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 			BufferedImage backGrnd;
-			switch (IconCreatorFrame.globalSettings.getSignalWifiBackgroundStyle()) {
+			switch (GlobalSettings.INSTANCE.getSignalWifiBackgroundStyle()) {
 				default:
 				case 0:
 					backGrnd = StaticBackgroundCreator.drawBackground01(w, h, offsetOben - 10, offsetUnten);

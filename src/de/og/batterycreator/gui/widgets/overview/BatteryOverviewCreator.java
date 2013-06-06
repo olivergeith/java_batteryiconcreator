@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import javax.swing.ImageIcon;
+import de.og.batterycreator.cfg.GlobalSettings;
 import de.og.batterycreator.main.IconCreatorFrame;
 
 public class BatteryOverviewCreator extends OverviewCreator {
@@ -17,7 +18,7 @@ public class BatteryOverviewCreator extends OverviewCreator {
 	}
 
 	public static BufferedImage createOverview(final List<ImageIcon> iconMap, final String name) {
-		switch (IconCreatorFrame.globalSettings.getBigBackgroundStyle()) {
+		switch (GlobalSettings.INSTANCE.getBigBackgroundStyle()) {
 			default:
 			case 0:
 				return createOverviewOldstyle(iconMap, name);
@@ -103,7 +104,7 @@ public class BatteryOverviewCreator extends OverviewCreator {
 
 			// Iconblock besorgen
 			BufferedImage iconBlock;
-			switch (IconCreatorFrame.globalSettings.getSmallOverViewStyle()) {
+			switch (GlobalSettings.INSTANCE.getSmallOverViewStyle()) {
 				default:
 				case 0:
 					iconBlock = StaticIconGridCreator.createBatteryOneLineGrid(iconMap, true);
@@ -140,7 +141,7 @@ public class BatteryOverviewCreator extends OverviewCreator {
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 			BufferedImage backGrnd;
-			switch (IconCreatorFrame.globalSettings.getSmallBackgroundStyle()) {
+			switch (GlobalSettings.INSTANCE.getSmallBackgroundStyle()) {
 				default:
 				case 0:
 					backGrnd = StaticBackgroundCreator.drawBackground01(w, h, offsetOben - 10, offsetUnten);

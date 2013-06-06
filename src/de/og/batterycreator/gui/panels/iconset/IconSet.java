@@ -10,9 +10,9 @@ import javax.swing.JLabel;
 import og.basics.gui.image.StaticImageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import de.og.batterycreator.cfg.GlobalSettings;
 import de.og.batterycreator.gui.widgets.overview.OverviewCreator;
 import de.og.batterycreator.gui.widgets.overview.StripeviewCreator;
-import de.og.batterycreator.main.IconCreatorFrame;
 
 /**
  * {@link IconSet} is a collection of Icons in One Folder that are flashed
@@ -75,7 +75,7 @@ public class IconSet {
 	private void writeOverview(final ImageIcon over, final String name) {
 		final String filename = rootDir.getPath() + File.separator + "overview_" + name + ".png";
 		final File overFile = new File(filename);
-		if (!overFile.exists() || IconCreatorFrame.globalSettings.isAlwaysWriteOverview()) {
+		if (!overFile.exists() || GlobalSettings.INSTANCE.isAlwaysWriteOverview()) {
 			LOG.info("  Writing overview to filesystem {}", overFile.getPath());
 			StaticImageHelper.writePNG(over, overFile);
 		}

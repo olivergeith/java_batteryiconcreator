@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import og.basics.gui.image.StaticImageHelper;
-import de.og.batterycreator.main.IconCreatorFrame;
+import de.og.batterycreator.cfg.GlobalSettings;
 
 public class StaticIconGridCreator {
 
@@ -179,7 +179,7 @@ public class StaticIconGridCreator {
 		// normal Icon
 		for (int z = 0; z <= 5; z++) {
 			int index = z * 20;
-			if (IconCreatorFrame.globalSettings.isSmallOverviewsOtherNmbers())
+			if (GlobalSettings.INSTANCE.isSmallOverviewsOtherNmbers())
 				index = index + 5 - z;
 			final ImageIcon img = iconMap.get(index);
 			iconMapOut.add(img);
@@ -192,7 +192,7 @@ public class StaticIconGridCreator {
 		// normal Icon
 		for (int z = 0; z <= 5; z++) {
 			int index = 101 + z * 20;
-			if (IconCreatorFrame.globalSettings.isSmallOverviewsOtherNmbers())
+			if (GlobalSettings.INSTANCE.isSmallOverviewsOtherNmbers())
 				index = index + 5 - z;
 			final ImageIcon img = iconMap.get(index);
 			iconMapOut.add(img);
