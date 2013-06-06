@@ -15,9 +15,10 @@ public class BatteryAnalyser {
 	/**
 	 * the Logger for this Class
 	 */
-	private static final Logger				LOG				= LoggerFactory.getLogger(BatteryAnalyser.class);
+	private static final Logger				LOG						= LoggerFactory.getLogger(BatteryAnalyser.class);
 	private final File						extractDir;
-	private final Map<String, BatteryType>	batteryTypeMap	= new HashMap<String, BatteryType>();
+	private final Map<String, BatteryType>	batteryTypeMap			= new HashMap<String, BatteryType>();
+	private int								anzahlOnePercentMods	= 0;
 
 	public BatteryAnalyser(final File extractDir) {
 		this.extractDir = extractDir;
@@ -25,10 +26,26 @@ public class BatteryAnalyser {
 
 	public void analyse() {
 		findAllBatteriesInDirTree(extractDir);
-		for (final BatteryType type : batteryTypeMap.values()) {
-			LOG.info("Found: " + type);
-		}
+		finalizeResults();
+	}
 
+	private void finalizeResults() {
+		LOG.info("##################################################");
+		LOG.info(" Battery Analyser");
+		LOG.info("##################################################");
+		for (final BatteryType type : batteryTypeMap.values()) {
+			LOG.info(" Found: " + type.toDebugString());
+			if (type.isOnPercentMod()) {
+				anzahlOnePercentMods++;
+			}
+		}
+		LOG.info("##################################################");
+		if (anzahlOnePercentMods == 0) {
+			LOG.info(" Sorry your SystemUI has no 1% MOD");
+		} else {
+			LOG.info(" Your SystemUI has {} 1% MOD(s)", anzahlOnePercentMods);
+		}
+		LOG.info("##################################################");
 	}
 
 	private void findAllBatteriesInDirTree(final File file) {
@@ -123,6 +140,13 @@ public class BatteryAnalyser {
 			}
 		}
 		return -1;
+	}
+
+	/**
+	 * @return the hasOnePercentMod
+	 */
+	public boolean hasOnePercentMod() {
+		return anzahlOnePercentMods > 0;
 	}
 
 }

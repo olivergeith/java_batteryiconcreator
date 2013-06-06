@@ -109,7 +109,8 @@ public class RomSettingsPanel extends SettingsPanel {
 	// Template
 	private final TemplateChooser	templateChooser					= new TemplateChooser();
 
-	// Construktor
+	// Subdialogs
+	private final APKAnalyzerDialog	analyzer						= new APKAnalyzerDialog(IconCreatorFrame.MAIN_FRAME_INSTANCE, this);
 
 	// Construktor
 	public RomSettingsPanel() {
@@ -602,7 +603,6 @@ public class RomSettingsPanel extends SettingsPanel {
 	}
 
 	protected void analyze() {
-		final APKAnalyzerDialog analyzer = new APKAnalyzerDialog(IconCreatorFrame.MAIN_FRAME_INSTANCE, this);
 		analyzer.setVisible(true);
 
 	}

@@ -91,7 +91,7 @@ public class BatteryType {
 
 	public String toDebugString() {
 		return "BatteryType pattern=" + pattern + " in " + drawableFolder + " [contains " + numbers.size() + " icons and " + numbersCharge.size()
-				+ " chargeIcons]";
+				+ " chargeIcons]" + "is 1% MOD: " + isOnPercentMod();
 	}
 
 	/**

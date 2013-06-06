@@ -14,6 +14,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
@@ -175,6 +176,16 @@ public class APKAnalyzerDialog extends JDialog {
 			LOG.info("Cleaning up...deleting : " + extractDir.getPath());
 			ZipArchiveExtractor.deleteDirRecurse(extractDir);
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			// Wenns keinen 1% Mod gibt!
+			if (battAnalyser.hasOnePercentMod() == false) {
+				JOptionPane.showMessageDialog(this, //
+						"ERROR: There is no 1% Battery Mod in your SystemUI !!!\n" + //
+								"Try to find a 1% Mod for your Rom first.\n" + //
+								"Search XDA Forum for this!", //
+						getTitle(),//
+						JOptionPane.ERROR_MESSAGE);
+				setVisible(false);
+			}
 		}
 	}
 
