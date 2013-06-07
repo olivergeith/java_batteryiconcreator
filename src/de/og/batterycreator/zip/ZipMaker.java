@@ -1,4 +1,4 @@
-package de.og.batterycreator.zipcreator;
+package de.og.batterycreator.zip;
 
 import java.io.File;
 import java.io.FileInputStream;

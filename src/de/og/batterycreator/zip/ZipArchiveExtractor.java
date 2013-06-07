@@ -1,4 +1,4 @@
-package de.og.batterycreator.systemuianalyser.gui;
+package de.og.batterycreator.zip;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

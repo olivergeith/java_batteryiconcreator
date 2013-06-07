@@ -36,8 +36,8 @@ import de.og.batterycreator.gui.panels.iconset.RawIconSetSelector;
 import de.og.batterycreator.gui.panels.notification.NotificationAreaBG;
 import de.og.batterycreator.gui.panels.recurseiconset.RecurseIconSetSelector;
 import de.og.batterycreator.gui.panels.xmlset.RecurseXMLSetSelector;
-import de.og.batterycreator.zipcreator.ZipElementCollection;
-import de.og.batterycreator.zipcreator.ZipMaker;
+import de.og.batterycreator.zip.ZipElementCollection;
+import de.og.batterycreator.zip.ZipMaker;
 
 public class IconCreatingPanelNew extends JPanel {
 	@SuppressWarnings("unused")

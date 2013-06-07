@@ -582,7 +582,7 @@ public class RomSettingsPanel extends SettingsPanel {
 
 	@Override
 	protected void validateControls() {
-		LOGGER.info("validating Rom-Copntrols");
+		LOGGER.debug("validating Rom-Copntrols");
 		lidroidDrawableFolderCombo.setEnabled(cboxUseLidroid.isSelected());
 		morphLidroidWidget.setEnabled(cboxUseLidroid.isSelected());
 
