@@ -5,6 +5,15 @@ import java.io.Serializable;
 public class GlobalSettings implements Serializable {
 	private static final long		serialVersionUID			= -1271358085998273369L;
 
+	private final String			signalWifiCustomPath		= "./custom/signalwifi/";
+	private final String			toggleCustomPath			= "./custom/toggles/";
+	private final String			battCustomPath				= "./custom/batteries/";
+	private final String			powerwidgetCustomPath		= "./custom/powerwidget/";
+	private final String			weatherCustomPath			= "./custom/weather/";
+	private final String			emoCustomPath				= "./custom/emoticons/";
+	private final String			systemUICustomPath			= "./custom/systemui-mods/";
+	private final String			frameworkresCustomPath		= "./custom/frameworkres-mods/";
+
 	private RomPreset				romPreset;
 	private boolean					showAdvancedButton			= false;
 	private boolean					alwaysWriteOverview			= false;
@@ -113,6 +122,38 @@ public class GlobalSettings implements Serializable {
 	 */
 	public void setSignalWifiOverViewStyle(final int signalWifiOverViewStyle) {
 		this.signalWifiOverViewStyle = signalWifiOverViewStyle;
+	}
+
+	public String getSignalWifiCustomPath() {
+		return signalWifiCustomPath;
+	}
+
+	public String getToggleCustomPath() {
+		return toggleCustomPath;
+	}
+
+	public String getBattCustomPath() {
+		return battCustomPath;
+	}
+
+	public String getPowerwidgetCustomPath() {
+		return powerwidgetCustomPath;
+	}
+
+	public String getWeatherCustomPath() {
+		return weatherCustomPath;
+	}
+
+	public String getEmoCustomPath() {
+		return emoCustomPath;
+	}
+
+	public String getSystemUICustomPath() {
+		return systemUICustomPath;
+	}
+
+	public String getFrameworkresCustomPath() {
+		return frameworkresCustomPath;
 	}
 
 }

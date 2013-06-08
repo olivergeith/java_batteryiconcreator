@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import de.og.batterycreator.gui.widgets.overview.BatteryOverviewCreator;
 
-public class BatteryType {
+public class BatteryType extends IconType {
 
 	public static final String		CHARGE_ANIM		= "charge_anim";
 	public static final String		BATTERY_PREFIX	= "stat_sys_battery";
@@ -14,16 +14,15 @@ public class BatteryType {
 	private final String			patternCharge;
 	private final List<ImageIcon>	icons			= new ArrayList<ImageIcon>();
 	private final List<ImageIcon>	iconsCharge		= new ArrayList<ImageIcon>();
-	private final String			drawableFolder;
 
 	public String getPattern() {
 		return pattern;
 	}
 
 	public BatteryType(final String pattern, final String drawableFolder) {
+		super(drawableFolder);
 		this.pattern = pattern;
 		patternCharge = pattern + CHARGE_ANIM;
-		this.drawableFolder = drawableFolder;
 	}
 
 	public List<ImageIcon> getIcons() {
@@ -71,8 +70,9 @@ public class BatteryType {
 		return "BatteryType " + pattern;
 	}
 
+	@Override
 	public String toDebugString() {
-		return "BatteryType pattern=" + pattern + " in " + drawableFolder + " [contains " + icons.size() + " icons and " + iconsCharge.size() + " chargeIcons]"
+		return "BatteryType in " + getDrawableFolder() + "/" + pattern + " [" + icons.size() + " icons/ " + iconsCharge.size() + " chargeIcons]"
 				+ "is 1% MOD: " + isOnPercentMod();
 	}
 
@@ -83,18 +83,11 @@ public class BatteryType {
 		return patternCharge;
 	}
 
-	/**
-	 * @return the drawableFolder
-	 */
-	public String getDrawableFolder() {
-		return drawableFolder;
-	}
-
 	public BufferedImage getOverview() {
 		final List<ImageIcon> iconMap = new ArrayList<ImageIcon>();
 		iconMap.addAll(icons);
 		iconMap.addAll(iconsCharge);
-		return BatteryOverviewCreator.createOverviewNewStyle(iconMap, pattern + " (" + drawableFolder + ")");
+		return BatteryOverviewCreator.createOverviewNewStyle(iconMap, pattern + " (" + getDrawableFolder() + ")");
 	}
 
 	public boolean isOnPercentMod() {
