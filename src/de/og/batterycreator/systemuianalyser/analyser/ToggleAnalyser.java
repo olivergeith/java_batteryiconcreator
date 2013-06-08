@@ -46,7 +46,7 @@ public class ToggleAnalyser {
 			}
 			final File[] files = findPNGs(file);
 			for (final File png : files) {
-				LOG.info("Found Toggle: " + png.getPath());
+				LOG.debug("Found Toggle: " + png.getPath());
 				final ImageIcon icon = new ImageIcon(png.getPath());
 				final File parent = new File(png.getParent());
 				final String drawableFolder = parent.getName();
