@@ -25,19 +25,16 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import og.basics.gui.file.FileDialogs;
-import og.basics.gui.image.StaticImageHelper;
 import og.basics.jgoodies.JGoodiesHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import de.og.batterycreator.cfg.GlobalSettings;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.gui.cfg.RomSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
-import de.og.batterycreator.main.IconCreatorFrame;
 import de.og.batterycreator.systemuianalyser.analyser.BatteryAnalyser;
 import de.og.batterycreator.systemuianalyser.analyser.ToggleAnalyser;
 import de.og.batterycreator.systemuianalyser.analyser.WifiSignalAnalyser;
@@ -49,7 +46,6 @@ import de.og.batterycreator.zip.ZipArchiveExtractor;
 public class APKAnalyzerDialog extends JDialog {
 	private static final long			serialVersionUID		= -1605180725450582074L;
 	private static final Logger			LOG						= LoggerFactory.getLogger(APKAnalyzerDialog.class);
-	private String						romName					= "MyRomName";
 	private File						zipFile					= new File("SystemUI.apk");
 	private final JButton				zipChooseButton			= new JButton("Load SystemUI.apk", IconStore.androidblueIcon);
 	private final JProgressBar			progressBar				= new JProgressBar();
@@ -442,100 +438,21 @@ public class APKAnalyzerDialog extends JDialog {
 		return cbox;
 	}
 
+	// #########################################################################
+	// exporting
+	// #########################################################################
+	private final IconExporter	exporter	= new IconExporter(this);
+
 	private void exportBatteryIconSet() {
-		final BatteryType type = battTypeList.getSelectedValue();
-		if (type != null) {
-
-			final String s = (String) JOptionPane.showInputDialog(this, //
-					"Exporting and creating an 'Icon-Set --> Batteries' for you\n\n"//
-							+ "- The Icon-Set will be named <MyRomName>_" + type.getPattern() + "_(" + type.getDpi() + ")\n\n"//
-							+ "What is the name of your Rom ?\n" //
-					, "What is the Name of the Rom, you extracted this SystemUI from ?", JOptionPane.PLAIN_MESSAGE, IconStore.iconsetsIcon, null, romName);
-
-			// If a string was returned, say so.
-			if ((s != null) && (s.length() > 0)) {
-				romName = s;
-				exportBatteryIconSet(type, romName);
-			}
-		}
-	}
-
-	private void exportBatteryIconSet(final BatteryType type, final String romName) {
-		if (type != null) {
-			final String iconsetFolderName = romName + "_" + type.getPattern() + "_(" + type.getDpi() + ")";
-			// outfolder anlegen
-			final String outFolder = "./custom/batteries/" + iconsetFolderName + "/";
-			final File folder = new File(outFolder);
-			folder.mkdirs();
-			// loop über alle icons
-			for (final ImageIcon icon : type.getIcons()) {
-				//
-				final String filenameandPath = outFolder + icon.getDescription();
-				LOG.info("Saving: {}", filenameandPath);
-				StaticImageHelper.writePNG(icon, new File(filenameandPath));
-			}
-			// loop über alle chargeicons
-			for (final ImageIcon icon : type.getIconsCharge()) {
-				//
-				final String filenameandPath = outFolder + icon.getDescription();
-				LOG.info("Saving: {}", filenameandPath);
-				StaticImageHelper.writePNG(icon, new File(filenameandPath));
-			}
-			// Erfolg vermelden
-			JOptionPane.showMessageDialog(this, //
-					"This Battery Mod has been saved to:\n\n" + //
-							outFolder + "\n\n" + //
-							"Please restart " + IconCreatorFrame.APP_NAME + " to have this new Icon-Set available in 'Icon-Sets --> Batteries'", //
-					getTitle(),//
-					JOptionPane.INFORMATION_MESSAGE);
-		}
+		exporter.exportBatteryIconSet(battTypeList.getSelectedValue());
 	}
 
 	private void exportWifiSignalIconSet() {
-		final WifiSignalType type = wifiTypeList.getSelectedValue();
-		if (type != null) {
-
-			final String s = (String) JOptionPane.showInputDialog(this, //
-					"Exporting and creating an 'Icon-Set --> Signal&Wifi' for you\n\n"//
-							+ "- The Icon-Set will be named <MyRomName>_Signal&Wifi_(" + type.getDpi() + ")\n\n"//
-							+ "What is the name of your Rom ?\n" //
-					, "What is the Name of the Rom, you extracted this SystemUI from ?", JOptionPane.PLAIN_MESSAGE, IconStore.iconsetsIcon, null, romName);
-
-			// If a string was returned, say so.
-			if ((s != null) && (s.length() > 0)) {
-				romName = s;
-				exportWifiIconSet(type, romName);
-			}
-		}
-	}
-
-	private void exportWifiIconSet(final WifiSignalType type, final String romName) {
-		if (type != null) {
-			final String iconsetFolderName = romName + "_Signal&Wifi_(" + type.getDpi() + ")";
-			// outfolder anlegen
-			final String outFolder = GlobalSettings.INSTANCE.getSignalWifiCustomPath() + iconsetFolderName + "/";
-			final File folder = new File(outFolder);
-			folder.mkdirs();
-			// loop über alle icons
-			for (final ImageIcon icon : type.getIcons()) {
-				//
-				final String filenameandPath = outFolder + icon.getDescription();
-				LOG.info("Saving: {}", filenameandPath);
-				StaticImageHelper.writePNG(icon, new File(filenameandPath));
-			}
-			// Erfolg vermelden
-			JOptionPane.showMessageDialog(this, //
-					"This Wifi & Signal icons has been saved to:\n\n" + //
-							outFolder + "\n\n" + //
-							"Please restart " + IconCreatorFrame.APP_NAME + " to have this new Icon-Set available in 'Icon-Sets --> Signal & Wifi'", //
-					getTitle(),//
-					JOptionPane.INFORMATION_MESSAGE);
-		}
+		exporter.exportWifiSignalIconSet(wifiTypeList.getSelectedValue());
 	}
 
 	protected void exportToggleIconSet() {
-		// TODO Auto-generated method stub
-
+		exporter.exportToggleIconSet(toggleTypeList.getSelectedValue());
 	}
 
 	// #########################################################################
