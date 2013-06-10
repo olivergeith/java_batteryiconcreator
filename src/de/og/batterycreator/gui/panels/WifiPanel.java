@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.Vector;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -22,6 +23,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
+import og.basics.util.StaticExecutor;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.wifi.AbstractWifiCreator;
 import de.og.batterycreator.creators.wifi.BrickWifi1Creator;
@@ -45,6 +47,7 @@ public class WifiPanel extends JPanel {
 	private static final long						serialVersionUID	= -4657987890334428414L;
 
 	private final JComboBox<AbstractWifiCreator>	combo				= new JComboBox<AbstractWifiCreator>();
+	private final JButton							openFolderButton	= new JButton(IconStore.folder2Icon);
 	private AbstractWifiCreator						activWifiCreator;
 	private final WifiSignaleSettingsPanel			settingsPanel		= new WifiSignaleSettingsPanel();
 	private final OverviewPanel						overPane			= new OverviewPanel();
@@ -99,9 +102,24 @@ public class WifiPanel extends JPanel {
 		combo.setSelectedIndex(0);
 		combo.setToolTipText("Choose your WifiCreator...then press play-button");
 		combo.setMaximumRowCount(10);
-		combo.setMaximumSize(new Dimension(300, 40));
+		combo.setMaximumSize(new Dimension(400, 40));
+		// combo.setPreferredSize(new Dimension(400, 30));
+
 		activWifiCreator = (AbstractWifiCreator) combo.getSelectedItem();
 		settingsPanel.setSettings(activWifiCreator.getSettings());
+
+		openFolderButton.setToolTipText("Open the folder where the icons and overviews are strored");
+		openFolderButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				final AbstractWifiCreator cre = (AbstractWifiCreator) combo.getSelectedItem();
+				if (!(cre instanceof NoWifiIcons)) {
+					final String path = cre.getPath();
+					StaticExecutor.openFolder(path);
+				}
+			}
+		});
+
 		setLayout(new BorderLayout());
 
 		// Icon Liste
@@ -136,6 +154,8 @@ public class WifiPanel extends JPanel {
 		final JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		toolBar.add(combo);
+		toolBar.add(new JPanel());
+		toolBar.add(openFolderButton);
 		return toolBar;
 	}
 
@@ -155,7 +175,7 @@ public class WifiPanel extends JPanel {
 			iconList.removeAll();
 			iconList.setListData(activWifiCreator.getFilenames());
 			iconList.repaint();
-
+			openFolderButton.setEnabled(true);
 		} else {
 			overPane.setOverview(IconStore.nothingIcon);
 			overPane.setText("    No Wifi Icons selected...choose Wifi icon style in Toolbar");
@@ -163,6 +183,7 @@ public class WifiPanel extends JPanel {
 			iconList.removeAll();
 			iconList.setListData(new Vector<String>());
 			iconList.repaint();
+			openFolderButton.setEnabled(false);
 		}
 
 	}

@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.Vector;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -22,6 +23,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
+import og.basics.util.StaticExecutor;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.signal.AbstractSignalCreator;
 import de.og.batterycreator.creators.signal.ArcSignalCreator;
@@ -39,6 +41,7 @@ public class SignalPanel extends JPanel {
 	private static final long						serialVersionUID	= -4657987890334428414L;
 
 	private final JComboBox<AbstractSignalCreator>	combo				= new JComboBox<AbstractSignalCreator>();
+	private final JButton							openFolderButton	= new JButton(IconStore.folder2Icon);
 	private final OverviewPanel						overPane			= new OverviewPanel();
 	private final WifiSignaleSettingsPanel			settingsPanel		= new WifiSignaleSettingsPanel();
 	private AbstractSignalCreator					activSignalCreator;
@@ -85,9 +88,21 @@ public class SignalPanel extends JPanel {
 		combo.setSelectedIndex(0);
 		combo.setToolTipText("Choose your SignalCreator...then press play-button");
 		combo.setMaximumRowCount(10);
-		combo.setMaximumSize(new Dimension(300, 40));
+		// combo.setPreferredSize(new Dimension(400, 30));
+		combo.setMaximumSize(new Dimension(400, 40));
 		setActivSignalCreator((AbstractSignalCreator) combo.getSelectedItem());
 		setLayout(new BorderLayout());
+		openFolderButton.setToolTipText("Open the folder where the icons and overviews are strored");
+		openFolderButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				final AbstractSignalCreator cre = (AbstractSignalCreator) combo.getSelectedItem();
+				if (!(cre instanceof NoSignalIcons)) {
+					final String path = cre.getPath();
+					StaticExecutor.openFolder(path);
+				}
+			}
+		});
 
 		// Icon Liste
 		final JScrollPane scroller = new JScrollPane();
@@ -122,6 +137,8 @@ public class SignalPanel extends JPanel {
 		final JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		toolBar.add(combo);
+		toolBar.add(new JPanel());
+		toolBar.add(openFolderButton);
 		return toolBar;
 	}
 
@@ -141,6 +158,7 @@ public class SignalPanel extends JPanel {
 			iconList.removeAll();
 			iconList.setListData(activSignalCreator.getFilenames());
 			iconList.repaint();
+			openFolderButton.setEnabled(true);
 		} else {
 			overPane.setOverview(IconStore.nothingIcon);
 			overPane.setText("    No Signal Icons selected...choose Signal icon style in Toolbar");
@@ -148,6 +166,7 @@ public class SignalPanel extends JPanel {
 			iconList.removeAll();
 			iconList.setListData(new Vector<String>());
 			iconList.repaint();
+			openFolderButton.setEnabled(false);
 		}
 
 	}

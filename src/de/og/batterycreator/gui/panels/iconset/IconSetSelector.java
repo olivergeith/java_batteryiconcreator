@@ -12,6 +12,7 @@ import java.io.FilenameFilter;
 import java.util.Vector;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +24,7 @@ import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 import og.basics.gui.html.HTMLFileDisplay;
+import og.basics.util.StaticExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import de.og.batterycreator.gui.iconstore.IconStore;
@@ -34,6 +36,7 @@ public class IconSetSelector extends JPanel {
 
 	private final JList<ImageIcon>		list				= new JList<ImageIcon>();
 	private final JComboBox<ImageIcon>	combo				= new JComboBox<ImageIcon>();
+	private final JButton				openFolderButton	= new JButton(IconStore.folder2Icon);
 	private final OverviewPanel			overPane			= new OverviewPanel();
 	private final ImageIcon				nada				= IconStore.nothingIcon;
 	private Vector<String>				filenamesAndPath	= new Vector<String>();
@@ -106,6 +109,7 @@ public class IconSetSelector extends JPanel {
 		addSetsFromFilesystem();
 		combo.setRenderer(new MyCellRenderer());
 		combo.setToolTipText("Choose your " + setTypeName + " Iconset");
+		combo.setPreferredSize(new Dimension(400, 30));
 		combo.addActionListener(new ActionListener() {
 
 			@Override
@@ -131,6 +135,13 @@ public class IconSetSelector extends JPanel {
 		combo.setSelectedIndex(0);
 		combo.setMaximumSize(new Dimension(400, 40));
 		combo.setMaximumRowCount(10);
+		openFolderButton.setToolTipText("Open the ./custom/-folder for " + setTypeName + "-Icon-Sets");
+		openFolderButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				StaticExecutor.openFolder(rootDir);
+			}
+		});
 
 		setLayout(new BorderLayout());
 		// Tabbed Pane
@@ -153,6 +164,8 @@ public class IconSetSelector extends JPanel {
 		final JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		toolBar.add(combo);
+		toolBar.add(new JPanel());
+		toolBar.add(openFolderButton);
 		this.add(toolBar, BorderLayout.NORTH);
 	}
 
