@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -21,6 +22,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
+import og.basics.util.StaticExecutor;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.batt.AbstractIconCreator;
 import de.og.batterycreator.creators.batt.AppleBatteryCreator;
@@ -88,7 +90,7 @@ public class BatteryPanel extends JPanel {
 	private static final long						serialVersionUID		= -5956664471952448919L;
 
 	private final JComboBox<AbstractIconCreator>	combo					= new JComboBox<AbstractIconCreator>();
-
+	private final JButton							openFolderButton		= new JButton(IconStore.folder2Icon);
 	private final JList<String>						battIconList			= new JList<String>();
 	private AbstractIconCreator						activBattCreator		= null;
 	private final OverviewPanel						battOverviewPanel		= new OverviewPanel();
@@ -191,6 +193,18 @@ public class BatteryPanel extends JPanel {
 			combo.setSelectedIndex(0);
 		activBattCreator = (AbstractIconCreator) combo.getSelectedItem();
 
+		openFolderButton.setToolTipText("Open the folder where the icons and overviews are strored");
+		openFolderButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				final AbstractIconCreator cre = (AbstractIconCreator) combo.getSelectedItem();
+				if (!(cre instanceof NoBattIcons)) {
+					final String path = cre.getPath();
+					StaticExecutor.openFolder(path);
+				}
+			}
+		});
+
 		combo.setToolTipText("Choose your Battery-Renderer...then press play-button");
 		combo.setRenderer(new BattCreatorListCellRenderer());
 		combo.setMaximumRowCount(15);
@@ -233,6 +247,8 @@ public class BatteryPanel extends JPanel {
 		final JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		toolBar.add(combo);
+		toolBar.add(new JPanel());
+		toolBar.add(openFolderButton);
 		// toolBar.add(anibar);
 		return toolBar;
 	}
@@ -259,9 +275,11 @@ public class BatteryPanel extends JPanel {
 		if (cre.getOverviewIcon().equals(IconStore.nothingIcon)) {
 			battSmallOverviewPanel.setText("Choose your Battery Style in dropdown box");
 			battOverviewPanel.setText("Choose your Battery Style in dropdown box");
+			openFolderButton.setEnabled(false);
 		} else {
 			battSmallOverviewPanel.setText("");
 			battOverviewPanel.setText("");
+			openFolderButton.setEnabled(true);
 		}
 		battSmallOverviewPanel.setOverview(cre.getOverviewSmallIcon(), 100);
 		battOverviewPanel.setOverview(cre.getOverviewIcon(), 100);
