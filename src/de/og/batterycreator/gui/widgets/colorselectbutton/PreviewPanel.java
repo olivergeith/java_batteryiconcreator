@@ -28,7 +28,7 @@ public class PreviewPanel extends JPanel {
 	private void initUI() {
 		setLayout(new BorderLayout());
 		final JButton saveButton = new JButton("Save Color to user defined Colors", IconStore.colorIcon);
-		saveButton.setToolTipText("Save Color to userdefined Colors");
+		saveButton.setToolTipText("Save Color to userdefined Colors (visible in at next start of this colorchooser-dialog)");
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
