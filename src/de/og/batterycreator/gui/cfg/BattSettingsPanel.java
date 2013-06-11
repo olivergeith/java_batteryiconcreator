@@ -14,7 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import og.basics.gui.Jcolorselectbutton.JColorSelectButton;
 import og.basics.gui.icon.CommonIconProvider;
 import og.basics.gui.jfontchooser.JFontChooserButton;
 import og.basics.gui.widgets.hidepanel.HidePanel;
@@ -25,6 +24,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.gui.widgets.SliderAndLabel;
+import de.og.batterycreator.gui.widgets.colorselectbutton.ColorSelectButton;
 import de.og.batterycreator.gui.widgets.iconpositioner.IconPositioner;
 import de.og.batterycreator.gui.widgets.iconpositioner.IconPositionerListener;
 import de.og.batterycreator.gui.widgets.iconselector.chargeiconselector.ChargeIconSelector;
@@ -41,15 +41,15 @@ public class BattSettingsPanel extends SettingsPanel {
 			"36", "38", "39", "40", "41", "42", "43", "44", "45"
 																	};
 
-	private final JColorSelectButton	fontColor					= new JColorSelectButton("Main Color", "Color when normal battery-level");
-	private final JColorSelectButton	fontColorLowBatt			= new JColorSelectButton("LowBatt", "Color when low battery");
-	private final JColorSelectButton	fontColorMedBatt			= new JColorSelectButton("MedBatt", "Color when Med battery");
-	private final JColorSelectButton	fontColorCharge				= new JColorSelectButton("Charge Color", "Color when charging");
+	private final ColorSelectButton	fontColor					= new ColorSelectButton("Main Color", "Color when normal battery-level");
+	private final ColorSelectButton	fontColorLowBatt			= new ColorSelectButton("LowBatt", "Color when low battery");
+	private final ColorSelectButton	fontColorMedBatt			= new ColorSelectButton("MedBatt", "Color when Med battery");
+	private final ColorSelectButton	fontColorCharge				= new ColorSelectButton("Charge Color", "Color when charging");
 	private final ChargeIconSelector	chargeIconSeletor			= new ChargeIconSelector(36);
 
 	private final JCheckBox				cboxDropShadowFont			= createCheckbox("DropShadow Font", "DropShadow behind PercentageText");
 	private final JCheckBox				cboxDropShadowIcon			= createCheckbox("DropShadow ChargeIcon", "DropShadow behind Charge-Icon");
-	private final JColorSelectButton	dropShadowColor				= new JColorSelectButton("DropShadow Color", "Color of Shadow behind Percentage-Text");
+	private final ColorSelectButton	dropShadowColor				= new ColorSelectButton("DropShadow Color", "Color of Shadow behind Percentage-Text");
 	private final IconPositioner		dropShadowPos				= new IconPositioner(-5, 5);
 	private final SliderAndLabel		sliderDropShadowOpacity		= new SliderAndLabel(0, 6);
 	private final SliderAndLabel		sliderDropShadowBlurryness	= new SliderAndLabel(1, 6);
@@ -62,18 +62,18 @@ public class BattSettingsPanel extends SettingsPanel {
 
 	private final JCheckBox				cboxTransparentBgrnd		= createCheckbox("Transparent Background (switchOff = experimental !)",
 																			"Use this, when your statusbar Background is not black!");
-	private final JColorSelectButton	backgroundColor				= new JColorSelectButton("Background Color", "Color if not transparent");
+	private final ColorSelectButton	backgroundColor				= new ColorSelectButton("Background Color", "Color if not transparent");
 
-	private final JColorSelectButton	extraColor1					= new JColorSelectButton("Extra1", "Extra Color 1");
-	private final JColorSelectButton	extraColor2					= new JColorSelectButton("Extra2", "Extra Color 2");
+	private final ColorSelectButton	extraColor1					= new ColorSelectButton("Extra1", "Extra Color 1");
+	private final ColorSelectButton	extraColor2					= new ColorSelectButton("Extra2", "Extra Color 2");
 
-	private final JColorSelectButton	iconColor					= new JColorSelectButton("Main Color", "Color when normal battery-level");
-	private final JColorSelectButton	iconColorLowBatt			= new JColorSelectButton("LowBatt", "Color when low battery");
-	private final JColorSelectButton	iconColorMedBatt			= new JColorSelectButton("MedBatt", "Color when Med battery");
-	private final JColorSelectButton	iconColorInactiv			= new JColorSelectButton("Inactiv", "Color for inactiv Iconelements");
-	private final JColorSelectButton	iconColorCharge				= new JColorSelectButton("Charge Color", "Color when charging");
+	private final ColorSelectButton	iconColor					= new ColorSelectButton("Main Color", "Color when normal battery-level");
+	private final ColorSelectButton	iconColorLowBatt			= new ColorSelectButton("LowBatt", "Color when low battery");
+	private final ColorSelectButton	iconColorMedBatt			= new ColorSelectButton("MedBatt", "Color when Med battery");
+	private final ColorSelectButton	iconColorInactiv			= new ColorSelectButton("Inactiv", "Color for inactiv Iconelements");
+	private final ColorSelectButton	iconColorCharge				= new ColorSelectButton("Charge Color", "Color when charging");
 
-	private final JColorSelectButton	iconColorGlowCharge			= new JColorSelectButton("Charge Glow Color", "Glow Color when charging");
+	private final ColorSelectButton	iconColorGlowCharge			= new ColorSelectButton("Charge Glow Color", "Glow Color when charging");
 	private final JCheckBox				cboxChargeGlow				= createCheckbox("ChargeGlow", "Pulsing glow Animation behind Charge-Icon or number");
 	private final SliderAndLabel		sliderChargGlowRadius		= new SliderAndLabel(10, 50);
 

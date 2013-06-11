@@ -10,7 +10,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
-import og.basics.gui.Jcolorselectbutton.JColorSelectButton;
 import og.basics.gui.icon.CommonIconProvider;
 import og.basics.gui.jfontchooser.JFontChooserButton;
 import og.basics.jgoodies.JGoodiesHelper;
@@ -21,6 +20,7 @@ import com.jgoodies.forms.layout.FormLayout;
 
 import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.cfg.WifiSignalSettings;
+import de.og.batterycreator.gui.widgets.colorselectbutton.ColorSelectButton;
 
 public class WifiSignaleSettingsPanel extends SettingsPanel {
 	private static final long serialVersionUID = 1L;
@@ -32,12 +32,12 @@ public class WifiSignaleSettingsPanel extends SettingsPanel {
 
 	private final JCheckBox cboxTransparentBgrnd = createCheckbox("Transparent Background (switchOff = experimental !)",
 			"Use this, when your statusbar Background is not black!");
-	private final JColorSelectButton backgroundColor = new JColorSelectButton("Background Color", "Color if not transparent");
-	private final JColorSelectButton iconColorInactiv = new JColorSelectButton("Inactiv", "Color for inactiv Iconelements");
-	private final JColorSelectButton inColor = new JColorSelectButton("ColorDataIn", "Color when Data comes in ;-)");
-	private final JColorSelectButton outColor = new JColorSelectButton("ColorDataOut", "Color when Data comes in ;-)");
-	private final JColorSelectButton color = new JColorSelectButton("Connected", "Color when connected");
-	private final JColorSelectButton colorFully = new JColorSelectButton("Fully Connected", "Color when fully connected");
+	private final ColorSelectButton backgroundColor = new ColorSelectButton("Background Color", "Color if not transparent");
+	private final ColorSelectButton iconColorInactiv = new ColorSelectButton("Inactiv", "Color for inactiv Iconelements");
+	private final ColorSelectButton inColor = new ColorSelectButton("ColorDataIn", "Color when Data comes in ;-)");
+	private final ColorSelectButton outColor = new ColorSelectButton("ColorDataOut", "Color when Data comes in ;-)");
+	private final ColorSelectButton color = new ColorSelectButton("Connected", "Color when connected");
+	private final ColorSelectButton colorFully = new ColorSelectButton("Fully Connected", "Color when fully connected");
 	private final JFontChooserButton fontButton = new JFontChooserButton("Choose Font", fontSizes);
 
 	// Construktor

@@ -12,11 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-import og.basics.gui.Jcolorselectbutton.ColorChangeListener;
-import og.basics.gui.Jcolorselectbutton.JColorSelectButton;
 import og.basics.util.timer.AbstractTrigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import de.og.batterycreator.gui.widgets.colorselectbutton.ColorChangeListener;
+import de.og.batterycreator.gui.widgets.colorselectbutton.ColorSelectButton;
 
 public class AnimatorBar extends JToolBar {
 	private static final long			serialVersionUID	= -7723769368206156309L;
@@ -27,7 +27,7 @@ public class AnimatorBar extends JToolBar {
 	private AbstractTrigger				trigger;
 	private int							index				= 0;
 	private static final Logger			LOG					= LoggerFactory.getLogger(AnimatorBar.class);
-	private final JColorSelectButton	bgColor				= new JColorSelectButton("", "BackgroundColor of Animator");
+	private final ColorSelectButton	bgColor				= new ColorSelectButton("", "BackgroundColor of Animator");
 	final JPanel						aniPanel			= new JPanel(new BorderLayout());
 	private int							delayTime			= 80;
 
