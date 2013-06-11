@@ -67,12 +67,12 @@ public class CrayonPanel extends AbstractColorChooserPanel implements ActionList
 
 	@Override
 	public void updateChooser() {
-		final Color color = getColorFromModel();
-		for (final JToggleButton button : buttons) {
-			if (button.getBackground().equals(color))
-				button.setSelected(true);
-			return;
-		}
+		// final Color color = getColorFromModel();
+		// for (final JToggleButton button : buttons) {
+		// if (button.getBackground().equals(color))
+		// button.setSelected(true);
+		// return;
+		// }
 	}
 
 	protected JToggleButton createCrayon(final String name, final Color col) {

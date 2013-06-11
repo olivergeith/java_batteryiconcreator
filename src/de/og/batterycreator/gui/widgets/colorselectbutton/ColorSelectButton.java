@@ -4,18 +4,16 @@
 package de.og.batterycreator.gui.widgets.colorselectbutton;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Action;
-import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 
 /**
@@ -114,18 +112,21 @@ public class ColorSelectButton extends JButton {
 
 	private void bringUpColorChooser2() {
 		final JColorChooser colorChooser = new JColorChooser();
-		final JLabel previewLabel = new JLabel();
-		previewLabel.setText("xxx");
-		previewLabel.setSize(previewLabel.getPreferredSize());
-		previewLabel.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 48));
-		previewLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 1, 0));
-		colorChooser.setPreviewPanel(previewLabel);
+
+		final JPanel previewPanel = new PreviewPanel(colorChooser);
+
+		// final JLabel previewLabel = new JLabel();
+		// previewLabel.setText("xxx");
+		// previewLabel.setSize(previewLabel.getPreferredSize());
+		// previewLabel.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 48));
+		// previewLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 1, 0));
+		colorChooser.setPreviewPanel(previewPanel);
 
 		// Override the chooser panels with our own
 
 		final AbstractColorChooserPanel[] panels = colorChooser.getChooserPanels();
 
-		final AbstractColorChooserPanel[] panelsnew = new AbstractColorChooserPanel[panels.length + 3];
+		final AbstractColorChooserPanel[] panelsnew = new AbstractColorChooserPanel[panels.length + 4];
 
 		for (int i = 0; i < panels.length; i++) {
 			panelsnew[i] = panels[i];
@@ -133,6 +134,7 @@ public class ColorSelectButton extends JButton {
 		panelsnew[panels.length] = new CrayonPanel();
 		panelsnew[panels.length + 1] = new KrozCrayonPanel();
 		panelsnew[panels.length + 2] = new MorphologyCrayonPanel();
+		panelsnew[panels.length + 3] = new UserCrayonPanel();
 
 		colorChooser.setChooserPanels(panelsnew);
 

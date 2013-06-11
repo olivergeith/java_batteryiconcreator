@@ -1,16 +1,20 @@
 package de.og.batterycreator.cfg;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import og.basics.gui.file.FileDialogs;
 import og.basics.util.KPropertyReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import de.og.batterycreator.gui.widgets.customcolors.NamedColor;
 
 public class SettingsPersistor {
 	private static final Logger	LOGGER					= LoggerFactory.getLogger(SettingsPersistor.class);
@@ -21,6 +25,9 @@ public class SettingsPersistor {
 	private static final String	SETTINGS_DIR_GLOBAL		= "./settings/";
 	public static final String	ROMPRESETS_DIR			= "./rompresets/";
 	public static final String	ROMPRESETS_EXTENSION	= ".rompreset";
+
+	public static final String	COLOR_DIR				= "./colors/";
+	public static final String	COLOR_EXTENSION			= ".color";
 
 	// ###############################################################################
 	// Persisting Settings
@@ -285,6 +292,63 @@ public class SettingsPersistor {
 		}
 	}
 
+	// ###############################################################################
+	// Persisting Colors
+	// ###############################################################################
+	public static void writeColor(final NamedColor col) {
+		// Pfad anlegen falls nicht vorhanden
+		final File pa = new File(COLOR_DIR);
+		if (!pa.exists())
+			pa.mkdirs();
+		final String filename = COLOR_DIR + col.getName() + COLOR_EXTENSION;
+		LOGGER.debug("Writing Color: {}", col);
+		final KPropertyReader reader = new KPropertyReader(filename, true);
+		reader.writeProperty("Name", col.getName());
+		reader.writeColorProperty("Color", col.getColor());
+	}
+
+	public static void deleteColor(final NamedColor col) {
+		final String filename = COLOR_DIR + col.getName() + COLOR_EXTENSION;
+		LOGGER.debug("Deleting Color: {}", col);
+		final File del = new File(filename);
+		if (del.exists())
+			del.delete();
+	}
+
+	public static NamedColor readColor(final File file) {
+		LOGGER.debug("Reading Color: {}", file.getPath());
+		final KPropertyReader reader = new KPropertyReader(file.getPath(), false);
+		final String name = reader.readProperty("Name", "Name");
+		final Color color = reader.readColorProperty("Color", Color.black);
+		final NamedColor col = new NamedColor(color, name);
+		return col;
+	}
+
+	public static Vector<NamedColor> readAllNamedColors() {
+		final Vector<NamedColor> list = new Vector<NamedColor>();
+		final File dir = new File(COLOR_DIR);
+		if (dir.exists() && dir.isDirectory()) {
+			final File[] colors = dir.listFiles(new FilenameFilter() {
+
+				@Override
+				public boolean accept(final File dir, final String name) {
+					return name.toLowerCase().endsWith(COLOR_EXTENSION);
+				}
+			});
+
+			for (final File fi : colors) {
+				final NamedColor col = readColor(fi);
+				if (col != null) {
+					list.add(col);
+				}
+			}
+		}
+		return list;
+	}
+
+	// ###############################################################################
+	// Helper
+	// ###############################################################################
 	public static String stripExtension(final String str) {
 		// Handle null case specially.
 		if (str == null)
