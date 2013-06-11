@@ -11,6 +11,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import og.basics.util.StaticExecutor;
 import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.customcolors.NamedColor;
@@ -28,11 +29,18 @@ public class PreviewPanel extends JPanel {
 	private void initUI() {
 		setLayout(new BorderLayout());
 		final JButton saveButton = new JButton("Save Color to user defined Colors", IconStore.colorIcon);
+		final JButton manageButton = new JButton("Manage user defined Colors", IconStore.folder2Icon);
 		saveButton.setToolTipText("Save Color to userdefined Colors (visible in at next start of this colorchooser-dialog)");
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
 				save();
+			}
+		});
+		manageButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				manage();
 			}
 		});
 		previewLabel.setText("XXXXXXXXXX");
@@ -43,9 +51,14 @@ public class PreviewPanel extends JPanel {
 		final JToolBar bar = new JToolBar();
 		bar.setFloatable(false);
 		bar.add(saveButton);
+		bar.add(manageButton);
 
-		add(saveButton, BorderLayout.SOUTH);
+		add(bar, BorderLayout.SOUTH);
 		add(previewLabel, BorderLayout.CENTER);
+	}
+
+	protected void manage() {
+		StaticExecutor.openFolder(SettingsPersistor.COLOR_DIR);
 	}
 
 	protected void save() {
