@@ -126,6 +126,49 @@ public class StaticBackgroundCreator {
 		return over;
 	}
 
+	protected static BufferedImage drawBackgroundFrame2(final int w, final int h) {
+		final BufferedImage over = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		final Graphics2D g2d = initGraphics(over);
+		// Zurück auf normales paint
+		g2d.setPaintMode();
+		// Background
+		final int radius = 2;
+
+		Color col1 = new Color(32, 32, 32, 255);
+		Color col2 = new Color(92, 92, 92, 255);
+		GradientPaint gradientFill = new GradientPaint(0, h / 2, col1, 0, h, col2);
+		g2d.setPaint(gradientFill);
+		g2d.fillRect(1, 1, w - 2, h - 2);
+
+		// fläche
+		col1 = new Color(192, 192, 192, 128);
+		col2 = new Color(32, 32, 32, 200);
+		gradientFill = new GradientPaint(0, 0, col1, w / 2, h, col2);
+		g2d.setPaint(gradientFill);
+		g2d.fillRoundRect(10, 10, w - 20, h - 20, radius, radius);
+		// innerer rand
+		col1 = new Color(32, 32, 32, 255);
+		col2 = new Color(16, 16, 16, 255);
+		gradientFill = new GradientPaint(0, 0, col2, w, 0, col1);
+		g2d.setPaint(gradientFill);
+		g2d.drawRoundRect(11, 11, w - 22, h - 22, radius, radius);
+
+		// Reflektion
+		// g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,
+		// 1f));
+		//
+		// col1 = new Color(32, 32, 32, 200);
+		// col2 = new Color(32, 32, 32, 0);
+		// gradientFill = new GradientPaint(0, 0, col1, w, 0, col2);
+		// g2d.setPaint(gradientFill);
+		// g2d.fillArc(-10, -20, w * 2, h * 2, 0, 360);
+		// Zurück auf normales paint
+		g2d.setPaintMode();
+
+		g2d.dispose();
+		return over;
+	}
+
 	// #########################################################################
 	// Backgrounds
 	// #########################################################################

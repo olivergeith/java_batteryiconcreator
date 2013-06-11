@@ -153,7 +153,7 @@ public class BatteryOverviewCreator extends OverviewCreator {
 					backGrnd = StaticBackgroundCreator.drawBackgroundTV(w, h, true);
 					break;
 				case 3:
-					backGrnd = StaticBackgroundCreator.drawBackgroundFrame(w, h);
+					backGrnd = StaticBackgroundCreator.drawBackgroundFrame2(w, h);
 					break;
 				case 4:
 					backGrnd = StaticBackgroundCreator.drawBackgroundGlassFrame(w, h);
