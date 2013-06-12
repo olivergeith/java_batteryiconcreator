@@ -324,8 +324,10 @@ public class SettingsPersistor {
 		return col;
 	}
 
+	// private static Vector<NamedColor> colorVector = new Vector<NamedColor>();
+
 	public static Vector<NamedColor> readAllNamedColors() {
-		final Vector<NamedColor> list = new Vector<NamedColor>();
+		final Vector<NamedColor> colorVector = new Vector<NamedColor>();
 		final File dir = new File(COLOR_DIR);
 		if (dir.exists() && dir.isDirectory()) {
 			final File[] colors = dir.listFiles(new FilenameFilter() {
@@ -336,14 +338,19 @@ public class SettingsPersistor {
 				}
 			});
 
+			//
+			// if (colorVector.size() != colors.length) {
+			LOGGER.info("Reading {} Colors (again)", colors.length);
+			colorVector.removeAllElements();
 			for (final File fi : colors) {
 				final NamedColor col = readColor(fi);
 				if (col != null) {
-					list.add(col);
+					colorVector.add(col);
 				}
 			}
+			// }
 		}
-		return list;
+		return colorVector;
 	}
 
 	// ###############################################################################

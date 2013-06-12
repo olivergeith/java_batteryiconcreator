@@ -28,9 +28,10 @@ public class PreviewPanel extends JPanel {
 
 	private void initUI() {
 		setLayout(new BorderLayout());
-		final JButton saveButton = new JButton("Save Color to user defined Colors", IconStore.colorIcon);
-		final JButton manageButton = new JButton("Manage user defined Colors", IconStore.folder2Icon);
-		saveButton.setToolTipText("Save Color to userdefined Colors (visible in at next start of this colorchooser-dialog)");
+		final JButton saveButton = new JButton("Save Color to 'User defined Colors'", IconStore.colorIcon);
+		final JButton manageButton = new JButton("Manage 'User defined Colors'", IconStore.folder2Icon);
+		manageButton.setToolTipText("Gogo the folder, where the colors are stored and delete them there!");
+		saveButton.setToolTipText("Save Color to 'User defined Colors' (visible in at next start of this colorchooser-dialog)");
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
@@ -73,6 +74,7 @@ public class PreviewPanel extends JPanel {
 	@Override
 	public void setBackground(final Color color) {
 		super.setBackground(color);
+		super.setForeground(color);
 		if (previewLabel != null && color != null) {
 			previewLabel.setBackground(color);
 			previewLabel.setForeground(color);
@@ -81,6 +83,7 @@ public class PreviewPanel extends JPanel {
 
 	@Override
 	public void setForeground(final Color color) {
+		super.setBackground(color);
 		super.setForeground(color);
 		if (previewLabel != null && color != null) {
 			previewLabel.setBackground(color);

@@ -42,13 +42,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import og.basics.util.StaticExecutor;
 import de.og.batterycreator.main.IconCreatorFrame;
@@ -56,11 +54,10 @@ import de.og.batterycreator.main.IconCreatorFrame;
 /* Used by ColorChooserDemo2.java. */
 public class CrayonPanel extends AbstractColorChooserPanel implements ActionListener {
 	private static final long		serialVersionUID	= 2389524499578003673L;
-	final ButtonGroup				boxOfCrayons		= new ButtonGroup();
-	List<JToggleButton>				buttons				= new ArrayList<JToggleButton>();
+	private final List<JButton>		buttons				= new ArrayList<JButton>();
 
-	private final JPanel			buttonPanel			= new JPanel(new GridLayout(0, 1));
-	private static final ImageIcon	icon				= new ImageIcon(CrayonPanel.class.getResource("crayons.png"));
+	private final JPanel			buttonPanel			= new JPanel(new GridLayout(0, 2));
+	private static final ImageIcon	icon				= new ImageIcon(CrayonPanel.class.getResource("crayons2.png"));
 	private final JLabel			logoLabel			= new JLabel();
 	private final JLabel			urlLabel			= new JLabel();
 	private final JLabel			titleLabel			= new JLabel();
@@ -68,20 +65,21 @@ public class CrayonPanel extends AbstractColorChooserPanel implements ActionList
 	@Override
 	public void updateChooser() {
 		// final Color color = getColorFromModel();
-		// for (final JToggleButton button : buttons) {
+		// System.out.println("updateModel " + color);
+		// for (final JButton button : buttons) {
 		// if (button.getBackground().equals(color))
 		// button.setSelected(true);
-		// return;
 		// }
 	}
 
-	protected JToggleButton createCrayon(final String name, final Color col) {
-		final JToggleButton crayon = new JToggleButton();
+	protected JButton createCrayon(final String name, final Color col) {
+		final JButton crayon = new JButton();
+		crayon.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 		crayon.setActionCommand(name);
 		crayon.addActionListener(this);
 		crayon.setText(name);
 		crayon.setHorizontalAlignment(JButton.HORIZONTAL);
-		crayon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		// crayon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		crayon.setBackground(col);
 		// optimizing foregroundcolor for better readability
 		final int howdark = col.getRed() + col.getGreen() + col.getBlue();
@@ -91,7 +89,6 @@ public class CrayonPanel extends AbstractColorChooserPanel implements ActionList
 			crayon.setForeground(Color.black);
 
 		buttons.add(crayon);
-		boxOfCrayons.add(crayon);
 		buttonPanel.add(crayon);
 		return crayon;
 	}
@@ -152,7 +149,7 @@ public class CrayonPanel extends AbstractColorChooserPanel implements ActionList
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		Color newColor = null;
-		final JToggleButton toggle = (JToggleButton) e.getSource();
+		final JButton toggle = (JButton) e.getSource();
 		newColor = toggle.getBackground();
 		getColorSelectionModel().setSelectedColor(newColor);
 	}
