@@ -48,6 +48,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
+import og.basics.util.StaticColorHelper;
 import og.basics.util.StaticExecutor;
 import de.og.batterycreator.main.IconCreatorFrame;
 
@@ -55,7 +56,6 @@ import de.og.batterycreator.main.IconCreatorFrame;
 public class CrayonPanel extends AbstractColorChooserPanel implements ActionListener {
 	private static final long		serialVersionUID	= 2389524499578003673L;
 	private final List<JButton>		buttons				= new ArrayList<JButton>();
-
 	private final JPanel			buttonPanel			= new JPanel(new GridLayout(0, 2));
 	private static final ImageIcon	icon				= new ImageIcon(CrayonPanel.class.getResource("crayons2.png"));
 	private final JLabel			logoLabel			= new JLabel();
@@ -79,11 +79,9 @@ public class CrayonPanel extends AbstractColorChooserPanel implements ActionList
 		crayon.addActionListener(this);
 		crayon.setText(name);
 		crayon.setHorizontalAlignment(JButton.HORIZONTAL);
-		// crayon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		crayon.setBackground(col);
 		// optimizing foregroundcolor for better readability
-		final int howdark = col.getRed() + col.getGreen() + col.getBlue();
-		if (howdark < (3 * 255) / 3)
+		if (StaticColorHelper.isdark(col))
 			crayon.setForeground(Color.white);
 		else
 			crayon.setForeground(Color.black);
