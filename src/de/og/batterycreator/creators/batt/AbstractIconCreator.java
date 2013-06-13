@@ -7,7 +7,9 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.TexturePaint;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -515,6 +517,11 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	@Override
 	public String getPath() {
 		return "./pngs/renderer/batt/" + toString();
+	}
+
+	protected TexturePaint getTexturePaint() {
+		final ImageIcon tex = settings.getTextureIcon();
+		return new TexturePaint(StaticImageHelper.convertImageIcon(tex), new Rectangle(0, 0, tex.getIconWidth(), tex.getIconHeight()));
 	}
 
 }

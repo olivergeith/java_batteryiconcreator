@@ -5,12 +5,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
-import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.gui.widgets.iconselector.xorcircleselector.XorCircleSelector;
 
@@ -102,8 +99,7 @@ public class XORCircleCreator extends AbstractIconCreator {
 		}
 		// Level malen
 		if (settings.isUseTexture()) {
-			final TexturePaint slatetp = new TexturePaint(StaticImageHelper.convertImageIcon(settings.getTextureIcon()), new Rectangle(0, 0, 64, 64));
-			g2d.setPaint(slatetp);
+			g2d.setPaint(getTexturePaint());
 		} else if (settings.isBattGradient()) {
 			final Color col1 = settings.getActivIconColor(percentage, charge);
 			final Color col2 = getBattGardientSecondColor(col1);
