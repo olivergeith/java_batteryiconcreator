@@ -13,6 +13,7 @@ public class GlobalSettings implements Serializable {
 	private final String			emoCustomPath				= "./custom/emoticons/";
 	private final String			systemUICustomPath			= "./custom/systemui-mods/";
 	private final String			frameworkresCustomPath		= "./custom/frameworkres-mods/";
+	private final String			ZIP_OUT_DIR					= "./flashablezip_out/";
 
 	private RomPreset				romPreset;
 	private boolean					showAdvancedButton			= false;
@@ -154,6 +155,10 @@ public class GlobalSettings implements Serializable {
 
 	public String getFrameworkresCustomPath() {
 		return frameworkresCustomPath;
+	}
+
+	public String getZIP_OUT_DIR() {
+		return ZIP_OUT_DIR;
 	}
 
 }
