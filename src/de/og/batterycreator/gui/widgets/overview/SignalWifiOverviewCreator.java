@@ -64,9 +64,12 @@ public class SignalWifiOverviewCreator extends OverviewCreator {
 					backGrnd = StaticBackgroundCreator.drawBackgroundFrame(w, h);
 					break;
 				case 4:
-					backGrnd = StaticBackgroundCreator.drawBackgroundGlassFrame(w, h);
+					backGrnd = StaticBackgroundCreator.drawBackgroundFrame(w, h);
 					break;
 				case 5:
+					backGrnd = StaticBackgroundCreator.drawBackgroundGlassFrame(w, h);
+					break;
+				case 6:
 					backGrnd = StaticBackgroundCreator.drawBackgroundOldStyle(w, h, offsetOben - 5, offsetUnten);
 					break;
 			}

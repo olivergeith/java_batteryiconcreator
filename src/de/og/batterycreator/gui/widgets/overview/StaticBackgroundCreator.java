@@ -132,7 +132,7 @@ public class StaticBackgroundCreator {
 		// Zurück auf normales paint
 		g2d.setPaintMode();
 		// Background
-		final int radius = 2;
+		final int radius = 3;
 
 		Color col1 = new Color(32, 32, 32, 255);
 		Color col2 = new Color(92, 92, 92, 255);
@@ -141,9 +141,9 @@ public class StaticBackgroundCreator {
 		g2d.fillRect(1, 1, w - 2, h - 2);
 
 		// fläche
-		col1 = new Color(192, 192, 192, 128);
-		col2 = new Color(32, 32, 32, 200);
-		gradientFill = new GradientPaint(0, 0, col1, w / 2, h, col2);
+		col1 = new Color(255, 255, 255, 210);
+		col2 = new Color(8, 8, 8, 192);
+		gradientFill = new GradientPaint(0, 0, col1, w / 5, h, col2);
 		g2d.setPaint(gradientFill);
 		g2d.fillRoundRect(10, 10, w - 20, h - 20, radius, radius);
 		// innerer rand
@@ -154,14 +154,14 @@ public class StaticBackgroundCreator {
 		g2d.drawRoundRect(11, 11, w - 22, h - 22, radius, radius);
 
 		// Reflektion
-		// g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,
-		// 1f));
-		//
-		// col1 = new Color(32, 32, 32, 200);
-		// col2 = new Color(32, 32, 32, 0);
-		// gradientFill = new GradientPaint(0, 0, col1, w, 0, col2);
-		// g2d.setPaint(gradientFill);
-		// g2d.fillArc(-10, -20, w * 2, h * 2, 0, 360);
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 1f));
+
+		col1 = new Color(32, 32, 32, 200);
+		col2 = new Color(0, 0, 0, 128);
+		gradientFill = new GradientPaint(0, 0, col1, w, 0, col2);
+		g2d.setPaint(gradientFill);
+		g2d.fillArc(-3, -20, w * 2, h * 2, 0, 360);
+
 		// Zurück auf normales paint
 		g2d.setPaintMode();
 
