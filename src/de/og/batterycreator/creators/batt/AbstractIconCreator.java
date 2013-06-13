@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.AbstractCreator;
+import de.og.batterycreator.gui.widgets.iconselector.textureselector.TextureSelector;
 import de.og.batterycreator.gui.widgets.overview.BatteryOverviewCreator;
 
 /**
@@ -520,7 +521,10 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	}
 
 	protected TexturePaint getTexturePaint() {
-		final ImageIcon tex = settings.getTextureIcon();
+		ImageIcon tex = settings.getTextureIcon();
+		if (tex == null) {
+			tex = TextureSelector.icon01;
+		}
 		return new TexturePaint(StaticImageHelper.convertImageIcon(tex), new Rectangle(0, 0, tex.getIconWidth(), tex.getIconHeight()));
 	}
 

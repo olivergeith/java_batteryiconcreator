@@ -13,6 +13,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import og.basics.gui.LToolBar;
 import og.basics.gui.icon.CommonIconProvider;
+import og.basics.util.StaticExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import de.og.batterycreator.cfg.GlobalSettings;
@@ -51,6 +52,7 @@ public class IconCreatingPanelNew extends JPanel {
 	private static final Logger				LOGGER						= LoggerFactory.getLogger(IconCreatingPanelNew.class);
 	private static final long				serialVersionUID			= -2956273745014471932L;
 
+	private final JButton					openZipFolderButton			= new JButton(IconStore.folderZipIcon);
 	private final JButton					zipButton					= new JButton(IconStore.zipIcon);
 	private final JButton					createButton				= new JButton(CommonIconProvider.BUTTON_ICON_START);
 	private final JToggleButton				advancedToggle				= new JToggleButton(IconStore.moreIcon, false);
@@ -97,6 +99,14 @@ public class IconCreatingPanelNew extends JPanel {
 
 	private void initUI() {
 		setLayout(new BorderLayout());
+		openZipFolderButton.setToolTipText("Open folder of flashble Zips!");
+		openZipFolderButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				StaticExecutor.openFolder(ZipMaker.OUT_DIR);
+			}
+		});
 		zipButton.setToolTipText("Create flashble Zip!");
 		zipButton.addActionListener(new ActionListener() {
 
@@ -220,7 +230,8 @@ public class IconCreatingPanelNew extends JPanel {
 		toolBar.add(new JPanel());
 		toolBar.add(createButton);
 		toolBar.add(zipButton);
-		// add(toolBar, BorderLayout.NORTH);
+		toolBar.addSeparator();
+		toolBar.add(openZipFolderButton);
 	}
 
 	/**

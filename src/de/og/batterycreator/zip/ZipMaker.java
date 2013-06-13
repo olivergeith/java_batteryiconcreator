@@ -35,7 +35,7 @@ public class ZipMaker {
 	}
 
 	private File				template	= new File("./template/template.zip");
-	private final static String	OUT_DIR		= "./flashablezip_out/";
+	public final static String	OUT_DIR		= "./flashablezip_out/";
 
 	public ZipMaker(final String templ) {
 		template = new File(templ);

@@ -126,14 +126,18 @@ public class XORSquareCreator extends AbstractIconCreator {
 			g2d.setPaint(col);
 		}
 
-		int h = Math.round(imgHeight / 100f * percentage);
-		if (h < 2)
-			h = 2;
-		final int y = img.getHeight() - h;
-		if (!settings.isFlip())
+		if (!settings.isFlip()) {
+			int h = Math.round(imgHeight / 100f * percentage);
+			if (h < 2)
+				h = 2;
+			final int y = img.getHeight() - h;
 			g2d.fillRect(0, y, imgWidth, h);
-		else
-			g2d.fillRect(0, 0, h, imgHeight);
+		} else {
+			int w = Math.round(imgWidth / 100f * percentage);
+			if (w < 2)
+				w = 2;
+			g2d.fillRect(0, 0, w, imgHeight);
+		}
 
 		// Zurück auf normales paint
 		g2d.setPaintMode();

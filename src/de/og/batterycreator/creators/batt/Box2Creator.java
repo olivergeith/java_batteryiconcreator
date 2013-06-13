@@ -5,12 +5,9 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.LinearGradientPaint;
-import java.awt.Rectangle;
-import java.awt.TexturePaint;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
-import og.basics.gui.image.StaticImageHelper;
 import de.og.batterycreator.cfg.RomSettings;
 
 public class Box2Creator extends AbstractIconCreator {
@@ -101,8 +98,7 @@ public class Box2Creator extends AbstractIconCreator {
 			final LinearGradientPaint gradientFill = settings.createLinearGradientPaint(start, end);
 			g2d.setPaint(gradientFill);
 		} else if (settings.isUseTexture()) {
-			final TexturePaint slatetp = new TexturePaint(StaticImageHelper.convertImageIcon(settings.getTextureIcon()), new Rectangle(0, 0, 64, 64));
-			g2d.setPaint(slatetp);
+			g2d.setPaint(getTexturePaint());
 		} else if (settings.isBattGradient()) {
 
 			final Color col1 = settings.getActivIconColor(percentage, charge);
