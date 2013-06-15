@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import de.og.batterycreator.cfg.GlobalSettings;
 import de.og.batterycreator.cfg.RomPreset;
 import de.og.batterycreator.creators.batt.AbstractIconCreator;
+import de.og.batterycreator.creators.batt.NoBattIcons;
 import de.og.batterycreator.creators.signal.AbstractSignalCreator;
 import de.og.batterycreator.creators.signal.NoSignalIcons;
 import de.og.batterycreator.creators.wifi.AbstractWifiCreator;
@@ -235,12 +236,49 @@ public class IconCreatingPanelNew extends JPanel {
 	}
 
 	/**
+	 * Checking if there is a risk of duplicate Filenames in Zip
+	 */
+	private boolean doChecksBeforeZipping() {
+
+		String msg = "";
+
+		final AbstractIconCreator activBattCreator = battPanel.getActivBattCreator();
+		if (activBattCreator != null && !(activBattCreator instanceof NoBattIcons) //
+				&& battBox.getAllFilenamesAndPath().size() > 0) {
+			msg += "Warning: You have selected Battery-Icons in Renderer-Tab and in IconSets-Tab!\n";
+		}
+		final AbstractWifiCreator activWifiCreator = wifiPanel.getActivWifiCreator();
+		final AbstractSignalCreator activSignalCreator = signalPanel.getActivSignalCreator();
+		if ((activWifiCreator != null && !activWifiCreator.toString().equals(NoWifiIcons.name)) //
+				|| (activSignalCreator != null && !activSignalCreator.toString().equals(NoSignalIcons.name))//
+				&& signalWifiBox.getAllFilenamesAndPath().size() > 0) {
+			msg += "Warning: You have selected Signal/Wifi-Icons in Renderer-Tab and in IconSets-Tab!\n";
+		}
+
+		if (msg.length() > 0) {
+			msg += "\n...this may lead to Zipping Errors due to duplicate Filenames!\n";
+			msg += "\nDo you want to continue anyway ?!\n";
+			final int status = JOptionPane.showConfirmDialog(null, msg, "Duplicate Icon-Type Warning", JOptionPane.YES_NO_OPTION);
+			if (status == JOptionPane.YES_OPTION) {
+				return true;
+			}
+		} else {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Zip the flashable Zip!
 	 */
 	private void doZip() {
 		// first create everything again, to fill the deploy area with latest
 		// settings
 		create();
+
+		// do some initial checks...and stop if something is wrong!
+		if (doChecksBeforeZipping() == false)
+			return;
 
 		final ZipElementCollection zipCollection = new ZipElementCollection();
 		final ZipMaker zipper = new ZipMaker(romSettingsPanel.getSettings().getTemplate());
@@ -342,7 +380,9 @@ public class IconCreatingPanelNew extends JPanel {
 		} catch (final Exception e) {
 			// Error during zip...
 			updateProgressBar(step++, "Done With Error!");
-			JOptionPane.showMessageDialog(IconCreatingPanelNew.this, "ERROR: Zip was not created successfully!!!\n" + e.getMessage(), "Zip creating ERROR",
+			JOptionPane.showMessageDialog(IconCreatingPanelNew.this, //
+					"ERROR: Zip was not created !!!\n" //
+							+ e.getMessage(), "Zip creating ERROR", //
 					JOptionPane.ERROR_MESSAGE);
 			LOGGER.error("" + e.getMessage());
 		}
