@@ -13,8 +13,6 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.colorchooser.AbstractColorChooserPanel;
 import og.basics.util.StaticColorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +83,7 @@ public class ColorSelectButton extends JButton {
 
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				bringUpColorChooser2();
+				bringUpColorChooser();
 			}
 		});
 	}
@@ -98,23 +96,14 @@ public class ColorSelectButton extends JButton {
 		return getBackground();
 	}
 
-	private void bringUpColorChooser2() {
+	private void bringUpColorChooser() {
 		final JColorChooser colorChooser = new JColorChooser();
-		final JPanel previewPanel = new PreviewPanel(colorChooser);
-		colorChooser.setPreviewPanel(previewPanel);
-
-		// Override the chooser panels with our own
-		final AbstractColorChooserPanel[] panels = colorChooser.getChooserPanels();
-		final AbstractColorChooserPanel[] panelsnew = new AbstractColorChooserPanel[panels.length + 4];
-
-		for (int i = 0; i < panels.length; i++) {
-			panelsnew[i] = panels[i];
-		}
-		panelsnew[panels.length] = new CrayonPanel();
-		panelsnew[panels.length + 1] = new KrozCrayonPanel();
-		panelsnew[panels.length + 2] = new MorphologyCrayonPanel();
-		panelsnew[panels.length + 3] = new UserCrayonPanel();
-		colorChooser.setChooserPanels(panelsnew);
+		// final PreviewPane previewPanel = new PreviewPane(colorChooser);
+		// colorChooser.setPreviewPanel(previewPanel);
+		colorChooser.addChooserPanel(new CrayonPanel());
+		colorChooser.addChooserPanel(new KrozCrayonPanel());
+		colorChooser.addChooserPanel(new MorphologyCrayonPanel());
+		colorChooser.addChooserPanel(new UserCrayonPanel());
 
 		final ActionListener okActionListener = new ActionListener() {
 			@Override

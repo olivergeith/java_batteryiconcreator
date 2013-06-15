@@ -47,6 +47,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import og.basics.util.StaticColorHelper;
 import og.basics.util.StaticExecutor;
@@ -61,15 +62,18 @@ public class CrayonPanel extends AbstractColorChooserPanel implements ActionList
 	private final JLabel			logoLabel			= new JLabel();
 	private final JLabel			urlLabel			= new JLabel();
 	private final JLabel			titleLabel			= new JLabel();
+	private final JToolBar			toolBar				= new JToolBar();
+	private Color					currentColor;
+
+	public CrayonPanel() {
+		super();
+		initUI();
+		addColors();
+	}
 
 	@Override
 	public void updateChooser() {
-		// final Color color = getColorFromModel();
-		// System.out.println("updateModel " + color);
-		// for (final JButton button : buttons) {
-		// if (button.getBackground().equals(color))
-		// button.setSelected(true);
-		// }
+		setCurrentColor(getColorFromModel());
 	}
 
 	protected JButton createCrayon(final String name, final Color col) {
@@ -91,8 +95,7 @@ public class CrayonPanel extends AbstractColorChooserPanel implements ActionList
 		return crayon;
 	}
 
-	@Override
-	protected void buildChooser() {
+	protected void initUI() {
 		setLayout(new BorderLayout());
 
 		titleLabel.setText(getDisplayName());
@@ -121,12 +124,19 @@ public class CrayonPanel extends AbstractColorChooserPanel implements ActionList
 			}
 		});
 
-		add(buttonPanel, BorderLayout.CENTER);
+		toolBar.setVisible(false);
+		toolBar.setFloatable(false);
+		toolBar.setOrientation(JToolBar.VERTICAL);
+
+		final JPanel p = new JPanel(new BorderLayout());
+		p.add(buttonPanel, BorderLayout.CENTER);
+		p.add(toolBar, BorderLayout.EAST);
+
+		add(p, BorderLayout.CENTER);
 		add(titleLabel, BorderLayout.NORTH);
 		add(logoLabel, BorderLayout.WEST);
 		add(urlLabel, BorderLayout.SOUTH);
 
-		addColors();
 	}
 
 	protected String getUrl() {
@@ -169,5 +179,22 @@ public class CrayonPanel extends AbstractColorChooserPanel implements ActionList
 
 	protected ImageIcon getIcon() {
 		return icon;
+	}
+
+	@Override
+	protected void buildChooser() {
+
+	}
+
+	public JToolBar getToolBar() {
+		return toolBar;
+	}
+
+	public Color getCurrentColor() {
+		return currentColor;
+	}
+
+	public void setCurrentColor(final Color currentColor) {
+		this.currentColor = currentColor;
 	}
 }

@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
@@ -43,6 +45,12 @@ public class NamedColorDialog extends JDialog {
 	}
 
 	private void initUI() {
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(final WindowEvent e) {
+				cancel();
+			}
+		});
 		setTitle("Enter Name for Color");
 		setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 		this.getContentPane().setBackground(color.getColor());
@@ -110,7 +118,11 @@ public class NamedColorDialog extends JDialog {
 	public static NamedColor showDialog(final Window parent, final NamedColor color) {
 		final NamedColorDialog f = new NamedColorDialog(parent, color);
 		f.setVisible(true);
-		return f.getColor();
+		final NamedColor ret = f.getColor();
+		if (ret != null && ret.getName().length() > 0)
+			return ret;
+		else
+			return null;
 	}
 
 	/**

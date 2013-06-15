@@ -1,39 +1,25 @@
 [B][SIZE="3"]New Version out of [URL="http://forum.xda-developers.com/showthread.php?t=1918500"]"The Rom Fumbler"[/URL] aka "The Battery Icon Creator"[/SIZE][/B]
 
-This update has some real "killer-features" that took a lot of work! "[B]Swagger Overviews[/B] and [B]SystemUI Analyzer[/B]"
-
 [SIZE="4"][B]Changelog:[/B][/SIZE]
-[COLOR="Blue"][B]June-09-2013[/B] : Release 28.0[/COLOR]
+[COLOR="Blue"][B]June-15-2013[/B] : Release 29.0[/COLOR]
 [LIST]
-[*][B]New feature: SystemUI Analyzer...[/B] (original idea from [MENTION=5026924]drinfernoo[/MENTION] !!!)
-...This is supposed to help you find the correct Rom Settings for flashable zip creation
-...[URL="http://forum.xda-developers.com/showpost.php?p=42209074&postcount=717"]Description how to use it[/URL]
-...You can also export the icons found by the SystemUI Analyzer into a new Icon-Set for later use within the Rom Fumbler.
-...export Battery, wifi/signal and toggle-icons!
-(You can use these exported Icon-Sets as template for your own icon creations...lets say you want to design your own toggle icons!)
-...[URL="http://forum.xda-developers.com/showpost.php?p=42285060&postcount=729"]Description how to export battery icons[/URL]
-[*][B]Nice "frames" to swagger with your battery-renderer creations[/B]
-...find them in the new tab "Small overview" in the Battery Renderer
-...configure the background and style in GlobalSettings
-...[URL="http://forum.xda-developers.com/showpost.php?p=42019993&postcount=694"]Look here[/URL]
-...same nice overviews for Wifi and Signal Renderer too!
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2019912&d=1370459682[/IMG][IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2013939&d=1370259657[/IMG]
-[*][B]New Battery styles (all with xxhdpi support)[/B]
-...XorCenter (fills a square or a cicle from the center...)
-[*][B]DropShadows now behind charge icon too![/B]
+[*][B]New feature: Save Custom Colors[/B] (original idea from @drinfernoo !!!)
+...[URL="http://forum.xda-developers.com/showpost.php?p=42484020&postcount=741"]Description how to use it[/URL]
+[*][B]New pre-defined custom Colors[/B] 
+...for Hue Theme by @kroz
+...Morphology Colors
+[*][B]New "open" button(s) in a lot of Tabs...[/B]
+...opens the corresponding folder in your filesystem
+...[URL="http://forum.xda-developers.com/showpost.php?p=42446590&postcount=735"]Description here...[/URL]
 [*][B]Gui changes[/B]
-...you can now move "glow", percentage text and charge icon together... (checkbox underneath the Positioners)
-...[URL="http://forum.xda-developers.com/showpost.php?p=41974842&postcount=687"]Description[/URL]
+...Small Overview renamed to Swagger Overview ;-)
+... another new Swagger background "Frame.V2"
 [*][B]More backgrounds and textures for the XorBatteries[/B]
-[*][B]Removed UFT template.zip for preload, as it is not working and only consuming 2MB :)[/B]
-...if you are on a preload Rom use the vrtheme template!
-[*][B]Updated Help-Pages[/B]
+[*][B]OlliG Toggle V9 updated with adb Toggle[/B]
 [/LIST]
 
 
-[B]Check out the new SystemUI Analyzer in Rom Settings! [/B]
-...If you are on a ROM not yet supported with build in RomPresets...try to find your RomSettings with the SystemUI Analyzer and share your RomPreset here!
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2029598&d=1370797999[/IMG]
+[B]Check out the new custom Colors in ColorChooser!! [/B]
 
 Happy modding & flashing :)
 Press [B]Thanks [/B]if you like the new Version :)

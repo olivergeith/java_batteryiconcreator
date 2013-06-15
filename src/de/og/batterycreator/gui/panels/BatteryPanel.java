@@ -220,7 +220,7 @@ public class BatteryPanel extends JPanel {
 
 		// battTabPane.setTabPlacement(JTabbedPane.LEFT);
 		tabPane.addTab("Overview", IconStore.overIcon, battOverviewPanel, "Get an Overview of your icons");
-		tabPane.addTab("'Swagger' Overview", IconStore.overSmallIcon, battSmallOverviewPanel, "Swagger with your creations with thios overview");
+		tabPane.addTab("Swagger Overview", IconStore.overSmallIcon, battSmallOverviewPanel, "Swagger with your creations with thios overview");
 		tabPane.addTab("List", IconStore.listIcon, scroller, "Get a List-Overview of your icons");
 		// Adding Howto, if Helpfile exists !
 		final File howto = new File("./help/Howto-Render-Battery.htm");
