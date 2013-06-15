@@ -1,9 +1,11 @@
 [B][SIZE="3"]New Version out of [URL="http://forum.xda-developers.com/showthread.php?t=1918500"]"The Rom Fumbler"[/URL] aka "The Battery Icon Creator"[/SIZE][/B]
 
+This time a smaller changelist, but some interesting features for you...
+
 [SIZE="4"][B]Changelog:[/B][/SIZE]
 [COLOR="Blue"][B]June-15-2013[/B] : Release 29.0[/COLOR]
 [LIST]
-[*][B]New feature: Save Custom Colors[/B] (original idea from @drinfernoo !!!)
+[*][B]New feature: Save your own custom Colors in "User defined Colors"[/B] (original idea from @drinfernoo !!!)
 ...[URL="http://forum.xda-developers.com/showpost.php?p=42484020&postcount=741"]Description how to use it[/URL]
 [*][B]New pre-defined custom Colors[/B] 
 ...for Hue Theme by @kroz
@@ -19,7 +21,7 @@
 [/LIST]
 
 
-[B]Check out the new custom Colors in ColorChooser!! [/B]
+[B]Check out the new "User defined Colors" in ColorChooser!! [/B]
 
 Happy modding & flashing :)
 Press [B]Thanks [/B]if you like the new Version :)
