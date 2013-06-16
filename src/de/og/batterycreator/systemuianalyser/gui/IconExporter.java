@@ -2,6 +2,7 @@ package de.og.batterycreator.systemuianalyser.gui;
 
 import java.awt.Component;
 import java.io.File;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import og.basics.gui.image.StaticImageHelper;
@@ -152,6 +153,22 @@ public class IconExporter {
 				"Exporting Icons",//
 				JOptionPane.INFORMATION_MESSAGE);
 
+	}
+
+	public void exportIconSet(final List<ImageIcon> icons, final String exportPath, final String iconSetName) {
+		if (icons != null) {
+			// outfolder anlegen
+			final String outFolder = getOutFolder(exportPath, iconSetName);
+			// loop über alle icons
+			for (final ImageIcon icon : icons) {
+				//
+				final String filenameandPath = outFolder + icon.getDescription();
+				LOG.info("Saving: {}", filenameandPath);
+				StaticImageHelper.writePNG(icon, new File(filenameandPath));
+			}
+			// Erfolg vermelden
+			showQuittung(outFolder, "Batteries");
+		}
 	}
 
 }

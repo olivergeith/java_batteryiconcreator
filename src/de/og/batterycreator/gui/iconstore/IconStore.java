@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 
 public class IconStore {
 
+	public static final ImageIcon	refresh				= new ImageIcon(IconStore.class.getResource("refresh.png"));
 	public static final ImageIcon	batteryIcon			= new ImageIcon(IconStore.class.getResource("battery.png"));
 	public static final ImageIcon	zipIcon				= new ImageIcon(IconStore.class.getResource("zip.png"));
 	public static final ImageIcon	overIcon			= new ImageIcon(IconStore.class.getResource("over.png"));

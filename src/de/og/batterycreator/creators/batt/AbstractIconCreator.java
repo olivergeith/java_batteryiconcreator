@@ -114,6 +114,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			filenames.add(getFileName(i, true));
 			iconMap.add(createImage(i, true));
 		}
+		// filenames.add(getFileNameFull(true));
 		filenamesAndPath.add(getFilenameAndPathFull(true));
 
 	}
@@ -124,6 +125,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			filenames.add(getFileName(i, false));
 			iconMap.add(createImage(i, false));
 		}
+		// filenames.add(getFileNameFull(false));
 		filenamesAndPath.add(getFilenameAndPathFull(false));
 	}
 

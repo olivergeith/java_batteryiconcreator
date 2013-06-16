@@ -36,6 +36,7 @@ public class IconSetSelector extends JPanel {
 
 	private final JList<ImageIcon>		list				= new JList<ImageIcon>();
 	private final JComboBox<ImageIcon>	combo				= new JComboBox<ImageIcon>();
+	private final JButton				refreshButton		= new JButton(IconStore.refresh);
 	private final JButton				openFolderButton	= new JButton(IconStore.folder2Icon);
 	private final OverviewPanel			overPane			= new OverviewPanel();
 	private final ImageIcon				nada				= IconStore.nothingIcon;
@@ -142,6 +143,13 @@ public class IconSetSelector extends JPanel {
 				StaticExecutor.openFolder(rootDir);
 			}
 		});
+		refreshButton.setToolTipText("Refresh/Reload and update content of dropdownbox");
+		refreshButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				refresh();
+			}
+		});
 
 		setLayout(new BorderLayout());
 		// Tabbed Pane
@@ -164,9 +172,26 @@ public class IconSetSelector extends JPanel {
 		final JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		toolBar.add(combo);
+		toolBar.add(refreshButton);
 		toolBar.add(new JPanel());
 		toolBar.add(openFolderButton);
 		this.add(toolBar, BorderLayout.NORTH);
+	}
+
+	public void refresh() {
+		final int index = combo.getSelectedIndex();
+		combo.setSelectedIndex(0);
+		iconSets.removeAllElements();
+		for (int i = combo.getItemCount() - 1; i > 0; i--) {
+			combo.removeItemAt(i);
+
+		}
+		// combo.addItem(nada);
+		addSetsFromFilesystem();
+		if (index < combo.getItemCount())
+			combo.setSelectedIndex(index);
+		else
+			combo.setSelectedIndex(0);
 	}
 
 	/**
@@ -185,7 +210,6 @@ public class IconSetSelector extends JPanel {
 				final IconSet set = new IconSet(setDir);
 				iconSets.add(set);
 				combo.addItem(set.getOverviewStripe());
-				// addItem(set.getRepresentivIcon());
 			}
 		}
 	}
@@ -202,11 +226,6 @@ public class IconSetSelector extends JPanel {
 
 			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 			if (value instanceof ImageIcon) {
-				// if (isSelected)
-				// renderer.setBackground(Color.darkGray.darker());
-				// else
-				// renderer.setBackground(Color.black);
-				// renderer.setForeground(Color.white);
 				final ImageIcon icon = value;
 				renderer.setIcon(icon);
 				if (index > 0) {
