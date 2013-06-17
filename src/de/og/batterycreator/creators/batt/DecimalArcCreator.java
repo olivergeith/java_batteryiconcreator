@@ -7,9 +7,9 @@ import javax.swing.ImageIcon;
 
 import de.og.batterycreator.cfg.RomSettings;
 
-public class ArcDecimalCreator extends AbstractIconCreator {
+public class DecimalArcCreator extends AbstractIconCreator {
 
-	public ArcDecimalCreator(final RomSettings romSettings) {
+	public DecimalArcCreator(final RomSettings romSettings) {
 		super(romSettings);
 	}
 

@@ -10,15 +10,15 @@ import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class TachoCreatorWideV5 extends AbstractIconCreator {
+public class ZoopaCreatorWide extends AbstractIconCreator {
 
-	protected static String	name	= "TachoBattery.Wide.V5";
+	protected static String	name	= "Zoopa.Wide";
 
-	public TachoCreatorWideV5(final RomSettings romSettings) {
+	public ZoopaCreatorWide(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setMoveIconWithText(false);
-		settings.setFontYOffset(16);
 		settings.setFontXOffset(-1);
+		settings.setFontYOffset(16);
 		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 28));
 		settings.setReduceFontOn100(-2);
 		settings.setIconXOffset(-1);
@@ -28,7 +28,7 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 		settings.setMedBattTheshold(40);
 		settings.setUseGradiantForMediumColor(true);
 		settings.setUseGradiantForNormalColor(true);
-		settings.setStrokewidth(4);
+		settings.setStrokewidth(2);
 		settings.setExtraColor1(Color.white);
 	}
 
@@ -48,22 +48,17 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsTexture() {
-		return true;
-	}
-
-	@Override
-	public boolean supportsFlip() {
-		return true;
-	}
-
-	@Override
 	public boolean supportsStrokeWidth() {
 		return true;
 	}
 
 	@Override
 	public boolean isNativeXXHDPI() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsFlip() {
 		return true;
 	}
 
@@ -91,22 +86,62 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 	}
 
 	private void drawScala(final Graphics2D g2d, final boolean charge, final int percentage) {
-		Color col;
-		// Hintergrund
-		col = settings.getIconColorInActiv();
+		final int radius = imgHeight - 1;
+		final int einer = percentage % 10;
+		final int zehner = percentage / 10;
+		final int einerdicke = 6;
+		final int zehnerdicke = 12;
+		drawSegmente(g2d, charge, percentage, einer, radius, einerdicke, 10);
+		drawSegmente(g2d, charge, percentage, zehner, radius - einerdicke - 2, zehnerdicke, 10);
 
+		// Normales Paint setzen
+		g2d.setPaintMode();
+
+	}
+
+	private void drawSegmente(final Graphics2D g2d, final boolean charge, final int percentage, final int selectedValue, final int radius, final int dicke,
+			final int anzahlSegmente) {
 		final int x = imgWidth / 2;
 		final int y = imgHeight;
-		int radius = imgHeight - 1;
-		// // Composite COlor setzen
-		// g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN,
-		// 1f));
+		final int segmente = anzahlSegmente;
+		final int gap = settings.getStrokewidth(); // in grad
+		final float winkelSegment = (180f - (segmente - 1) * gap) / segmente;
 
-		// aussen rand
-		g2d.setColor(col.brighter());
-		Draw2DFunktions.fillCircle(g2d, x, y, radius, 0, 180);
+		// Skala Hintergergrund einer
+		for (int i = 0; i < segmente; i++) {
+			if (settings.isNoBG()) {
+				if (i <= selectedValue || percentage == 100) {
+					setSelectedPaint(g2d, charge, percentage);
+				} else {
+					setHintergrundPaint(g2d);
+				}
+			} else {
+				if (i < selectedValue || percentage == 100) {
+					if (!settings.isFlip())
+						setSelectedPaint(g2d, charge, percentage);
+					else
+						setExtraPaint(g2d);
+				} else if (i == selectedValue || percentage == 100) {
+					if (settings.isFlip())
+						setSelectedPaint(g2d, charge, percentage);
+					else
+						setExtraPaint(g2d);
+				} else {
+					setHintergrundPaint(g2d);
+				}
+			}
+			final int startwinkel = Math.round(180f - i * (winkelSegment + gap));
+			Draw2DFunktions.fillCircle(g2d, x, y, radius, startwinkel, -(int) winkelSegment);
+		}
+		// Inneren Halbkreis clearen
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
+		Draw2DFunktions.fillCircle(g2d, x, y, radius - dicke, 0, 180);
 
-		// Skala
+		// Normales Paint setzen
+		g2d.setPaintMode();
+	}
+
+	private void setHintergrundPaint(final Graphics2D g2d) {
 		if (!settings.isNoBG() && (settings.isBattGradient() || settings.isUseTexture())) {
 			final Color col1 = settings.getIconColorInActiv().brighter();
 			final Color col2 = getBattGardientSecondColor(col1);
@@ -115,12 +150,10 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 		} else {
 			g2d.setPaint(settings.getIconColorInActiv());
 		}
-		Draw2DFunktions.fillCircle(g2d, x, y, radius - 2, 0, 180);
+	}
 
-		// Level malen
-		if (settings.isUseTexture()) {
-			g2d.setPaint(getTexturePaint());
-		} else if (settings.isBattGradient()) {
+	private void setSelectedPaint(final Graphics2D g2d, final boolean charge, final int percentage) {
+		if (settings.isBattGradient()) {
 			final Color col1 = settings.getActivIconColor(percentage, charge).brighter();
 			final Color col2 = getBattGardientSecondColor(col1);
 			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, imgHeight, col1);
@@ -128,36 +161,17 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 		} else {
 			g2d.setPaint(settings.getActivIconColor(percentage, charge));
 		}
-		final int w = Math.round(180 - (1.8f * percentage));
-		Draw2DFunktions.fillCircle(g2d, x, y, radius - 3, w, 180 - w);
-		// Zeiger
-		if (settings.isFlip()) {
-			g2d.setPaint(Color.darkGray.darker());
-			Draw2DFunktions.fillCircle(g2d, x, y, radius - 3, w - 2, 4);
-			g2d.setPaint(settings.getExtraColor1());
-			Draw2DFunktions.fillCircle(g2d, x, y, radius, w - 1, 2);
-		}
-		// Skala innerer rand
-		if (settings.isBattGradient() || settings.isUseTexture()) {
-			final Color col1 = settings.getIconColorInActiv().brighter();
+	}
+
+	private void setExtraPaint(final Graphics2D g2d) {
+		if (settings.isBattGradient()) {
+			final Color col1 = settings.getExtraColor1().brighter();
 			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
+			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, imgHeight, col1);
 			g2d.setPaint(gradientFill);
 		} else {
-			g2d.setPaint(settings.getIconColorInActiv());
+			g2d.setPaint(settings.getExtraColor1());
 		}
-		radius = radius - (14 + settings.getStrokewidth());
-		Draw2DFunktions.fillCircle(g2d, x, y, radius, 0, 180);
-		g2d.setColor(col.brighter());
-		Draw2DFunktions.fillCircle(g2d, x, y, radius - 1, 0, 180);
-
-		// Inneren Halbkreis clearen
-		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
-		Draw2DFunktions.fillCircle(g2d, x, y, radius - 3, 0, 180);
-
-		// Normales Paint setzen
-		g2d.setPaintMode();
-
 	}
 
 	@Override

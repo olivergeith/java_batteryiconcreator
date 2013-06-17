@@ -41,15 +41,15 @@ public class BattSettingsPanel extends SettingsPanel {
 			"36", "38", "39", "40", "41", "42", "43", "44", "45"
 																	};
 
-	private final ColorSelectButton	fontColor					= new ColorSelectButton("Main Color", "Color when normal battery-level");
-	private final ColorSelectButton	fontColorLowBatt			= new ColorSelectButton("LowBatt", "Color when low battery");
-	private final ColorSelectButton	fontColorMedBatt			= new ColorSelectButton("MedBatt", "Color when Med battery");
-	private final ColorSelectButton	fontColorCharge				= new ColorSelectButton("Charge Color", "Color when charging");
+	private final ColorSelectButton		fontColor					= new ColorSelectButton("Main Color", "Color when normal battery-level");
+	private final ColorSelectButton		fontColorLowBatt			= new ColorSelectButton("LowBatt", "Color when low battery");
+	private final ColorSelectButton		fontColorMedBatt			= new ColorSelectButton("MedBatt", "Color when Med battery");
+	private final ColorSelectButton		fontColorCharge				= new ColorSelectButton("Charge Color", "Color when charging");
 	private final ChargeIconSelector	chargeIconSeletor			= new ChargeIconSelector(36);
 
 	private final JCheckBox				cboxDropShadowFont			= createCheckbox("DropShadow Font", "DropShadow behind PercentageText");
 	private final JCheckBox				cboxDropShadowIcon			= createCheckbox("DropShadow ChargeIcon", "DropShadow behind Charge-Icon");
-	private final ColorSelectButton	dropShadowColor				= new ColorSelectButton("DropShadow Color", "Color of Shadow behind Percentage-Text");
+	private final ColorSelectButton		dropShadowColor				= new ColorSelectButton("DropShadow Color", "Color of Shadow behind Percentage-Text");
 	private final IconPositioner		dropShadowPos				= new IconPositioner(-5, 5);
 	private final SliderAndLabel		sliderDropShadowOpacity		= new SliderAndLabel(0, 6);
 	private final SliderAndLabel		sliderDropShadowBlurryness	= new SliderAndLabel(1, 6);
@@ -62,18 +62,18 @@ public class BattSettingsPanel extends SettingsPanel {
 
 	private final JCheckBox				cboxTransparentBgrnd		= createCheckbox("Transparent Background (switchOff = experimental !)",
 																			"Use this, when your statusbar Background is not black!");
-	private final ColorSelectButton	backgroundColor				= new ColorSelectButton("Background Color", "Color if not transparent");
+	private final ColorSelectButton		backgroundColor				= new ColorSelectButton("Background Color", "Color if not transparent");
 
-	private final ColorSelectButton	extraColor1					= new ColorSelectButton("Extra1", "Extra Color 1");
-	private final ColorSelectButton	extraColor2					= new ColorSelectButton("Extra2", "Extra Color 2");
+	private final ColorSelectButton		extraColor1					= new ColorSelectButton("Extra1", "Extra Color 1");
+	private final ColorSelectButton		extraColor2					= new ColorSelectButton("Extra2", "Extra Color 2");
 
-	private final ColorSelectButton	iconColor					= new ColorSelectButton("Main Color", "Color when normal battery-level");
-	private final ColorSelectButton	iconColorLowBatt			= new ColorSelectButton("LowBatt", "Color when low battery");
-	private final ColorSelectButton	iconColorMedBatt			= new ColorSelectButton("MedBatt", "Color when Med battery");
-	private final ColorSelectButton	iconColorInactiv			= new ColorSelectButton("Inactiv", "Color for inactiv Iconelements");
-	private final ColorSelectButton	iconColorCharge				= new ColorSelectButton("Charge Color", "Color when charging");
+	private final ColorSelectButton		iconColor					= new ColorSelectButton("Main Color", "Color when normal battery-level");
+	private final ColorSelectButton		iconColorLowBatt			= new ColorSelectButton("LowBatt", "Color when low battery");
+	private final ColorSelectButton		iconColorMedBatt			= new ColorSelectButton("MedBatt", "Color when Med battery");
+	private final ColorSelectButton		iconColorInactiv			= new ColorSelectButton("Inactiv", "Color for inactiv Iconelements");
+	private final ColorSelectButton		iconColorCharge				= new ColorSelectButton("Charge Color", "Color when charging");
 
-	private final ColorSelectButton	iconColorGlowCharge			= new ColorSelectButton("Charge Glow Color", "Glow Color when charging");
+	private final ColorSelectButton		iconColorGlowCharge			= new ColorSelectButton("Charge Glow Color", "Glow Color when charging");
 	private final JCheckBox				cboxChargeGlow				= createCheckbox("ChargeGlow", "Pulsing glow Animation behind Charge-Icon or number");
 	private final SliderAndLabel		sliderChargGlowRadius		= new SliderAndLabel(10, 50);
 
@@ -393,6 +393,9 @@ public class BattSettingsPanel extends SettingsPanel {
 	public void setSettings(final BattSettings settings) {
 		if (settings != null) {
 			this.settings = settings;
+			cboxMoveIconWithText.setSelected(settings.isMoveIconWithText());
+			cboxMoveGlowWithText.setSelected(settings.isMoveGlowWithText());
+
 			cboxNoFilling.setSelected(true);
 			fontColor.setColor(settings.getFontColor());
 			fontColorLowBatt.setColor(settings.getFontColorLowBatt());
@@ -464,9 +467,6 @@ public class BattSettingsPanel extends SettingsPanel {
 			iconPos.setPosition(settings.getIconXOffset(), settings.getIconYOffset());
 			fontPos.setPosition(settings.getFontXOffset(), settings.getFontYOffset());
 			glowPos.setPosition(settings.getGlowXOffset(), settings.getGlowYOffset());
-
-			cboxMoveIconWithText.setSelected(settings.isMoveIconWithText());
-			cboxMoveGlowWithText.setSelected(settings.isMoveGlowWithText());
 
 			sliderReduceOn100.setValue(settings.getReduceFontOn100());
 
