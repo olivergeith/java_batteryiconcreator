@@ -73,8 +73,9 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final ColorSelectButton		iconColorInactiv			= new ColorSelectButton("Inactiv", "Color for inactiv Iconelements");
 	private final ColorSelectButton		iconColorCharge				= new ColorSelectButton("Charge Color", "Color when charging");
 
-	private final ColorSelectButton		iconColorGlowCharge			= new ColorSelectButton("Charge Glow Color", "Glow Color when charging");
-	private final JCheckBox				cboxChargeGlow				= createCheckbox("ChargeGlow", "Pulsing glow Animation behind Charge-Icon or number");
+	private final ColorSelectButton		iconColorGlowCharge			= new ColorSelectButton("Glow Color", "Glow Color when charging");
+	private final JCheckBox				cboxChargeGlow				= createCheckbox("Pulsing ChargeGlow",
+																			"Pulsing glow Animation behind Charge-Icon or number");
 	private final SliderAndLabel		sliderChargGlowRadius		= new SliderAndLabel(10, 50);
 
 	private final SliderAndLabel		sliderStroke				= new SliderAndLabel(1, 10);
@@ -95,11 +96,14 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final SliderAndLabel		sliderLowBatt				= new SliderAndLabel(0, 30);
 	private final SliderAndLabel		sliderMedBatt				= new SliderAndLabel(0, 100);
 
-	private final IconPositioner		iconPos						= new IconPositioner(-20, 20);
-	private final IconPositioner		glowPos						= new IconPositioner(-20, 20);
-	private final IconPositioner		fontPos						= new IconPositioner(-20, 20);
+	private final IconPositioner		iconPos						= new IconPositioner(-25, 25);
+	private final IconPositioner		glowPos						= new IconPositioner(-25, 25);
+	private final IconPositioner		fontPos						= new IconPositioner(-25, 25);
+	private final IconPositioner		chargeGlowPos				= new IconPositioner(-25, 25);
 	private final JCheckBox				cboxMoveIconWithText		= createCheckbox("Lock to Font-Position-Offset", "Move Charge-Icon with Font-Position");
 	private final JCheckBox				cboxMoveGlowWithText		= createCheckbox("Lock to Font-Position-Offset", "Move Glow with Font-Position");
+	private final JCheckBox				cboxMoveChargeGlowWithText	= createCheckbox("Lock to Font-Position-Offset",
+																			"Move pulsing ChargeGlow with Font-Position");
 
 	private final SliderAndLabel		sliderReduceOn100			= new SliderAndLabel(-5, 0);
 
@@ -170,6 +174,9 @@ public class BattSettingsPanel extends SettingsPanel {
 				if (cboxMoveIconWithText.isSelected() == true) {
 					iconPos.setPosition(x, y);
 				}
+				if (cboxMoveChargeGlowWithText.isSelected() == true) {
+					chargeGlowPos.setPosition(x, y);
+				}
 			}
 		});
 	}
@@ -198,6 +205,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(createDropShadowPane(), cc.xyw(1, ++row, 9));
 
 		builder.add(createCfgPaneChargeIcon(), cc.xyw(1, ++row, 9));
+		builder.add(createCfgPanePulsingChargeGlow(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneIconColors(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneThresholds(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneFilling(), cc.xyw(1, ++row, 9));
@@ -295,15 +303,27 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(iconPos, cc.xyw(6, row, 3));
 		builder.add(cboxMoveIconWithText, cc.xyw(6, ++row, 3));
 
-		builder.addSeparator("", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Pulsing ChargeGlow"), cc.xyw(2, ++row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius"), cc.xyw(4, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Glow Color"), cc.xyw(6, row, 1));
-		builder.add(cboxChargeGlow, cc.xyw(2, ++row, 1));
-		builder.add(sliderChargGlowRadius.getToolbar(), cc.xyw(4, row, 1));
-		builder.add(iconColorGlowCharge, cc.xyw(6, row, 1));
-
 		final JPanel hide = new HidePanel("Charge-Icon...", builder.getPanel());
+		return hide;
+	}
+
+	private JPanel createCfgPanePulsingChargeGlow() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(cboxChargeGlow, cc.xyw(2, ++row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius"), cc.xyw(4, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("ChargeGlow Offset (drag red square)"), cc.xyw(6, row, 3));
+		builder.add(iconColorGlowCharge, cc.xyw(2, ++row, 1));
+		builder.add(sliderChargGlowRadius.getToolbar(), cc.xyw(4, row, 1));
+		builder.add(chargeGlowPos, cc.xyw(6, row, 3));
+		builder.add(cboxMoveChargeGlowWithText, cc.xyw(6, ++row, 3));
+
+		final JPanel hide = new HidePanel("Pulsing Charge Glow", builder.getPanel(), false);
 		return hide;
 	}
 
@@ -395,6 +415,7 @@ public class BattSettingsPanel extends SettingsPanel {
 			this.settings = settings;
 			cboxMoveIconWithText.setSelected(settings.isMoveIconWithText());
 			cboxMoveGlowWithText.setSelected(settings.isMoveGlowWithText());
+			cboxMoveChargeGlowWithText.setSelected(settings.isMoveChargeGlowWithText());
 
 			cboxNoFilling.setSelected(true);
 			fontColor.setColor(settings.getFontColor());
@@ -437,6 +458,7 @@ public class BattSettingsPanel extends SettingsPanel {
 			cboxChargeGlow.setSelected(settings.isChargeGlow());
 			iconColorGlowCharge.setColor(settings.getIconChargeGlowColor());
 			sliderChargGlowRadius.setValue(settings.getChargeGlowRadius());
+			chargeGlowPos.setPosition(settings.getChargeGlowOffsetX(), settings.getChargeGlowOffsetY());
 
 			cboxGlow.setSelected(settings.isGlow());
 			sliderGlowRadius.setValue(settings.getGlowRadius());
@@ -527,14 +549,12 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setChargeGlow(cboxChargeGlow.isSelected());
 		settings.setIconChargeGlowColor(iconColorGlowCharge.getColor());
 		settings.setChargeGlowRadius(sliderChargGlowRadius.getValue());
+		settings.setChargeGlowOffsetX(chargeGlowPos.getPosition().x);
+		settings.setChargeGlowOffsetY(chargeGlowPos.getPosition().y);
 
 		settings.setGlow(cboxGlow.isSelected());
 		settings.setGlowRadius(sliderGlowRadius.getValue());
 		settings.setGlowForChargeToo(cboxGlowForChargeToo.isSelected());
-
-		cboxChargeGlow.setSelected(settings.isChargeGlow());
-		iconColorGlowCharge.setColor(settings.getIconChargeGlowColor());
-		sliderChargGlowRadius.setValue(settings.getChargeGlowRadius());
 
 		settings.setMedBattTheshold(sliderMedBatt.getValue());
 		settings.setLowBattTheshold(sliderLowBatt.getValue());
@@ -554,6 +574,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setGlowYOffset(glowPos.getPosition().y);
 		settings.setMoveIconWithText(cboxMoveIconWithText.isSelected());
 		settings.setMoveGlowWithText(cboxMoveGlowWithText.isSelected());
+		settings.setMoveChargeGlowWithText(cboxMoveChargeGlowWithText.isSelected());
 
 		settings.setIconXOffset(iconPos.getPosition().x);
 		settings.setIconYOffset(iconPos.getPosition().y);
@@ -582,7 +603,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		iconColorCharge.setEnabled(cboxUseChargeColor.isSelected());
 		chargeIconSeletor.setEnabled(cboxShowChargeSymbol.isSelected());
 		fontButton.setEnabled(cboxShowFont.isSelected());
-		iconPos.setEnabled(cboxShowChargeSymbol.isSelected());
+		// iconPos.setEnabled(cboxShowChargeSymbol.isSelected());
 		fontPos.setEnabled(cboxShowFont.isSelected());
 		sliderReduceOn100.setEnabled(cboxShowFont.isSelected());
 		sliderResizeChargeSymbol.setEnabled(cboxShowChargeSymbol.isSelected());
@@ -623,6 +644,11 @@ public class BattSettingsPanel extends SettingsPanel {
 		iconPos.setEnabled(!cboxMoveIconWithText.isSelected() && cboxShowChargeSymbol.isSelected());
 		if (cboxMoveIconWithText.isSelected() == true) {
 			iconPos.setPosition(fontPos.getPosition().x, fontPos.getPosition().y);
+		}
+		cboxMoveChargeGlowWithText.setEnabled(cboxChargeGlow.isSelected());
+		chargeGlowPos.setEnabled(!cboxMoveChargeGlowWithText.isSelected() && cboxChargeGlow.isSelected());
+		if (cboxMoveChargeGlowWithText.isSelected() == true) {
+			chargeGlowPos.setPosition(fontPos.getPosition().x, fontPos.getPosition().y);
 		}
 
 	}

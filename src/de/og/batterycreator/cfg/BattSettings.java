@@ -65,9 +65,11 @@ public class BattSettings implements Serializable {
 	private boolean				glowForChargeToo			= true;
 	private int					glowRadius					= 20;
 
-	private Color				iconChargeGlowColor			= Color.orange;
+	private Color				iconChargeGlowColor			= Color.white;
 	private boolean				chargeGlow					= false;
 	private int					chargeGlowRadius			= 20;
+	private int					chargeGlowOffsetX			= 0;
+	private int					chargeGlowOffsetY			= 0;
 
 	private boolean				transparentBackground		= true;
 	private Color				backgroundColor				= COLOR_BGRND;
@@ -75,6 +77,7 @@ public class BattSettings implements Serializable {
 	// font and charge icon offset
 	private boolean				moveIconWithText			= true;
 	private boolean				moveGlowWithText			= true;
+	private boolean				moveChargeGlowWithText		= true;
 	private int					glowXOffset					= 0;
 	private int					glowYOffset					= 0;
 	private int					iconXOffset					= 0;
@@ -918,6 +921,30 @@ public class BattSettings implements Serializable {
 
 	public void setDropShadowIcon(final boolean dropShadowIcon) {
 		this.dropShadowIcon = dropShadowIcon;
+	}
+
+	public int getChargeGlowOffsetX() {
+		return chargeGlowOffsetX;
+	}
+
+	public void setChargeGlowOffsetX(final int chargeGlowOffsetX) {
+		this.chargeGlowOffsetX = chargeGlowOffsetX;
+	}
+
+	public int getChargeGlowOffsetY() {
+		return chargeGlowOffsetY;
+	}
+
+	public void setChargeGlowOffsetY(final int chargeGlowOffsetY) {
+		this.chargeGlowOffsetY = chargeGlowOffsetY;
+	}
+
+	public boolean isMoveChargeGlowWithText() {
+		return moveChargeGlowWithText;
+	}
+
+	public void setMoveChargeGlowWithText(final boolean moveChargeGlowWithText) {
+		this.moveChargeGlowWithText = moveChargeGlowWithText;
 	}
 
 }
