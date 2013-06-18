@@ -10,11 +10,11 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class Box2Creator extends AbstractIconCreator {
+public class BoxCreatorV3 extends AbstractIconCreator {
 
-	protected static String	name	= "BoxBattery.2";
+	protected static String	name	= "BoxBattery.V3";
 
-	public Box2Creator(final RomSettings romSettings) {
+	public BoxCreatorV3(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 26));
 		settings.setFontXOffset(-1);

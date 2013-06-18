@@ -10,29 +10,18 @@ import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
-/**
- * @author Oliver
- * 
- */
-public class ArcCreator2 extends AbstractIconCreator {
+public class BoxCreatorV1 extends AbstractIconCreator {
 
-	protected static String	name	= "ArcBattery.V2";
+	protected static String	name	= "BoxBattery.V1";
 
-	public ArcCreator2(final RomSettings romSettings) {
+	public BoxCreatorV1(final RomSettings romSettings) {
 		super(romSettings);
-		settings.setStrokewidth(6);
-		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 26));
-		settings.setResizeChargeSymbolHeight(33);
-		settings.setIconXOffset(-1);
-		settings.setIconYOffset(-1);
 		settings.setFontXOffset(-1);
 		settings.setFontYOffset(1);
+		settings.setStrokewidth(6);
+		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 28));
 		settings.setUseGradiantForMediumColor(true);
-	}
 
-	@Override
-	public boolean isNativeXXHDPI() {
-		return true;
 	}
 
 	@Override
@@ -46,7 +35,7 @@ public class ArcCreator2 extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsNoBg() {
+	public boolean isNativeXXHDPI() {
 		return true;
 	}
 
@@ -60,44 +49,52 @@ public class ArcCreator2 extends AbstractIconCreator {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.og.creators.AbstractCreator#createImage(int, boolean)
+	 */
 	@Override
 	public ImageIcon createImage(final int percentage, final boolean charge) {
 		final int imgWidth = 64;
 		final int imgHeight = 64;
-		final int radius = 30 - settings.getStrokewidth() / 2;
+		final int w = 2 + settings.getStrokewidth();
+		final int x = imgWidth / 2;
+		final int y = imgHeight / 2;
 
 		// Create a graphics contents on the buffered image
 		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
 		final Graphics2D g2d = initGrafics2D(img);
 
-		if (!settings.isNoBG()) {
-			g2d.setColor(settings.getIconColorInActiv());
-			Draw2DFunktions.drawCircle(g2d, imgWidth / 2, imgHeight / 2, radius, 0, 360);
-		}
+		g2d.setColor(settings.getIconColorInActiv());
+		g2d.fillRect(0, 0, imgWidth, imgHeight);
 
-		// Composite COlor setzen
-		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
 		// Level malen
 		if (settings.isUseTexture()) {
 			g2d.setPaint(getTexturePaint());
 		} else if (settings.isBattGradient()) {
 			final Color col1 = settings.getActivIconColor(percentage, charge);
 			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, imgHeight, col1);
+			final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
 			g2d.setPaint(gradientFill);
 		} else {
 			final Color col = settings.getActivIconColor(percentage, charge);
 			g2d.setPaint(col);
 		}
-		if (settings.isFlip())
-			Draw2DFunktions.fillCircle(g2d, imgWidth / 2, imgHeight / 2, imgWidth, 90, -Math.round(percentage * (360f / 100f)));
-		else
-			Draw2DFunktions.fillCircle(g2d, imgWidth / 2, imgHeight / 2, imgWidth, 90, +Math.round(percentage * (360f / 100f)));
 
+		final int winkel = Math.round(percentage * (360f / 100f));
+
+		if (settings.isFlip())
+			Draw2DFunktions.fillCircle(g2d, x, x, imgHeight, 135, winkel);
+		else
+			Draw2DFunktions.fillCircle(g2d, x, y, imgHeight, 135, -winkel);
+
+		// Inneren Halbkreis clearen
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
+		g2d.fillRect(w, w, imgWidth - 2 * w, imgHeight - 2 * w);
 		// Zurück auf normales paint
 		g2d.setPaintMode();
 
-		// % malen
 		drawPercentage(g2d, percentage, charge, img);
 
 		// Filewriting
@@ -109,5 +106,4 @@ public class ArcCreator2 extends AbstractIconCreator {
 	public String toString() {
 		return name;
 	}
-
 }
