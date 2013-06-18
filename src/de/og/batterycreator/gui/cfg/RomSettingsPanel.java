@@ -211,6 +211,8 @@ public class RomSettingsPanel extends SettingsPanel {
 		if (!pre.getRomName().equals(RomPreset.APPLY)) {
 			LOGGER.info("Setting RomPreset to : {}", pre.getRomName());
 
+			lidroidDrawableFolderCombo.setSelectedItem(pre.getLidroidDrawableFolder());
+			emoticonsDrawableFolderCombo.setSelectedItem(pre.getMmsDrawableFolder());
 			systemUIDrawableFolderCombo.setSelectedItem(pre.getSystemUIDrawableFolder());
 			frameworkDrawableFolderCombo.setSelectedItem(pre.getFrameworkDrawableFolder());
 			filepattern.setText(pre.getFilePattern());
