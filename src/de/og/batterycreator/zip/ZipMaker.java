@@ -34,18 +34,19 @@ public class ZipMaker {
 
 	}
 
-	private File				template	= new File("./template/template.zip");
-	public final static String	OUT_DIR		= "./flashablezip_out/";
+	private File				template				= new File("./template/template.zip");
+	public final static String	FLASHABLEZIP_OUT_DIR	= "./flashablezip_out/";
+	public final static String	ZIP_OUT_DIR				= "./flashablezip_out/noflashable/";
 
 	public ZipMaker(final String templ) {
 		template = new File(templ);
 		// creating outdirs
-		final File pa = new File(OUT_DIR);
+		final File pa = new File(FLASHABLEZIP_OUT_DIR);
 		if (!pa.exists())
 			pa.mkdirs();
 	}
 
-	private void traceInfo(final String txt) {
+	private static void traceInfo(final String txt) {
 		LOGGER.info(txt);
 	}
 
@@ -62,11 +63,11 @@ public class ZipMaker {
 		final ZipFile zipSrc = new ZipFile(template);
 
 		// Verzeichnis anlegen
-		final File pa = new File(OUT_DIR);
+		final File pa = new File(FLASHABLEZIP_OUT_DIR);
 		if (!pa.exists())
 			pa.mkdirs();
 		// ausgabezipname vorbelegen
-		File outzipFile = new File(OUT_DIR + outzipName + "_" + getTimestamp() + ".zip");
+		File outzipFile = new File(FLASHABLEZIP_OUT_DIR + outzipName + "_" + getTimestamp() + ".zip");
 		outzipFile = FileDialogs.saveFile(pa, outzipFile, ".zip", "Save flashable Zip");
 		if (outzipFile == null) {
 			zipSrc.close();
@@ -74,11 +75,7 @@ public class ZipMaker {
 		}
 
 		// checking if some 'idiot' deleted the .zip from filename
-		if (!outzipFile.getPath().endsWith(".zip")) {
-			traceInfo("ZipCreator: Some 'idiot' deleted the .zip  from filename...adding it again!");
-			final String path = outzipFile.getPath() + ".zip";
-			outzipFile = new File(path);
-		}
+		outzipFile = checkFileEndsWithZip(outzipFile);
 		traceInfo("ZipCreator: Opening Output-Zip " + outzipFile.getPath());
 		final ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(outzipFile));
 
@@ -123,6 +120,65 @@ public class ZipMaker {
 		return true;
 	}
 
+	/**
+	 * TODO comment checkFileEndsWithZip
+	 * 
+	 * @param outzipFile
+	 * @return
+	 */
+	private static File checkFileEndsWithZip(File outzipFile) {
+		if (!outzipFile.getPath().endsWith(".zip")) {
+			traceInfo("ZipCreator: Some 'idiot' deleted the .zip  from filename...adding it again!");
+			final String path = outzipFile.getPath() + ".zip";
+			outzipFile = new File(path);
+		}
+		return outzipFile;
+	}
+
+	public static boolean createZipArchive(final Vector<ZipElement> elements, final String outzipName) throws Exception {
+
+		// Verzeichnis anlegen
+		final File pa = new File(ZIP_OUT_DIR);
+		if (!pa.exists())
+			pa.mkdirs();
+		// ausgabezipname vorbelegen
+		File outzipFile = new File(ZIP_OUT_DIR + outzipName + ".zip");
+		outzipFile = FileDialogs.saveFile(pa, outzipFile, ".zip", "Save Zip with Files");
+		if (outzipFile == null) {
+			return false;
+		}
+
+		// check if file ends with .zip
+		outzipFile = checkFileEndsWithZip(outzipFile);
+		traceInfo("ZipCreator: Creating Output-Zip " + outzipFile.getPath());
+		final ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(outzipFile));
+
+		final byte[] buffer = new byte[32756];
+		int len = 0;
+
+		for (final ZipElement ele : elements) {
+			final File file = new File(ele.getFilenameWithPath());
+			traceInfo("Adding File to " + ele.getPathInArchiv() + file.getName());
+			final ZipEntry newEntry = new ZipEntry(ele.getPathInArchiv() + file.getName());
+			zos.putNextEntry(newEntry);
+
+			final InputStream is = new FileInputStream(file);
+
+			while ((len = is.read(buffer)) > 0) {
+				zos.write(buffer, 0, len);
+			}
+			is.close();
+		}
+		traceInfo("ZipCreator: Closing Output-Zip " + outzipFile.getPath());
+		zos.closeEntry();
+		zos.finish();
+		zos.close();
+		traceInfo("...");
+		traceInfo("..");
+		traceInfo(".");
+		return true;
+	}
+
 	private final static String getTimestamp() {
 		final DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		return (df.format(new Date()));
@@ -132,7 +188,7 @@ public class ZipMaker {
 	 * @return the outDir
 	 */
 	public String getOutDir() {
-		return OUT_DIR;
+		return FLASHABLEZIP_OUT_DIR;
 	}
 
 }

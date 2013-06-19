@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -91,12 +92,15 @@ import de.og.batterycreator.gui.cfg.BattSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
 import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
+import de.og.batterycreator.zip.ZipElementCollection;
+import de.og.batterycreator.zip.ZipMaker;
 
 public class BatteryPanel extends JPanel {
 	private static final long						serialVersionUID		= -5956664471952448919L;
 
 	private final JComboBox<AbstractIconCreator>	combo					= new JComboBox<AbstractIconCreator>();
 	private final JButton							openFolderButton		= new JButton(IconStore.folder2Icon);
+	private final JButton							exportZipButton			= new JButton(IconStore.zipFileIcon);
 	private final JList<String>						battIconList			= new JList<String>();
 	private AbstractIconCreator						activBattCreator		= null;
 	private final OverviewPanel						battOverviewPanel		= new OverviewPanel();
@@ -216,6 +220,13 @@ public class BatteryPanel extends JPanel {
 				}
 			}
 		});
+		exportZipButton.setToolTipText("Export icons into Zip-File...attention...this is NOT a flashable Zip!");
+		exportZipButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				zipExporting();
+			}
+		});
 
 		combo.setToolTipText("Choose your Battery-Renderer...then press play-button");
 		combo.setRenderer(new BattCreatorListCellRenderer());
@@ -261,6 +272,7 @@ public class BatteryPanel extends JPanel {
 		toolBar.add(combo);
 		toolBar.add(new JPanel());
 		toolBar.add(openFolderButton);
+		toolBar.add(exportZipButton);
 		// toolBar.add(anibar);
 		return toolBar;
 	}
@@ -288,10 +300,12 @@ public class BatteryPanel extends JPanel {
 			battSmallOverviewPanel.setText("Choose your Battery Style in dropdown box");
 			battOverviewPanel.setText("Choose your Battery Style in dropdown box");
 			openFolderButton.setEnabled(false);
+			exportZipButton.setEnabled(false);
 		} else {
 			battSmallOverviewPanel.setText("");
 			battOverviewPanel.setText("");
 			openFolderButton.setEnabled(true);
+			exportZipButton.setEnabled(true);
 		}
 		battSmallOverviewPanel.setOverview(cre.getOverviewSmallIcon(), 100);
 		battOverviewPanel.setOverview(cre.getOverviewIcon(), 100);
@@ -404,6 +418,28 @@ public class BatteryPanel extends JPanel {
 	 */
 	public AbstractIconCreator getActivBattCreator() {
 		return activBattCreator;
+	}
+
+	private void zipExporting() {
+		final AbstractIconCreator cre = (AbstractIconCreator) combo.getSelectedItem();
+		if (!(cre instanceof NoBattIcons)) {
+			final ZipElementCollection zipCollection = new ZipElementCollection();
+			zipCollection.addElements(cre.getAllFilenamesAndPath(), cre.getRomSettings().getSystemUIDrawableFolder() + "/");
+			try {
+				final String name = cre.toString() + "(" + cre.getRomSettings().getSystemUIDrawableFolder() + ")";
+				final boolean saved = ZipMaker.createZipArchive(zipCollection.getZipelEments(), name);
+				if (saved == true) {
+					JOptionPane.showMessageDialog(BatteryPanel.this, "Zip was created successfully", "Zip creating", JOptionPane.INFORMATION_MESSAGE);
+				}
+
+			} catch (final Exception e) {
+				// Error during zip...
+				JOptionPane.showMessageDialog(BatteryPanel.this, //
+						"ERROR: Zip was not created !!!\n" //
+								+ e.getMessage(), "Zip creating ERROR", //
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
 	}
 
 }

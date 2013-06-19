@@ -7,6 +7,7 @@ public class IconStore {
 	public static final ImageIcon	refresh				= new ImageIcon(IconStore.class.getResource("refresh.png"));
 	public static final ImageIcon	batteryIcon			= new ImageIcon(IconStore.class.getResource("battery.png"));
 	public static final ImageIcon	zipIcon				= new ImageIcon(IconStore.class.getResource("zip.png"));
+	public static final ImageIcon	zipFileIcon			= new ImageIcon(IconStore.class.getResource("zipfile.png"));
 	public static final ImageIcon	overIcon			= new ImageIcon(IconStore.class.getResource("over.png"));
 	public static final ImageIcon	overSmallIcon		= new ImageIcon(IconStore.class.getResource("oversmall.png"));
 	public static final ImageIcon	listIcon			= new ImageIcon(IconStore.class.getResource("list.png"));

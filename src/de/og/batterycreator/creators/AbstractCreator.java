@@ -15,8 +15,8 @@ public abstract class AbstractCreator implements IconProviderInterface {
 	protected ImageIcon					overview			= null;
 	protected RomSettings				romSettings			= new RomSettings();
 
-	public AbstractCreator(final RomSettings romSettings) {
-		this.romSettings = romSettings;
+	public RomSettings getRomSettings() {
+		return romSettings;
 	}
 
 	// ###############################################################################
@@ -39,6 +39,10 @@ public abstract class AbstractCreator implements IconProviderInterface {
 	// ###############################################################################
 	public void setRomSettings(final RomSettings settings) {
 		romSettings = settings;
+	}
+
+	public AbstractCreator(final RomSettings romSettings) {
+		this.romSettings = romSettings;
 	}
 
 	// ###############################################################################

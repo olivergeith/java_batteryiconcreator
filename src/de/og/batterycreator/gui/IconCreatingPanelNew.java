@@ -105,7 +105,7 @@ public class IconCreatingPanelNew extends JPanel {
 
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				StaticExecutor.openFolder(ZipMaker.OUT_DIR);
+				StaticExecutor.openFolder(ZipMaker.FLASHABLEZIP_OUT_DIR);
 			}
 		});
 		zipButton.setToolTipText("Create flashble Zip!");
