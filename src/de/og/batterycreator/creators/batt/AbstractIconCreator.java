@@ -91,6 +91,10 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		return false;
 	}
 
+	public boolean supportsOwnComponents() {
+		return false;
+	}
+
 	// ###############################################################################
 	// Creating Images
 	// ###############################################################################

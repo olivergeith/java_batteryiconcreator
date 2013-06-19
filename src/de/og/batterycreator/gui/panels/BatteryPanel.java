@@ -85,10 +85,11 @@ import de.og.batterycreator.creators.batt.XORApfelCreator;
 import de.og.batterycreator.creators.batt.XORCenterCreator;
 import de.og.batterycreator.creators.batt.XORCircleCreator;
 import de.og.batterycreator.creators.batt.XORSquareCreator;
-import de.og.batterycreator.creators.batt.Zoopa3QuaterCreator;
-import de.og.batterycreator.creators.batt.ZoopaCreator;
-import de.og.batterycreator.creators.batt.ZoopaCreatorWide;
-import de.og.batterycreator.creators.batt.ZoopaGaugeCreator;
+import de.og.batterycreator.creators.batt.Zoopa3Quater;
+import de.og.batterycreator.creators.batt.ZoopaCircle;
+import de.og.batterycreator.creators.batt.ZoopaGauge;
+import de.og.batterycreator.creators.batt.ZoopaWide;
+import de.og.batterycreator.creators.batt.ZoopaWideZeiger;
 import de.og.batterycreator.gui.cfg.BattSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
@@ -130,20 +131,25 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new DecimalArcCreator(romSettings));
 		combo.addItem(new HoneycombCreator(romSettings));
 		// combo.addItem(new AOKPCircleModCreator(romSettings));
+
 		combo.addItem(new XORCircleCreator(romSettings));
 		combo.addItem(new XORSquareCreator(romSettings));
 		combo.addItem(new XORCenterCreator(romSettings));
+
 		combo.addItem(new BoxCreatorV1(romSettings));
 		combo.addItem(new BoxCreatorV2(romSettings));
 		combo.addItem(new BoxCreatorV3(romSettings));
+
 		combo.addItem(new BubbleCreator(romSettings));
 		combo.addItem(new BallCreator(romSettings));
+
 		combo.addItem(new BrickBattCreator(romSettings));
 		combo.addItem(new BrickBattCreatorV2(romSettings));
 		combo.addItem(new BrickBattNoGapCreator(romSettings));
 		combo.addItem(new BrickDecimalCreator(romSettings));
 		combo.addItem(new BrickDecimal2Creator(romSettings));
 		combo.addItem(new BrickDecimal3Creator(romSettings));
+
 		combo.addItem(new TwoBarsCreator(romSettings));
 		combo.addItem(new SliderCreator(romSettings));
 		combo.addItem(new DecimalBarCreator(romSettings));
@@ -152,31 +158,40 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new BinaryBarsCreator(romSettings));
 		combo.addItem(new BinarySquaresCreator(romSettings));
 		combo.addItem(new SamsungStockBatteryCreator(romSettings));
+
 		combo.addItem(new SimpleBatteryCreator(romSettings));
 		combo.addItem(new SimpleBatteryCreatorV2(romSettings));
+
 		combo.addItem(new BatterySymbolCreator(romSettings));
 		combo.addItem(new BatterySymbolCreatorV2(romSettings));
 		combo.addItem(new BatterySymbolCreatorV3(romSettings));
 		combo.addItem(new BatteryVerticalSymbolCreator(romSettings));
 		combo.addItem(new BatteryVerticalSymbolCreatorV2(romSettings));
+
 		combo.addItem(new AppleBatteryCreator(romSettings));
 		combo.addItem(new KnobBatteryCreator(romSettings));
+
 		combo.addItem(new ClockCreator(romSettings));
 		combo.addItem(new ClockPointerCreator(romSettings));
+
 		combo.addItem(new CastawayCreator(romSettings));
 		combo.addItem(new CastawayCreatorFlip(romSettings));
 		combo.addItem(new CastawayCreator2(romSettings));
 		combo.addItem(new CastawayCreator2Flip(romSettings));
+
 		combo.addItem(new TachoCreator(romSettings));
 		combo.addItem(new TachoCreatorWide(romSettings));
 		combo.addItem(new TachoCreatorWideV2(romSettings));
 		combo.addItem(new TachoCreatorWideV3(romSettings));
 		combo.addItem(new TachoCreatorWideV4(romSettings));
 		combo.addItem(new TachoCreatorWideV5(romSettings));
-		combo.addItem(new ZoopaCreatorWide(romSettings));
-		combo.addItem(new ZoopaCreator(romSettings));
-		combo.addItem(new Zoopa3QuaterCreator(romSettings));
-		combo.addItem(new ZoopaGaugeCreator(romSettings));
+
+		combo.addItem(new ZoopaCircle(romSettings));
+		combo.addItem(new Zoopa3Quater(romSettings));
+		combo.addItem(new ZoopaGauge(romSettings));
+		combo.addItem(new ZoopaWide(romSettings));
+		combo.addItem(new ZoopaWideZeiger(romSettings));
+
 		combo.addItem(new FaecherCreatorWide(romSettings));
 		combo.addItem(new TachoCreator3Quater(romSettings));
 		combo.addItem(new ScalaBatteryCreator(romSettings));

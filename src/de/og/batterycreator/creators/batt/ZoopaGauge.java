@@ -10,25 +10,25 @@ import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class Zoopa3QuaterCreator extends AbstractIconCreator {
+public class ZoopaGauge extends AbstractIconCreator {
 
-	protected static String	name	= "Zoopa.3Quater";
+	protected static String	name	= "Zoopa.Gauge";
 
-	public Zoopa3QuaterCreator(final RomSettings romSettings) {
+	public ZoopaGauge(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setMoveIconWithText(true);
-		settings.setFontXOffset(-1);
-		settings.setFontYOffset(9);
-		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 26));
+		settings.setFontXOffset(10);
+		settings.setFontYOffset(18);
+		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 28));
 		settings.setReduceFontOn100(-2);
-		settings.setIconXOffset(-1);
-		settings.setIconYOffset(9);
-		settings.setResizeChargeSymbolHeight(30);
+		settings.setIconXOffset(10);
+		settings.setIconYOffset(16);
+		settings.setResizeChargeSymbolHeight(33);
 		settings.setLowBattTheshold(0);
 		settings.setMedBattTheshold(40);
 		settings.setUseGradiantForMediumColor(true);
 		settings.setUseGradiantForNormalColor(true);
-		settings.setStrokewidth(4);
+		settings.setStrokewidth(2);
 		settings.setExtraColor1(Color.white);
 	}
 
@@ -62,7 +62,7 @@ public class Zoopa3QuaterCreator extends AbstractIconCreator {
 		return true;
 	}
 
-	private final int	imgWidth	= 84;
+	private final int	imgWidth	= 96;
 	private final int	imgHeight	= 64;
 
 	/*
@@ -86,14 +86,14 @@ public class Zoopa3QuaterCreator extends AbstractIconCreator {
 	}
 
 	private void drawScala(final Graphics2D g2d, final boolean charge, final int percentage) {
-		final int radius = imgWidth / 2 - 1;
+		final int radius = imgHeight - 1;
 		final int einer = percentage % 10;
 		final int zehner = percentage / 10;
 		final int einerdicke = 6;
 		final int zehnerdicke = 9;
 		drawSegmente(g2d, charge, percentage, einer, radius, einerdicke, 10);
 		drawSegmente(g2d, charge, percentage, zehner, radius - einerdicke - 2, zehnerdicke, 10);
-
+		drawZeiger(g2d, charge, percentage, zehner, radius - einerdicke - 2, zehnerdicke, 10);
 		// Normales Paint setzen
 		g2d.setPaintMode();
 
@@ -101,11 +101,13 @@ public class Zoopa3QuaterCreator extends AbstractIconCreator {
 
 	private void drawSegmente(final Graphics2D g2d, final boolean charge, final int percentage, final int selectedValue, final int radius, final int dicke,
 			final int anzahlSegmente) {
-		final int x = imgWidth / 2;
+		final int x = imgHeight;
 		final int y = x;
 		final int segmente = anzahlSegmente;
-		final int gap = settings.getStrokewidth(); // in grad
-		final float winkelSegment = (230f - (segmente - 1) * gap) / segmente;
+		int gap = settings.getStrokewidth(); // in grad
+		if (gap > 6)
+			gap = 6;
+		final float winkelSegment = (115f - (segmente - 1) * gap) / segmente;
 
 		// Skala Hintergergrund einer
 		for (int i = 0; i < segmente; i++) {
@@ -130,12 +132,41 @@ public class Zoopa3QuaterCreator extends AbstractIconCreator {
 					setHintergrundPaint(g2d);
 				}
 			}
-			final int startwinkel = Math.round(205f - i * (winkelSegment + gap));
+			final int startwinkel = Math.round(180f - i * (winkelSegment + gap));
 			Draw2DFunktions.fillCircle(g2d, x, y, radius, startwinkel, -(int) winkelSegment);
 		}
 		// Inneren Halbkreis clearen
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
 		Draw2DFunktions.fillCircle(g2d, x, y, radius - dicke, 0, 360);
+
+		// Normales Paint setzen
+		g2d.setPaintMode();
+	}
+
+	private void drawZeiger(final Graphics2D g2d, final boolean charge, final int percentage, int selectedValue, final int radius, final int dicke,
+			final int anzahlSegmente) {
+		final int x = imgHeight;
+		final int y = x;
+		final int segmente = anzahlSegmente;
+		int gap = settings.getStrokewidth(); // in grad
+		if (gap > 6)
+			gap = 6;
+		final float winkelSegment = (115f - (segmente - 1) * gap) / segmente;
+
+		// Skala Hintergergrund einer
+
+		if (settings.isFlip())
+			setSelectedPaint(g2d, charge, percentage);
+		else
+			setExtraPaint(g2d);
+
+		if (selectedValue == 10)
+			selectedValue = 9;
+		final int startwinkel = Math.round(180f - selectedValue * (winkelSegment + gap));
+		Draw2DFunktions.fillCircle(g2d, x, y, radius, startwinkel, -(int) winkelSegment);
+		// Inneren Halbkreis clearen
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
+		Draw2DFunktions.fillCircle(g2d, x, y, radius - 2 * dicke, 0, 360);
 
 		// Normales Paint setzen
 		g2d.setPaintMode();

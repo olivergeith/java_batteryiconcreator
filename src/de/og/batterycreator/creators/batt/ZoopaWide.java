@@ -10,25 +10,25 @@ import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class ZoopaCreator extends AbstractIconCreator {
+public class ZoopaWide extends AbstractIconCreator {
 
-	protected static String	name	= "Zoopa";
+	protected static String	name	= "Zoopa.Wide";
 
-	public ZoopaCreator(final RomSettings romSettings) {
+	public ZoopaWide(final RomSettings romSettings) {
 		super(romSettings);
-		settings.setMoveIconWithText(true);
+		settings.setMoveIconWithText(false);
 		settings.setFontXOffset(-1);
-		settings.setFontYOffset(0);
-		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+		settings.setFontYOffset(16);
+		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 28));
 		settings.setReduceFontOn100(-2);
 		settings.setIconXOffset(-1);
-		settings.setIconYOffset(0);
+		settings.setIconYOffset(12);
 		settings.setResizeChargeSymbolHeight(30);
 		settings.setLowBattTheshold(0);
 		settings.setMedBattTheshold(40);
 		settings.setUseGradiantForMediumColor(true);
 		settings.setUseGradiantForNormalColor(true);
-		settings.setStrokewidth(5);
+		settings.setStrokewidth(2);
 		settings.setExtraColor1(Color.white);
 	}
 
@@ -62,8 +62,8 @@ public class ZoopaCreator extends AbstractIconCreator {
 		return true;
 	}
 
-	private final int	imgWidth	= 64;
-	private final int	imgHeight	= 64;
+	private final int	imgWidth	= 108;
+	private final int	imgHeight	= 54;
 
 	/*
 	 * (non-Javadoc)
@@ -86,13 +86,13 @@ public class ZoopaCreator extends AbstractIconCreator {
 	}
 
 	private void drawScala(final Graphics2D g2d, final boolean charge, final int percentage) {
-		final int radius = imgHeight / 2 - 1;
+		final int radius = imgHeight - 1;
 		final int einer = percentage % 10;
 		final int zehner = percentage / 10;
-		final int einerdicke = 4;
-		final int zehnerdicke = 8;
+		final int einerdicke = 6;
+		final int zehnerdicke = 12;
 		drawSegmente(g2d, charge, percentage, einer, radius, einerdicke, 10);
-		drawSegmente(g2d, charge, percentage, zehner, radius - einerdicke - 1, zehnerdicke, 10);
+		drawSegmente(g2d, charge, percentage, zehner, radius - einerdicke - 2, zehnerdicke, 10);
 
 		// Normales Paint setzen
 		g2d.setPaintMode();
@@ -102,10 +102,10 @@ public class ZoopaCreator extends AbstractIconCreator {
 	private void drawSegmente(final Graphics2D g2d, final boolean charge, final int percentage, final int selectedValue, final int radius, final int dicke,
 			final int anzahlSegmente) {
 		final int x = imgWidth / 2;
-		final int y = imgHeight / 2;
+		final int y = imgHeight;
 		final int segmente = anzahlSegmente;
 		final int gap = settings.getStrokewidth(); // in grad
-		final float winkelSegment = (360f - segmente * gap) / segmente;
+		final float winkelSegment = (180f - (segmente - 1) * gap) / segmente;
 
 		// Skala Hintergergrund einer
 		for (int i = 0; i < segmente; i++) {
@@ -130,12 +130,12 @@ public class ZoopaCreator extends AbstractIconCreator {
 					setHintergrundPaint(g2d);
 				}
 			}
-			final int startwinkel = Math.round(90f - i * (winkelSegment + gap));
+			final int startwinkel = Math.round(180f - i * (winkelSegment + gap));
 			Draw2DFunktions.fillCircle(g2d, x, y, radius, startwinkel, -(int) winkelSegment);
 		}
 		// Inneren Halbkreis clearen
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
-		Draw2DFunktions.fillCircle(g2d, x, y, radius - dicke, 0, 360);
+		Draw2DFunktions.fillCircle(g2d, x, y, radius - dicke, 0, 180);
 
 		// Normales Paint setzen
 		g2d.setPaintMode();
