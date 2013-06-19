@@ -133,9 +133,9 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 		// Zeiger
 		if (settings.isFlip()) {
 			g2d.setPaint(Color.darkGray.darker());
-			Draw2DFunktions.fillCircle(g2d, x, y, radius - 3, w - 2, 4);
+			Draw2DFunktions.fillCircle(g2d, x, y, radius - 3, w - 3, 6);
 			g2d.setPaint(settings.getExtraColor1());
-			Draw2DFunktions.fillCircle(g2d, x, y, radius, w - 1, 2);
+			Draw2DFunktions.fillCircle(g2d, x, y, radius, w - 2, 4);
 		}
 		// Skala innerer rand
 		if (settings.isBattGradient() || settings.isUseTexture()) {

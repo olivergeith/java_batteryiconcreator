@@ -35,6 +35,7 @@ public class SliderCreator extends AbstractIconCreator {
 		settings.setUseGradiantForMediumColor(true);
 		settings.setUseGradiantForNormalColor(false);
 		settings.setNoBG(true);
+		settings.setExtraColor1(Color.darkGray.brighter());
 	}
 
 	@Override
@@ -62,6 +63,11 @@ public class SliderCreator extends AbstractIconCreator {
 		return true;
 	}
 
+	@Override
+	public boolean supportsExtraColor1() {
+		return true;
+	}
+
 	private final int	radiusP		= 8;				// Radius Knob
 	private final int	offsetx		= 10;
 	private final int	offsety		= imgHeight - 15;
@@ -81,8 +87,14 @@ public class SliderCreator extends AbstractIconCreator {
 
 		// Bar
 		final int rahmen = settings.getStrokewidth() - 1;
-		g2d.setColor(settings.getIconColorInActiv().brighter());
+		g2d.setColor(settings.getExtraColor1());
 		g2d.fillRect(offsetx - rahmen, offsety - rahmen, imgWidth - 2 * (offsetx - rahmen), barHeight + 2 * rahmen);
+
+		// Inneren Bar clearen
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
+		g2d.fillRect(offsetx, offsety, imgWidth - 2 * (offsetx), barHeight);
+		// Zurück auf normales paint
+		g2d.setPaintMode();
 
 		if (settings.isBattGradient()) {
 			final Color col1 = settings.getIconColorInActiv();
@@ -90,7 +102,7 @@ public class SliderCreator extends AbstractIconCreator {
 			final GradientPaint gradientFill = new GradientPaint(offsetx, offsety, col2, offsetx, offsety + barHeight, col1);
 			g2d.setPaint(gradientFill);
 		} else {
-			g2d.setColor(settings.getIconColorInActiv());
+			g2d.setPaint(settings.getIconColorInActiv());
 			// g2d.setColor(settings.getIconColorInActiv().darker());
 		}
 
@@ -99,7 +111,8 @@ public class SliderCreator extends AbstractIconCreator {
 		// Procente
 		final int w = Math.round((imgWidth - 2 * offsetx) / 100f * percentage);
 		// Composite COlor setzen
-		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
+		// g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN,
+		// 1f));
 
 		if (settings.isBattGradient()) {
 			final Color col1 = settings.getActivIconColor(percentage, charge);
