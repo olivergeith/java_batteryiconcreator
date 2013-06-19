@@ -79,10 +79,11 @@ public class BatteryAnalyser {
 				ischarge = true;
 				pattern = filename.substring(0, indexCharge);
 			}
-			BatteryType type = batteryTypeMap.get(pattern);
+			final String mapKey = pattern + drawableFolder;
+			BatteryType type = batteryTypeMap.get(mapKey);
 			if (type == null) {
 				type = new BatteryType(pattern, drawableFolder);
-				batteryTypeMap.put(pattern, type);
+				batteryTypeMap.put(mapKey, type);
 			}
 			icon.setDescription(filename);
 			type.addIcon(icon, ischarge);
