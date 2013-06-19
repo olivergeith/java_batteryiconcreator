@@ -1,6 +1,13 @@
 package de.og.batterycreator.gui.widgets.iconselector.chargeiconselector;
 
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import de.og.batterycreator.gui.widgets.iconselector.IconSelector;
@@ -34,6 +41,7 @@ public class ChargeIconSelector extends IconSelector {
 
 	public ChargeIconSelector(final int height) {
 		super(customPath, height);
+		setRenderer(new IconListCellRenderer());
 	}
 
 	@Override
@@ -61,21 +69,26 @@ public class ChargeIconSelector extends IconSelector {
 		LOGGER.info("Loading Custom Charge Icons!");
 	}
 
-	// /**
-	// * For testing purposes !!!
-	// *
-	// * @param args
-	// */
-	// public static void main(final String[] args) {
-	//
-	// final JFrame f = new JFrame();
-	// f.setTitle("Hallo Emmy!!!!!!!");
-	// f.setBounds(200, 200, 200, 200);
-	// f.setLayout(new BorderLayout());
-	// final ChargeIconSelector combo = new ChargeIconSelector(40);
-	// combo.setSelectedIndex(0);
-	// f.add(combo, BorderLayout.CENTER);
-	//
-	// f.setVisible(true);
-	// }
+	/**
+	 * Renderer für IconList
+	 */
+	private class IconListCellRenderer implements ListCellRenderer<ImageIcon> {
+		protected DefaultListCellRenderer	defaultRenderer	= new DefaultListCellRenderer();
+
+		@Override
+		public Component getListCellRendererComponent(final JList<? extends ImageIcon> list, final ImageIcon value, final int index, final boolean isSelected,
+				final boolean cellHasFocus) {
+
+			final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+			if (value instanceof ImageIcon) {
+				renderer.setBorder(new EmptyBorder(1, 1, 1, 1));
+				renderer.setBackground(Color.gray);
+				renderer.setForeground(Color.white);
+				renderer.setBorder(new EmptyBorder(1, 1, 1, 1));
+			}
+			return renderer;
+		}
+
+	}
+
 }

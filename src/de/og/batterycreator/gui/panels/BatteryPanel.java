@@ -24,6 +24,7 @@ import javax.swing.border.EmptyBorder;
 import og.basics.gui.html.HTMLFileDisplay;
 import og.basics.gui.image.StaticImageHelper;
 import og.basics.util.StaticExecutor;
+import de.og.batterycreator.cfg.GlobalSettings;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.creators.batt.AbstractIconCreator;
 import de.og.batterycreator.creators.batt.AppleBatteryCreator;
@@ -313,6 +314,7 @@ public class BatteryPanel extends JPanel {
 		battIconList.setListData(cre.getFilenames());
 		battIconList.repaint();
 		anibar.setIcons(cre.getIcons());
+		exportZipButton.setVisible(GlobalSettings.INSTANCE.isShowExportToZipButton());
 	}
 
 	/**

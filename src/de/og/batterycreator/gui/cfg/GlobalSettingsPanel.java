@@ -32,7 +32,8 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	private JComboBox<RomPreset>		romPresetCombo;
 	private final JCheckBox				cboxShowAdvancedButton			= createCheckbox("Show 'Advanced Button' on startup (requires restart to take effect)",
 																				"Show 'Advanced Button' in buttonbar (requires restart to take effect)");
-
+	private final JCheckBox				cboxShowExportZipButton			= createCheckbox("Show 'Export Zip Button' in Battery Renderer",
+																				"Show 'Export Zip Button' in Battery Renderer");
 	private final JCheckBox				cboxAlwaysWriteOverviews		= createCheckbox("Always write Overview-Png's",
 																				"If selected, overviews are written to filesystem, even it the overview already exists! (May take more time on startup of the Rom Fumbler)");
 
@@ -235,6 +236,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 
 		builder.add(JGoodiesHelper.createBlackLabel("Change Look&Feel to:"), cc.xyw(2, ++row, 7));
 		builder.add(looks, cc.xyw(2, ++row, 7));
+		builder.add(cboxShowExportZipButton, cc.xyw(2, ++row, 7));
 
 		final JPanel hide = new HidePanel("Misc Settings", builder.getPanel());
 		return hide;
@@ -245,6 +247,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 			GlobalSettings.INSTANCE = settings;
 			romPresetCombo.setSelectedItem(settings.getRomPreset());
 			cboxShowAdvancedButton.setSelected(settings.isShowAdvancedButton());
+			cboxShowExportZipButton.setSelected(settings.isShowExportToZipButton());
 			cboxAlwaysWriteOverviews.setSelected(settings.isAlwaysWriteOverview());
 			bigBackgroundStyleCombo.setSelectedIndex(settings.getBigBackgroundStyle());
 			smallBackgroundStyleCombo.setSelectedIndex(settings.getSmallBackgroundStyle());
@@ -261,6 +264,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	public GlobalSettings getSettings() {
 		GlobalSettings.INSTANCE.setRomPreset((RomPreset) romPresetCombo.getSelectedItem());
 		GlobalSettings.INSTANCE.setShowAdvancedButton(cboxShowAdvancedButton.isSelected());
+		GlobalSettings.INSTANCE.setShowExportToZipButton(cboxShowExportZipButton.isSelected());
 		GlobalSettings.INSTANCE.setAlwaysWriteOverview(cboxAlwaysWriteOverviews.isSelected());
 		GlobalSettings.INSTANCE.setBigBackgroundStyle(bigBackgroundStyleCombo.getSelectedIndex());
 		GlobalSettings.INSTANCE.setSmallBackgroundStyle(smallBackgroundStyleCombo.getSelectedIndex());
@@ -294,6 +298,7 @@ public class GlobalSettingsPanel extends SettingsPanel {
 	public void debugGlobalSettings(final GlobalSettings set) {
 		LOGGER.info("--> RomPreset to load on start: {}", set.getRomPreset().getRomName());
 		LOGGER.info("--> showAdvanced Button on start: {}", set.isShowAdvancedButton());
+		LOGGER.info("--> showExport-Zip Button on start: {}", set.isShowExportToZipButton());
 		LOGGER.info("--> alwaysWriteOverviews {}", set.isAlwaysWriteOverview());
 		LOGGER.info("--> BigBackgroundStyle {}", set.getBigBackgroundStyle());
 		LOGGER.info("--> SmallBackgroundStyle {}", set.getSmallBackgroundStyle());

@@ -22,6 +22,7 @@ public class GlobalSettings implements Serializable {
 	private int						smallOverViewStyle			= 0;
 	private boolean					smallOverviewsOtherNmbers	= false;
 	private int						bigBackgroundStyle			= 0;
+	private boolean					showExportToZipButton		= false;
 
 	private int						signalWifiBackgroundStyle	= 0;
 	private int						signalWifiOverViewStyle		= 0;
@@ -159,6 +160,14 @@ public class GlobalSettings implements Serializable {
 
 	public String getZIP_OUT_DIR() {
 		return ZIP_OUT_DIR;
+	}
+
+	public boolean isShowExportToZipButton() {
+		return showExportToZipButton;
+	}
+
+	public void setShowExportToZipButton(final boolean showExportToZipButton) {
+		this.showExportToZipButton = showExportToZipButton;
 	}
 
 }

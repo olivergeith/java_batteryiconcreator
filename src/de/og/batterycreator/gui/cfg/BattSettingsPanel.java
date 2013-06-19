@@ -470,7 +470,7 @@ public class BattSettingsPanel extends SettingsPanel {
 			if (settings.getChargeIcon() != null)
 				chargeIconSeletor.setSelectedItem(settings.getChargeIcon());
 			else
-				chargeIconSeletor.setSelectedIndex(1);
+				chargeIconSeletor.setSelectedIndex(3);
 
 			if (settings.getXorIcon() != null)
 				xorIconSelector.setSelectedItem(settings.getXorIcon());
