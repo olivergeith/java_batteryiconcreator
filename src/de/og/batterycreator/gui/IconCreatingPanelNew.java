@@ -371,7 +371,8 @@ public class IconCreatingPanelNew extends JPanel {
 		// now the actual zipping...
 		try {
 			updateProgressBar(step++, "Choose ZipFilename....");
-			final boolean saved = zipper.addFilesToArchive(zipCollection.getZipelEments(), activBattCreator.getCreatorName());
+			final String namePattern = activBattCreator.getCreatorName() + "_(" + romSettingsPanel.getSettings().getSystemUIDpi() + ")";
+			final boolean saved = zipper.addFilesToArchive(zipCollection.getZipelEments(), namePattern);
 			// all ok ? Then Messagebox
 			if (saved == true) {
 				updateProgressBar(step++, "Done Successfully!");

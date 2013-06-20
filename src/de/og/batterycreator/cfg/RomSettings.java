@@ -30,7 +30,7 @@ public class RomSettings implements Serializable {
 	private String				morphPath2Lidroid			= RomPreset.MORPHPATH_LIDROID;
 	private String				folderLidroidInZip			= morphPath2Lidroid + RomPreset.DRAWABLE_HDPI + "/";
 
-	private String				morphPath2MMS			= RomPreset.MORPHPATH_MMS;
+	private String				morphPath2MMS				= RomPreset.MORPHPATH_MMS;
 	private String				folderEmoticonsInZip		= morphPath2MMS + RomPreset.DRAWABLE_HDPI + "/";
 
 	private int					battIconSize				= RomPreset.BATT_ICON_HEIGHT_HDPI;
@@ -118,6 +118,14 @@ public class RomSettings implements Serializable {
 		return systemUIDrawableFolder;
 	}
 
+	public String getSystemUIDpi() {
+		final int index = systemUIDrawableFolder.indexOf("-");
+		if (index > 0)
+			return systemUIDrawableFolder.substring(index + 1);
+		else
+			return "dpi_unknown";
+	}
+
 	public String getFolderSystemUIInZip() {
 		return folderSystemUIInZip;
 	}
@@ -189,9 +197,9 @@ public class RomSettings implements Serializable {
 	// ##########################################
 	private void setFolderEmoticonsInZip() {
 		if (useMMSForEmoticons)
-			this.folderEmoticonsInZip = morphPath2MMS + emoticonsDrawableFolder + "/";
+			folderEmoticonsInZip = morphPath2MMS + emoticonsDrawableFolder + "/";
 		else
-			this.folderEmoticonsInZip = morphPath2Framework + emoticonsDrawableFolder + "/";
+			folderEmoticonsInZip = morphPath2Framework + emoticonsDrawableFolder + "/";
 
 	}
 
@@ -213,7 +221,7 @@ public class RomSettings implements Serializable {
 	}
 
 	public void setMorphPath2MMS(final String morphPath2Emoticons) {
-		this.morphPath2MMS = morphPath2Emoticons;
+		morphPath2MMS = morphPath2Emoticons;
 		setFolderEmoticonsInZip();
 	}
 
