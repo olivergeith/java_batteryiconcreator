@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import de.og.batterycreator.cfg.GlobalSettings;
 import de.og.batterycreator.gui.iconstore.IconStore;
-import de.og.batterycreator.main.IconCreatorFrame;
 import de.og.batterycreator.systemuianalyser.data.BatteryType;
+import de.og.batterycreator.systemuianalyser.data.NotifyIconType;
 import de.og.batterycreator.systemuianalyser.data.ToggleType;
 import de.og.batterycreator.systemuianalyser.data.WifiSignalType;
 
@@ -23,6 +23,32 @@ public class IconExporter {
 
 	public IconExporter(final Component parent) {
 		this.parent = parent;
+	}
+
+	// #######################################################
+	// Notification
+	// #######################################################
+
+	public void exportNotifyIconSet(final NotifyIconType type) {
+		exportSystemUIIconSet(type.getDpi(), type.getIcons(), type.getPattern() + "NotificationIcons");
+
+	}
+
+	public void exportSystemUIIconSet(final String dpi, final List<ImageIcon> iconList, final String name) {
+		final String iconSetFolderName = askRomNameGenerateFolderNameForIconSet(name, dpi);
+		if ((iconSetFolderName != null) && (iconSetFolderName.length() > 0)) {
+			// outfolder anlegen
+			final String outFolder = getOutFolder(GlobalSettings.INSTANCE.getSystemUICustomPath(), iconSetFolderName);
+			// loop über alle icons
+			for (final ImageIcon icon : iconList) {
+				//
+				final String filenameandPath = outFolder + icon.getDescription();
+				LOG.info("Saving: {}", filenameandPath);
+				StaticImageHelper.writePNG(icon, new File(filenameandPath));
+			}
+			// Erfolg vermelden
+			showQuittung(outFolder, "Advanced --> SystemUIMods");
+		}
 	}
 
 	// #######################################################
@@ -49,7 +75,7 @@ public class IconExporter {
 				StaticImageHelper.writePNG(icon, new File(filenameandPath));
 			}
 			// Erfolg vermelden
-			showQuittung(outFolder, "Toggles");
+			showQuittung(outFolder, "Icon-Sets --> Toggles");
 		}
 	}
 
@@ -77,7 +103,7 @@ public class IconExporter {
 				StaticImageHelper.writePNG(icon, new File(filenameandPath));
 			}
 			// Erfolg vermelden
-			showQuittung(outFolder, "Signal & Wifi");
+			showQuittung(outFolder, "Icon-Sets --> Signal & Wifi");
 		}
 	}
 
@@ -112,7 +138,7 @@ public class IconExporter {
 				StaticImageHelper.writePNG(icon, new File(filenameandPath));
 			}
 			// Erfolg vermelden
-			showQuittung(outFolder, "Batteries");
+			showQuittung(outFolder, "Icon-Sets --> Batteries");
 		}
 	}
 
@@ -149,7 +175,7 @@ public class IconExporter {
 		JOptionPane.showMessageDialog(parent, //
 				"Icons have been saved to:\n" + //
 						outFolder + "\n\n" + //
-						"Please restart " + IconCreatorFrame.APP_NAME + " to have this new Icon-Set available in 'Icon-Sets --> " + setType + "'\n", //
+						"Please press refresh-button in '" + setType + "' to have this new Icon-Set available\n", //
 				"Exporting Icons",//
 				JOptionPane.INFORMATION_MESSAGE);
 

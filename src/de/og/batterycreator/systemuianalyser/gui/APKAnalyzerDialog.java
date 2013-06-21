@@ -36,9 +36,11 @@ import de.og.batterycreator.gui.cfg.RomSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.overview.OverviewPanel;
 import de.og.batterycreator.systemuianalyser.analyser.BatteryAnalyser;
+import de.og.batterycreator.systemuianalyser.analyser.NotifyAnalyser;
 import de.og.batterycreator.systemuianalyser.analyser.ToggleAnalyser;
 import de.og.batterycreator.systemuianalyser.analyser.WifiSignalAnalyser;
 import de.og.batterycreator.systemuianalyser.data.BatteryType;
+import de.og.batterycreator.systemuianalyser.data.NotifyIconType;
 import de.og.batterycreator.systemuianalyser.data.ToggleType;
 import de.og.batterycreator.systemuianalyser.data.WifiSignalType;
 import de.og.batterycreator.zip.ZipArchiveExtractor;
@@ -69,6 +71,12 @@ public class APKAnalyzerDialog extends JDialog {
 	private final JLabel				toggleSizeLabel			= new JLabel("Height of selected icons: --");
 	private final JButton				exportToggleButton		= new JButton("Export selected Icons", IconStore.iconsetsIcon);
 	private final OverviewPanel			toggleOverPanel			= new OverviewPanel();
+
+	// Notify Components
+	private final JList<NotifyIconType>	notifyTypeList			= new JList<NotifyIconType>();
+	private final JLabel				notifySizeLabel			= new JLabel("Height of selected icons: --");
+	private final JButton				exportNotifyButton		= new JButton("Export selected Icons", IconStore.androidredIcon);
+	private final OverviewPanel			notifyOverPanel			= new OverviewPanel();
 
 	public APKAnalyzerDialog(final Window parentFrame, final RomSettingsPanel settingsPanel) {
 		super(parentFrame, "SystemUI - Analyzer", ModalityType.APPLICATION_MODAL);
@@ -136,6 +144,23 @@ public class APKAnalyzerDialog extends JDialog {
 		});
 		exportToggleButton.setEnabled(false);
 
+		// notify components
+		notifyTypeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		notifyTypeList.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(final ListSelectionEvent arg0) {
+				validateNotifyPanel();
+			}
+		});
+		exportNotifyButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent arg0) {
+				exportNotifyIconSet();
+			}
+
+		});
+		exportNotifyButton.setEnabled(false);
+
 		// batt components
 		cboxDefaultBatterySizes.setSelected(true);
 		battTypeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -157,6 +182,7 @@ public class APKAnalyzerDialog extends JDialog {
 		tabPane.addTab("Batteries", IconStore.batteryIcon, createBatteryPanel(), "See what kind of batteries are found in your SystemUI!");
 		tabPane.addTab("Wifi/Signal", IconStore.signalwifiIcon, createWifiPanel(), "See what kind of signal & wifi icons are found in your SystemUI!");
 		tabPane.addTab("Toggles", IconStore.toggleIcon, createTogglePanel(), "See what kind of toggle icons are found in your SystemUI!");
+		tabPane.addTab("Notification Icons", IconStore.androidredIcon, createNotifyPanel(), "See what kind of notification icons are found in your SystemUI!");
 
 		setLayout(new BorderLayout());
 		this.add(makeToolBar(), BorderLayout.NORTH);
@@ -181,6 +207,20 @@ public class APKAnalyzerDialog extends JDialog {
 			toggleSizeLabel.setText("Height of selected icons: --");
 			toggleOverPanel.setOverview(null, false);
 			exportToggleButton.setEnabled(false);
+		}
+	}
+
+	private void validateNotifyPanel() {
+		final NotifyIconType type = notifyTypeList.getSelectedValue();
+		if (type != null) {
+			notifySizeLabel.setText("Height of selected icons: " + type.getSize());
+			notifyOverPanel.setOverview(new ImageIcon(type.getOverview()), true);
+			exportNotifyButton.setEnabled(true);
+
+		} else {
+			notifySizeLabel.setText("Height of selected icons: --");
+			notifyOverPanel.setOverview(null, false);
+			exportNotifyButton.setEnabled(false);
 		}
 	}
 
@@ -318,6 +358,20 @@ public class APKAnalyzerDialog extends JDialog {
 		toggleTypeList.setListData(toggleTypes);
 		toggleTypeList.repaint();
 
+		// Notigfy Icons suchen
+		LOG.info("Analysing: Notify Icons");
+		progressBar.setString("Analysing: Notify icons...");
+		final NotifyAnalyser notifyAnalyser = new NotifyAnalyser(extractDir);
+		notifyAnalyser.analyse();
+		notifyTypeList.removeAll();
+		final Vector<NotifyIconType> notifyTypes = new Vector<NotifyIconType>();
+		for (final NotifyIconType type : notifyAnalyser.getIconMap().values()) {
+			if (type.isValidIconSet())
+				notifyTypes.add(type);
+		}
+		notifyTypeList.setListData(notifyTypes);
+		notifyTypeList.repaint();
+
 		// validation
 		validateControlls();
 
@@ -419,6 +473,32 @@ public class APKAnalyzerDialog extends JDialog {
 		return out;
 	}
 
+	private JPanel createNotifyPanel() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(JGoodiesHelper.createBlackLabel("Notify icons in your SystemUI.apk:"), cc.xyw(2, ++row, 5));
+		final JScrollPane scroller = new JScrollPane();
+		scroller.add(notifyTypeList);
+		scroller.getViewport().setView(notifyTypeList);
+		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		builder.add(scroller, cc.xyw(2, ++row, 5));
+		builder.add(new JLabel(IconStore.logoIconAnalyzer), cc.xyw(8, row, 3));
+
+		builder.add(notifySizeLabel, cc.xyw(2, ++row, 3));
+		builder.add(exportNotifyButton, cc.xyw(2, ++row, 3));
+
+		final JPanel cfp = builder.getPanel();
+		final JPanel out = new JPanel(new BorderLayout());
+		out.add(cfp, BorderLayout.NORTH);
+		out.add(notifyOverPanel, BorderLayout.CENTER);
+		return out;
+	}
+
 	/**
 	 * @param text
 	 *            Text der Checkbox
@@ -453,6 +533,10 @@ public class APKAnalyzerDialog extends JDialog {
 
 	protected void exportToggleIconSet() {
 		exporter.exportToggleIconSet(toggleTypeList.getSelectedValue());
+	}
+
+	protected void exportNotifyIconSet() {
+		exporter.exportNotifyIconSet(notifyTypeList.getSelectedValue());
 	}
 
 	// #########################################################################
