@@ -139,6 +139,9 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		if (settings.isShowFont()) {
 			if (charge && settings.isShowChargeSymbol()) {
 				drawChargeIcon(g2d, img);
+				if (settings.isShowAdditionalFontOnCharge()) {
+					drawPercentageText(g2d, percentage, charge, img);
+				}
 			} else {
 				drawPercentageText(g2d, percentage, charge, img);
 			}

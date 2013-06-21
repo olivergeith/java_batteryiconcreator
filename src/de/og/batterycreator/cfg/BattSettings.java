@@ -70,6 +70,7 @@ public class BattSettings implements Serializable {
 	private int					chargeGlowRadius			= 20;
 	private int					chargeGlowOffsetX			= 0;
 	private int					chargeGlowOffsetY			= 0;
+	private boolean				showAdditionalFontOnCharge	= false;
 
 	private boolean				transparentBackground		= true;
 	private Color				backgroundColor				= COLOR_BGRND;
@@ -945,6 +946,21 @@ public class BattSettings implements Serializable {
 
 	public void setMoveChargeGlowWithText(final boolean moveChargeGlowWithText) {
 		this.moveChargeGlowWithText = moveChargeGlowWithText;
+	}
+
+	/**
+	 * @return the showAdditionalFontOnCharge
+	 */
+	public boolean isShowAdditionalFontOnCharge() {
+		return showAdditionalFontOnCharge;
+	}
+
+	/**
+	 * @param showAdditionalFontOnCharge
+	 *            the showAdditionalFontOnCharge to set
+	 */
+	public void setShowAdditionalFontOnCharge(final boolean showAdditionalFontOnCharge) {
+		this.showAdditionalFontOnCharge = showAdditionalFontOnCharge;
 	}
 
 }

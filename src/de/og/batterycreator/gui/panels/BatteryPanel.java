@@ -68,6 +68,7 @@ import de.og.batterycreator.creators.batt.HoneycombCreator;
 import de.og.batterycreator.creators.batt.KnobBatteryCreator;
 import de.og.batterycreator.creators.batt.NoBattIcons;
 import de.og.batterycreator.creators.batt.PlanetCreator;
+import de.og.batterycreator.creators.batt.Rush25Battery;
 import de.og.batterycreator.creators.batt.SamsungStockBatteryCreator;
 import de.og.batterycreator.creators.batt.ScalaBatteryCreator;
 import de.og.batterycreator.creators.batt.SimpleBatteryCreator;
@@ -158,6 +159,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new BinaryBarsCreator(romSettings));
 		combo.addItem(new BinarySquaresCreator(romSettings));
 		combo.addItem(new SamsungStockBatteryCreator(romSettings));
+		combo.addItem(new Rush25Battery(romSettings));
 
 		combo.addItem(new SimpleBatteryCreator(romSettings));
 		combo.addItem(new SimpleBatteryCreatorV2(romSettings));
