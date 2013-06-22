@@ -108,7 +108,7 @@ public class TachoWideV5 extends AbstractIconCreator {
 
 		// Skala
 		if (!settings.isNoBG() && (settings.isBattGradient() || settings.isUseTexture())) {
-			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv().brighter(), 0, 0, imgWidth, imgHeight, false));
+			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv(), 0, 0, imgWidth, imgHeight, true));
 		} else {
 			g2d.setPaint(settings.getIconColorInActiv());
 		}
@@ -118,7 +118,7 @@ public class TachoWideV5 extends AbstractIconCreator {
 		if (settings.isUseTexture()) {
 			g2d.setPaint(getTexturePaint());
 		} else if (settings.isBattGradient()) {
-			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge).brighter(), 0, 0, imgWidth, imgHeight, true));
+			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge).brighter(), 0, 0, imgWidth, imgHeight, false));
 		} else {
 			g2d.setPaint(settings.getActivIconColor(percentage, charge));
 		}
@@ -133,7 +133,7 @@ public class TachoWideV5 extends AbstractIconCreator {
 		}
 		// Skala innerer rand
 		if (settings.isBattGradient() || settings.isUseTexture()) {
-			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv().brighter(), 0, 0, imgWidth, imgHeight, false));
+			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv().brighter(), 0, 0, imgWidth, imgHeight, true));
 		} else {
 			g2d.setPaint(settings.getIconColorInActiv());
 		}

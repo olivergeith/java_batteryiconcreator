@@ -387,7 +387,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	 * @param col1
 	 * @return
 	 */
-	protected Color getBattGardientSecondColor(final Color col1) {
+	private Color getBattGardientSecondColor(final Color col1) {
 		Color col2 = col1;
 		for (int i = 0; i <= settings.getBattGradientLevel(); i++)
 			col2 = col2.darker();

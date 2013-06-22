@@ -3,7 +3,6 @@ package de.og.batterycreator.creators.batt;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
@@ -143,10 +142,7 @@ public class Zoopa3Quater extends AbstractIconCreator {
 
 	private void setHintergrundPaint(final Graphics2D g2d) {
 		if (!settings.isNoBG() && (settings.isBattGradient() || settings.isUseTexture())) {
-			final Color col1 = settings.getIconColorInActiv().brighter();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv().brighter(), 0, 0, imgWidth, imgHeight, true));
 		} else {
 			g2d.setPaint(settings.getIconColorInActiv());
 		}
@@ -154,10 +150,7 @@ public class Zoopa3Quater extends AbstractIconCreator {
 
 	private void setSelectedPaint(final Graphics2D g2d, final boolean charge, final int percentage) {
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getActivIconColor(percentage, charge).brighter();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, imgHeight, col1);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge).brighter(), 0, 0, imgWidth, imgHeight, false));
 		} else {
 			g2d.setPaint(settings.getActivIconColor(percentage, charge));
 		}
@@ -165,10 +158,7 @@ public class Zoopa3Quater extends AbstractIconCreator {
 
 	private void setExtraPaint(final Graphics2D g2d) {
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getExtraColor1().brighter();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, imgHeight, col1);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getExtraColor1().brighter(), 0, 0, imgWidth, imgHeight, false));
 		} else {
 			g2d.setPaint(settings.getExtraColor1());
 		}

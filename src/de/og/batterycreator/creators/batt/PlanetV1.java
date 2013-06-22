@@ -9,9 +9,9 @@ import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class PlanetCreator extends AbstractIconCreator {
+public class PlanetV1 extends AbstractIconCreator {
 
-	public PlanetCreator(final RomSettings romSettings) {
+	public PlanetV1(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setLowBattTheshold(1);
 		settings.setMedBattTheshold(30);
@@ -35,7 +35,7 @@ public class PlanetCreator extends AbstractIconCreator {
 	/**
 	 * 
 	 */
-	protected static String	name		= "PlanetBattery";
+	protected static String	name		= "Planet.V1";
 
 	private final int		imgWidth	= 64;
 	private final int		imgHeight	= 64;
