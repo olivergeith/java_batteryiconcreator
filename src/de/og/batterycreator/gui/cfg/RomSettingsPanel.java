@@ -57,6 +57,7 @@ public class RomSettingsPanel extends SettingsPanel {
 
 	// Presets
 	JComboBox<RomPreset>			romPresetCombo					= new RomPresetsComboBox();
+	private final JLabel			lastAppliedRomPreset			= new JLabel();
 
 	// Drawable
 	DrawableComboBox				frameworkDrawableFolderCombo	= new DrawableComboBox();
@@ -169,6 +170,9 @@ public class RomSettingsPanel extends SettingsPanel {
 				analyze();
 			}
 		});
+		lastAppliedRomPreset.setForeground(Color.DARK_GRAY);
+		lastAppliedRomPreset.setToolTipText("The last RomPreset that was applied!...a '#' is appended if something was changed after it was applied!");
+
 	}
 
 	private void myInit() {
@@ -229,7 +233,7 @@ public class RomSettingsPanel extends SettingsPanel {
 			cboxVRTheme.setSelected(pre.isUseVRThemeTemplate());
 			cboxMMSForEmos.setSelected(pre.isUseMMSforEmoticons());
 			validateControls();
-
+			lastAppliedRomPreset.setText(pre.getRomName());
 			// lidroidDrawableFolderCombo.setEnabled(pre.isUseLidroid());
 		}
 	}
@@ -266,8 +270,10 @@ public class RomSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(JGoodiesHelper.createBlackLabel("Rom Presets"), cc.xyw(2, ++row, 3));
-		builder.add(romPresetCombo, cc.xyw(2, ++row, 5));
+		builder.add(JGoodiesHelper.createBlackLabel("Rom Presets"), cc.xyw(2, ++row, 7));
+		builder.add(romPresetCombo, cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Last applied RomPreset"), cc.xyw(2, ++row, 7));
+		builder.add(lastAppliedRomPreset, cc.xyw(2, ++row, 7));
 
 		final JPanel hide = new HidePanel("Rom Presets", builder.getPanel());
 		return hide;
@@ -602,6 +608,8 @@ public class RomSettingsPanel extends SettingsPanel {
 
 		morphMMSWidget.setUsePreload(cboxPreload.isSelected());
 		morphMMSWidget.setUseVRTheme(cboxVRTheme.isSelected());
+
+		lastAppliedRomPreset.setText(lastAppliedRomPreset.getText() + " #");
 	}
 
 	protected void analyze() {
