@@ -9,26 +9,27 @@ import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class PlanetV2 extends AbstractIconCreator {
+public class CircleCreatorV4 extends AbstractIconCreator {
 
-	protected static String	name	= "Planet.V2";
+	protected static String	name	= "CircleMod.V4";
 
-	public PlanetV2(final RomSettings romSettings) {
+	public CircleCreatorV4(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setMoveIconWithText(true);
-		settings.setFontYOffset(1);
+		settings.setFontYOffset(0);
 		settings.setFontXOffset(-1);
-		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
-		settings.setReduceFontOn100(-2);
+		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 26));
+		settings.setReduceFontOn100(-5);
 		settings.setIconXOffset(-1);
-		settings.setIconYOffset(1);
+		settings.setIconYOffset(0);
 		settings.setResizeChargeSymbolHeight(30);
 		settings.setLowBattTheshold(0);
 		settings.setMedBattTheshold(40);
 		settings.setUseGradiantForMediumColor(true);
 		settings.setUseGradiantForNormalColor(false);
-		settings.setStrokewidth(1);
+		settings.setStrokewidth(5);
 		settings.setExtraColor1(Color.white);
+		settings.setDrawZeiger(true);
 	}
 
 	@Override
@@ -58,6 +59,16 @@ public class PlanetV2 extends AbstractIconCreator {
 
 	@Override
 	public boolean isNativeXXHDPI() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsZeiger() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsStrokeWidth() {
 		return true;
 	}
 
@@ -91,13 +102,8 @@ public class PlanetV2 extends AbstractIconCreator {
 
 		final int x = imgWidth / 2;
 		final int y = imgHeight / 2;
-		int radius = imgHeight / 2 - 2;
-		final int dicke = 12;
-
-		// aussen rand
-		g2d.setPaint(col.brighter());
-		Draw2DFunktions.drawCircle(g2d, x, y, radius, 0, 360);
-		Draw2DFunktions.drawCircle(g2d, x, y, radius - 1, 0, 360);
+		int radius = imgHeight / 2 - 1;
+		final int dicke = 5 + settings.getStrokewidth();
 
 		// Level malen
 		if (settings.isUseTexture()) {
@@ -108,18 +114,28 @@ public class PlanetV2 extends AbstractIconCreator {
 			g2d.setPaint(settings.getActivIconColor(percentage, charge));
 		}
 		final int w = Math.round(3.6f * percentage);
-		Draw2DFunktions.fillCircle(g2d, x, y, radius - 3, 90, w);
+		Draw2DFunktions.fillCircle(g2d, x, y, radius, 90, w);
+
+		radius = radius - dicke;
+
+		// ineerer rand
+		g2d.setPaint(col.darker());
+		Draw2DFunktions.fillCircle(g2d, x, y, radius, 0, 360);
+		g2d.setPaint(col.brighter());
+		Draw2DFunktions.fillCircle(g2d, x, y, radius - 2, 0, 360);
+
+		if (settings.isDrawZeiger()) {
+			g2d.setPaint(Color.darkGray.darker());
+			Draw2DFunktions.fillCircle(g2d, x, y, radius + dicke + 1, 90 + w - 4, 8);
+			g2d.setPaint(settings.getExtraColor1());
+			Draw2DFunktions.fillCircle(g2d, x, y, radius + dicke + 1, 90 + w - 3, 6);
+		}
 
 		// Inneren Halbkreis clearen
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
-		radius = radius - dicke;
-		Draw2DFunktions.fillCircle(g2d, x, y, radius, 0, 360);
+		Draw2DFunktions.fillCircle(g2d, x, y, radius - 3, 0, 360);
 		// Normales Paint setzen
 		g2d.setPaintMode();
-
-		g2d.setPaint(col.brighter());
-		Draw2DFunktions.drawCircle(g2d, x, y, radius - 2, 0, 360);
-		Draw2DFunktions.drawCircle(g2d, x, y, radius - 3, 0, 360);
 
 	}
 
