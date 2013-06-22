@@ -3,7 +3,6 @@ package de.og.batterycreator.creators.batt;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
@@ -30,6 +29,7 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 		settings.setUseGradiantForNormalColor(true);
 		settings.setStrokewidth(4);
 		settings.setExtraColor1(Color.white);
+		settings.setDrawZeiger(true);
 	}
 
 	@Override
@@ -53,17 +53,17 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean supportsFlip() {
-		return true;
-	}
-
-	@Override
 	public boolean supportsStrokeWidth() {
 		return true;
 	}
 
 	@Override
 	public boolean isNativeXXHDPI() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsZeiger() {
 		return true;
 	}
 
@@ -108,10 +108,7 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 
 		// Skala
 		if (!settings.isNoBG() && (settings.isBattGradient() || settings.isUseTexture())) {
-			final Color col1 = settings.getIconColorInActiv().brighter();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv().brighter(), 0, 0, imgWidth, imgHeight, false));
 		} else {
 			g2d.setPaint(settings.getIconColorInActiv());
 		}
@@ -121,17 +118,14 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 		if (settings.isUseTexture()) {
 			g2d.setPaint(getTexturePaint());
 		} else if (settings.isBattGradient()) {
-			final Color col1 = settings.getActivIconColor(percentage, charge).brighter();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, imgHeight, col1);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge).brighter(), 0, 0, imgWidth, imgHeight, true));
 		} else {
 			g2d.setPaint(settings.getActivIconColor(percentage, charge));
 		}
 		final int w = Math.round(180 - (1.8f * percentage));
 		Draw2DFunktions.fillCircle(g2d, x, y, radius - 3, w, 180 - w);
 		// Zeiger
-		if (settings.isFlip()) {
+		if (settings.isDrawZeiger()) {
 			g2d.setPaint(Color.darkGray.darker());
 			Draw2DFunktions.fillCircle(g2d, x, y, radius - 3, w - 3, 6);
 			g2d.setPaint(settings.getExtraColor1());
@@ -139,15 +133,13 @@ public class TachoCreatorWideV5 extends AbstractIconCreator {
 		}
 		// Skala innerer rand
 		if (settings.isBattGradient() || settings.isUseTexture()) {
-			final Color col1 = settings.getIconColorInActiv().brighter();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv().brighter(), 0, 0, imgWidth, imgHeight, false));
 		} else {
 			g2d.setPaint(settings.getIconColorInActiv());
 		}
 		radius = radius - (14 + settings.getStrokewidth());
 		Draw2DFunktions.fillCircle(g2d, x, y, radius, 0, 180);
+		// Skala innerer rand
 		g2d.setColor(col.brighter());
 		Draw2DFunktions.fillCircle(g2d, x, y, radius - 1, 0, 180);
 

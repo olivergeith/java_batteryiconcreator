@@ -56,6 +56,8 @@ public class BattSettings implements Serializable {
 	private Color				extraColor1					= COLOR_AOKP_BLUE;
 	private Color				extraColor2					= COLOR_AOKP_BLUE;
 
+	private boolean				drawZeiger					= false;
+
 	private Color				iconColorInActiv			= COLOR_INACTIV;
 	private Color				iconColor					= COLOR_AOKP_BLUE;
 	private Color				iconColorLowBatt			= COLOR_LOW_BATT;
@@ -961,6 +963,21 @@ public class BattSettings implements Serializable {
 	 */
 	public void setShowAdditionalFontOnCharge(final boolean showAdditionalFontOnCharge) {
 		this.showAdditionalFontOnCharge = showAdditionalFontOnCharge;
+	}
+
+	/**
+	 * @return the drawZeiger
+	 */
+	public boolean isDrawZeiger() {
+		return drawZeiger;
+	}
+
+	/**
+	 * @param drawZeiger
+	 *            the drawZeiger to set
+	 */
+	public void setDrawZeiger(final boolean drawZeiger) {
+		this.drawZeiger = drawZeiger;
 	}
 
 }

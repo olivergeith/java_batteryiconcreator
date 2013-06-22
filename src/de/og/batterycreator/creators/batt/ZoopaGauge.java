@@ -30,6 +30,7 @@ public class ZoopaGauge extends AbstractIconCreator {
 		settings.setUseGradiantForNormalColor(true);
 		settings.setStrokewidth(2);
 		settings.setExtraColor1(Color.white);
+		settings.setDrawZeiger(true);
 	}
 
 	@Override
@@ -59,6 +60,11 @@ public class ZoopaGauge extends AbstractIconCreator {
 
 	@Override
 	public boolean supportsFlip() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsZeiger() {
 		return true;
 	}
 
@@ -93,7 +99,9 @@ public class ZoopaGauge extends AbstractIconCreator {
 		final int zehnerdicke = 9;
 		drawSegmente(g2d, charge, percentage, einer, radius, einerdicke, 10);
 		drawSegmente(g2d, charge, percentage, zehner, radius - einerdicke - 2, zehnerdicke, 10);
-		drawZeiger(g2d, charge, percentage, zehner, radius - einerdicke - 2, zehnerdicke, 10);
+		if (settings.isDrawZeiger()) {
+			drawZeiger(g2d, charge, percentage, zehner, radius - einerdicke - 2, zehnerdicke, 10);
+		}
 		// Normales Paint setzen
 		g2d.setPaintMode();
 

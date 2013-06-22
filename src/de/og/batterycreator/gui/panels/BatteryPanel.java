@@ -90,7 +90,6 @@ import de.og.batterycreator.creators.batt.Zoopa3Quater;
 import de.og.batterycreator.creators.batt.ZoopaCircle;
 import de.og.batterycreator.creators.batt.ZoopaGauge;
 import de.og.batterycreator.creators.batt.ZoopaWide;
-import de.og.batterycreator.creators.batt.ZoopaWideZeiger;
 import de.og.batterycreator.gui.cfg.BattSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
@@ -192,7 +191,6 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new Zoopa3Quater(romSettings));
 		combo.addItem(new ZoopaGauge(romSettings));
 		combo.addItem(new ZoopaWide(romSettings));
-		combo.addItem(new ZoopaWideZeiger(romSettings));
 
 		combo.addItem(new FaecherCreatorWide(romSettings));
 		combo.addItem(new TachoCreator3Quater(romSettings));
@@ -214,9 +212,7 @@ public class BatteryPanel extends JPanel {
 
 				if (cre != null) {
 					activBattCreator = cre;
-					settingsPanel.enableSupportedFeatures(cre.supportsFlip(), cre.supportsStrokeWidth(), cre.supportsNoBg(), cre.supportsBattGradient(),
-							cre.supportsExtraColor1(), cre.supportsExtraColor2(), cre.supportsXOrIcon(), cre.supportsXOrSquareIcon(),
-							cre.supportsLinearGradient(), cre.supportsTexture());
+					settingsPanel.enableSupportedFeatures(cre);
 					settingsPanel.setSettings(cre.getBattSettings());
 					create();
 				}
@@ -398,6 +394,8 @@ public class BatteryPanel extends JPanel {
 				html += "- ExtraColor 2<br>";
 			if (creator.supportsStrokeWidth())
 				html += "- Stroke-Width<br>";
+			if (creator.supportsZeiger())
+				html += "- Zeiger<br>";
 
 			html += "</font>";
 			html += "</html>";

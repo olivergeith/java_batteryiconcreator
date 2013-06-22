@@ -23,6 +23,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.SettingsPersistor;
+import de.og.batterycreator.creators.batt.AbstractIconCreator;
 import de.og.batterycreator.gui.widgets.SliderAndLabel;
 import de.og.batterycreator.gui.widgets.colorselectbutton.ColorSelectButton;
 import de.og.batterycreator.gui.widgets.iconpositioner.IconPositioner;
@@ -80,6 +81,7 @@ public class BattSettingsPanel extends SettingsPanel {
 
 	private final SliderAndLabel		sliderStroke					= new SliderAndLabel(1, 10);
 	private final JCheckBox				cboxFlip						= createCheckbox("Flip Icon", "Mirror's the Icon...ony has effect on a few styls!");
+	private final JCheckBox				cboxZeiger						= createCheckbox("Draw Zeiger", "Draw a Zeiger...ony has effect on a few styls!");
 	private final JCheckBox				cboxNoBG						= createCheckbox("No Backgr.", "Removes the -normally gray- background!");
 	private final SliderAndLabel		sliderBattGradientLevel			= new SliderAndLabel(1, 5);
 
@@ -398,6 +400,8 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		builder.add(cboxNoBG, cc.xyw(2, ++row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Stroke Width"), cc.xyw(4, row, 1));
+		builder.add(cboxZeiger, cc.xyw(6, row, 1));
+
 		builder.add(cboxFlip, cc.xyw(2, ++row, 1));
 		builder.add(sliderStroke.getToolbar(), cc.xyw(4, row, 1));
 
@@ -446,6 +450,7 @@ public class BattSettingsPanel extends SettingsPanel {
 			cboxTransparentBgrnd.setSelected(settings.isTransparentBackground());
 
 			cboxFlip.setSelected(settings.isFlip());
+			cboxZeiger.setSelected(settings.isDrawZeiger());
 			cboxBattGradient.setSelected(settings.isBattGradient());
 			sliderBattGradientLevel.setValue(settings.getBattGradientLevel());
 			cboxNoBG.setSelected(settings.isNoBG());
@@ -537,6 +542,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setTransparentBackground(cboxTransparentBgrnd.isSelected());
 
 		settings.setFlip(cboxFlip.isSelected());
+		settings.setDrawZeiger(cboxZeiger.isSelected());
 		settings.setBattGradient(cboxBattGradient.isSelected());
 		settings.setBattGradientLevel(sliderBattGradientLevel.getValue());
 		settings.setNoBG(cboxNoBG.isSelected());
@@ -658,21 +664,20 @@ public class BattSettingsPanel extends SettingsPanel {
 
 	}
 
-	public void enableSupportedFeatures(final boolean supportsFlip, final boolean suppoertsStrokewidth, final boolean noBG, final boolean battGradient,
-			final boolean extra1, final boolean extra2, final boolean xorBackground, final boolean xorSquareBackground, final boolean linearGradient,
-			final boolean useTexture) {
-		cboxFlip.setEnabled(supportsFlip);
-		sliderStroke.setEnabled(suppoertsStrokewidth);
-		cboxNoBG.setEnabled(noBG);
-		cboxBattGradient.setEnabled(battGradient);
-		sliderBattGradientLevel.setEnabled(battGradient);
-		extraColor1.setEnabled(extra1);
-		extraColor2.setEnabled(extra2);
-		xorIconSelector.setEnabled(xorBackground);
-		xorSquareIconSelector.setEnabled(xorSquareBackground);
-		cboxLinearGradient.setEnabled(linearGradient);
-		textureSelector.setEnabled(useTexture);
-		cboxTexture.setEnabled(useTexture);
+	public void enableSupportedFeatures(final AbstractIconCreator cre) {
+		cboxFlip.setEnabled(cre.supportsFlip());
+		sliderStroke.setEnabled(cre.supportsStrokeWidth());
+		cboxNoBG.setEnabled(cre.supportsNoBg());
+		cboxBattGradient.setEnabled(cre.supportsBattGradient());
+		sliderBattGradientLevel.setEnabled(cre.supportsBattGradient());
+		extraColor1.setEnabled(cre.supportsExtraColor1());
+		extraColor2.setEnabled(cre.supportsExtraColor2());
+		xorIconSelector.setEnabled(cre.supportsXOrIcon());
+		xorSquareIconSelector.setEnabled(cre.supportsXOrSquareIcon());
+		cboxLinearGradient.setEnabled(cre.supportsLinearGradient());
+		textureSelector.setEnabled(cre.supportsTexture());
+		cboxTexture.setEnabled(cre.supportsTexture());
+		cboxZeiger.setEnabled(cre.supportsZeiger());
 	}
 
 	/**

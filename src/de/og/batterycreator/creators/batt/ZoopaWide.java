@@ -62,6 +62,11 @@ public class ZoopaWide extends AbstractIconCreator {
 		return true;
 	}
 
+	@Override
+	public boolean supportsZeiger() {
+		return true;
+	}
+
 	private final int	imgWidth	= 108;
 	private final int	imgHeight	= 54;
 
@@ -93,7 +98,9 @@ public class ZoopaWide extends AbstractIconCreator {
 		final int zehnerdicke = 12;
 		drawSegmente(g2d, charge, percentage, einer, radius, einerdicke, 10);
 		drawSegmente(g2d, charge, percentage, zehner, radius - einerdicke - 2, zehnerdicke, 10);
-
+		if (settings.isDrawZeiger()) {
+			drawZeiger(g2d, charge, percentage, zehner, radius - einerdicke - 2, zehnerdicke, 10);
+		}
 		// Normales Paint setzen
 		g2d.setPaintMode();
 
@@ -136,6 +143,35 @@ public class ZoopaWide extends AbstractIconCreator {
 		// Inneren Halbkreis clearen
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
 		Draw2DFunktions.fillCircle(g2d, x, y, radius - dicke, 0, 180);
+
+		// Normales Paint setzen
+		g2d.setPaintMode();
+	}
+
+	private void drawZeiger(final Graphics2D g2d, final boolean charge, final int percentage, int selectedValue, final int radius, final int dicke,
+			final int anzahlSegmente) {
+		final int x = imgHeight;
+		final int y = x;
+		final int segmente = anzahlSegmente;
+		int gap = settings.getStrokewidth(); // in grad
+		if (gap > 6)
+			gap = 6;
+		final float winkelSegment = (180f - (segmente - 1) * gap) / segmente;
+
+		// Skala Hintergergrund einer
+
+		if (settings.isFlip())
+			setSelectedPaint(g2d, charge, percentage);
+		else
+			setExtraPaint(g2d);
+
+		if (selectedValue == 10)
+			selectedValue = 9;
+		final int startwinkel = Math.round(180f - selectedValue * (winkelSegment + gap));
+		Draw2DFunktions.fillCircle(g2d, x, y, radius, startwinkel, -(int) winkelSegment);
+		// Inneren Halbkreis clearen
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
+		Draw2DFunktions.fillCircle(g2d, x, y, radius - dicke - dicke / 2, 0, 360);
 
 		// Normales Paint setzen
 		g2d.setPaintMode();
