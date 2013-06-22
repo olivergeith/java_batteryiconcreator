@@ -1,8 +1,6 @@
 package de.og.batterycreator.creators.batt;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.LinearGradientPaint;
 import java.awt.geom.Point2D;
@@ -78,10 +76,7 @@ public class BoxCreatorV3 extends AbstractIconCreator {
 
 		if (!settings.isNoBG()) {
 			if (settings.isBattGradient() || settings.isUseTexture() || settings.isLinearGradient()) {
-				final Color col1 = settings.getIconColorInActiv();
-				final Color col2 = getBattGardientSecondColor(col1);
-				final GradientPaint gradientFill = new GradientPaint(w, w, col2, imgWidth - w, imgHeight - w, col1);
-				g2d.setPaint(gradientFill);
+				g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), w, w, imgWidth - w, imgHeight - w, true));
 			} else {
 				g2d.setColor(settings.getIconColorInActiv());
 			}
@@ -100,12 +95,7 @@ public class BoxCreatorV3 extends AbstractIconCreator {
 		} else if (settings.isUseTexture()) {
 			g2d.setPaint(getTexturePaint());
 		} else if (settings.isBattGradient()) {
-
-			final Color col1 = settings.getActivIconColor(percentage, charge);
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(w, w, col1, imgWidth - w, w, col2);
-			g2d.setPaint(gradientFill);
-
+			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), w, w, imgWidth - w, w, false));
 		} else {
 			g2d.setColor(settings.getActivIconColor(percentage, charge));
 		}

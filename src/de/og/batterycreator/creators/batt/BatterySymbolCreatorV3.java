@@ -2,7 +2,6 @@ package de.og.batterycreator.creators.batt;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
@@ -76,10 +75,11 @@ public class BatterySymbolCreatorV3 extends AbstractIconCreator {
 
 		// Inner Battery
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getIconColorInActiv().brighter();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(battXOffset + 2, battYOffset + 2, col2, battXOffset + battWidth, battYOffset + 2, col1);
-			g2d.setPaint(gradientFill);
+			final int x = battXOffset + 2;
+			final int y = battYOffset + 2;
+			final int ex = battXOffset + battWidth;
+			final int ey = battYOffset + 2;
+			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv().brighter(), x, y, ex, ey, true));
 		} else {
 			g2d.setColor(settings.getIconColorInActiv());
 		}
@@ -90,10 +90,11 @@ public class BatterySymbolCreatorV3 extends AbstractIconCreator {
 		if (h < 2)
 			h = 2;
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getActivIconColor(percentage, charge);
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(battXOffset + 3, h, col1, battXOffset + battWidth, h, col2);
-			g2d.setPaint(gradientFill);
+			final int x = battXOffset + 3;
+			final int y = h;
+			final int ex = battXOffset + battWidth;
+			final int ey = h;
+			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), x, y, ex, ey, false));
 		} else {
 			g2d.setColor(settings.getActivIconColor(percentage, charge));
 		}
@@ -112,9 +113,7 @@ public class BatterySymbolCreatorV3 extends AbstractIconCreator {
 			col1 = settings.getExtraColor1();
 		}
 		if (settings.isBattGradient()) {
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(8, 8, col1, 41, 30, col2);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(col1, 8, 8, imgWidth, 30, false));
 		} else {
 			g2d.setColor(col1);
 		}

@@ -3,7 +3,6 @@ package de.og.batterycreator.creators.batt;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
@@ -11,12 +10,12 @@ import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.gui.widgets.iconselector.xorcircleselector.XorCircleSelector;
 
-public class XORCircleCreator extends AbstractIconCreator {
+public class XORCircle extends AbstractIconCreator {
 
 	public static final ImageIcon	myIcon	= XorCircleSelector.icon01;	;
-	protected static String			name	= "XorCircleBattery";
+	protected static String			name	= "XorBattery.Circle";
 
-	public XORCircleCreator(final RomSettings romSettings) {
+	public XORCircle(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setIconXOffset(-1);
 		settings.setIconYOffset(-1);
@@ -88,10 +87,7 @@ public class XORCircleCreator extends AbstractIconCreator {
 		if (!settings.isNoBG()) {
 			// Hintergrund icon umfärben in Hintergrundfarbe
 			if (settings.isBattGradient() || settings.isUseTexture()) {
-				final Color col1 = settings.getIconColorInActiv();
-				final Color col2 = getBattGardientSecondColor(col1);
-				final GradientPaint gradientFill = new GradientPaint(0, 0, col1, imgWidth, imgHeight, col2);
-				g2d.setPaint(gradientFill);
+				g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv(), 0, 0, imgWidth, imgHeight, true));
 			} else {
 				g2d.setPaint(settings.getIconColorInActiv());
 			}
@@ -101,10 +97,7 @@ public class XORCircleCreator extends AbstractIconCreator {
 		if (settings.isUseTexture()) {
 			g2d.setPaint(getTexturePaint());
 		} else if (settings.isBattGradient()) {
-			final Color col1 = settings.getActivIconColor(percentage, charge);
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgWidth, imgHeight, col1);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), 0, 0, imgWidth, imgHeight, false));
 		} else {
 			final Color col = settings.getActivIconColor(percentage, charge);
 			g2d.setPaint(col);

@@ -3,16 +3,27 @@ package de.og.batterycreator.creators.batt;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
+import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class ArcQuaterCreator2 extends AbstractIconCreator {
+public class BallBattery extends AbstractIconCreator {
 
-	public ArcQuaterCreator2(final RomSettings romSettings) {
+	public BallBattery(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setBattGradient(true);
 	}
 
-	protected static String	name	= "ArcQuaterBattery";
+	protected static String	name	= "BallBattery";
+
+	@Override
+	public boolean supportsFlip() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsNoBg() {
+		return true;
+	}
 
 	@Override
 	public boolean supportsBattGradient() {
@@ -28,22 +39,20 @@ public class ArcQuaterCreator2 extends AbstractIconCreator {
 	public ImageIcon createImage(final int percentage, final boolean charge) {
 
 		// Create a graphics contents on the buffered image
-		BufferedImage img = new BufferedImage(41, 41, BufferedImage.TYPE_INT_ARGB);
+		final int imgWidth = 41;
+		final int imgHeight = 41;
+		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
 		final Graphics2D g2d = initGrafics2D(img);
 
+		final int radius = Math.round(4 + 16f * percentage / 100f);
 		if (settings.isBattGradient()) {
-			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv(), 0, 0, img.getWidth(), img.getHeight(), true));
-		} else {
-			g2d.setColor(settings.getIconColorInActiv());
-		}
-		g2d.fillArc(-41, 0, 82, 82, 0, 90);
-
-		if (settings.isBattGradient()) {
-			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), 0, 0, img.getWidth(), img.getHeight(), false));
+			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), 0, imgHeight - 2 * radius, 2 * radius, img.getHeight(),
+					false));
 		} else {
 			g2d.setColor(settings.getActivIconColor(percentage, charge));
 		}
-		g2d.fillArc(-41, 0, 82, 82, 0, Math.round(percentage * (90f / 100f)));
+
+		Draw2DFunktions.fillCircle(g2d, radius, imgHeight - radius, radius, 0, 360);
 
 		drawPercentage(g2d, percentage, charge, img);
 

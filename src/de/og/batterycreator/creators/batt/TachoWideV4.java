@@ -12,11 +12,11 @@ import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class TachoCreatorWideV4 extends AbstractIconCreator {
+public class TachoWideV4 extends AbstractIconCreator {
 
 	protected static String name = "TachoBattery.Wide.V4";
 
-	public TachoCreatorWideV4(final RomSettings romSettings) {
+	public TachoWideV4(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setFontYOffset(7);
 		settings.setFontXOffset(-1);

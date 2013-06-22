@@ -1,7 +1,6 @@
 package de.og.batterycreator.creators.batt;
 
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
@@ -47,10 +46,7 @@ public class AppleBatteryCreator extends AbstractIconCreator {
 		g2d.fillRoundRect(45, 15, 6, 11, cornerRad - 2, cornerRad - 2); // BatteryKnob
 
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getIconColorInActiv();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(3, 9, col2, 3, 9 + 23, col1);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv(), 3, 9, 3, 9 + 23, true));
 		} else {
 			g2d.setColor(settings.getIconColorInActiv());
 		}
@@ -60,10 +56,7 @@ public class AppleBatteryCreator extends AbstractIconCreator {
 		g2d.fillRoundRect(46, 17, 3, 7, cornerRad - 2, cornerRad - 2); // InnerBatteryKnob
 
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getActivIconColor(percentage, charge);
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(4, 10, col1, 4, 10 + 21, col2);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), 4, 10, 4, 10 + 21, false));
 		} else {
 			g2d.setColor(settings.getActivIconColor(percentage, charge));
 		}

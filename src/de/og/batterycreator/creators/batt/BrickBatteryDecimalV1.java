@@ -9,13 +9,13 @@ import javax.swing.ImageIcon;
 
 import de.og.batterycreator.cfg.RomSettings;
 
-public class BrickBattCreator extends AbstractIconCreator {
+public class BrickBatteryDecimalV1 extends AbstractIconCreator {
 
-	public BrickBattCreator(final RomSettings romSettings) {
+	public BrickBatteryDecimalV1(final RomSettings romSettings) {
 		super(romSettings);
 	}
 
-	protected static String name = "BrickBattery";
+	protected static String name = "BrickBattery.Decimal.V1";
 
 	/*
 	 * (non-Javadoc)
@@ -29,24 +29,41 @@ public class BrickBattCreator extends AbstractIconCreator {
 		BufferedImage img = new BufferedImage(41, 41, BufferedImage.TYPE_INT_ARGB);
 		final Graphics2D g2d = initGrafics2D(img);
 
-		for (int j = 0; j <= 100; j++) {
-			final int h = 3;
-			final int w = 3;
-			final int x = (j % 10) * 4 + 1;
-			final int y = 37 - (j / 10) * 4;
+		final int e = percentage % 10;
+		final int z = percentage / 10;
+		final int hd = percentage / 100;
 
+		final int h = 3;
+
+		for (int einer = 0; einer < 10; einer++) {
+			final int y = 41 - (einer * 4 + 4);
+			final int x = 33;
+			final int w = 6;
 			final Rectangle rec = new Rectangle(x, y, w, h);
-			drawRect(rec, g2d, charge, percentage > j, percentage);
+			drawRect(rec, g2d, charge, e > einer, percentage);
 		}
+		for (int zehner = 0; zehner < 10; zehner++) {
+			final int y = 41 - (zehner * 4 + 4);
+			final int x = 1;
+			final int w = 30;
+			final Rectangle rec = new Rectangle(x, y, w, h);
+			drawRect(rec, g2d, charge, z > zehner, percentage);
+		}
+		if (hd == 1) {
+			final Rectangle rec = new Rectangle(1, 1, 39, 39);
+			drawRect(rec, g2d, charge, true, percentage);
+		}
+
+		// Schrift
 		drawPercentage(g2d, percentage, charge, img);
 		// Filewriting
 		img = writeFile(percentage, charge, img);
 		return new ImageIcon(img);
-
 	}
 
 	private void drawRect(final Rectangle rect, final Graphics2D g2d, final boolean charge, final boolean activ, final int percentage) {
 		Color col = settings.getIconColorInActiv();
+
 		if (activ) {
 			col = settings.getActivIconColor(percentage, charge);
 		} else {

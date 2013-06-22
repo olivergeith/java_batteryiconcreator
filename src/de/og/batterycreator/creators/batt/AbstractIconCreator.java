@@ -5,6 +5,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
 import java.awt.Rectangle;
@@ -91,7 +92,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		return false;
 	}
 
-	public boolean supportsOwnComponents() {
+	public boolean supportsZeiger() {
 		return false;
 	}
 
@@ -386,11 +387,20 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	 * @param col1
 	 * @return
 	 */
-	public Color getBattGardientSecondColor(final Color col1) {
+	protected Color getBattGardientSecondColor(final Color col1) {
 		Color col2 = col1;
 		for (int i = 0; i <= settings.getBattGradientLevel(); i++)
 			col2 = col2.darker();
 		return col2;
+	}
+
+	protected GradientPaint getSingelColorGradientPaint(final Color col, final int startX, final int startY, final int endX, final int endY,
+			final boolean invert) {
+		final Color col2 = getBattGardientSecondColor(col);
+		if (!invert)
+			return new GradientPaint(startX, startY, col, endX, endY, col2);
+		else
+			return new GradientPaint(startX, startY, col2, endX, endY, col);
 	}
 
 	private void drawChargeIcon(final Graphics2D g2d, final BufferedImage img) {

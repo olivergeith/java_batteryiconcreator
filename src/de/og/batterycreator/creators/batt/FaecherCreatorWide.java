@@ -2,7 +2,6 @@ package de.og.batterycreator.creators.batt;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
@@ -101,9 +100,7 @@ public class FaecherCreatorWide extends AbstractIconCreator {
 			col1 = settings.getExtraColor1();
 		}
 		if (settings.isBattGradient()) {
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(16, 16, col1, 36, 36, col2);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(col1, 16, 16, 36, 36, false));
 		} else {
 			g2d.setColor(col1);
 		}

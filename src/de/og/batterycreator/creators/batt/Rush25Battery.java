@@ -2,7 +2,6 @@ package de.og.batterycreator.creators.batt;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
@@ -71,10 +70,7 @@ public class Rush25Battery extends AbstractIconCreator {
 		final Graphics2D g2d = initGrafics2D(img);
 
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getIconColorInActiv().brighter();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(x, y, col2, x + width, y, col1);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv().brighter(), y, y, x + width, y, true));
 		} else {
 			g2d.setColor(settings.getIconColorInActiv());
 		}
@@ -86,10 +82,7 @@ public class Rush25Battery extends AbstractIconCreator {
 			h = 2;
 
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getActivIconColor(percentage, charge);
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(x, y, col1, x + width, y, col2);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), x, y, x + width, y, false));
 		} else {
 			g2d.setColor(settings.getActivIconColor(percentage, charge));
 		}

@@ -2,19 +2,20 @@ package de.og.batterycreator.creators.batt;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class BrickBattCreatorV2 extends AbstractIconCreator {
+public class BrickBattV2 extends AbstractIconCreator {
 
-	public BrickBattCreatorV2(final RomSettings romSettings) {
+	public BrickBattV2(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
 		settings.setStrokewidth(2);
+		settings.setBattGradient(true);
+		settings.setUseGradiantForMediumColor(true);
 
 	}
 
@@ -66,10 +67,7 @@ public class BrickBattCreatorV2 extends AbstractIconCreator {
 	private void drawRect(final Rectangle rect, final Graphics2D g2d, final boolean charge, final boolean activ, final int percentage) {
 		if (activ) {
 			if (settings.isBattGradient()) {
-				final Color col1 = settings.getActivIconColor(percentage, charge).brighter();
-				final Color col2 = getBattGardientSecondColor(col1);
-				final GradientPaint gradientFill = new GradientPaint(0, 0, col2, imgSize, imgSize, col1);
-				g2d.setPaint(gradientFill);
+				g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge).brighter(), 0, 0, imgSize, imgSize, false));
 			} else {
 				g2d.setPaint(settings.getActivIconColor(percentage, charge));
 			}

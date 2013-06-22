@@ -7,12 +7,12 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class SamsungStockBatteryCreator extends AbstractIconCreator {
+public class SimpleBatteryV2 extends AbstractIconCreator {
 
-	public SamsungStockBatteryCreator(final RomSettings romSettings) {
+	public SimpleBatteryV2(final RomSettings romSettings) {
 		super(romSettings);
-		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
-		settings.setReduceFontOn100(-5);
+		settings.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 19));
+		settings.setReduceFontOn100(-2);
 		settings.setBattGradient(true);
 		settings.setBattGradientLevel(1);
 		settings.setUseGradiantForMediumColor(true);
@@ -20,17 +20,11 @@ public class SamsungStockBatteryCreator extends AbstractIconCreator {
 		settings.setLowBattTheshold(1);
 		settings.setMedBattTheshold(30);
 		settings.setFontXOffset(-1);
-		settings.setFontYOffset(3);
 		settings.setStrokewidth(2);
 		settings.setIconXOffset(-1);
-		settings.setIconYOffset(3);
-		settings.setIconColor(new Color(142, 205, 0));
-		settings.setIconChargeColor(new Color(142, 205, 0));
-		settings.setResizeChargeSymbolHeight(33);
-		settings.setDropShadowFont(true);
 	}
 
-	protected static String	name	= "Samsung.Stock.JellyBean";
+	protected static String	name	= "SimpleBattery.V2";
 
 	@Override
 	public boolean supportsBattGradient() {
@@ -38,7 +32,7 @@ public class SamsungStockBatteryCreator extends AbstractIconCreator {
 	}
 
 	@Override
-	public boolean isNativeXXHDPI() {
+	public boolean supportsStrokeWidth() {
 		return true;
 	}
 
@@ -49,8 +43,10 @@ public class SamsungStockBatteryCreator extends AbstractIconCreator {
 	 */
 	@Override
 	public ImageIcon createImage(final int percentage, final boolean charge) {
-		final int imgWidth = 48;
-		final int imgHeight = 54;
+		final int imgWidth = 41;
+		final int imgHeight = 41;
+		final int rand = settings.getStrokewidth();
+		final int cornerRad = 5;
 
 		// Create a graphics contents on the buffered image
 		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
@@ -61,29 +57,30 @@ public class SamsungStockBatteryCreator extends AbstractIconCreator {
 		} else {
 			g2d.setColor(settings.getIconColorInActiv());
 		}
-		final int xoff = 6;
-		final int yoffunten = 2;
-		final int yoffoben = 1;
-		g2d.fillRect(xoff, yoffoben, imgWidth - 2 * xoff, imgHeight - yoffoben - yoffunten);
+		final int xoff = 9;
+		final int yoff = 5;
+		g2d.fillRoundRect(xoff, yoff, imgWidth - 2 * xoff, imgHeight - yoff - 3, cornerRad, cornerRad);
 
-		// level
-		int h = Math.round((imgHeight - yoffoben - yoffunten) / 100f * percentage);
-		if (h < 2)
-			h = 2;
+		// Knob
+		final int knobxoff = 15;
+		final int knobyoff = 2;
+		g2d.fillRoundRect(knobxoff, knobyoff, imgWidth - 2 * knobxoff, 3, cornerRad, cornerRad);
+
+		int h = Math.round(39f / 100f * percentage);
+		if (h < 3)
+			h = 3;
 
 		if (settings.isBattGradient()) {
 			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), 8, h, 8 + 25, h, false));
 		} else {
 			g2d.setColor(settings.getActivIconColor(percentage, charge));
 		}
-		g2d.fillRect(xoff, imgHeight - yoffunten - h, imgWidth - 2 * xoff, h);
+		g2d.fillRoundRect(xoff - rand, imgHeight - 1 - h, imgWidth - 2 * (xoff - rand), h, cornerRad + 2, cornerRad + 2);
 
 		// ClearingKnob
-		final int knobxoff = 18;
-		final int knobyoff = 7;
 		g2d.setBackground(new Color(255, 255, 255, 0));
-		g2d.clearRect(0, 0, knobxoff, knobyoff);
-		g2d.clearRect(imgWidth - knobxoff, 0, knobxoff, knobyoff);
+		g2d.clearRect(0, 0, knobxoff - rand, yoff - 0);
+		g2d.clearRect(imgWidth - (knobxoff - rand), 0, knobxoff - rand, yoff - 0);
 
 		// Schrift
 		drawPercentage(g2d, percentage, charge, img);

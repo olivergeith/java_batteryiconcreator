@@ -3,7 +3,6 @@ package de.og.batterycreator.creators.batt;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
 import java.awt.geom.Point2D;
@@ -97,10 +96,7 @@ public class SliderCreator extends AbstractIconCreator {
 		g2d.setPaintMode();
 
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getIconColorInActiv();
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(offsetx, offsety, col2, offsetx, offsety + barHeight, col1);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv(), offsetx, offsety, offsetx, offsety + barHeight, true));
 		} else {
 			g2d.setPaint(settings.getIconColorInActiv());
 			// g2d.setColor(settings.getIconColorInActiv().darker());
@@ -115,10 +111,7 @@ public class SliderCreator extends AbstractIconCreator {
 		// 1f));
 
 		if (settings.isBattGradient()) {
-			final Color col1 = settings.getActivIconColor(percentage, charge);
-			final Color col2 = getBattGardientSecondColor(col1);
-			final GradientPaint gradientFill = new GradientPaint(offsetx, offsety, col1, offsetx, offsety + barHeight, col2);
-			g2d.setPaint(gradientFill);
+			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), offsetx, offsety, offsetx, offsety + barHeight, false));
 		} else {
 			g2d.setPaint(settings.getActivIconColor(percentage, charge));
 		}
@@ -136,10 +129,8 @@ public class SliderCreator extends AbstractIconCreator {
 			final int y = offsety + barHeight / 2;
 			Draw2DFunktions.fillCircle(g2d, x, y, radiusP + 2, 90, 360);
 			if (settings.isBattGradient()) {
-				final Color col1 = settings.getActivIconColor(percentage, charge);
-				final Color col2 = getBattGardientSecondColor(col1);
-				final GradientPaint gradientFill = new GradientPaint(x - radiusP, y - radiusP, col1, x + radiusP, y + radiusP, col2);
-				g2d.setPaint(gradientFill);
+				g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), x - radiusP, y - radiusP, x + radiusP, y + radiusP,
+						false));
 			} else {
 				g2d.setColor(settings.getActivIconColor(percentage, charge));
 			}
@@ -153,10 +144,7 @@ public class SliderCreator extends AbstractIconCreator {
 			final int heigth = 5 + barHeight + 5;
 			g2d.fillRect(x - 2, y - 2, width + 4, heigth + 4);
 			if (settings.isBattGradient()) {
-				final Color col1 = settings.getActivIconColor(percentage, charge);
-				final Color col2 = getBattGardientSecondColor(col1);
-				final GradientPaint gradientFill = new GradientPaint(x, y, col1, x + width, y + heigth, col2);
-				g2d.setPaint(gradientFill);
+				g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), x, y, x + width, y + heigth, false));
 			} else {
 				g2d.setColor(settings.getActivIconColor(percentage, charge));
 			}
