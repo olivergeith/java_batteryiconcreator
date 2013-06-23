@@ -64,7 +64,7 @@ public class BattSettings implements Serializable {
 	private Color				iconColorMedBatt			= COLOR_Med_BATT;
 	private Color				iconChargeColor				= COLOR_CHARGE;
 	private boolean				glow						= false;
-	private boolean				glowForChargeToo			= true;
+	private boolean				glowForCharge				= false;
 	private int					glowRadius					= 20;
 
 	private Color				iconChargeGlowColor			= Color.white;
@@ -755,16 +755,16 @@ public class BattSettings implements Serializable {
 	/**
 	 * @return the glowForChargeToo
 	 */
-	public boolean isGlowForChargeToo() {
-		return glowForChargeToo;
+	public boolean isGlowForCharge() {
+		return glowForCharge;
 	}
 
 	/**
-	 * @param glowForChargeToo
-	 *            the glowForChargeToo to set
+	 * @param glowForCharge
+	 *            the glowForCharge to set
 	 */
-	public void setGlowForChargeToo(final boolean glowForChargeToo) {
-		this.glowForChargeToo = glowForChargeToo;
+	public void setGlowForCharge(final boolean glowForCharge) {
+		this.glowForCharge = glowForCharge;
 	}
 
 	/**

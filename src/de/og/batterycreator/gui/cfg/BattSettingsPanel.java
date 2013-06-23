@@ -34,94 +34,98 @@ import de.og.batterycreator.gui.widgets.iconselector.xorcircleselector.XorCircle
 import de.og.batterycreator.gui.widgets.iconselector.xorsquareselector.XorSquareSelector;
 
 public class BattSettingsPanel extends SettingsPanel {
-	private static final long			serialVersionUID				= 1L;
+	private static final long			serialVersionUID					= 1L;
 
 	private BattSettings				settings;
-	private final String				fontSizes[]						= {
+	private final String				fontSizes[]							= {
 			"12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35",
 			"36", "38", "39", "40", "41", "42", "43", "44", "45"
-																		};
+																			};
 
-	private final ColorSelectButton		fontColor						= new ColorSelectButton("Main Color", "Color when normal battery-level");
-	private final ColorSelectButton		fontColorLowBatt				= new ColorSelectButton("LowBatt", "Color when low battery");
-	private final ColorSelectButton		fontColorMedBatt				= new ColorSelectButton("MedBatt", "Color when Med battery");
-	private final ColorSelectButton		fontColorCharge					= new ColorSelectButton("Charge Color", "Color when charging");
-	private final ChargeIconSelector	chargeIconSeletor				= new ChargeIconSelector(36);
+	private final ColorSelectButton		fontColor							= new ColorSelectButton("Main Color", "Color when normal battery-level");
+	private final ColorSelectButton		fontColorLowBatt					= new ColorSelectButton("LowBatt", "Color when low battery");
+	private final ColorSelectButton		fontColorMedBatt					= new ColorSelectButton("MedBatt", "Color when Med battery");
+	private final ColorSelectButton		fontColorCharge						= new ColorSelectButton("Charge Color", "Color when charging");
+	private final ChargeIconSelector	chargeIconSeletor					= new ChargeIconSelector(36);
 
-	private final JCheckBox				cboxDropShadowFont				= createCheckbox("DropShadow Font", "DropShadow behind PercentageText");
-	private final JCheckBox				cboxDropShadowIcon				= createCheckbox("DropShadow ChargeIcon", "DropShadow behind Charge-Icon");
-	private final ColorSelectButton		dropShadowColor					= new ColorSelectButton("DropShadow Color", "Color of Shadow behind Percentage-Text");
-	private final IconPositioner		dropShadowPos					= new IconPositioner(-5, 5);
-	private final SliderAndLabel		sliderDropShadowOpacity			= new SliderAndLabel(0, 6);
-	private final SliderAndLabel		sliderDropShadowBlurryness		= new SliderAndLabel(1, 6);
+	private final JCheckBox				cboxDropShadowFont					= createCheckbox("DropShadow Font", "DropShadow behind PercentageText");
+	private final JCheckBox				cboxDropShadowIcon					= createCheckbox("DropShadow ChargeIcon", "DropShadow behind Charge-Icon");
+	private final ColorSelectButton		dropShadowColor						= new ColorSelectButton("DropShadow Color",
+																					"Color of Shadow behind Percentage-Text");
+	private final IconPositioner		dropShadowPos						= new IconPositioner(-5, 5);
+	private final SliderAndLabel		sliderDropShadowOpacity				= new SliderAndLabel(0, 6);
+	private final SliderAndLabel		sliderDropShadowBlurryness			= new SliderAndLabel(1, 6);
 
-	private final XorCircleSelector		xorIconSelector					= new XorCircleSelector(36);
-	private final XorSquareSelector		xorSquareIconSelector			= new XorSquareSelector(36);
+	private final XorCircleSelector		xorIconSelector						= new XorCircleSelector(36);
+	private final XorSquareSelector		xorSquareIconSelector				= new XorSquareSelector(36);
 
-	private final JCheckBox				cboxUseChargeColor				= createCheckbox("Use charge color",
-																				"Use ChargeColor (green), else use normal battery colors");
+	private final JCheckBox				cboxUseChargeColor					= createCheckbox("Use charge color",
+																					"Use ChargeColor (green), else use normal battery colors");
 
-	private final JCheckBox				cboxTransparentBgrnd			= createCheckbox("Transparent Background (switchOff = experimental !)",
-																				"Use this, when your statusbar Background is not black!");
-	private final ColorSelectButton		backgroundColor					= new ColorSelectButton("Background Color", "Color if not transparent");
+	private final JCheckBox				cboxTransparentBgrnd				= createCheckbox("Transparent Background (switchOff = experimental !)",
+																					"Use this, when your statusbar Background is not black!");
+	private final ColorSelectButton		backgroundColor						= new ColorSelectButton("Background Color", "Color if not transparent");
 
-	private final ColorSelectButton		extraColor1						= new ColorSelectButton("Extra1", "Extra Color 1");
-	private final ColorSelectButton		extraColor2						= new ColorSelectButton("Extra2", "Extra Color 2");
+	private final ColorSelectButton		extraColor1							= new ColorSelectButton("Extra1", "Extra Color 1");
+	private final ColorSelectButton		extraColor2							= new ColorSelectButton("Extra2", "Extra Color 2");
 
-	private final ColorSelectButton		iconColor						= new ColorSelectButton("Main Color", "Color when normal battery-level");
-	private final ColorSelectButton		iconColorLowBatt				= new ColorSelectButton("LowBatt", "Color when low battery");
-	private final ColorSelectButton		iconColorMedBatt				= new ColorSelectButton("MedBatt", "Color when Med battery");
-	private final ColorSelectButton		iconColorInactiv				= new ColorSelectButton("Inactiv", "Color for inactiv Iconelements");
-	private final ColorSelectButton		iconColorCharge					= new ColorSelectButton("Charge Color", "Color when charging");
+	private final ColorSelectButton		iconColor							= new ColorSelectButton("Main Color", "Color when normal battery-level");
+	private final ColorSelectButton		iconColorLowBatt					= new ColorSelectButton("LowBatt", "Color when low battery");
+	private final ColorSelectButton		iconColorMedBatt					= new ColorSelectButton("MedBatt", "Color when Med battery");
+	private final ColorSelectButton		iconColorInactiv					= new ColorSelectButton("Inactiv", "Color for inactiv Iconelements");
+	private final ColorSelectButton		iconColorCharge						= new ColorSelectButton("Charge Color", "Color when charging");
 
-	private final ColorSelectButton		iconColorGlowCharge				= new ColorSelectButton("Glow Color", "Glow Color when charging");
-	private final JCheckBox				cboxChargeGlow					= createCheckbox("Pulsing ChargeGlow",
-																				"Pulsing glow Animation behind Charge-Icon or number");
-	private final SliderAndLabel		sliderChargGlowRadius			= new SliderAndLabel(10, 50);
+	private final ColorSelectButton		pulsingChargeGlowColorButton		= new ColorSelectButton("Glow Color", "Glow Color when charging");
+	private final JCheckBox				cboxPulsingChargeGlow				= createCheckbox("Pulsing ChargeGlow",
+																					"Pulsing glow Animation behind Charge-Icon or number");
+	private final SliderAndLabel		pulsingChargGlowRadiusSlider		= new SliderAndLabel(10, 50);
 
-	private final SliderAndLabel		sliderStroke					= new SliderAndLabel(1, 10);
-	private final JCheckBox				cboxFlip						= createCheckbox("Flip Icon", "Mirror's the Icon...ony has effect on a few styls!");
-	private final JCheckBox				cboxZeiger						= createCheckbox("Draw Zeiger", "Draw a Zeiger...ony has effect on a few styls!");
-	private final JCheckBox				cboxNoBG						= createCheckbox("No Backgr.", "Removes the -normally gray- background!");
-	private final SliderAndLabel		sliderBattGradientLevel			= new SliderAndLabel(1, 5);
+	private final SliderAndLabel		sliderStroke						= new SliderAndLabel(1, 10);
+	private final JCheckBox				cboxFlip							= createCheckbox("Flip Icon", "Mirror's the Icon...ony has effect on a few styls!");
+	private final JCheckBox				cboxZeiger							= createCheckbox("Draw Zeiger", "Draw a Zeiger...ony has effect on a few styls!");
+	private final JCheckBox				cboxNoBG							= createCheckbox("No Backgr.", "Removes the -normally gray- background!");
+	private final SliderAndLabel		sliderBattGradientLevel				= new SliderAndLabel(1, 5);
 
-	private final JCheckBox				cboxColoredFont					= createCheckbox("Low battery Colors", "...");
-	private final JCheckBox				cboxColoredIcon					= createCheckbox("Low battery Colors", "...");
-	private final JCheckBox				cboxShowFont					= createCheckbox("Show percentages", "...");
-	private final JCheckBox				cboxShowChargeSymbol			= createCheckbox("Charge-Icon", "Show Charge-Icon when charging");
-	private final JCheckBox				cboxUseGradientMediumLevels		= createCheckbox("Gradient", "Use Gradient Colors between Low and Med Batterylevels");
-	private final JCheckBox				cboxUseGradientNormalLevels		= createCheckbox("Gradient", "Use Gradient Colors between Med and 100% Batterylevels");
-	private final JCheckBox				cboxGlow						= createCheckbox("Glow", "Glow behind percentages");
-	private final SliderAndLabel		sliderGlowRadius				= new SliderAndLabel(10, 50);
-	private final JCheckBox				cboxGlowForChargeToo			= createCheckbox("Also for Charge", "Glow behind Charge-Icon too!");
-	private final JCheckBox				cboxShowAdditionalFontOnCharge	= createCheckbox("Add Font on Charge too", "Have a percentage-text and charge-icon");
+	private final JCheckBox				cboxColoredFont						= createCheckbox("Low battery Colors", "...");
+	private final JCheckBox				cboxColoredIcon						= createCheckbox("Low battery Colors", "...");
+	private final JCheckBox				cboxShowFont						= createCheckbox("Show percentages", "...");
+	private final JCheckBox				cboxShowChargeSymbol				= createCheckbox("Charge-Icon", "Show Charge-Icon when charging");
+	private final JCheckBox				cboxUseGradientMediumLevels			= createCheckbox("Gradient",
+																					"Use Gradient Colors between Low and Med Batterylevels");
+	private final JCheckBox				cboxUseGradientNormalLevels			= createCheckbox("Gradient",
+																					"Use Gradient Colors between Med and 100% Batterylevels");
+	private final JCheckBox				cboxGlow							= createCheckbox("Glow behind Font", "Glow behind percentages (when not on charge)");
+	private final JCheckBox				cboxGlowForCharge					= createCheckbox("Glow behind ChargeIcon", "Glow behind Charge-Icon!");
+	private final SliderAndLabel		sliderGlowRadius					= new SliderAndLabel(10, 50);
+	private final JCheckBox				cboxShowAdditionalFontOnCharge		= createCheckbox("Add Font on Charge too", "Have a percentage-text and charge-icon");
 
-	private final SliderAndLabel		sliderLowBatt					= new SliderAndLabel(0, 30);
-	private final SliderAndLabel		sliderMedBatt					= new SliderAndLabel(0, 100);
+	private final SliderAndLabel		sliderLowBatt						= new SliderAndLabel(0, 30);
+	private final SliderAndLabel		sliderMedBatt						= new SliderAndLabel(0, 100);
 
-	private final IconPositioner		iconPos							= new IconPositioner(-30, 30);
-	private final IconPositioner		glowPos							= new IconPositioner(-30, 30);
-	private final IconPositioner		fontPos							= new IconPositioner(-30, 30);
-	private final IconPositioner		chargeGlowPos					= new IconPositioner(-30, 30);
-	private final JCheckBox				cboxMoveIconWithText			= createCheckbox("Lock to Font-Position-Offset", "Move Charge-Icon with Font-Position");
-	private final JCheckBox				cboxMoveGlowWithText			= createCheckbox("Lock to Font-Position-Offset", "Move Glow with Font-Position");
-	private final JCheckBox				cboxMoveChargeGlowWithText		= createCheckbox("Lock to Font-Position-Offset",
-																				"Move pulsing ChargeGlow with Font-Position");
+	private final IconPositioner		iconPos								= new IconPositioner(-30, 30);
+	private final IconPositioner		glowPos								= new IconPositioner(-30, 30);
+	private final IconPositioner		fontPos								= new IconPositioner(-30, 30);
+	private final IconPositioner		pulsingChargeGlowPos				= new IconPositioner(-30, 30);
+	private final JCheckBox				cboxMoveIconWithText				= createCheckbox("Lock to Font-Position-Offset",
+																					"Move Charge-Icon with Font-Position");
+	private final JCheckBox				cboxMoveGlowWithText				= createCheckbox("Lock to Font-Position-Offset", "Move Glow with Font-Position");
+	private final JCheckBox				cboxMovePulsingChargeGlowWithText	= createCheckbox("Lock to Font-Position-Offset",
+																					"Move pulsing ChargeGlow with Font-Position");
 
-	private final SliderAndLabel		sliderReduceOn100				= new SliderAndLabel(-5, 0);
+	private final SliderAndLabel		sliderReduceOn100					= new SliderAndLabel(-5, 0);
 
-	private final SliderAndLabel		sliderResizeChargeSymbol		= new SliderAndLabel(15, 40);
+	private final SliderAndLabel		sliderResizeChargeSymbol			= new SliderAndLabel(15, 40);
 
-	private final JFontChooserButton	fontButton						= new JFontChooserButton("Font", fontSizes);
+	private final JFontChooserButton	fontButton							= new JFontChooserButton("Font", fontSizes);
 
-	private final JCheckBox				cboxAddPercent					= createCheckbox("Add '%'", "Add '%' behind numbers");
+	private final JCheckBox				cboxAddPercent						= createCheckbox("Add '%'", "Add '%' behind numbers");
 
-	private final ButtonGroup			radiogroup						= new ButtonGroup();
-	private final JRadioButton			cboxNoFilling					= createRadioButton("No special fill", "No special filling");
-	private final JRadioButton			cboxBattGradient				= createRadioButton("BattGradient", "Gradients within Iconcolor (Level below)");
-	private final JRadioButton			cboxLinearGradient				= createRadioButton("LinearGradient",
-																				"Linear Gradients within Icon (BattGradients will have no effect then!");
-	private final JRadioButton			cboxTexture						= createRadioButton("Use Texture", "Use Texture instead of colors");
+	private final ButtonGroup			radiogroup							= new ButtonGroup();
+	private final JRadioButton			cboxNoFilling						= createRadioButton("No special fill", "No special filling");
+	private final JRadioButton			cboxBattGradient					= createRadioButton("BattGradient", "Gradients within Iconcolor (Level below)");
+	private final JRadioButton			cboxLinearGradient					= createRadioButton("LinearGradient",
+																					"Linear Gradients within Icon (BattGradients will have no effect then!");
+	private final JRadioButton			cboxTexture							= createRadioButton("Use Texture", "Use Texture instead of colors");
 	// private final JCheckBox cboxBattGradient = createCheckbox("BattGradient",
 	// "Gradients within Iconcolor (Level below)");
 	// private final JCheckBox cboxLinearGradient =
@@ -129,7 +133,7 @@ public class BattSettingsPanel extends SettingsPanel {
 	// "Linear Gradients within Icon (BattGradients will have no effect then!");
 	// private final JCheckBox cboxTexture = createCheckbox("Use Texture",
 	// "Use Texture instead of colors");
-	private final TextureSelector		textureSelector					= new TextureSelector(36);
+	private final TextureSelector		textureSelector						= new TextureSelector(36);
 
 	// Construktor
 	public BattSettingsPanel() {
@@ -177,8 +181,8 @@ public class BattSettingsPanel extends SettingsPanel {
 				if (cboxMoveIconWithText.isSelected() == true) {
 					iconPos.setPosition(x, y);
 				}
-				if (cboxMoveChargeGlowWithText.isSelected() == true) {
-					chargeGlowPos.setPosition(x, y);
+				if (cboxMovePulsingChargeGlowWithText.isSelected() == true) {
+					pulsingChargeGlowPos.setPosition(x, y);
 				}
 			}
 		});
@@ -253,15 +257,15 @@ public class BattSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(cboxGlow, cc.xyw(2, ++row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius: "), cc.xyw(4, row, 1));
+		builder.add(cboxGlow, cc.xyw(2, ++row, 3));
+		builder.add(cboxGlowForCharge, cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius: "), cc.xyw(4, ++row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Glow Offset (drag red square)"), cc.xyw(6, row, 3));
 
 		builder.add(sliderGlowRadius.getToolbar(), cc.xyw(4, ++row, 1));
 		builder.add(glowPos, cc.xyw(6, row, 3));
 
-		builder.add(cboxGlowForChargeToo, cc.xyw(2, ++row, 1));
-		builder.add(cboxMoveGlowWithText, cc.xyw(6, row, 3));
+		builder.add(cboxMoveGlowWithText, cc.xyw(6, ++row, 3));
 
 		final JPanel hide = new HidePanel("Glow behind Percentage#", builder.getPanel(), true);
 		return hide;
@@ -319,13 +323,13 @@ public class BattSettingsPanel extends SettingsPanel {
 		final PanelBuilder builder = new PanelBuilder(layout);
 		int row = 1;
 
-		builder.add(cboxChargeGlow, cc.xyw(2, ++row, 1));
+		builder.add(cboxPulsingChargeGlow, cc.xyw(2, ++row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Glow Radius"), cc.xyw(4, row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("ChargeGlow Offset (drag red square)"), cc.xyw(6, row, 3));
-		builder.add(iconColorGlowCharge, cc.xyw(2, ++row, 1));
-		builder.add(sliderChargGlowRadius.getToolbar(), cc.xyw(4, row, 1));
-		builder.add(chargeGlowPos, cc.xyw(6, row, 3));
-		builder.add(cboxMoveChargeGlowWithText, cc.xyw(6, ++row, 3));
+		builder.add(pulsingChargeGlowColorButton, cc.xyw(2, ++row, 1));
+		builder.add(pulsingChargGlowRadiusSlider.getToolbar(), cc.xyw(4, row, 1));
+		builder.add(pulsingChargeGlowPos, cc.xyw(6, row, 3));
+		builder.add(cboxMovePulsingChargeGlowWithText, cc.xyw(6, ++row, 3));
 
 		final JPanel hide = new HidePanel("Pulsing Charge Glow", builder.getPanel(), false);
 		return hide;
@@ -421,7 +425,7 @@ public class BattSettingsPanel extends SettingsPanel {
 			this.settings = settings;
 			cboxMoveIconWithText.setSelected(settings.isMoveIconWithText());
 			cboxMoveGlowWithText.setSelected(settings.isMoveGlowWithText());
-			cboxMoveChargeGlowWithText.setSelected(settings.isMoveChargeGlowWithText());
+			cboxMovePulsingChargeGlowWithText.setSelected(settings.isMoveChargeGlowWithText());
 			cboxShowAdditionalFontOnCharge.setSelected(settings.isShowAdditionalFontOnCharge());
 
 			cboxNoFilling.setSelected(true);
@@ -463,14 +467,14 @@ public class BattSettingsPanel extends SettingsPanel {
 			cboxColoredIcon.setSelected(settings.isColoredIcon());
 			cboxUseChargeColor.setSelected(settings.isUseChargeColor());
 
-			cboxChargeGlow.setSelected(settings.isChargeGlow());
-			iconColorGlowCharge.setColor(settings.getIconChargeGlowColor());
-			sliderChargGlowRadius.setValue(settings.getChargeGlowRadius());
-			chargeGlowPos.setPosition(settings.getChargeGlowOffsetX(), settings.getChargeGlowOffsetY());
+			cboxPulsingChargeGlow.setSelected(settings.isChargeGlow());
+			pulsingChargeGlowColorButton.setColor(settings.getIconChargeGlowColor());
+			pulsingChargGlowRadiusSlider.setValue(settings.getChargeGlowRadius());
+			pulsingChargeGlowPos.setPosition(settings.getChargeGlowOffsetX(), settings.getChargeGlowOffsetY());
 
 			cboxGlow.setSelected(settings.isGlow());
 			sliderGlowRadius.setValue(settings.getGlowRadius());
-			cboxGlowForChargeToo.setSelected(settings.isGlowForChargeToo());
+			cboxGlowForCharge.setSelected(settings.isGlowForCharge());
 
 			sliderMedBatt.setValue(settings.getMedBattTheshold());
 			sliderLowBatt.setValue(settings.getLowBattTheshold());
@@ -555,15 +559,15 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setColoredIcon(cboxColoredIcon.isSelected());
 		settings.setUseChargeColor(cboxUseChargeColor.isSelected());
 
-		settings.setChargeGlow(cboxChargeGlow.isSelected());
-		settings.setIconChargeGlowColor(iconColorGlowCharge.getColor());
-		settings.setChargeGlowRadius(sliderChargGlowRadius.getValue());
-		settings.setChargeGlowOffsetX(chargeGlowPos.getPosition().x);
-		settings.setChargeGlowOffsetY(chargeGlowPos.getPosition().y);
+		settings.setChargeGlow(cboxPulsingChargeGlow.isSelected());
+		settings.setIconChargeGlowColor(pulsingChargeGlowColorButton.getColor());
+		settings.setChargeGlowRadius(pulsingChargGlowRadiusSlider.getValue());
+		settings.setChargeGlowOffsetX(pulsingChargeGlowPos.getPosition().x);
+		settings.setChargeGlowOffsetY(pulsingChargeGlowPos.getPosition().y);
 
 		settings.setGlow(cboxGlow.isSelected());
 		settings.setGlowRadius(sliderGlowRadius.getValue());
-		settings.setGlowForChargeToo(cboxGlowForChargeToo.isSelected());
+		settings.setGlowForCharge(cboxGlowForCharge.isSelected());
 
 		settings.setMedBattTheshold(sliderMedBatt.getValue());
 		settings.setLowBattTheshold(sliderLowBatt.getValue());
@@ -583,7 +587,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setGlowYOffset(glowPos.getPosition().y);
 		settings.setMoveIconWithText(cboxMoveIconWithText.isSelected());
 		settings.setMoveGlowWithText(cboxMoveGlowWithText.isSelected());
-		settings.setMoveChargeGlowWithText(cboxMoveChargeGlowWithText.isSelected());
+		settings.setMoveChargeGlowWithText(cboxMovePulsingChargeGlowWithText.isSelected());
 		settings.setShowAdditionalFontOnCharge(cboxShowAdditionalFontOnCharge.isSelected());
 
 		settings.setIconXOffset(iconPos.getPosition().x);
@@ -626,11 +630,8 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		sliderBattGradientLevel.setEnabled(cboxBattGradient.isSelected());
 
-		sliderChargGlowRadius.setEnabled(cboxChargeGlow.isSelected());
-		iconColorGlowCharge.setEnabled(cboxChargeGlow.isSelected());
-
-		sliderGlowRadius.setEnabled(cboxGlow.isSelected());
-		cboxGlowForChargeToo.setEnabled(cboxGlow.isSelected());
+		pulsingChargGlowRadiusSlider.setEnabled(cboxPulsingChargeGlow.isSelected());
+		pulsingChargeGlowColorButton.setEnabled(cboxPulsingChargeGlow.isSelected());
 
 		cboxDropShadowFont.setEnabled(cboxShowFont.isSelected());
 		cboxDropShadowIcon.setEnabled(cboxShowChargeSymbol.isSelected());
@@ -644,8 +645,10 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		textureSelector.setEnabled(cboxTexture.isSelected());
 
-		cboxMoveGlowWithText.setEnabled(cboxGlow.isSelected());
-		glowPos.setEnabled(!cboxMoveGlowWithText.isSelected() && cboxGlow.isSelected());
+		// Glow
+		sliderGlowRadius.setEnabled(cboxGlow.isSelected() || cboxGlowForCharge.isSelected());
+		cboxMoveGlowWithText.setEnabled(cboxGlow.isSelected() || cboxGlowForCharge.isSelected());
+		glowPos.setEnabled(!cboxMoveGlowWithText.isSelected() && (cboxGlow.isSelected() || cboxGlowForCharge.isSelected()));
 		if (cboxMoveGlowWithText.isSelected() == true) {
 			glowPos.setPosition(fontPos.getPosition().x, fontPos.getPosition().y);
 		}
@@ -656,10 +659,10 @@ public class BattSettingsPanel extends SettingsPanel {
 		if (cboxMoveIconWithText.isSelected() == true) {
 			iconPos.setPosition(fontPos.getPosition().x, fontPos.getPosition().y);
 		}
-		cboxMoveChargeGlowWithText.setEnabled(cboxChargeGlow.isSelected());
-		chargeGlowPos.setEnabled(!cboxMoveChargeGlowWithText.isSelected() && cboxChargeGlow.isSelected());
-		if (cboxMoveChargeGlowWithText.isSelected() == true) {
-			chargeGlowPos.setPosition(fontPos.getPosition().x, fontPos.getPosition().y);
+		cboxMovePulsingChargeGlowWithText.setEnabled(cboxPulsingChargeGlow.isSelected());
+		pulsingChargeGlowPos.setEnabled(!cboxMovePulsingChargeGlowWithText.isSelected() && cboxPulsingChargeGlow.isSelected());
+		if (cboxMovePulsingChargeGlowWithText.isSelected() == true) {
+			pulsingChargeGlowPos.setPosition(fontPos.getPosition().x, fontPos.getPosition().y);
 		}
 
 	}

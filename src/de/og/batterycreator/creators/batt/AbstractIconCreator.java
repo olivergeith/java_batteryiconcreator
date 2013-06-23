@@ -349,12 +349,12 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 	 * @param img
 	 */
 	private void drawGlow(final Graphics2D g2d, final int percentage, final boolean charge, final BufferedImage img) {
-		if (settings.isGlow()) {
-			// aus aussteigen, wenn gerade charge, aber bei cahrge kein glow
-			// soll!
-			if (charge == true && settings.isGlowForChargeToo() == false) {
-				return;
-			}
+		if ((charge == false && settings.isGlow()) || (charge == true && settings.isGlowForCharge())) {
+			// // aus aussteigen, wenn gerade charge, aber bei cahrge kein glow
+			// // soll!
+			// if (charge == true && settings.isGlowForChargeToo() == false) {
+			// return;
+			// }
 			final int centertranparenz = 190;
 			// getting the Colors right...
 			final Color col = settings.getActivIconColor(percentage, charge);
