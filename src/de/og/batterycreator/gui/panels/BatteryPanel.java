@@ -77,6 +77,7 @@ import de.og.batterycreator.creators.batt.SimpleBatteryV2;
 import de.og.batterycreator.creators.batt.SliderCreator;
 import de.og.batterycreator.creators.batt.TachoCreator;
 import de.og.batterycreator.creators.batt.TachoCreator3Quater;
+import de.og.batterycreator.creators.batt.TachoGauge;
 import de.og.batterycreator.creators.batt.TachoWideV1;
 import de.og.batterycreator.creators.batt.TachoWideV2;
 import de.og.batterycreator.creators.batt.TachoWideV3;
@@ -90,7 +91,8 @@ import de.og.batterycreator.creators.batt.XORSquare;
 import de.og.batterycreator.creators.batt.Zoopa3Quater;
 import de.og.batterycreator.creators.batt.ZoopaCircle;
 import de.og.batterycreator.creators.batt.ZoopaGauge;
-import de.og.batterycreator.creators.batt.ZoopaWide;
+import de.og.batterycreator.creators.batt.ZoopaWideV1;
+import de.og.batterycreator.creators.batt.ZoopaWideV2;
 import de.og.batterycreator.gui.cfg.BattSettingsPanel;
 import de.og.batterycreator.gui.iconstore.IconStore;
 import de.og.batterycreator.gui.widgets.animator.AnimatorBar;
@@ -188,11 +190,13 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new TachoWideV3(romSettings));
 		combo.addItem(new TachoWideV4(romSettings));
 		combo.addItem(new TachoWideV5(romSettings));
+		combo.addItem(new TachoGauge(romSettings));
 
 		combo.addItem(new ZoopaCircle(romSettings));
 		combo.addItem(new Zoopa3Quater(romSettings));
 		combo.addItem(new ZoopaGauge(romSettings));
-		combo.addItem(new ZoopaWide(romSettings));
+		combo.addItem(new ZoopaWideV1(romSettings));
+		combo.addItem(new ZoopaWideV2(romSettings));
 
 		combo.addItem(new FaecherCreatorWide(romSettings));
 		combo.addItem(new TachoCreator3Quater(romSettings));

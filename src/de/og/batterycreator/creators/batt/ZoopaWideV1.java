@@ -9,11 +9,11 @@ import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
 import de.og.batterycreator.cfg.RomSettings;
 
-public class ZoopaWide extends AbstractIconCreator {
+public class ZoopaWideV1 extends AbstractIconCreator {
 
-	protected static String	name	= "Zoopa.Wide";
+	protected static String	name	= "Zoopa.Wide.V1";
 
-	public ZoopaWide(final RomSettings romSettings) {
+	public ZoopaWideV1(final RomSettings romSettings) {
 		super(romSettings);
 		settings.setMoveIconWithText(false);
 		settings.setFontXOffset(-1);
