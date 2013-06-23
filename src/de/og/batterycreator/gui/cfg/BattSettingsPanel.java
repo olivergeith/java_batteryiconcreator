@@ -91,9 +91,9 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JCheckBox				cboxShowFont						= createCheckbox("Show percentages", "...");
 	private final JCheckBox				cboxShowChargeSymbol				= createCheckbox("Charge-Icon", "Show Charge-Icon when charging");
 	private final JCheckBox				cboxUseGradientMediumLevels			= createCheckbox("Gradient",
-																					"Use Gradient Colors between Low and Med Batterylevels");
+																					"Use Gradient Colors between Low and Medium Batterylevels");
 	private final JCheckBox				cboxUseGradientNormalLevels			= createCheckbox("Gradient",
-																					"Use Gradient Colors between Med and 100% Batterylevels");
+																					"Use Gradient Colors between Medium and 100% Batterylevels");
 	private final JCheckBox				cboxGlow							= createCheckbox("Glow behind Font", "Glow behind percentages (when not on charge)");
 	private final JCheckBox				cboxGlowForCharge					= createCheckbox("Glow behind ChargeIcon", "Glow behind Charge-Icon!");
 	private final SliderAndLabel		sliderGlowRadius					= new SliderAndLabel(10, 50);
