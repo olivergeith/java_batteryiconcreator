@@ -76,7 +76,7 @@ public class BoxCreatorV3 extends AbstractIconCreator {
 
 		if (!settings.isNoBG()) {
 			if (settings.isBattGradient() || settings.isUseTexture() || settings.isLinearGradient()) {
-				g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), w, w, imgWidth - w, imgHeight - w, true));
+				g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv(), w, w, imgWidth - w, imgHeight - w, true));
 			} else {
 				g2d.setColor(settings.getIconColorInActiv());
 			}

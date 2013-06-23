@@ -267,7 +267,7 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		builder.add(cboxMoveGlowWithText, cc.xyw(6, ++row, 3));
 
-		final JPanel hide = new HidePanel("Glow behind Percentage#", builder.getPanel(), true);
+		final JPanel hide = new HidePanel("Glow", builder.getPanel(), true);
 		return hide;
 	}
 
@@ -290,7 +290,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(dropShadowPos, cc.xyw(6, row, 3));
 		builder.add(dropShadowColor, cc.xyw(2, ++row, 1));
 
-		final JPanel hide = new HidePanel("DropShadow behind Percentage#", builder.getPanel(), false);
+		final JPanel hide = new HidePanel("DropShadow", builder.getPanel(), false);
 		return hide;
 	}
 
