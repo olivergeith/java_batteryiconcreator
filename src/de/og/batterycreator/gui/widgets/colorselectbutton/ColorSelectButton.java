@@ -98,6 +98,7 @@ public class ColorSelectButton extends JButton {
 
 	private void bringUpColorChooser() {
 		final JColorChooser colorChooser = new JColorChooser();
+		colorChooser.setColor(getBackground());
 		// final PreviewPane previewPanel = new PreviewPane(colorChooser);
 		// colorChooser.setPreviewPanel(previewPanel);
 		colorChooser.addChooserPanel(new CrayonPanel());

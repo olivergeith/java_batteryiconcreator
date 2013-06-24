@@ -48,6 +48,7 @@ Hope you enjoy it!
 ...better defaultname for flashable-Zips
 ...SystemUI-Analyzer now exporting notification icons
 ...showing last applied RomPreset in RomSettings now ('#' will be added when something was changed after that)
+...ColorChooser now preset with the selected Color (Thanks for hint... @hara74) 
 [*][B]Zip creation of Battery icon-sets[/B]
 ...attention not flashable...just plain zips with icons 
 ...activate this button in GlobalSettings
