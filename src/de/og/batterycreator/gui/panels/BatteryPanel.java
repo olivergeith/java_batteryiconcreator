@@ -90,6 +90,8 @@ import de.og.batterycreator.creators.batt.XORCircle;
 import de.og.batterycreator.creators.batt.XORSquare;
 import de.og.batterycreator.creators.batt.Zoopa3Quater;
 import de.og.batterycreator.creators.batt.ZoopaCircle;
+import de.og.batterycreator.creators.batt.ZoopaClock;
+import de.og.batterycreator.creators.batt.ZoopaClockWide;
 import de.og.batterycreator.creators.batt.ZoopaGauge;
 import de.og.batterycreator.creators.batt.ZoopaWideV1;
 import de.og.batterycreator.creators.batt.ZoopaWideV2;
@@ -192,6 +194,8 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new TachoWideV5(romSettings));
 		combo.addItem(new TachoGauge(romSettings));
 
+		combo.addItem(new ZoopaClock(romSettings));
+		combo.addItem(new ZoopaClockWide(romSettings));
 		combo.addItem(new ZoopaCircle(romSettings));
 		combo.addItem(new Zoopa3Quater(romSettings));
 		combo.addItem(new ZoopaGauge(romSettings));

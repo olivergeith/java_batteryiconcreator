@@ -30,6 +30,7 @@ public class TachoGauge extends AbstractIconCreator {
 		settings.setStrokewidth(4);
 		settings.setExtraColor1(Color.white);
 		settings.setDrawZeiger(true);
+		settings.setFlip(true);
 	}
 
 	@Override
@@ -64,6 +65,11 @@ public class TachoGauge extends AbstractIconCreator {
 
 	@Override
 	public boolean supportsZeiger() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsFlip() {
 		return true;
 	}
 
@@ -105,6 +111,9 @@ public class TachoGauge extends AbstractIconCreator {
 		// aussen rand
 		g2d.setColor(col.brighter());
 		Draw2DFunktions.fillCircle(g2d, x, y, radius, 180, -115);
+		// links rechts
+		if (settings.isFlip())
+			Draw2DFunktions.fillCircle(g2d, x, y, radius - 2, 180, -115);
 
 		// Skala
 		if (!settings.isNoBG() && (settings.isBattGradient() || settings.isUseTexture())) {
@@ -112,7 +121,10 @@ public class TachoGauge extends AbstractIconCreator {
 		} else {
 			g2d.setPaint(settings.getIconColorInActiv());
 		}
-		Draw2DFunktions.fillCircle(g2d, x, y, radius - 2, 180, -115);
+		if (settings.isFlip())
+			Draw2DFunktions.fillCircle(g2d, x, y, radius - 2, 178, -111);
+		else
+			Draw2DFunktions.fillCircle(g2d, x, y, radius - 2, 180, -115);
 
 		// Level malen
 		if (settings.isUseTexture()) {
