@@ -16,5 +16,5 @@ RomName=(Galaxy Nexus) CarbonRom (Gear)
 LockHandleSize=216
 LidroidDrawableFolder=drawable-xhdpi
 FrameworkDrawableFolder=drawable-xhdpi
-Template=./template/template.zip
+Template=./template/templateS3Nexus.zip
 UseMMSforEmoticons=true

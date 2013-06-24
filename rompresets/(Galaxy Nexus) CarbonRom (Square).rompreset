@@ -17,4 +17,4 @@ LockHandleSize=216
 LidroidDrawableFolder=drawable-xhdpi
 FrameworkDrawableFolder=drawable-xhdpi
 UseMMSforEmoticons=true
-Template=./template/template.zip
+Template=./template/templateS3Nexus.zip
