@@ -29,6 +29,7 @@ public class ZoopaWideV2 extends AbstractIconCreator {
 		settings.setUseGradiantForNormalColor(true);
 		settings.setStrokewidth(2);
 		settings.setExtraColor1(Color.white);
+		settings.setDrawZeiger(true);
 	}
 
 	@Override
@@ -85,15 +86,16 @@ public class ZoopaWideV2 extends AbstractIconCreator {
 	}
 
 	private void drawScala(final Graphics2D g2d, final boolean charge, final int percentage) {
-		int radius = imgHeight - 1;
+		final int radius = imgHeight - 1;
 		final int zehner = percentage / 10;
 		final int zehnerdicke = 12;
 		final int einerdicke = 5;
 		if (settings.isDrawZeiger()) {
-			drawZeiger(g2d, percentage, radius, einerdicke);
-			radius = radius - einerdicke - 1;
+			drawSegmente(g2d, charge, percentage, zehner, radius - einerdicke, zehnerdicke, 10);
+			drawZeiger(g2d, percentage, radius, 2 * einerdicke + zehnerdicke);
+		} else {
+			drawSegmente(g2d, charge, percentage, zehner, radius, zehnerdicke, 10);
 		}
-		drawSegmente(g2d, charge, percentage, zehner, radius, zehnerdicke, 10);
 
 		// Normales Paint setzen
 		g2d.setPaintMode();
@@ -134,6 +136,8 @@ public class ZoopaWideV2 extends AbstractIconCreator {
 		final int y = x;
 		final int w = 180 - Math.round(1.8f * percentage);
 
+		g2d.setPaint(Color.DARK_GRAY);
+		Draw2DFunktions.fillCircle(g2d, x, y, radius, w - 4, 8);
 		g2d.setPaint(settings.getExtraColor1());
 		Draw2DFunktions.fillCircle(g2d, x, y, radius, w - 3, 6);
 
