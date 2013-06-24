@@ -26,7 +26,7 @@ public class IconCreatorFrame extends JFrame {
 	private static final long			serialVersionUID	= 1L;
 	public static IconCreatorFrame		MAIN_FRAME_INSTANCE;
 	private final IconCreatingPanelNew	iconCreatingPanel	= new IconCreatingPanelNew(this);
-	LToolBar							toolBar				= iconCreatingPanel.getToolBar();
+	private final LToolBar				toolBar				= iconCreatingPanel.getToolBar();
 
 	public static void main(final String[] args) {
 		LOGGER.info("Java Version:" + VersionDetails.javaVendor + " " + VersionDetails.javaVersion);
