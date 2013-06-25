@@ -214,7 +214,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(createCfgPaneChargeIcon(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPanePulsingChargeGlow(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneIconColors(), cc.xyw(1, ++row, 9));
-		builder.add(createCfgPaneThresholds(), cc.xyw(1, ++row, 9));
+		// builder.add(createCfgPaneThresholds(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneFilling(), cc.xyw(1, ++row, 9));
 		builder.add(createCfgPaneMisc(), cc.xyw(1, ++row, 9));
 		final JPanel cfp = builder.getPanel();
@@ -267,7 +267,7 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		builder.add(cboxMoveGlowWithText, cc.xyw(6, ++row, 3));
 
-		final JPanel hide = new HidePanel("Glow", builder.getPanel(), true);
+		final JPanel hide = new HidePanel("Glow", builder.getPanel(), false);
 		return hide;
 	}
 
@@ -353,17 +353,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(cboxTransparentBgrnd, cc.xyw(2, ++row, 5));
 		builder.add(backgroundColor, cc.xyw(8, row, 1));
 
-		final JPanel hide = new HidePanel("Icon Colors...", builder.getPanel());
-		return hide;
-	}
-
-	private JPanel createCfgPaneThresholds() {
-		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
-		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
-				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
-		final CellConstraints cc = new CellConstraints();
-		final PanelBuilder builder = new PanelBuilder(layout);
-		int row = 1;
+		builder.addSeparator("", cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createGroupLabel("Thresholds..."), cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("...for Low Battery-Levels"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("...for Med Battery-Levels"), cc.xyw(6, row, 3));
 		builder.add(sliderLowBatt.getToolbar(), cc.xyw(2, ++row, 1));
@@ -371,9 +362,31 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(sliderMedBatt.getToolbar(), cc.xyw(6, row, 1));
 		builder.add(cboxUseGradientNormalLevels, cc.xyw(8, row, 1));
 
-		final JPanel hide = new HidePanel("Thresholds...", builder.getPanel());
+		final JPanel hide = new HidePanel("Icon Colors...", builder.getPanel());
 		return hide;
 	}
+
+	// private JPanel createCfgPaneThresholds() {
+	// //
+	// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+	// final FormLayout layout = new
+	// FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+	// "p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+	// final CellConstraints cc = new CellConstraints();
+	// final PanelBuilder builder = new PanelBuilder(layout);
+	// int row = 1;
+	// builder.add(JGoodiesHelper.createBlackLabel("...for Low Battery-Levels"),
+	// cc.xyw(2, ++row, 3));
+	// builder.add(JGoodiesHelper.createBlackLabel("...for Med Battery-Levels"),
+	// cc.xyw(6, row, 3));
+	// builder.add(sliderLowBatt.getToolbar(), cc.xyw(2, ++row, 1));
+	// builder.add(cboxUseGradientMediumLevels, cc.xyw(4, row, 1));
+	// builder.add(sliderMedBatt.getToolbar(), cc.xyw(6, row, 1));
+	// builder.add(cboxUseGradientNormalLevels, cc.xyw(8, row, 1));
+	//
+	// final JPanel hide = new HidePanel("Thresholds...", builder.getPanel());
+	// return hide;
+	// }
 
 	private JPanel createCfgPaneFilling() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
@@ -389,6 +402,11 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(cboxLinearGradient, cc.xyw(8, row, 1));
 		builder.add(textureSelector, cc.xyw(4, ++row, 1));
 		builder.add(sliderBattGradientLevel.getToolbar(), cc.xyw(6, row, 1));
+		builder.addSeparator("Background Icons", cc.xyw(2, ++row, 7));
+		// builder.add(JGoodiesHelper.createBlackLabel("Background Icons"),
+		// cc.xyw(2, ++row, 3));
+		builder.add(xorIconSelector, cc.xyw(2, ++row, 1));
+		builder.add(xorSquareIconSelector, cc.xyw(4, row, 1));
 
 		final JPanel hide = new HidePanel("Special Paint Options (only work in some batteries)", builder.getPanel());
 		return hide;
@@ -410,11 +428,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(sliderStroke.getToolbar(), cc.xyw(4, row, 1));
 
 		builder.add(JGoodiesHelper.createBlackLabel("Extra Colors"), cc.xyw(2, ++row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Background Icons"), cc.xyw(6, row, 1));
 		builder.add(extraColor1, cc.xyw(2, ++row, 1));
 		builder.add(extraColor2, cc.xyw(4, row, 1));
-		builder.add(xorIconSelector, cc.xyw(6, row, 1));
-		builder.add(xorSquareIconSelector, cc.xyw(8, row, 1));
 
 		final JPanel hide = new HidePanel("Misc Options (only work in some batteries)", builder.getPanel());
 		return hide;
