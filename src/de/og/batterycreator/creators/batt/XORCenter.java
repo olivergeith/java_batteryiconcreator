@@ -78,10 +78,6 @@ public class XORCenter extends AbstractIconCreator {
 		if (xorIcon == null) {
 			xorIcon = myIcon;
 		}
-		ImageIcon textureIcon = settings.getTextureIcon();
-		if (textureIcon == null) {
-			textureIcon = myTexture;
-		}
 		final int imgWidth = xorIcon.getIconWidth();
 		final int imgHeight = xorIcon.getIconHeight();
 		// Create a graphics contents on the buffered image
