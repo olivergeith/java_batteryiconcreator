@@ -415,9 +415,9 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(sliderBattGradientLevel.getToolbar(), cc.xyw(6, row, 1));
 
 		builder.addSeparator("Texture Options", cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createGroupLabel("Filter"), cc.xyw(2, ++row, 7));
-		builder.add(JGoodiesHelper.createBlackLabel("Hue-Level"), cc.xyw(2, ++row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Hue-Preview"), cc.xyw(6, row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Filter"), cc.xyw(2, ++row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Hue-Level"), cc.xyw(4, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Hue-Preview"), cc.xyw(6, row, 1));
 		builder.add(textureFilterTypeCombo, cc.xyw(2, ++row, 1));
 		builder.add(sliderHueShift.getToolbar(), cc.xyw(4, row, 1));
 		builder.add(huePreviewLabel, cc.xyw(6, row, 1));
