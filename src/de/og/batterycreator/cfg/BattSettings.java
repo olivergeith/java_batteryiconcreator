@@ -30,7 +30,7 @@ public class BattSettings implements Serializable {
 	public static final Color	COLOR_AOKP_BLUE				= new Color(39, 135, 173);
 	public static final Font	DEFAULT_FONT				= new Font(Font.SANS_SERIF, Font.BOLD, 21);
 
-	// Member
+	// Font colors
 	private Color				fontColor					= COLOR_FONT;
 	private Color				fontColorLowBatt			= COLOR_LOW_BATT;
 	private Color				fontColorMedBatt			= COLOR_Med_BATT;
@@ -50,44 +50,52 @@ public class BattSettings implements Serializable {
 	 * 1-6 How often should be blurred ?
 	 */
 	private int					dropShadowBlurryness		= 3;
-
-	private boolean				useChargeColor				= true;
-
-	private Color				extraColor1					= COLOR_AOKP_BLUE;
-	private Color				extraColor2					= COLOR_AOKP_BLUE;
-
+	// zeiger
 	private boolean				drawZeiger					= false;
 
+	// colors
+	private Color				extraColor1					= COLOR_AOKP_BLUE;
+	private Color				extraColor2					= COLOR_AOKP_BLUE;
 	private Color				iconColorInActiv			= COLOR_INACTIV;
 	private Color				iconColor					= COLOR_AOKP_BLUE;
 	private Color				iconColorLowBatt			= COLOR_LOW_BATT;
 	private Color				iconColorMedBatt			= COLOR_Med_BATT;
 	private Color				iconChargeColor				= COLOR_CHARGE;
+	private Color				iconChargeGlowColor			= Color.white;
+	private Color				backgroundColor				= COLOR_BGRND;
+	private boolean				transparentBackground		= true;
+	private boolean				useChargeColor				= true;
+
+	// glow
 	private boolean				glow						= false;
 	private boolean				glowForCharge				= false;
 	private int					glowRadius					= 20;
-
-	private Color				iconChargeGlowColor			= Color.white;
+	private int					glowXOffset					= 0;
+	private int					glowYOffset					= 0;
+	private boolean				moveGlowWithText			= true;
+	// pulsing charge glow
 	private boolean				chargeGlow					= false;
 	private int					chargeGlowRadius			= 20;
 	private int					chargeGlowOffsetX			= 0;
 	private int					chargeGlowOffsetY			= 0;
 	private boolean				showAdditionalFontOnCharge	= false;
 
-	private boolean				transparentBackground		= true;
-	private Color				backgroundColor				= COLOR_BGRND;
+	//
+	public static final int		TEXTURE_FILTER_NON			= 0;
+	public static final int		TEXTURE_FILTER_COLORIZE		= 1;
+	public static final int		TEXTURE_FILTER_HUE_SHIFT	= 2;
+	private int					textureFilterType			= TEXTURE_FILTER_NON;
+	private int					hueShift					= 0;
 
 	// font and charge icon offset
 	private boolean				moveIconWithText			= true;
-	private boolean				moveGlowWithText			= true;
 	private boolean				moveChargeGlowWithText		= true;
-	private int					glowXOffset					= 0;
-	private int					glowYOffset					= 0;
 	private int					iconXOffset					= 0;
 	private int					iconYOffset					= 0;
 	private int					fontXOffset					= 0;
 	private int					fontYOffset					= 0;
 	// font
+
 	private Font				font						= DEFAULT_FONT;
 	private int					reduceFontOn100				= -3;
 	private boolean				showFont					= true;
@@ -978,6 +986,22 @@ public class BattSettings implements Serializable {
 	 */
 	public void setDrawZeiger(final boolean drawZeiger) {
 		this.drawZeiger = drawZeiger;
+	}
+
+	public int getTextureFilterType() {
+		return textureFilterType;
+	}
+
+	public void setTextureFilterType(final int textureFilterType) {
+		this.textureFilterType = textureFilterType;
+	}
+
+	public int getHueShift() {
+		return hueShift;
+	}
+
+	public void setHueShift(final int hueShift) {
+		this.hueShift = hueShift;
 	}
 
 }

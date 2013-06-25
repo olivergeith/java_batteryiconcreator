@@ -81,7 +81,7 @@ public class CircleCreatorV2 extends AbstractIconCreator {
 		// 1f));
 		// Level malen
 		if (settings.isUseTexture()) {
-			g2d.setPaint(getTexturePaint());
+			g2d.setPaint(getTexturePaint(settings.getActivIconColor(percentage, charge)));
 		} else if (settings.isBattGradient()) {
 			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge), 0, 0, imgWidth, imgHeight, false));
 		} else {

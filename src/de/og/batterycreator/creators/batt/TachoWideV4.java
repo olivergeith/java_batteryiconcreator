@@ -126,7 +126,7 @@ public class TachoWideV4 extends AbstractIconCreator {
 
 		// Level malen
 		if (settings.isUseTexture()) {
-			g2d.setPaint(getTexturePaint());
+			g2d.setPaint(getTexturePaint(settings.getActivIconColor(percentage, charge)));
 		} else if (settings.isBattGradient()) {
 			g2d.setPaint(getSingelColorGradientPaint(settings.getActivIconColor(percentage, charge).brighter(), 0, 0, imgWidth, imgHeight, false));
 		} else {

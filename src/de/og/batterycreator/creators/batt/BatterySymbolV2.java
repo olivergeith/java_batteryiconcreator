@@ -89,7 +89,7 @@ public class BatterySymbolV2 extends AbstractIconCreator {
 			h = 2;
 
 		if (settings.isUseTexture()) {
-			g2d.setPaint(getTexturePaint());
+			g2d.setPaint(getTexturePaint(settings.getActivIconColor(percentage, charge)));
 		} else if (settings.isBattGradient()) {
 			final int x = battXOffset + 3;
 			final int y = battYOffset;

@@ -20,6 +20,7 @@ import og.basics.grafics.Draw2DFunktions;
 import og.basics.gui.image.StaticImageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.jhlabs.image.HSBAdjustFilter;
 import com.jhlabs.image.TritoneFilter;
 import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.RomSettings;
@@ -545,24 +546,31 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 		return "./pngs/renderer/batt/" + toString();
 	}
 
-	protected TexturePaint getTexturePaint() {
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	// Texture stuff
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	protected TexturePaint getTexturePaint(final Color col) {
 		ImageIcon tex = settings.getTextureIcon();
 		if (tex == null) {
 			tex = TextureSelector.icon01;
 		}
-		return new TexturePaint(StaticImageHelper.convertImageIcon(tex), new Rectangle(0, 0, tex.getIconWidth(), tex.getIconHeight()));
-	}
-
-	protected TexturePaint getTexturePaintFiltered(final Color col) {
-		ImageIcon tex = settings.getTextureIcon();
-		final TritoneFilter filter = new TritoneFilter();
-		filter.setMidColor(col.getRGB());
-		final BufferedImage img = filter.filter(StaticImageHelper.convertImageIcon(tex), null);
-
-		if (tex == null) {
-			tex = TextureSelector.icon01;
+		switch (settings.getTextureFilterType()) {
+			default:
+			case BattSettings.TEXTURE_FILTER_NON:
+				return new TexturePaint(StaticImageHelper.convertImageIcon(tex), new Rectangle(0, 0, tex.getIconWidth(), tex.getIconHeight()));
+			case BattSettings.TEXTURE_FILTER_COLORIZE:
+				final TritoneFilter filter = new TritoneFilter();
+				filter.setMidColor(col.getRGB());
+				final BufferedImage img = filter.filter(StaticImageHelper.convertImageIcon(tex), null);
+				return new TexturePaint(img, new Rectangle(0, 0, tex.getIconWidth(), tex.getIconHeight()));
+			case BattSettings.TEXTURE_FILTER_HUE_SHIFT:
+				final HSBAdjustFilter huefilter = new HSBAdjustFilter();
+				final Float factor = settings.getHueShift() / 100f;
+				huefilter.setHFactor(factor);
+				final BufferedImage imghue = huefilter.filter(StaticImageHelper.convertImageIcon(tex), null);
+				return new TexturePaint(imghue, new Rectangle(0, 0, tex.getIconWidth(), tex.getIconHeight()));
 		}
-		return new TexturePaint(img, new Rectangle(0, 0, tex.getIconWidth(), tex.getIconHeight()));
 	}
 
 }

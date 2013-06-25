@@ -3,11 +3,15 @@ package de.og.batterycreator.gui.cfg;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -15,12 +19,14 @@ import javax.swing.JToolBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import og.basics.gui.icon.CommonIconProvider;
+import og.basics.gui.image.StaticImageHelper;
 import og.basics.gui.jfontchooser.JFontChooserButton;
 import og.basics.gui.widgets.hidepanel.HidePanel;
 import og.basics.jgoodies.JGoodiesHelper;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import com.jhlabs.image.HSBAdjustFilter;
 import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.SettingsPersistor;
 import de.og.batterycreator.creators.batt.AbstractIconCreator;
@@ -126,14 +132,11 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JRadioButton			cboxLinearGradient					= createRadioButton("LinearGradient",
 																					"Linear Gradients within Icon (BattGradients will have no effect then!");
 	private final JRadioButton			cboxTexture							= createRadioButton("Use Texture", "Use Texture instead of colors");
-	// private final JCheckBox cboxBattGradient = createCheckbox("BattGradient",
-	// "Gradients within Iconcolor (Level below)");
-	// private final JCheckBox cboxLinearGradient =
-	// createCheckbox("LinearGradient",
-	// "Linear Gradients within Icon (BattGradients will have no effect then!");
-	// private final JCheckBox cboxTexture = createCheckbox("Use Texture",
-	// "Use Texture instead of colors");
+
 	private final TextureSelector		textureSelector						= new TextureSelector(36);
+	private final JComboBox<String>		textureFilterTypeCombo				= new JComboBox<String>();
+	private final SliderAndLabel		sliderHueShift						= new SliderAndLabel(0, 100);
+	private final JLabel				huePreviewLabel						= new JLabel();
 
 	// Construktor
 	public BattSettingsPanel() {
@@ -147,6 +150,24 @@ public class BattSettingsPanel extends SettingsPanel {
 		radiogroup.add(cboxTexture);
 		radiogroup.add(cboxLinearGradient);
 		cboxNoFilling.setSelected(true);
+
+		textureFilterTypeCombo.addItem("None");
+		textureFilterTypeCombo.addItem("Colorize Texture");
+		textureFilterTypeCombo.addItem("Hue shift");
+		textureFilterTypeCombo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				validateControls();
+			}
+		});
+		sliderHueShift.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(final ChangeEvent e) {
+				final BufferedImage imghue = getHuePreviewImage();
+				huePreviewLabel.setIcon(new ImageIcon(imghue));
+			}
+
+		});
 
 		sliderLowBatt.addChangeListener(new ChangeListener() {
 
@@ -186,6 +207,18 @@ public class BattSettingsPanel extends SettingsPanel {
 				}
 			}
 		});
+	}
+
+	private BufferedImage getHuePreviewImage() {
+		ImageIcon tex = (ImageIcon) textureSelector.getSelectedItem();
+		if (tex == null) {
+			tex = TextureSelector.icon01;
+		}
+		final HSBAdjustFilter huefilter = new HSBAdjustFilter();
+		final Float factor = sliderHueShift.getValue() / 100f;
+		huefilter.setHFactor(factor);
+		final BufferedImage imghue = huefilter.filter(StaticImageHelper.convertImageIcon(tex), null);
+		return imghue;
 	}
 
 	private void myInit() {
@@ -366,28 +399,6 @@ public class BattSettingsPanel extends SettingsPanel {
 		return hide;
 	}
 
-	// private JPanel createCfgPaneThresholds() {
-	// //
-	// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
-	// final FormLayout layout = new
-	// FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
-	// "p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
-	// final CellConstraints cc = new CellConstraints();
-	// final PanelBuilder builder = new PanelBuilder(layout);
-	// int row = 1;
-	// builder.add(JGoodiesHelper.createBlackLabel("...for Low Battery-Levels"),
-	// cc.xyw(2, ++row, 3));
-	// builder.add(JGoodiesHelper.createBlackLabel("...for Med Battery-Levels"),
-	// cc.xyw(6, row, 3));
-	// builder.add(sliderLowBatt.getToolbar(), cc.xyw(2, ++row, 1));
-	// builder.add(cboxUseGradientMediumLevels, cc.xyw(4, row, 1));
-	// builder.add(sliderMedBatt.getToolbar(), cc.xyw(6, row, 1));
-	// builder.add(cboxUseGradientNormalLevels, cc.xyw(8, row, 1));
-	//
-	// final JPanel hide = new HidePanel("Thresholds...", builder.getPanel());
-	// return hide;
-	// }
-
 	private JPanel createCfgPaneFilling() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
 		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
@@ -402,9 +413,16 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(cboxLinearGradient, cc.xyw(8, row, 1));
 		builder.add(textureSelector, cc.xyw(4, ++row, 1));
 		builder.add(sliderBattGradientLevel.getToolbar(), cc.xyw(6, row, 1));
+
+		builder.addSeparator("Texture Options", cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createGroupLabel("Filter"), cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Hue-Level"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Hue-Preview"), cc.xyw(6, row, 3));
+		builder.add(textureFilterTypeCombo, cc.xyw(2, ++row, 1));
+		builder.add(sliderHueShift.getToolbar(), cc.xyw(4, row, 1));
+		builder.add(huePreviewLabel, cc.xyw(6, row, 1));
+
 		builder.addSeparator("Background Icons", cc.xyw(2, ++row, 7));
-		// builder.add(JGoodiesHelper.createBlackLabel("Background Icons"),
-		// cc.xyw(2, ++row, 3));
 		builder.add(xorIconSelector, cc.xyw(2, ++row, 1));
 		builder.add(xorSquareIconSelector, cc.xyw(4, row, 1));
 
@@ -529,6 +547,9 @@ public class BattSettingsPanel extends SettingsPanel {
 			else
 				textureSelector.setSelectedIndex(0);
 
+			textureFilterTypeCombo.setSelectedIndex(settings.getTextureFilterType());
+			sliderHueShift.setValue(settings.getHueShift());
+
 			this.repaint();
 			validateControls();
 		}
@@ -615,6 +636,8 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		settings.setUseTexture(cboxTexture.isSelected());
 		settings.setTextureIcon((ImageIcon) textureSelector.getSelectedItem());
+		settings.setTextureFilterType(textureFilterTypeCombo.getSelectedIndex());
+		settings.setHueShift(sliderHueShift.getValue());
 
 		return settings;
 	}
@@ -657,9 +680,11 @@ public class BattSettingsPanel extends SettingsPanel {
 		sliderDropShadowBlurryness.setEnabled(enableDropshadowOptions);
 		dropShadowColor.setEnabled(enableDropshadowOptions);
 		dropShadowPos.setEnabled(enableDropshadowOptions);
-
+		// texturestuff
 		textureSelector.setEnabled(cboxTexture.isSelected());
-
+		textureFilterTypeCombo.setEnabled(cboxTexture.isSelected());
+		sliderHueShift.setEnabled(cboxTexture.isSelected() && textureFilterTypeCombo.getSelectedIndex() == BattSettings.TEXTURE_FILTER_HUE_SHIFT);
+		huePreviewLabel.setVisible(cboxTexture.isSelected() && textureFilterTypeCombo.getSelectedIndex() == BattSettings.TEXTURE_FILTER_HUE_SHIFT);
 		// Glow
 		sliderGlowRadius.setEnabled(cboxGlow.isSelected() || cboxGlowForCharge.isSelected());
 		cboxMoveGlowWithText.setEnabled(cboxGlow.isSelected() || cboxGlowForCharge.isSelected());
