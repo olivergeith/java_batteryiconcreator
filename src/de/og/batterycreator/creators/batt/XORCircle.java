@@ -67,14 +67,14 @@ public class XORCircle extends AbstractIconCreator {
 		if (xorIcon == null) {
 			xorIcon = myIcon;
 		}
-		final int imgWidth = xorIcon.getIconWidth();
-		final int imgHeight = xorIcon.getIconHeight();
+		final BufferedImage backgrnd = getBackgroundImage(xorIcon);
+		final int imgWidth = backgrnd.getWidth();
+		final int imgHeight = backgrnd.getHeight();
 		// Create a graphics contents on the buffered image
 		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
 		final Graphics2D g2d = initGrafics2D(img);
 
 		// Hintergrund icon malen
-		final BufferedImage backgrnd = getBackgroundImage(xorIcon);
 		g2d.drawImage(backgrnd, 0, 0, null);
 
 		// Composite COlor setzen
