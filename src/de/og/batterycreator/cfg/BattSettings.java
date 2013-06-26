@@ -18,115 +18,123 @@ public class BattSettings implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID			= 6505593229306008760L;
+	private static final long	serialVersionUID				= 6505593229306008760L;
 
 	// Konstanten
-	public static final Color	COLOR_INACTIV				= Color.darkGray;
-	public static final Color	COLOR_BGRND					= Color.black;
-	public static final Color	COLOR_FONT					= Color.white;
-	public static final Color	COLOR_CHARGE				= Color.green.darker();
-	public static final Color	COLOR_Med_BATT				= Color.orange;
-	public static final Color	COLOR_LOW_BATT				= Color.red;
-	public static final Color	COLOR_AOKP_BLUE				= new Color(39, 135, 173);
-	public static final Font	DEFAULT_FONT				= new Font(Font.SANS_SERIF, Font.BOLD, 21);
+	public static final Color	COLOR_INACTIV					= Color.darkGray;
+	public static final Color	COLOR_BGRND						= Color.black;
+	public static final Color	COLOR_FONT						= Color.white;
+	public static final Color	COLOR_CHARGE					= Color.green.darker();
+	public static final Color	COLOR_Med_BATT					= Color.orange;
+	public static final Color	COLOR_LOW_BATT					= Color.red;
+	public static final Color	COLOR_AOKP_BLUE					= new Color(39, 135, 173);
+	public static final Font	DEFAULT_FONT					= new Font(Font.SANS_SERIF, Font.BOLD, 21);
 
 	// Font colors
-	private Color				fontColor					= COLOR_FONT;
-	private Color				fontColorLowBatt			= COLOR_LOW_BATT;
-	private Color				fontColorMedBatt			= COLOR_Med_BATT;
-	private Color				fontChargeColor				= COLOR_FONT;
+	private Color				fontColor						= COLOR_FONT;
+	private Color				fontColorLowBatt				= COLOR_LOW_BATT;
+	private Color				fontColorMedBatt				= COLOR_Med_BATT;
+	private Color				fontChargeColor					= COLOR_FONT;
 
 	// Dropshadow
-	private boolean				dropShadowIcon				= false;
-	private boolean				dropShadowFont				= false;
-	private Color				dropShadowColor				= COLOR_BGRND;
-	private int					dropShadowOffsetX			= 0;
-	private int					dropShadowOffsetY			= 0;
+	private boolean				dropShadowIcon					= false;
+	private boolean				dropShadowFont					= false;
+	private Color				dropShadowColor					= COLOR_BGRND;
+	private int					dropShadowOffsetX				= 0;
+	private int					dropShadowOffsetY				= 0;
 	/**
 	 * 0-6 Adjusting the filter to be more "black"
 	 */
-	private int					dropShadowOpacity			= 3;
+	private int					dropShadowOpacity				= 3;
 	/**
 	 * 1-6 How often should be blurred ?
 	 */
-	private int					dropShadowBlurryness		= 3;
+	private int					dropShadowBlurryness			= 3;
 	// zeiger
-	private boolean				drawZeiger					= false;
+	private boolean				drawZeiger						= false;
 
 	// colors
-	private Color				extraColor1					= COLOR_AOKP_BLUE;
-	private Color				extraColor2					= COLOR_AOKP_BLUE;
-	private Color				iconColorInActiv			= COLOR_INACTIV;
-	private Color				iconColor					= COLOR_AOKP_BLUE;
-	private Color				iconColorLowBatt			= COLOR_LOW_BATT;
-	private Color				iconColorMedBatt			= COLOR_Med_BATT;
-	private Color				iconChargeColor				= COLOR_CHARGE;
-	private Color				iconChargeGlowColor			= Color.white;
-	private Color				backgroundColor				= COLOR_BGRND;
-	private boolean				transparentBackground		= true;
-	private boolean				useChargeColor				= true;
+	private Color				extraColor1						= COLOR_AOKP_BLUE;
+	private Color				extraColor2						= COLOR_AOKP_BLUE;
+	private Color				iconColorInActiv				= COLOR_INACTIV;
+	private Color				iconColor						= COLOR_AOKP_BLUE;
+	private Color				iconColorLowBatt				= COLOR_LOW_BATT;
+	private Color				iconColorMedBatt				= COLOR_Med_BATT;
+	private Color				iconChargeColor					= COLOR_CHARGE;
+	private Color				iconChargeGlowColor				= Color.white;
+	private Color				backgroundColor					= COLOR_BGRND;
+	private boolean				transparentBackground			= true;
+	private boolean				useChargeColor					= true;
 
 	// glow
-	private boolean				glow						= false;
-	private boolean				glowForCharge				= false;
-	private int					glowRadius					= 20;
-	private int					glowXOffset					= 0;
-	private int					glowYOffset					= 0;
-	private boolean				moveGlowWithText			= true;
+	private boolean				glow							= false;
+	private boolean				glowForCharge					= false;
+	private int					glowRadius						= 20;
+	private int					glowXOffset						= 0;
+	private int					glowYOffset						= 0;
+	private boolean				moveGlowWithText				= true;
 	// pulsing charge glow
-	private boolean				chargeGlow					= false;
-	private int					chargeGlowRadius			= 20;
-	private int					chargeGlowOffsetX			= 0;
-	private int					chargeGlowOffsetY			= 0;
-	private boolean				showAdditionalFontOnCharge	= false;
+	private boolean				chargeGlow						= false;
+	private int					chargeGlowRadius				= 20;
+	private int					chargeGlowOffsetX				= 0;
+	private int					chargeGlowOffsetY				= 0;
+	private boolean				showAdditionalFontOnCharge		= false;
 
-	//
-	public static final int		TEXTURE_FILTER_NON			= 0;
-	public static final int		TEXTURE_FILTER_COLORIZE		= 1;
-	public static final int		TEXTURE_FILTER_HUE_SHIFT	= 2;
-	private int					textureFilterType			= TEXTURE_FILTER_NON;
-	private int					hueShift					= 0;
+	// texture manipulation
+	public static final int		TEXTURE_FILTER_NON				= 0;
+	public static final int		TEXTURE_FILTER_COLORIZE			= 1;
+	public static final int		TEXTURE_FILTER_HUE_SHIFT		= 2;
+	private int					textureFilterType				= TEXTURE_FILTER_NON;
+	private int					hueShift						= 0;
+
+	// texture as Background
+	public static final int		BACKGROUND_ICON					= 0;
+	public static final int		BACKGROUND_TEXTURE_GRAYSCALE	= 1;
+	public static final int		BACKGROUND_TEXTURE_DESATURATE	= 2;
+	private int					backgroundTextureMode			= BACKGROUND_ICON;
+	private int					backgroundBrightness			= 0;
+	private boolean				overpaintBackground				= true;
 
 	// font and charge icon offset
-	private boolean				moveIconWithText			= true;
-	private boolean				moveChargeGlowWithText		= true;
-	private int					iconXOffset					= 0;
-	private int					iconYOffset					= 0;
-	private int					fontXOffset					= 0;
-	private int					fontYOffset					= 0;
+	private boolean				moveIconWithText				= true;
+	private boolean				moveChargeGlowWithText			= true;
+	private int					iconXOffset						= 0;
+	private int					iconYOffset						= 0;
+	private int					fontXOffset						= 0;
+	private int					fontYOffset						= 0;
 	// font
 
-	private Font				font						= DEFAULT_FONT;
-	private int					reduceFontOn100				= -3;
-	private boolean				showFont					= true;
-	private boolean				coloredFont					= false;
-	private boolean				coloredIcon					= true;
-	private boolean				showChargeSymbol			= true;
-	private int					resizeChargeSymbolHeight	= 24;
-	private boolean				useGradiantForMediumColor	= false;
-	private boolean				useGradiantForNormalColor	= false;
-	private boolean				flip						= false;
-	private boolean				noBG						= false;
-	private boolean				battGradient				= false;
-	private int					battGradientLevel			= 2;
-	private int					strokewidth					= 3;
+	private Font				font							= DEFAULT_FONT;
+	private int					reduceFontOn100					= -3;
+	private boolean				showFont						= true;
+	private boolean				coloredFont						= false;
+	private boolean				coloredIcon						= true;
+	private boolean				showChargeSymbol				= true;
+	private int					resizeChargeSymbolHeight		= 24;
+	private boolean				useGradiantForMediumColor		= false;
+	private boolean				useGradiantForNormalColor		= false;
+	private boolean				flip							= false;
+	private boolean				noBG							= false;
+	private boolean				battGradient					= false;
+	private int					battGradientLevel				= 2;
+	private int					strokewidth						= 3;
 
-	private int					lowBattTheshold				= 10;
-	private int					MedBattTheshold				= 30;
+	private int					lowBattTheshold					= 10;
+	private int					MedBattTheshold					= 30;
 
-	private boolean				addPercent					= false;
+	private boolean				addPercent						= false;
 
-	private boolean				linearGradient				= false;
-	private boolean				useTexture					= false;
+	private boolean				linearGradient					= false;
+	private boolean				useTexture						= false;
 
 	// this is transient because it should not be serialized
-	private transient ImageIcon	chargeIcon					= null;
+	private transient ImageIcon	chargeIcon						= null;
 	// this is transient because it should not be serialized
-	private transient ImageIcon	xorIcon						= null;
+	private transient ImageIcon	xorIcon							= null;
 	// this is transient because it should not be serialized
-	private transient ImageIcon	xorSquareIcon				= null;
+	private transient ImageIcon	xorSquareIcon					= null;
 	// this is transient because it should not be serialized
-	private transient ImageIcon	textureIcon					= null;
+	private transient ImageIcon	textureIcon						= null;
 
 	public Color getFontColor() {
 		return fontColor;
@@ -1002,6 +1010,51 @@ public class BattSettings implements Serializable {
 
 	public void setHueShift(final int hueShift) {
 		this.hueShift = hueShift;
+	}
+
+	/**
+	 * @return the backgroundTextureMode
+	 */
+	public int getBackgroundTextureMode() {
+		return backgroundTextureMode;
+	}
+
+	/**
+	 * @param backgroundTextureMode
+	 *            the backgroundTextureMode to set
+	 */
+	public void setBackgroundTextureMode(final int backgroundTextureMode) {
+		this.backgroundTextureMode = backgroundTextureMode;
+	}
+
+	/**
+	 * @return the backgroundBrightness
+	 */
+	public int getBackgroundBrightness() {
+		return backgroundBrightness;
+	}
+
+	/**
+	 * @param backgroundBrightness
+	 *            the backgroundBrightness to set
+	 */
+	public void setBackgroundBrightness(final int backgroundBrightness) {
+		this.backgroundBrightness = backgroundBrightness;
+	}
+
+	/**
+	 * @return the flatBackground
+	 */
+	public boolean isOverpaintBackground() {
+		return overpaintBackground;
+	}
+
+	/**
+	 * @param overpaintBackground
+	 *            the flatBackground to set
+	 */
+	public void setOverPaintBackground(final boolean overpaintBackground) {
+		this.overpaintBackground = overpaintBackground;
 	}
 
 }

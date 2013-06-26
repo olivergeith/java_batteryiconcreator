@@ -56,11 +56,6 @@ public class XORCircle extends AbstractIconCreator {
 		return true;
 	}
 
-	@Override
-	public boolean supportsNoBg() {
-		return true;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -79,12 +74,13 @@ public class XORCircle extends AbstractIconCreator {
 		final Graphics2D g2d = initGrafics2D(img);
 
 		// Hintergrund icon malen
-		g2d.drawImage(xorIcon.getImage(), 0, 0, null);
+		final BufferedImage backgrnd = getBackgroundImage(xorIcon);
+		g2d.drawImage(backgrnd, 0, 0, null);
 
 		// Composite COlor setzen
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
 
-		if (!settings.isNoBG()) {
+		if (settings.isOverpaintBackground()) {
 			// Hintergrund icon umfärben in Hintergrundfarbe
 			if (settings.isBattGradient() || settings.isUseTexture()) {
 				g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv(), 0, 0, imgWidth, imgHeight, true));

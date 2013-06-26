@@ -63,11 +63,6 @@ public class XORSquare extends AbstractIconCreator {
 		return true;
 	}
 
-	@Override
-	public boolean supportsNoBg() {
-		return true;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -83,15 +78,20 @@ public class XORSquare extends AbstractIconCreator {
 		final int imgHeight = xorIcon.getIconHeight();
 		// Create a graphics contents on the buffered image
 		BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
+
 		final Graphics2D g2d = initGrafics2D(img);
 
 		// Hintergrund icon malen
-		g2d.drawImage(xorIcon.getImage(), 0, 0, null);
+		final BufferedImage backgrnd = getBackgroundImage(xorIcon);
+		// final BufferedImage backgrnd =
+		// StaticFilterHelper.getColorizedBackground(xorIcon,
+		// settings.getIconColorInActiv(), 0);
+		g2d.drawImage(backgrnd, 0, 0, null);
 
 		// Composite COlor setzen
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
 
-		if (!settings.isNoBG()) {
+		if (settings.isOverpaintBackground()) {
 			// Hintergrund icon umfärben in Hintergrundfarbe
 			if (settings.isBattGradient() || settings.isUseTexture() || settings.isLinearGradient()) {
 				g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv(), 0, 0, imgWidth, imgHeight, true));
