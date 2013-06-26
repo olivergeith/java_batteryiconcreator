@@ -86,6 +86,8 @@ public class BattSettings implements Serializable {
 	public static final int		TEXTURE_FILTER_HUE_SHIFT		= 2;
 	private int					textureFilterType				= TEXTURE_FILTER_NON;
 	private int					hueShift						= 0;
+	private int					satuationShift					= 0;
+	private int					brightnessShift					= 0;
 
 	// texture as Background
 	public static final int		BACKGROUND_ICON					= 0;
@@ -1055,6 +1057,22 @@ public class BattSettings implements Serializable {
 	 */
 	public void setOverPaintBackground(final boolean overpaintBackground) {
 		this.overpaintBackground = overpaintBackground;
+	}
+
+	public int getSatuationShift() {
+		return satuationShift;
+	}
+
+	public void setSatuationShift(final int satuationShift) {
+		this.satuationShift = satuationShift;
+	}
+
+	public int getBrightnessShift() {
+		return brightnessShift;
+	}
+
+	public void setBrightnessShift(final int brightnessShift) {
+		this.brightnessShift = brightnessShift;
 	}
 
 }

@@ -19,6 +19,12 @@ public class StaticFilterHelper {
 
 	}
 
+	public static TexturePaint getHSBTexturePaint(final ImageIcon tex, final int hueShift, final int brightnewwShift, final int saturationShift) {
+		final BufferedImage imghue = getHSBImage(tex, hueShift, brightnewwShift, saturationShift);
+		return new TexturePaint(imghue, new Rectangle(0, 0, tex.getIconWidth(), tex.getIconHeight()));
+
+	}
+
 	public static BufferedImage getHueImage(final ImageIcon tex, final int hueShift) {
 		return getHSBImage(tex, hueShift, 0, 0);
 	}

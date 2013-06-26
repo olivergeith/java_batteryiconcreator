@@ -561,7 +561,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			case BattSettings.TEXTURE_FILTER_COLORIZE:
 				return StaticFilterHelper.getColorizedTexturePaint(tex, col);
 			case BattSettings.TEXTURE_FILTER_HUE_SHIFT:
-				return StaticFilterHelper.getHueTexturePaint(tex, settings.getHueShift());
+				return StaticFilterHelper.getHSBTexturePaint(tex, settings.getHueShift(), settings.getBrightnessShift(), settings.getSatuationShift());
 		}
 	}
 
