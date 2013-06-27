@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import og.basics.gui.image.StaticImageHelper;
 import com.jhlabs.image.GrayscaleFilter;
 import com.jhlabs.image.HSBAdjustFilter;
+import com.jhlabs.image.InvertFilter;
 import com.jhlabs.image.TritoneFilter;
 import de.og.batterycreator.cfg.BattSettings;
 
@@ -74,16 +75,26 @@ public class StaticFilterHelper {
 		return img;
 	}
 
+	public static BufferedImage getInvertedGrayScaleImage(final ImageIcon tex, final int brightness) {
+		final InvertFilter inverter = new InvertFilter();
+		final GrayscaleFilter filter = new GrayscaleFilter();
+		BufferedImage img = inverter.filter(StaticImageHelper.convertImageIcon(tex), null);
+		img = filter.filter(img, null);
+		final HSBAdjustFilter huefilter = new HSBAdjustFilter();
+		huefilter.setBFactor(brightness / 100f);
+		img = huefilter.filter(img, null);
+		return img;
+	}
+
 	public static BufferedImage getColorizedBackground(final ImageIcon tex, final Color col, final int brightness) {
 		final BufferedImage img = getColorizedImage(tex, col);
-		// final HSBAdjustFilter huefilter = new HSBAdjustFilter();
-		// huefilter.setBFactor(brightness / 100f);
-		// img = huefilter.filter(img, null);
 		return img;
 	}
 
 	public static BufferedImage getBackgroundImage(final ImageIcon tex, final ImageIcon xorBack, final int brightness, final int mode) {
 		switch (mode) {
+			case BattSettings.BACKGROUND_TEXTURE_GRAYSCALE_INVERTED:
+				return StaticFilterHelper.getInvertedGrayScaleImage(tex, brightness);
 			case BattSettings.BACKGROUND_TEXTURE_GRAYSCALE:
 				return StaticFilterHelper.getGrayScaleImage(tex, brightness);
 			case BattSettings.BACKGROUND_TEXTURE_DESATURATE:

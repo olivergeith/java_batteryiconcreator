@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import og.basics.grafics.Draw2DFunktions;
+import de.og.batterycreator.cfg.BattSettings;
 import de.og.batterycreator.cfg.RomSettings;
 import de.og.batterycreator.gui.widgets.iconselector.textureselector.TextureSelector;
 import de.og.batterycreator.gui.widgets.iconselector.xorsquareselector.XorSquareSelector;
@@ -86,14 +87,18 @@ public class XORCenter extends AbstractIconCreator {
 		// Composite COlor setzen
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1f));
 
-		if (settings.isOverpaintBackground()) {
-			// Hintergrund icon umfärben in Hintergrundfarbe
-			if (settings.isBattGradient() || settings.isUseTexture()) {
-				g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv(), 0, 0, imgWidth, imgHeight, true));
-			} else {
+		switch (settings.getOverpaintBackgroundMode()) {
+			default:
+			case BattSettings.BACKGROUND_OVERPAINT_NO:
+				break;
+			case BattSettings.BACKGROUND_OVERPAINT_FLAT:
 				g2d.setPaint(settings.getIconColorInActiv());
-			}
-			g2d.fillRect(0, 0, imgWidth, imgHeight);
+				g2d.fillRect(0, 0, imgWidth, imgHeight);
+				break;
+			case BattSettings.BACKGROUND_OVERPAINT_GRADIENT:
+				g2d.setPaint(getSingelColorGradientPaint(settings.getIconColorInActiv(), 0, 0, imgWidth, imgHeight, true));
+				g2d.fillRect(0, 0, imgWidth, imgHeight);
+				break;
 		}
 		// Paint zusammenbasteln
 		if (settings.isUseTexture()) {

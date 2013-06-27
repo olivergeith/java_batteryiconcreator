@@ -145,7 +145,7 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JComboBox<String>		backgroundModeCombo					= new JComboBox<String>();
 	private final SliderAndLabel		sliderBackgroundBrightness			= new SliderAndLabel(-100, 100);
 	private final JLabel				backgroundPreviewLabel				= new JLabel();
-	private final JCheckBox				cboxOverPaintBackground				= createCheckbox("Overpaint Backgrnd", "Overpaint background with inactiv Color");
+	private final JComboBox<String>		overpaintModeCombo					= new JComboBox<String>();
 
 	// Construktor
 	public BattSettingsPanel() {
@@ -195,9 +195,14 @@ public class BattSettingsPanel extends SettingsPanel {
 		});
 
 		// background
-		backgroundModeCombo.addItem("Use XorBackGrnd Icons");
-		backgroundModeCombo.addItem("Use texture as background (grayscaled)");
-		backgroundModeCombo.addItem("Use texture as background (desaturated)");
+		overpaintModeCombo.addItem("No Overpaint");
+		overpaintModeCombo.addItem("Flat Overpaint");
+		overpaintModeCombo.addItem("Gradient Overpaint");
+
+		backgroundModeCombo.addItem("Use XorBackGrnd-Icons");
+		backgroundModeCombo.addItem("Use Texture as BackGrnd (grayscaled)");
+		backgroundModeCombo.addItem("Use Texture as BackGrnd (desaturated)");
+		backgroundModeCombo.addItem("Use Texture as BackGrnd (negative grayscaled)");
 		backgroundModeCombo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
@@ -278,6 +283,8 @@ public class BattSettingsPanel extends SettingsPanel {
 			default:
 			case BattSettings.BACKGROUND_TEXTURE_GRAYSCALE:
 				return StaticFilterHelper.getGrayScaleImage(tex, sliderBackgroundBrightness.getValue());
+			case BattSettings.BACKGROUND_TEXTURE_GRAYSCALE_INVERTED:
+				return StaticFilterHelper.getInvertedGrayScaleImage(tex, sliderBackgroundBrightness.getValue());
 			case BattSettings.BACKGROUND_TEXTURE_DESATURATE:
 				return StaticFilterHelper.getHSBImage(tex, 0, sliderBackgroundBrightness.getValue(), -100);
 		}
@@ -519,8 +526,9 @@ public class BattSettingsPanel extends SettingsPanel {
 		int row = 1;
 
 		builder.add(JGoodiesHelper.createBlackLabel("Background-Mode"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Overpaint-Mode"), cc.xyw(6, row, 3));
 		builder.add(backgroundModeCombo, cc.xyw(2, ++row, 3));
-		builder.add(cboxOverPaintBackground, cc.xyw(6, row, 3));
+		builder.add(overpaintModeCombo, cc.xyw(6, row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("Brightness-Level"), cc.xyw(2, ++row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Preview"), cc.xyw(4, row, 1));
 		builder.add(xorLabel1, cc.xyw(6, row, 1));
@@ -642,7 +650,6 @@ public class BattSettingsPanel extends SettingsPanel {
 			sliderReduceOn100.setValue(settings.getReduceFontOn100());
 
 			sliderResizeChargeSymbol.setValue(settings.getResizeChargeSymbolHeight());
-			// cboxResizeChargeSymbol.setSelected(settings.isResizeChargeSymbol());
 
 			cboxLinearGradient.setSelected(settings.isLinearGradient());
 			cboxTexture.setSelected(settings.isUseTexture());
@@ -658,7 +665,7 @@ public class BattSettingsPanel extends SettingsPanel {
 
 			backgroundModeCombo.setSelectedIndex(settings.getBackgroundTextureMode());
 			sliderBackgroundBrightness.setValue(settings.getBackgroundBrightness());
-			cboxOverPaintBackground.setSelected(settings.isOverpaintBackground());
+			overpaintModeCombo.setSelectedIndex(settings.getOverpaintBackgroundMode());
 
 			this.repaint();
 			validateControls();
@@ -739,7 +746,6 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setIconXOffset(iconPos.getPosition().x);
 		settings.setIconYOffset(iconPos.getPosition().y);
 
-		// settings.setResizeChargeSymbol(cboxResizeChargeSymbol.isSelected());
 		settings.setResizeChargeSymbolHeight(sliderResizeChargeSymbol.getValue());
 
 		settings.setLinearGradient(cboxLinearGradient.isSelected());
@@ -753,7 +759,7 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		settings.setBackgroundTextureMode(backgroundModeCombo.getSelectedIndex());
 		settings.setBackgroundBrightness(sliderBackgroundBrightness.getValue());
-		settings.setOverPaintBackground(cboxOverPaintBackground.isSelected());
+		settings.setOverpaintBackgroundMode(overpaintModeCombo.getSelectedIndex());
 
 		return settings;
 	}
