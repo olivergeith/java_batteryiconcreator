@@ -30,7 +30,7 @@ public class NotifyAnalyser {
 
 	private void finalizeResults() {
 		LOG.info("##################################################");
-		LOG.info(" Notify Icon Analyser");
+		LOG.info(" SystemUIMOD Icon Analyser");
 		LOG.info("##################################################");
 		for (final NotifyIconType type : typeMap.values()) {
 			LOG.info(" Found: " + type.toDebugString());
@@ -61,10 +61,12 @@ public class NotifyAnalyser {
 			pattern = NotifyIconType.PREFIX_IC;
 		else if ((filename.startsWith(NotifyIconType.PREFIX_STAT)))
 			pattern = NotifyIconType.PREFIX_STAT;
+		else if ((filename.startsWith(NotifyIconType.PREFIX_HALO)))
+			pattern = NotifyIconType.PREFIX_HALO;
 		else
 			return;
 
-		final String mapKey = drawableFolder + "/" + pattern;
+		final String mapKey = drawableFolder + "_" + pattern;
 		NotifyIconType type = typeMap.get(mapKey);
 		if (type == null) {
 			type = new NotifyIconType(drawableFolder, mapKey);
@@ -84,7 +86,9 @@ public class NotifyAnalyser {
 			@Override
 			public boolean accept(final File dir, final String name) {
 				return name.toLowerCase().endsWith(".png") //
-						&& (name.toLowerCase().startsWith(NotifyIconType.PREFIX_IC) || name.toLowerCase().startsWith(NotifyIconType.PREFIX_STAT));
+						&& (name.toLowerCase().startsWith(NotifyIconType.PREFIX_IC) //
+								|| name.toLowerCase().startsWith(NotifyIconType.PREFIX_STAT) //
+						|| name.toLowerCase().startsWith(NotifyIconType.PREFIX_HALO));
 			}
 		});
 		return pngs;

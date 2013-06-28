@@ -10,6 +10,7 @@ public class NotifyIconType extends IconType {
 
 	public static final String		PREFIX_IC	= "ic_notify_";
 	public static final String		PREFIX_STAT	= "stat_notify_";
+	public static final String		PREFIX_HALO	= "halo_";
 
 	private final String			pattern;
 
