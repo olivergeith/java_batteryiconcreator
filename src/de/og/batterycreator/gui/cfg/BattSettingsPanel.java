@@ -806,18 +806,6 @@ public class BattSettingsPanel extends SettingsPanel {
 		textureSelector.setEnabled(cboxTexture.isSelected());
 		textureFilterTypeCombo.setEnabled(cboxTexture.isSelected());
 		hsbPanel.setVisible(cboxTexture.isSelected() && textureFilterTypeCombo.getSelectedIndex() == BattSettings.TEXTURE_FILTER_HUE_SHIFT);
-		// sliderHueShift.setEnabled(cboxTexture.isSelected() &&
-		// textureFilterTypeCombo.getSelectedIndex() ==
-		// BattSettings.TEXTURE_FILTER_HUE_SHIFT);
-		// sliderSaturationShift.setEnabled(cboxTexture.isSelected() &&
-		// textureFilterTypeCombo.getSelectedIndex() ==
-		// BattSettings.TEXTURE_FILTER_HUE_SHIFT);
-		// sliderBrightnessShift.setEnabled(cboxTexture.isSelected() &&
-		// textureFilterTypeCombo.getSelectedIndex() ==
-		// BattSettings.TEXTURE_FILTER_HUE_SHIFT);
-		// huePreviewLabel.setVisible(cboxTexture.isSelected() &&
-		// textureFilterTypeCombo.getSelectedIndex() ==
-		// BattSettings.TEXTURE_FILTER_HUE_SHIFT);
 		setHuePreviewImage();
 
 		// Backgroundstuff
