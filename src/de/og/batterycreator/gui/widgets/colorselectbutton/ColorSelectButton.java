@@ -104,6 +104,7 @@ public class ColorSelectButton extends JButton {
 		colorChooser.addChooserPanel(new CrayonPanel());
 		colorChooser.addChooserPanel(new KrozCrayonPanel());
 		colorChooser.addChooserPanel(new MorphologyCrayonPanel());
+		colorChooser.addChooserPanel(new NadmajCrayonPanel());
 		colorChooser.addChooserPanel(new UserCrayonPanel());
 
 		final ActionListener okActionListener = new ActionListener() {
