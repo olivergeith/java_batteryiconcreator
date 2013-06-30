@@ -138,8 +138,6 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JLabel				huePreviewLabel						= new JLabel();
 
 	// Backgrounds
-	private final JLabel				xorLabel1							= JGoodiesHelper.createBlackLabel("XorCircleBackGrnd");
-	private final JLabel				xorLabel2							= JGoodiesHelper.createBlackLabel("XorSquareBackGrnd");
 	private final XorCircleSelector		xorIconSelector						= new XorCircleSelector(36);
 	private final XorSquareSelector		xorSquareIconSelector				= new XorSquareSelector(36);
 	private final JComboBox<String>		backgroundModeCombo					= new JComboBox<String>();
@@ -302,6 +300,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		makeButtonBar();
 	}
 
+	private final JPanel	tex2BGPanel		= createCfgPaneTexture2Background();
+	private final JPanel	xorBGPanel		= createCfgPaneXorBackgrounds();
 	private final JPanel	backgroundPanel	= createCfgPaneBackground();
 	private final JPanel	hsbPanel		= createCfgPaneHSB();
 
@@ -484,12 +484,13 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(cboxTexture, cc.xyw(4, row, 1));
 		builder.add(cboxBattGradient, cc.xyw(6, row, 1));
 		builder.add(cboxLinearGradient, cc.xyw(8, row, 1));
-		builder.add(textureSelector, cc.xyw(4, ++row, 1));
-		builder.add(sliderBattGradientLevel.getToolbar(), cc.xyw(6, row, 1));
+		builder.add(sliderBattGradientLevel.getToolbar(), cc.xyw(6, ++row, 1));
 
 		builder.addSeparator("Texture Options", cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("Filter"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("Texture"), cc.xyw(6, row, 3));
 		builder.add(textureFilterTypeCombo, cc.xyw(2, ++row, 3));
+		builder.add(textureSelector.getToolBar(), cc.xyw(6, row, 3));
 
 		builder.add(hsbPanel, cc.xyw(1, ++row, 9));
 
@@ -529,17 +530,44 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(JGoodiesHelper.createBlackLabel("Overpaint-Mode"), cc.xyw(6, row, 3));
 		builder.add(backgroundModeCombo, cc.xyw(2, ++row, 3));
 		builder.add(overpaintModeCombo, cc.xyw(6, row, 3));
-		builder.add(JGoodiesHelper.createBlackLabel("Brightness-Level"), cc.xyw(2, ++row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Preview"), cc.xyw(4, row, 1));
-		builder.add(xorLabel1, cc.xyw(6, row, 1));
-		builder.add(xorLabel2, cc.xyw(8, row, 1));
-		builder.add(sliderBackgroundBrightness.getToolbar(), cc.xyw(2, ++row, 1));
-		builder.add(backgroundPreviewLabel, cc.xyw(4, row, 1));
-		builder.add(xorIconSelector, cc.xyw(6, row, 1));
-		builder.add(xorSquareIconSelector, cc.xyw(8, row, 1));
+
+		builder.add(xorBGPanel, cc.xyw(1, ++row, 9));
+		builder.add(tex2BGPanel, cc.xyw(1, ++row, 9));
 
 		final JPanel hide = new HidePanel("Background Options (only for Xor Batteries)", builder.getPanel());
 		return hide;
+	}
+
+	private JPanel createCfgPaneXorBackgrounds() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(JGoodiesHelper.createBlackLabel("XorCircleBackGrnd"), cc.xyw(2, ++row, 3));
+		builder.add(JGoodiesHelper.createBlackLabel("XorSquareBackGrnd"), cc.xyw(6, row, 3));
+		builder.add(xorIconSelector.getToolBar(), cc.xyw(2, ++row, 3));
+		builder.add(xorSquareIconSelector.getToolBar(), cc.xyw(6, row, 3));
+
+		return builder.getPanel();
+	}
+
+	private JPanel createCfgPaneTexture2Background() {
+		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
+		final FormLayout layout = new FormLayout("2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu, 64dlu, 2dlu",
+				"p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p");
+		final CellConstraints cc = new CellConstraints();
+		final PanelBuilder builder = new PanelBuilder(layout);
+		int row = 1;
+
+		builder.add(JGoodiesHelper.createBlackLabel("Brightness-Level"), cc.xyw(2, ++row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Preview"), cc.xyw(4, row, 1));
+		builder.add(sliderBackgroundBrightness.getToolbar(), cc.xyw(2, ++row, 1));
+		builder.add(backgroundPreviewLabel, cc.xyw(4, row, 1));
+
+		return builder.getPanel();
 	}
 
 	private JPanel createCfgPaneMisc() {
@@ -814,13 +842,13 @@ public class BattSettingsPanel extends SettingsPanel {
 		if (!cboxTexture.isSelected())
 			backgroundModeCombo.setSelectedIndex(0);
 		final boolean backEn = backgroundModeCombo.getSelectedIndex() > 0;
-		backgroundPreviewLabel.setVisible(backEn);
-		sliderBackgroundBrightness.setEnabled(backEn);
 
-		xorLabel1.setVisible(!backEn);
-		xorLabel2.setVisible(!backEn);
-		xorIconSelector.setVisible(!backEn);
-		xorSquareIconSelector.setVisible(!backEn);
+		// backgroundPreviewLabel.setVisible(backEn);
+		// sliderBackgroundBrightness.setEnabled(backEn);
+
+		xorBGPanel.setVisible(!backEn);
+		tex2BGPanel.setVisible(backEn);
+
 		setBackgroundPreviewImage();
 
 		// Glow
