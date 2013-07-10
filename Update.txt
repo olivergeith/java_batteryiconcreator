@@ -1,76 +1,33 @@
 [B][SIZE="3"]New Version out of [URL="http://forum.xda-developers.com/showthread.php?t=1918500"]"The Rom Fumbler"[/URL] aka "The Battery Icon Creator"[/SIZE][/B]
 
-This is a big update with lots of new and changed stuff...only 9 Day since last version, and so many updates! I cant believe it myself! :)
+A lot of new stuff regarding textures, colors and so on... I will try to post some tutorials the next days...so stay tuned ;)
 Hope you enjoy it!
 
 
 [SIZE="4"][B]Changelog:[/B][/SIZE]
-[COLOR="Blue"][B]June-24-2013[/B] : Release 30.0[/COLOR]
+[COLOR="Blue"][B]July-10-2013[/B] : Release 31.0[/COLOR]
 [LIST]
-[*][B]RefreshButton to refresh the Icon-Sets[/B]
-...usefull after exporting Icon-Sets with SystemUI-Analyzer (so you don't need to restart the Rom Fumbler any more for this!)
-[*][B]New Battery Styles:[/B]
-...Zoopa.Wide.V1 
-...Zoopa.Wide.V2
-...Zoopa.Gauge
-...Zoopa.Circle
-...Zoopa.Clock
-...Zoopa.Clock.Wide
-...Rush.35 Battery
-...Tacho.Gauge
-...Tacho.Wide.V4
-...Tacho.Wide.V5
-...Circle.V4
-[*][B]Lots of reworked or renamed Battery Styles:[/B]
-...BubbleBattery
-...Tacho-Batteries
-...ArcBatteries renamed to "Circle..."
-...xxhdpi compatibility for lots of old battery styles
-...lots of battery styles renamed
-[*][B]New in BatterySetting:[/B]
-...drawZeiger for some Batteries
-...pulsing chargeglow now movable too
-...normal glow now seperatly activated for normal and charge batteries
+[*][B]Texture Manipulation[/B]
+...colorizing of textures depending on the battery level and the corresponding color for that level
+...Changing of Hue, Saturation and Brightness of Textures...(so you dont need different colored versions of your textures any more!)
+......see here [url]http://forum.xda-developers.com/showpost.php?p=42945606&postcount=862[/url]
+...creating "gray" Backgrounds from Textures...(so you dont need 2 icons any more...one texture and one fitting background...now you only need the texture icon!)
+......see here [url]http://forum.xda-developers.com/showpost.php?p=42962875&postcount=877[/url] 
+--> so "duplicate" textures and backgrounds are removed from ./custom/...
+[*][B]New custom color panel for Nadmaj's simplistic colors in color chooseer dialog![/B]
+[*][B]SystemUI analyzer now searching for halo and notification icons too[/B]
+[*][B]Refreshbuttons everywhere...so no need to restart the Rom Fumbler any more after you added something in the custom area, like textures, charge icons, backgrounds, icon-sets and so on....[/B]
 [*][B]New pre-defined Stuff like[/B] 
 ...more ChargeIcons
-...more Textures (Rootbox- & Carbon-Logo....) 
+...more Textures
 ...more XorBackgrounds
 ...OlliG Halo Icons for Rootbox and others roms...
-...OlliG Toggles.V9 updated with hybrit toggle 
-...more userdefined colors
-...new RomPresets for the new Rootbox Battery styles
-...new RomPreset for S4 i337 Task650 Rom
-...new RomPresets for GNEX Carbon Rom
-...new Version of Kroz's Signal and Wifi icons with better compatibility for PAColors
-[*][B]Other Fixes and Changes[/B]
-...applyint RomPresets not setting some drawables fixed
-...SystemUI Analyzer fixes in scanning for batteries in SystemUI
-...better defaultname for flashable-Zips
-...SystemUI-Analyzer now exporting notification icons
-...showing last applied RomPreset in RomSettings now ('#' will be added when something was changed after that)
-...ColorChooser now preset with the selected Color (Thanks for hint... @hara74) 
-[*][B]Zip creation of battery icons from renderer[/B]
-...attention: not flashable!!! ...just plain zips with icons 
-...activate this button in GlobalSettings
+...new RomPresets for Carbon ROM batteries
+[*][B]New Feature: HSB changing of Charge icons[/B]
+...Changing of Hue, Saturation and Brightness of charge icons...(so you dont need different colored versions of your charge icons any more!)
+.......see here [url]http://forum.xda-developers.com/showpost.php?p=43441712&postcount=908[/url]
+--> so "duplicate" charge icons are removed from ./custom/charge/...
 [/LIST]
-
-New battery Styles:
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2049029&d=1371454261[/IMG]
-More:
-[HIDE]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2063816&d=1372008282[/IMG]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2065197&d=1372059018[/IMG]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2065051&d=1372053291[/IMG]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2058805&d=1371801132[/IMG]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2061400&d=1371911362[/IMG]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2061589&d=1371917853[/IMG]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2052753&d=1371582634[/IMG]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2050330&d=1371495932[/IMG]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2050331&d=1371495932[/IMG]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2050107&d=1371490131[/IMG]
-[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2047828&d=1371409257[/IMG]
-[/HIDE]
-
 
 Happy modding & flashing :)
 Press [B]Thanks [/B]if you like the new Version :)
