@@ -85,9 +85,10 @@ public class BattSettings implements Serializable {
 	public static final int		TEXTURE_FILTER_COLORIZE					= 1;
 	public static final int		TEXTURE_FILTER_HUE_SHIFT				= 2;
 	private int					textureFilterType						= TEXTURE_FILTER_NON;
-	private int					hueShift								= 0;
-	private int					satuationShift							= 0;
-	private int					brightnessShift							= 0;
+	private HSBSettings			textureHSB								= new HSBSettings(0, 0, 0);
+	// private int hueShift = 0;
+	// private int satuationShift = 0;
+	// private int brightnessShift = 0;
 
 	// texture as Background
 	public static final int		BACKGROUND_ICON							= 0;
@@ -1011,14 +1012,6 @@ public class BattSettings implements Serializable {
 		this.textureFilterType = textureFilterType;
 	}
 
-	public int getHueShift() {
-		return hueShift;
-	}
-
-	public void setHueShift(final int hueShift) {
-		this.hueShift = hueShift;
-	}
-
 	/**
 	 * @return the backgroundTextureMode
 	 */
@@ -1049,22 +1042,6 @@ public class BattSettings implements Serializable {
 		this.backgroundBrightness = backgroundBrightness;
 	}
 
-	public int getSatuationShift() {
-		return satuationShift;
-	}
-
-	public void setSatuationShift(final int satuationShift) {
-		this.satuationShift = satuationShift;
-	}
-
-	public int getBrightnessShift() {
-		return brightnessShift;
-	}
-
-	public void setBrightnessShift(final int brightnessShift) {
-		this.brightnessShift = brightnessShift;
-	}
-
 	/**
 	 * @return the overpaintBackgroundMode
 	 */
@@ -1078,6 +1055,14 @@ public class BattSettings implements Serializable {
 	 */
 	public void setOverpaintBackgroundMode(final int overpaintBackgroundMode) {
 		this.overpaintBackgroundMode = overpaintBackgroundMode;
+	}
+
+	public HSBSettings getTextureHSB() {
+		return textureHSB;
+	}
+
+	public void setTextureHSB(final HSBSettings textureHSB) {
+		this.textureHSB = textureHSB;
 	}
 
 }

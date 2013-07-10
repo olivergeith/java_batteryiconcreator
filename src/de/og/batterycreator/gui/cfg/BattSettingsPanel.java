@@ -687,9 +687,9 @@ public class BattSettingsPanel extends SettingsPanel {
 				textureSelector.setSelectedIndex(0);
 
 			textureFilterTypeCombo.setSelectedIndex(settings.getTextureFilterType());
-			sliderHueShift.setValue(settings.getHueShift());
-			sliderBrightnessShift.setValue(settings.getBrightnessShift());
-			sliderSaturationShift.setValue(settings.getSatuationShift());
+			sliderHueShift.setValue(settings.getTextureHSB().hue);
+			sliderBrightnessShift.setValue(settings.getTextureHSB().brightness);
+			sliderSaturationShift.setValue(settings.getTextureHSB().saturation);
 
 			backgroundModeCombo.setSelectedIndex(settings.getBackgroundTextureMode());
 			sliderBackgroundBrightness.setValue(settings.getBackgroundBrightness());
@@ -781,9 +781,9 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setUseTexture(cboxTexture.isSelected());
 		settings.setTextureIcon((ImageIcon) textureSelector.getSelectedItem());
 		settings.setTextureFilterType(textureFilterTypeCombo.getSelectedIndex());
-		settings.setHueShift(sliderHueShift.getValue());
-		settings.setBrightnessShift(sliderBrightnessShift.getValue());
-		settings.setSatuationShift(sliderSaturationShift.getValue());
+		settings.getTextureHSB().hue = sliderHueShift.getValue();
+		settings.getTextureHSB().brightness = sliderBrightnessShift.getValue();
+		settings.getTextureHSB().saturation = sliderSaturationShift.getValue();
 
 		settings.setBackgroundTextureMode(backgroundModeCombo.getSelectedIndex());
 		settings.setBackgroundBrightness(sliderBackgroundBrightness.getValue());
