@@ -111,6 +111,7 @@ public class BattSettings implements Serializable {
 	private int					fontXOffset								= 0;
 	private int					fontYOffset								= 0;
 	// font
+	private HSBSettings			chargeHSB								= new HSBSettings(0, 0, 0);
 
 	private Font				font									= DEFAULT_FONT;
 	private int					reduceFontOn100							= -3;
@@ -137,6 +138,7 @@ public class BattSettings implements Serializable {
 
 	// this is transient because it should not be serialized
 	private transient ImageIcon	chargeIcon								= null;
+	private int					chargeIconIndex							= 0;
 	// this is transient because it should not be serialized
 	private transient ImageIcon	xorIcon									= null;
 	// this is transient because it should not be serialized
@@ -446,8 +448,9 @@ public class BattSettings implements Serializable {
 	 * @param chargeIcon
 	 *            the chargeIcon to set
 	 */
-	public void setChargeIcon(final ImageIcon chargeIcon) {
+	public void setChargeIcon(final ImageIcon chargeIcon, final int index) {
 		this.chargeIcon = chargeIcon;
+		this.setChargeIconIndex(index);
 	}
 
 	/**
@@ -1063,6 +1066,22 @@ public class BattSettings implements Serializable {
 
 	public void setTextureHSB(final HSBSettings textureHSB) {
 		this.textureHSB = textureHSB;
+	}
+
+	public HSBSettings getChargeHSB() {
+		return chargeHSB;
+	}
+
+	public void setChargeHSB(final HSBSettings chargeHSB) {
+		this.chargeHSB = chargeHSB;
+	}
+
+	public int getChargeIconIndex() {
+		return chargeIconIndex;
+	}
+
+	public void setChargeIconIndex(int chargeIconIndex) {
+		this.chargeIconIndex = chargeIconIndex;
 	}
 
 }

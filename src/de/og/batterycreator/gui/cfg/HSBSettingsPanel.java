@@ -60,12 +60,12 @@ public class HSBSettingsPanel extends JPanel {
 		int row = 1;
 
 		builder.add(JGoodiesHelper.createBlackLabel("Hue"), cc.xyw(2, ++row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Brightness"), cc.xyw(4, row, 1));
-		builder.add(JGoodiesHelper.createBlackLabel("Saturation"), cc.xyw(6, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Saturation"), cc.xyw(4, row, 1));
+		builder.add(JGoodiesHelper.createBlackLabel("Brightness"), cc.xyw(6, row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Preview"), cc.xyw(8, row, 1));
 		builder.add(sliderHueShift.getToolbar(), cc.xyw(2, ++row, 1));
-		builder.add(sliderBrightnessShift.getToolbar(), cc.xyw(4, row, 1));
-		builder.add(sliderSaturationShift.getToolbar(), cc.xyw(6, row, 1));
+		builder.add(sliderSaturationShift.getToolbar(), cc.xyw(4, row, 1));
+		builder.add(sliderBrightnessShift.getToolbar(), cc.xyw(6, row, 1));
 		builder.add(preview, cc.xyw(8, row, 1));
 		builder.addSeparator("", cc.xyw(2, ++row, 7));
 		this.add(builder.getPanel(), BorderLayout.CENTER);

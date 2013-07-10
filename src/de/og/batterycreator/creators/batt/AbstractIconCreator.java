@@ -409,7 +409,7 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 			drawDropShadowForChargeIcon(g2d, img);
 		}
 
-		final ImageIcon chargeIcon = settings.getChargeIcon();
+		final ImageIcon chargeIcon = getHsbChargeIcon();
 		if (chargeIcon != null) {
 			// Resize Charge Icon
 			BufferedImage resizedChargeIcon = new BufferedImage(chargeIcon.getIconWidth(), chargeIcon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -564,6 +564,13 @@ public abstract class AbstractIconCreator extends AbstractCreator {
 				return StaticFilterHelper.getHSBTexturePaint(tex, settings.getTextureHSB().hue, settings.getTextureHSB().brightness,
 						settings.getTextureHSB().saturation);
 		}
+	}
+
+	private ImageIcon getHsbChargeIcon() {
+		final ImageIcon chargeIcon = settings.getChargeIcon();
+
+		return new ImageIcon(StaticFilterHelper.getHSBImage(chargeIcon, settings.getChargeHSB().hue, settings.getChargeHSB().brightness,
+				settings.getChargeHSB().saturation));
 	}
 
 	protected BufferedImage getBackgroundImage(final ImageIcon xorIcon) {

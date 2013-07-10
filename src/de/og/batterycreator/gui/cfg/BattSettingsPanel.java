@@ -141,6 +141,12 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JLabel				backgroundPreviewLabel				= new JLabel();
 	private final JComboBox<String>		overpaintModeCombo					= new JComboBox<String>();
 
+	private final JPanel				tex2BGPanel							= createCfgPaneTexture2Background();
+	private final JPanel				xorBGPanel							= createCfgPaneXorBackgrounds();
+	private final JPanel				backgroundPanel						= createCfgPaneBackground();
+	private final HSBSettingsPanel		hsbTexturePanel						= new HSBSettingsPanel();
+	private final HSBSettingsPanel		hsbChargePanel						= new HSBSettingsPanel();
+
 	// Construktor
 	public BattSettingsPanel() {
 		initComponents();
@@ -164,6 +170,12 @@ public class BattSettingsPanel extends SettingsPanel {
 			}
 		});
 		textureSelector.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				validateControls();
+			}
+		});
+		chargeIconSeletor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
 				validateControls();
@@ -264,11 +276,6 @@ public class BattSettingsPanel extends SettingsPanel {
 		this.add(cfgScroller, BorderLayout.CENTER);
 		makeButtonBar();
 	}
-
-	private final JPanel			tex2BGPanel		= createCfgPaneTexture2Background();
-	private final JPanel			xorBGPanel		= createCfgPaneXorBackgrounds();
-	private final JPanel			backgroundPanel	= createCfgPaneBackground();
-	private final HSBSettingsPanel	hsbTexturePanel	= new HSBSettingsPanel();
 
 	private JPanel createTabPaneBattSettings() {
 		// -----------------------------------------1-----2------3-----4------5-----6------7-----8-----9------10----11
@@ -381,6 +388,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(iconPos, cc.xyw(6, row, 3));
 		builder.add(cboxShowAdditionalFontOnCharge, cc.xyw(2, ++row, 3));
 		builder.add(cboxMoveIconWithText, cc.xyw(6, row, 3));
+		builder.add(hsbChargePanel, cc.xyw(1, ++row, 9));
 
 		final JPanel hide = new HidePanel("Charge-Icon...", builder.getPanel());
 		return hide;
@@ -599,8 +607,12 @@ public class BattSettingsPanel extends SettingsPanel {
 
 			if (settings.getChargeIcon() != null)
 				chargeIconSeletor.setSelectedItem(settings.getChargeIcon());
-			else
-				chargeIconSeletor.setSelectedIndex(3);
+			else {
+				if (settings.getChargeIconIndex() > 0 && settings.getChargeIconIndex() < chargeIconSeletor.getItemCount())
+					chargeIconSeletor.setSelectedIndex(settings.getChargeIconIndex());
+				else
+					chargeIconSeletor.setSelectedIndex(3);
+			}
 
 			if (settings.getXorIcon() != null)
 				xorIconSelector.setSelectedItem(settings.getXorIcon());
@@ -633,6 +645,7 @@ public class BattSettingsPanel extends SettingsPanel {
 
 			textureFilterTypeCombo.setSelectedIndex(settings.getTextureFilterType());
 			hsbTexturePanel.setHsbSettings(settings.getTextureHSB());
+			hsbChargePanel.setHsbSettings(settings.getChargeHSB());
 
 			backgroundModeCombo.setSelectedIndex(settings.getBackgroundTextureMode());
 			sliderBackgroundBrightness.setValue(settings.getBackgroundBrightness());
@@ -696,7 +709,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setMedBattTheshold(sliderMedBatt.getValue());
 		settings.setLowBattTheshold(sliderLowBatt.getValue());
 
-		settings.setChargeIcon((ImageIcon) chargeIconSeletor.getSelectedItem());
+		settings.setChargeIcon((ImageIcon) chargeIconSeletor.getSelectedItem(), chargeIconSeletor.getSelectedIndex());
 		settings.setXorIcon((ImageIcon) xorIconSelector.getSelectedItem());
 		settings.setXorSquareIcon((ImageIcon) xorSquareIconSelector.getSelectedItem());
 		settings.setUseGradiantForMediumColor(cboxUseGradientMediumLevels.isSelected());
@@ -726,6 +739,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setTextureFilterType(textureFilterTypeCombo.getSelectedIndex());
 
 		settings.setTextureHSB(hsbTexturePanel.getHsbSettings());
+		settings.setChargeHSB(hsbChargePanel.getHsbSettings());
 
 		settings.setBackgroundTextureMode(backgroundModeCombo.getSelectedIndex());
 		settings.setBackgroundBrightness(sliderBackgroundBrightness.getValue());
@@ -777,6 +791,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		textureFilterTypeCombo.setEnabled(cboxTexture.isSelected());
 		hsbTexturePanel.setVisible(cboxTexture.isSelected() && textureFilterTypeCombo.getSelectedIndex() == BattSettings.TEXTURE_FILTER_HUE_SHIFT);
 		hsbTexturePanel.setTexture((ImageIcon) textureSelector.getSelectedItem());
+		hsbChargePanel.setTexture((ImageIcon) chargeIconSeletor.getSelectedItem());
 
 		// Backgroundstuff
 		backgroundPanel.setVisible(xorIconSelector.isEnabled() || xorSquareIconSelector.isEnabled());
