@@ -616,13 +616,21 @@ public class BattSettingsPanel extends SettingsPanel {
 
 			if (settings.getXorIcon() != null)
 				xorIconSelector.setSelectedItem(settings.getXorIcon());
-			else
-				xorIconSelector.setSelectedIndex(0);
+			else {
+				if (settings.getXorIconIndex() > 0 && settings.getXorIconIndex() < xorIconSelector.getItemCount())
+					xorIconSelector.setSelectedIndex(settings.getXorIconIndex());
+				else
+					xorIconSelector.setSelectedIndex(0);
+			}
 
 			if (settings.getXorSquareIcon() != null)
 				xorSquareIconSelector.setSelectedItem(settings.getXorSquareIcon());
-			else
-				xorSquareIconSelector.setSelectedIndex(0);
+			else {
+				if (settings.getXorSquareIndex() > 0 && settings.getXorSquareIndex() < xorSquareIconSelector.getItemCount())
+					xorSquareIconSelector.setSelectedIndex(settings.getXorSquareIndex());
+				else
+					xorSquareIconSelector.setSelectedIndex(0);
+			}
 
 			cboxUseGradientMediumLevels.setSelected(settings.isUseGradiantForMediumColor());
 			cboxUseGradientNormalLevels.setSelected(settings.isUseGradiantForNormalColor());
@@ -640,8 +648,12 @@ public class BattSettingsPanel extends SettingsPanel {
 			cboxTexture.setSelected(settings.isUseTexture());
 			if (settings.getTextureIcon() != null)
 				textureSelector.setSelectedItem(settings.getTextureIcon());
-			else
-				textureSelector.setSelectedIndex(0);
+			else {
+				if (settings.getTextureIconIndex() > 0 && settings.getTextureIconIndex() < textureSelector.getItemCount())
+					textureSelector.setSelectedIndex(settings.getTextureIconIndex());
+				else
+					textureSelector.setSelectedIndex(0);
+			}
 
 			textureFilterTypeCombo.setSelectedIndex(settings.getTextureFilterType());
 			hsbTexturePanel.setHsbSettings(settings.getTextureHSB());
@@ -709,9 +721,12 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setMedBattTheshold(sliderMedBatt.getValue());
 		settings.setLowBattTheshold(sliderLowBatt.getValue());
 
-		settings.setChargeIcon((ImageIcon) chargeIconSeletor.getSelectedItem(), chargeIconSeletor.getSelectedIndex());
+		settings.setChargeIcon((ImageIcon) chargeIconSeletor.getSelectedItem());
+		settings.setChargeIconIndex(chargeIconSeletor.getSelectedIndex());
 		settings.setXorIcon((ImageIcon) xorIconSelector.getSelectedItem());
+		settings.setXorIconIndex(xorIconSelector.getSelectedIndex());
 		settings.setXorSquareIcon((ImageIcon) xorSquareIconSelector.getSelectedItem());
+		settings.setXorSquareIndex(xorSquareIconSelector.getSelectedIndex());
 		settings.setUseGradiantForMediumColor(cboxUseGradientMediumLevels.isSelected());
 		settings.setUseGradiantForNormalColor(cboxUseGradientNormalLevels.isSelected());
 
@@ -736,6 +751,7 @@ public class BattSettingsPanel extends SettingsPanel {
 
 		settings.setUseTexture(cboxTexture.isSelected());
 		settings.setTextureIcon((ImageIcon) textureSelector.getSelectedItem());
+		settings.setTextureIconIndex(textureSelector.getSelectedIndex());
 		settings.setTextureFilterType(textureFilterTypeCombo.getSelectedIndex());
 
 		settings.setTextureHSB(hsbTexturePanel.getHsbSettings());

@@ -141,10 +141,13 @@ public class BattSettings implements Serializable {
 	private int					chargeIconIndex							= 0;
 	// this is transient because it should not be serialized
 	private transient ImageIcon	xorIcon									= null;
+	private int					xorIconIndex							= 0;
 	// this is transient because it should not be serialized
 	private transient ImageIcon	xorSquareIcon							= null;
+	private int					xorSquareIndex							= 0;
 	// this is transient because it should not be serialized
 	private transient ImageIcon	textureIcon								= null;
+	private int					textureIconIndex						= 0;
 
 	public Color getFontColor() {
 		return fontColor;
@@ -448,9 +451,8 @@ public class BattSettings implements Serializable {
 	 * @param chargeIcon
 	 *            the chargeIcon to set
 	 */
-	public void setChargeIcon(final ImageIcon chargeIcon, final int index) {
+	public void setChargeIcon(final ImageIcon chargeIcon) {
 		this.chargeIcon = chargeIcon;
-		this.setChargeIconIndex(index);
 	}
 
 	/**
@@ -1080,8 +1082,32 @@ public class BattSettings implements Serializable {
 		return chargeIconIndex;
 	}
 
-	public void setChargeIconIndex(int chargeIconIndex) {
+	public void setChargeIconIndex(final int chargeIconIndex) {
 		this.chargeIconIndex = chargeIconIndex;
+	}
+
+	public int getTextureIconIndex() {
+		return textureIconIndex;
+	}
+
+	public void setTextureIconIndex(final int textureIconIndex) {
+		this.textureIconIndex = textureIconIndex;
+	}
+
+	public int getXorIconIndex() {
+		return xorIconIndex;
+	}
+
+	public void setXorIconIndex(final int xorIconIndex) {
+		this.xorIconIndex = xorIconIndex;
+	}
+
+	public int getXorSquareIndex() {
+		return xorSquareIndex;
+	}
+
+	public void setXorSquareIndex(final int xorSquareIndex) {
+		this.xorSquareIndex = xorSquareIndex;
 	}
 
 }
