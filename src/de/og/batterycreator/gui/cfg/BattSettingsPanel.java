@@ -51,7 +51,7 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final ColorSelectButton		fontColorLowBatt					= new ColorSelectButton("LowBatt", "Color when low battery");
 	private final ColorSelectButton		fontColorMedBatt					= new ColorSelectButton("MedBatt", "Color when Med battery");
 	private final ColorSelectButton		fontColorCharge						= new ColorSelectButton("Charge Color", "Color when charging");
-	private final ChargeIconSelector	chargeIconSeletor					= new ChargeIconSelector(36);
+	private final ChargeIconSelector	chargeIconSelector					= new ChargeIconSelector(36);
 
 	private final JCheckBox				cboxDropShadowFont					= createCheckbox("DropShadow Font", "DropShadow behind PercentageText");
 	private final JCheckBox				cboxDropShadowIcon					= createCheckbox("DropShadow ChargeIcon", "DropShadow behind Charge-Icon");
@@ -99,7 +99,7 @@ public class BattSettingsPanel extends SettingsPanel {
 	private final JCheckBox				cboxGlow							= createCheckbox("Glow behind Font", "Glow behind percentages (when not on charge)");
 	private final JCheckBox				cboxGlowForCharge					= createCheckbox("Glow behind Charge-Icon", "Glow behind Charge-Icon!");
 	private final SliderAndLabel		sliderGlowRadius					= new SliderAndLabel(10, 50);
-	private final JCheckBox				cboxShowAdditionalFontOnCharge		= createCheckbox("Add Font on Charge too", "Have a percentage-text and charge-icon");
+	private final JCheckBox				cboxShowAdditionalFontOnCharge		= createCheckbox("% numb. on charge too", "Have a percentage-text and charge-icon");
 
 	private final SliderAndLabel		sliderLowBatt						= new SliderAndLabel(0, 30);
 	private final SliderAndLabel		sliderMedBatt						= new SliderAndLabel(0, 100);
@@ -175,7 +175,7 @@ public class BattSettingsPanel extends SettingsPanel {
 				validateControls();
 			}
 		});
-		chargeIconSeletor.addActionListener(new ActionListener() {
+		chargeIconSelector.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
 				validateControls();
@@ -383,7 +383,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		builder.add(cboxShowChargeSymbol, cc.xyw(2, ++row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Charge-Icon size"), cc.xyw(4, row, 1));
 		builder.add(JGoodiesHelper.createBlackLabel("Charge-Icon Offset (drag red square)"), cc.xyw(6, row, 3));
-		builder.add(chargeIconSeletor, cc.xyw(2, ++row, 1));
+		builder.add(chargeIconSelector.getToolBar(), cc.xyw(2, ++row, 1));
 		builder.add(sliderResizeChargeSymbol.getToolbar(), cc.xyw(4, row, 1));
 		builder.add(iconPos, cc.xyw(6, row, 3));
 		builder.add(cboxShowAdditionalFontOnCharge, cc.xyw(2, ++row, 3));
@@ -606,12 +606,12 @@ public class BattSettingsPanel extends SettingsPanel {
 			sliderLowBatt.setValue(settings.getLowBattTheshold());
 
 			if (settings.getChargeIcon() != null)
-				chargeIconSeletor.setSelectedItem(settings.getChargeIcon());
+				chargeIconSelector.setSelectedItem(settings.getChargeIcon());
 			else {
-				if (settings.getChargeIconIndex() > 0 && settings.getChargeIconIndex() < chargeIconSeletor.getItemCount())
-					chargeIconSeletor.setSelectedIndex(settings.getChargeIconIndex());
+				if (settings.getChargeIconIndex() > 0 && settings.getChargeIconIndex() < chargeIconSelector.getItemCount())
+					chargeIconSelector.setSelectedIndex(settings.getChargeIconIndex());
 				else
-					chargeIconSeletor.setSelectedIndex(3);
+					chargeIconSelector.setSelectedIndex(3);
 			}
 
 			if (settings.getXorIcon() != null)
@@ -721,8 +721,8 @@ public class BattSettingsPanel extends SettingsPanel {
 		settings.setMedBattTheshold(sliderMedBatt.getValue());
 		settings.setLowBattTheshold(sliderLowBatt.getValue());
 
-		settings.setChargeIcon((ImageIcon) chargeIconSeletor.getSelectedItem());
-		settings.setChargeIconIndex(chargeIconSeletor.getSelectedIndex());
+		settings.setChargeIcon((ImageIcon) chargeIconSelector.getSelectedItem());
+		settings.setChargeIconIndex(chargeIconSelector.getSelectedIndex());
 		settings.setXorIcon((ImageIcon) xorIconSelector.getSelectedItem());
 		settings.setXorIconIndex(xorIconSelector.getSelectedIndex());
 		settings.setXorSquareIcon((ImageIcon) xorSquareIconSelector.getSelectedItem());
@@ -775,7 +775,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		iconColorMedBatt.setEnabled(cboxColoredIcon.isSelected());
 		iconColorLowBatt.setEnabled(cboxColoredIcon.isSelected());
 		iconColorCharge.setEnabled(cboxUseChargeColor.isSelected());
-		chargeIconSeletor.setEnabled(cboxShowChargeSymbol.isSelected());
+		chargeIconSelector.setEnabled(cboxShowChargeSymbol.isSelected());
 		fontButton.setEnabled(cboxShowFont.isSelected());
 		// iconPos.setEnabled(cboxShowChargeSymbol.isSelected());
 		fontPos.setEnabled(cboxShowFont.isSelected());
@@ -807,7 +807,7 @@ public class BattSettingsPanel extends SettingsPanel {
 		textureFilterTypeCombo.setEnabled(cboxTexture.isSelected());
 		hsbTexturePanel.setVisible(cboxTexture.isSelected() && textureFilterTypeCombo.getSelectedIndex() == BattSettings.TEXTURE_FILTER_HUE_SHIFT);
 		hsbTexturePanel.setTexture((ImageIcon) textureSelector.getSelectedItem());
-		hsbChargePanel.setTexture((ImageIcon) chargeIconSeletor.getSelectedItem());
+		hsbChargePanel.setTexture((ImageIcon) chargeIconSelector.getSelectedItem());
 
 		// Backgroundstuff
 		backgroundPanel.setVisible(xorIconSelector.isEnabled() || xorSquareIconSelector.isEnabled());

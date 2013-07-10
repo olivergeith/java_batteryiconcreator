@@ -20,7 +20,7 @@ public abstract class IconSelector extends JComboBox<ImageIcon> {
 	private int					height				= 38;
 	private final String		customPath;
 
-	private final JButton		refreshButton		= new JButton(IconStore.refresh);
+	private final JButton		refreshButton		= new JButton(IconStore.refresh_small);
 	private final JToolBar		toolBar				= new JToolBar();
 
 	public IconSelector(final String customPath, final int height) {
