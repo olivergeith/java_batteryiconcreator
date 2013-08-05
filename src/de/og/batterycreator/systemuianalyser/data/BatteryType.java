@@ -10,6 +10,7 @@ public class BatteryType extends IconType {
 
 	public static final String		CHARGE_ANIM		= "charge_anim";
 	public static final String		BATTERY_PREFIX	= "stat_sys_battery";
+	public static final String		BATTERY_PREFIX2	= "tw_stat_sys_battery";
 	private final String			pattern;
 	private final String			patternCharge;
 	private final List<ImageIcon>	icons			= new ArrayList<ImageIcon>();

@@ -99,7 +99,8 @@ public class BatteryAnalyser {
 
 			@Override
 			public boolean accept(final File dir, final String name) {
-				return name.toLowerCase().endsWith(".png") && name.toLowerCase().startsWith(BatteryType.BATTERY_PREFIX);
+				return name.toLowerCase().endsWith(".png")
+						&& (name.toLowerCase().startsWith(BatteryType.BATTERY_PREFIX) || name.toLowerCase().startsWith(BatteryType.BATTERY_PREFIX2));
 			}
 		});
 		return pngs;
