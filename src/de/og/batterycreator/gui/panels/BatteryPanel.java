@@ -32,6 +32,7 @@ import de.og.batterycreator.creators.batt.ArcGradientCreator;
 import de.og.batterycreator.creators.batt.ArcQuaterCreator2;
 import de.og.batterycreator.creators.batt.ArcSunCreator;
 import de.og.batterycreator.creators.batt.BallBattery;
+import de.og.batterycreator.creators.batt.BarGraphWide;
 import de.og.batterycreator.creators.batt.BatterySymbolCreatorV3;
 import de.og.batterycreator.creators.batt.BatterySymbolV1;
 import de.og.batterycreator.creators.batt.BatterySymbolV2;
@@ -201,6 +202,8 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new ZoopaGauge(romSettings));
 		combo.addItem(new ZoopaWideV1(romSettings));
 		combo.addItem(new ZoopaWideV2(romSettings));
+
+		combo.addItem(new BarGraphWide(romSettings));
 
 		combo.addItem(new FaecherCreatorWide(romSettings));
 		combo.addItem(new TachoCreator3Quater(romSettings));
