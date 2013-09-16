@@ -90,12 +90,31 @@ public class ZoopaCircleV2 extends AbstractIconCreator {
 		final int zehner = percentage / 10;
 		final int einerdicke = 4;
 		final int zehnerdicke = 8;
-		drawSegmente(g2d, charge, percentage, einer, radius, einerdicke, 100);
+		drawBogen(g2d, charge, percentage, einer, radius, einerdicke);
 		drawSegmente(g2d, charge, percentage, zehner, radius - einerdicke - 1, zehnerdicke, 10);
 
 		// Normales Paint setzen
 		g2d.setPaintMode();
 
+	}
+
+	private void drawBogen(final Graphics2D g2d, final boolean charge, final int percentage, final int selectedValue, final int radius, final int dicke) {
+		final int x = imgWidth / 2;
+		final int y = imgHeight / 2;
+
+		final int winkelSegment = 360 * selectedValue / 100;
+
+		// Skala Hintergergrund einer
+		setHintergrundPaint(g2d);
+		Draw2DFunktions.fillCircle(g2d, x, y, radius, 0, 360);
+		setSelectedPaint(g2d, charge, percentage);
+		Draw2DFunktions.fillCircle(g2d, x, y, radius, 90, -winkelSegment);
+		// Inneren Halbkreis clearen
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
+		Draw2DFunktions.fillCircle(g2d, x, y, radius - dicke, 0, 360);
+
+		// Normales Paint setzen
+		g2d.setPaintMode();
 	}
 
 	private void drawSegmente(final Graphics2D g2d, final boolean charge, final int percentage, final int selectedValue, final int radius, final int dicke,

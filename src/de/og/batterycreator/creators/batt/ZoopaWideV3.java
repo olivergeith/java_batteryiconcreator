@@ -29,6 +29,7 @@ public class ZoopaWideV3 extends AbstractIconCreator {
 		settings.setUseGradiantForNormalColor(true);
 		settings.setStrokewidth(2);
 		settings.setExtraColor1(Color.white);
+		settings.setFlip(true);
 	}
 
 	@Override
@@ -86,7 +87,7 @@ public class ZoopaWideV3 extends AbstractIconCreator {
 		final int zehnerdicke = 24 - einerdicke;
 
 		if (settings.isFlip()) {
-			drawSegmente(g2d, charge, percentage, percentage, radius, einerdicke, 100);
+			drawBogen(g2d, charge, percentage, percentage, radius, einerdicke);
 			drawSegmente(g2d, charge, percentage, zehner, radius - einerdicke - 2, zehnerdicke, 10);
 			drawZeiger(g2d, charge, percentage, zehner, einer, radius - einerdicke - 2, zehnerdicke, 10);
 		} else {
@@ -96,6 +97,25 @@ public class ZoopaWideV3 extends AbstractIconCreator {
 		// Normales Paint setzen
 		g2d.setPaintMode();
 
+	}
+
+	private void drawBogen(final Graphics2D g2d, final boolean charge, final int percentage, final int selectedValue, final int radius, final int dicke) {
+		final int x = imgWidth / 2;
+		final int y = imgHeight;
+
+		final int winkelSegment = 180 * selectedValue / 100;
+
+		// Skala Hintergergrund einer
+		setHintergrundPaint(g2d);
+		Draw2DFunktions.fillCircle(g2d, x, y, radius, 0, 180);
+		setSelectedPaint(g2d, charge, percentage);
+		Draw2DFunktions.fillCircle(g2d, x, y, radius, 180, -winkelSegment);
+		// Inneren Halbkreis clearen
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1f));
+		Draw2DFunktions.fillCircle(g2d, x, y, radius - dicke, 0, 180);
+
+		// Normales Paint setzen
+		g2d.setPaintMode();
 	}
 
 	private void drawSegmente(final Graphics2D g2d, final boolean charge, final int percentage, final int selectedValue, final int radius, final int dicke,
