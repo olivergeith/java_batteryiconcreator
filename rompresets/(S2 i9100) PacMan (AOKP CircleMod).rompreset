@@ -1,0 +1,20 @@
+#Paramterdaten
+#Wed Oct 30 12:39:22 CET 2013
+Battsize=27
+WeatherSize=98
+NotificationHeight=3
+ToggleSize=48
+SystemUIDrawableFolder=drawable-hdpi
+FilePattern=stat_sys_battery_circle_
+FilePatternCharge=stat_sys_battery_circle_charge_anim
+UsePreload=false
+MmsDrawableFolder=drawable-hdpi
+UseVRThemeTemplate=false
+UseLidroid=false
+EmoSize=33
+RomName=(S2 i9100) PacMan (AOKP CircleMod)
+LockHandleSize=162
+LidroidDrawableFolder=drawable-hdpi
+FrameworkDrawableFolder=drawable-hdpi
+Template=./template/template.zip
+UseMMSforEmoticons=true
