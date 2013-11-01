@@ -1,33 +1,29 @@
 [B][SIZE="3"]New Version out of [URL="http://forum.xda-developers.com/showthread.php?t=1918500"]"The Rom Fumbler"[/URL] aka "The Battery Icon Creator"[/SIZE][/B]
 
-A lot of new stuff regarding textures, colors and so on... I will try to post some tutorials the next days...so stay tuned ;)
-Hope you enjoy it!
-
+Not too much new stuff...hope you like it anyways...
 
 [SIZE="4"][B]Changelog:[/B][/SIZE]
-[COLOR="Blue"][B]July-10-2013[/B] : Release 31.0[/COLOR]
+[COLOR="Blue"][B]November-01-2013[/B] : Release 32.0[/COLOR]
 [LIST]
-[*][B]Texture Manipulation[/B]
-...colorizing of textures depending on the battery level and the corresponding color for that level
-...Changing of Hue, Saturation and Brightness of Textures...(so you dont need different colored versions of your textures any more!)
-......see here [url]http://forum.xda-developers.com/showpost.php?p=42945606&postcount=862[/url]
-...creating "gray" Backgrounds from Textures...(so you dont need 2 icons any more...one texture and one fitting background...now you only need the texture icon!)
-......see here [url]http://forum.xda-developers.com/showpost.php?p=42962875&postcount=877[/url] 
---> so "duplicate" textures and backgrounds are removed from ./custom/...
-[*][B]New custom color panel for Nadmaj's simplistic colors in color chooseer dialog![/B]
-[*][B]SystemUI analyzer now searching for halo and notification icons too[/B]
-[*][B]Refreshbuttons everywhere...so no need to restart the Rom Fumbler any more after you added something in the custom area, like textures, charge icons, backgrounds, icon-sets and so on....[/B]
+[*][B]New Battery Renderer Styles[/B]
+...[URL="http://forum.xda-developers.com/showpost.php?p=45636910&postcount=1136"]BarGraph V1 - V4[/URL] [IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2261193&stc=1&d=1379323834[/IMG][IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2261191&stc=1&d=1379323614[/IMG][IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2261226&stc=1&d=1379326008[/IMG]
+...[URL="http://forum.xda-developers.com/showpost.php?p=45640293&postcount=1141"]Zoopa.Wide.V3[/URL][IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2261361&stc=1&d=1379331665[/IMG][IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2261412&stc=1&d=1379332709[/IMG]
+...[URL="http://forum.xda-developers.com/showpost.php?p=45649774&postcount=1144"]Zoopa.Circle.V2[/URL] [IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2262022&stc=1&d=1379352966[/IMG]
+[*][B]SystemUI analyzer now searching for tw_stat_sys_battery....[/B]
 [*][B]New pre-defined Stuff like[/B] 
 ...more ChargeIcons
 ...more Textures
 ...more XorBackgrounds
-...OlliG Halo Icons for Rootbox and others roms...
-...new RomPresets for Carbon ROM batteries
-[*][B]New Feature: HSB changing of Charge icons[/B]
-...Changing of Hue, Saturation and Brightness of charge icons...(so you dont need different colored versions of your charge icons any more!)
-.......see here [url]http://forum.xda-developers.com/showpost.php?p=43441712&postcount=908[/url]
---> so "duplicate" charge icons are removed from ./custom/charge/...
+...OlliG Toggles for quicksettings on PacMan Roms
+...new RomPresets for PacMan Roms batteries on i9100
 [/LIST]
+
+[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2262021&d=1379352966[/IMG]
+[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2261360&d=1379331665[/IMG]
+[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2259773&d=1379269863[/IMG]
+[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2261119&d=1379320237[/IMG]
+[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2261157&d=1379321935[/IMG]
+[IMG]http://forum.xda-developers.com/attachment.php?attachmentid=2261225&d=1379326008[/IMG]
 
 Happy modding & flashing :)
 Press [B]Thanks [/B]if you like the new Version :)
