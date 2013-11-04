@@ -46,6 +46,7 @@ import de.og.batterycreator.creators.batt.BinarySquaresCreator;
 import de.og.batterycreator.creators.batt.BoxCreatorV1;
 import de.og.batterycreator.creators.batt.BoxCreatorV2;
 import de.og.batterycreator.creators.batt.BoxCreatorV3;
+import de.og.batterycreator.creators.batt.Brick25;
 import de.og.batterycreator.creators.batt.BrickBattNoGap;
 import de.og.batterycreator.creators.batt.BrickBattV1;
 import de.og.batterycreator.creators.batt.BrickBattV2;
@@ -155,6 +156,7 @@ public class BatteryPanel extends JPanel {
 		combo.addItem(new BubbleCreator(romSettings));
 		combo.addItem(new BallBattery(romSettings));
 
+		combo.addItem(new Brick25(romSettings));
 		combo.addItem(new BrickBattV1(romSettings));
 		combo.addItem(new BrickBattV2(romSettings));
 		combo.addItem(new BrickBattNoGap(romSettings));
