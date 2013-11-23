@@ -239,6 +239,7 @@ public class SettingsPersistor {
 		reader.writeBooleanProperty("UseMMSforEmoticons", pre.isUseMMSforEmoticons());
 		reader.writeBooleanProperty("UsePreload", pre.isUsePreload());
 		reader.writeBooleanProperty("UseVRThemeTemplate", pre.isUseVRThemeTemplate());
+		reader.writeBooleanProperty("useHTCForLock", pre.isUseHTCForLock());
 
 	}
 
@@ -263,9 +264,10 @@ public class SettingsPersistor {
 		final boolean useMMSforEmoticons = reader.readBooleanProperty("UseMMSforEmoticons", true);
 		final boolean usePreload = reader.readBooleanProperty("UsePreload", false);
 		final boolean useVRThemeTemplate = reader.readBooleanProperty("UseVRThemeTemplate", false);
+		final boolean useHTCForLock = reader.readBooleanProperty("useHTCForLock", false);
 		return new RomPreset(romName, systemUIDrawableFolder, battsize, frameworkDrawableFolder, lidroidDrawableFolder, mmsDrawableFolder, filePattern,
 				filePatternCharge, lockHandleSize, notificationHeight, toggleSize, useLidroid, weatherSize, emoSize, template, useVRThemeTemplate, usePreload,
-				useMMSforEmoticons);
+				useMMSforEmoticons, useHTCForLock);
 	}
 
 	public static void saveRomPresetFromRomSettings(final RomSettings rs) {
@@ -282,7 +284,7 @@ public class SettingsPersistor {
 			final RomPreset pre = new RomPreset(romName, rs.getSystemUIDrawableFolder(), rs.getBattIconSize(), rs.getFrameworkDrawableFolder(),
 					rs.getLidroidDrawableFolder(), rs.getEmoticonsDrawableFolder(), rs.getFilePattern(), rs.getFilePatternCharge(), rs.getLockHandleSize(),
 					rs.getNotificationHeight(), rs.getToggleSize(), rs.isUseLidroid(), rs.getWeatherSize(), rs.getEmoSize(), rs.getTemplate(),
-					rs.isUseVRThemeTemplate(), rs.isUsePreload(), rs.isUseMMSForEmoticons());
+					rs.isUseVRThemeTemplate(), rs.isUsePreload(), rs.isUseMMSForEmoticons(), rs.isUseHtcForLockhandle());
 			SettingsPersistor.writePreset(pre);
 			JOptionPane
 					.showMessageDialog(null, "RomPreset " + saveFile.getName()

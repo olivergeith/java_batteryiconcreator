@@ -286,6 +286,7 @@ public class IconCreatingPanelNew extends JPanel {
 		final Vector<String> files2add2SystemUI = new Vector<String>();
 		final Vector<String> files2add2Framework = new Vector<String>();
 		final Vector<String> emoticonFiles = new Vector<String>();
+		final Vector<String> lockhandleFiles = new Vector<String>();
 		// adding Battery Icons
 		updateProgressBar(step++, "Adding Battery Icons (if configured)");
 		final AbstractIconCreator activBattCreator = battPanel.getActivBattCreator();
@@ -333,7 +334,7 @@ public class IconCreatingPanelNew extends JPanel {
 		emoticonFiles.addAll(emoBox.getAllFilenamesAndPath());
 		// Lockhandle
 		updateProgressBar(step++, "Adding Lock Icons (if configured)");
-		files2add2Framework.addAll(lockHandleSelector.getAllFilenamesAndPath());
+		lockhandleFiles.addAll(lockHandleSelector.getAllFilenamesAndPath());
 		// notification BG
 		updateProgressBar(step++, "Adding Notification Background (if configured)");
 		files2add2SystemUI.addAll(notificationBG.getAllFilenamesAndPath());
@@ -351,6 +352,7 @@ public class IconCreatingPanelNew extends JPanel {
 		zipCollection.addElements(files2add2Framework, romSettingsPanel.getSettings().getFolderFrameworkInZip());
 		zipCollection.addElements(files2add2Lidroid, romSettingsPanel.getSettings().getFolderLidroidInZip());
 		zipCollection.addElements(emoticonFiles, romSettingsPanel.getSettings().getFolderEmoticonsInZip());
+		zipCollection.addElements(lockhandleFiles, romSettingsPanel.getSettings().getFolderLockHandleInZip());
 
 		// Adding Them MORPH
 		updateProgressBar(step++, "Adding Theme/Morph to ZipCollection");

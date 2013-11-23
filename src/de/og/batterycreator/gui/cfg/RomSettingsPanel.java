@@ -54,6 +54,8 @@ public class RomSettingsPanel extends SettingsPanel {
 																			"Check this if you have a Samsung Stock Rom with preload partition");
 	JCheckBox						cboxMMSForEmos					= createCheckbox("use Mms.apk for emoticons",
 																			"Check this if you want to flash emoticons to Mms.apk");
+	JCheckBox						cboxHTCLock						= createCheckbox("use htclockscreen.apk for Lockhandel",
+																			"Check this if you want to flash Lockhandle to htclockscreen.apk");
 
 	// Presets
 	JComboBox<RomPreset>			romPresetCombo					= new RomPresetsComboBox();
@@ -69,6 +71,7 @@ public class RomSettingsPanel extends SettingsPanel {
 	MorphPathWidget					morphFrameworkWidget			= new MorphPathWidget("system/framework/framework-res.apk/res/");
 	MorphPathWidget					morphLidroidWidget				= new MorphPathWidget("system/framework/lidroid-res.apk/res/");
 	MorphPathWidget					morphMMSWidget					= new MorphPathWidget("system/app/Mms.apk/res/");
+	MorphPathWidget					morphLockWidget					= new MorphPathWidget("system/app/HtcLockScreenLite.apk/res/");
 
 	// Battery
 	SliderAndLabel					sliderBattSize					= systemUIDrawableFolderCombo.getSliderBattSize();
@@ -232,6 +235,7 @@ public class RomSettingsPanel extends SettingsPanel {
 			cboxPreload.setSelected(pre.isUsePreload());
 			cboxVRTheme.setSelected(pre.isUseVRThemeTemplate());
 			cboxMMSForEmos.setSelected(pre.isUseMMSforEmoticons());
+			cboxHTCLock.setSelected(pre.isUseHTCForLock());
 			validateControls();
 			lastAppliedRomPreset.setText(pre.getRomName());
 			// lidroidDrawableFolderCombo.setEnabled(pre.isUseLidroid());
@@ -300,6 +304,8 @@ public class RomSettingsPanel extends SettingsPanel {
 		builder.add(morphLidroidWidget, cc.xyw(2, ++row, 7));
 		builder.add(JGoodiesHelper.createBlackLabel("Morph-Path to Mms.apk"), cc.xyw(2, ++row, 3));
 		builder.add(morphMMSWidget, cc.xyw(2, ++row, 7));
+		builder.add(JGoodiesHelper.createBlackLabel("Morph-Path to htclockscreen.apk"), cc.xyw(2, ++row, 3));
+		builder.add(morphLockWidget, cc.xyw(2, ++row, 7));
 
 		builder.add(JGoodiesHelper.createBlackLabel("Choose your SystemUI's resolution"), cc.xyw(2, ++row, 3));
 		builder.add(JGoodiesHelper.createBlackLabel("Choose your Framework's resolution"), cc.xyw(6, row, 3));
@@ -313,6 +319,7 @@ public class RomSettingsPanel extends SettingsPanel {
 
 		builder.add(cboxUseLidroid, cc.xyw(2, ++row, 3));
 		builder.add(cboxMMSForEmos, cc.xyw(6, row, 3));
+		builder.add(cboxHTCLock, cc.xyw(6, ++row, 3));
 
 		final JPanel hide = new HidePanel("Main Rom Settings...", builder.getPanel());
 		return hide;
@@ -449,6 +456,7 @@ public class RomSettingsPanel extends SettingsPanel {
 			cboxVRTheme.setSelected(settings.isUseVRThemeTemplate());
 			cboxPreload.setSelected(settings.isUsePreload());
 			cboxMMSForEmos.setSelected(settings.isUseMMSForEmoticons());
+			cboxHTCLock.setSelected(settings.isUseHtcForLockhandle());
 
 			// Drawables
 			systemUIDrawableFolderCombo.setSelectedItem(settings.getSystemUIDrawableFolder());
@@ -528,6 +536,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		settings.setUseVRThemeTemplate(cboxVRTheme.isSelected());
 		settings.setUsePreload(cboxPreload.isSelected());
 		settings.setUseMMSForEmoticons(cboxMMSForEmos.isSelected());
+		settings.setUseHtcForLockhandle(cboxHTCLock.isSelected());
 		// Drawables
 		settings.setSystemUIDrawableFolder((String) systemUIDrawableFolderCombo.getSelectedItem());
 		settings.setFrameworkDrawableFolder((String) frameworkDrawableFolderCombo.getSelectedItem());
@@ -538,6 +547,7 @@ public class RomSettingsPanel extends SettingsPanel {
 		settings.setMorphPath2Framework(morphFrameworkWidget.getText());
 		settings.setMorphPath2Lidroid(morphLidroidWidget.getText());
 		settings.setMorphPath2MMS(morphMMSWidget.getText());
+		settings.setMorphPath2HTCLock(morphLockWidget.getText());
 		// Battery
 		settings.setFilePattern(filepattern.getText());
 		settings.setFilePatternCharge(filepatternCharge.getText());
@@ -596,6 +606,7 @@ public class RomSettingsPanel extends SettingsPanel {
 
 		emoticonsDrawableFolderCombo.setEnabled(cboxMMSForEmos.isSelected());
 		morphMMSWidget.setEnabled(cboxMMSForEmos.isSelected());
+		morphLockWidget.setEnabled(cboxHTCLock.isSelected());
 
 		morphSystemUIWidget.setUsePreload(cboxPreload.isSelected());
 		morphSystemUIWidget.setUseVRTheme(cboxVRTheme.isSelected());
@@ -608,6 +619,9 @@ public class RomSettingsPanel extends SettingsPanel {
 
 		morphMMSWidget.setUsePreload(cboxPreload.isSelected());
 		morphMMSWidget.setUseVRTheme(cboxVRTheme.isSelected());
+
+		morphLockWidget.setUsePreload(cboxPreload.isSelected());
+		morphLockWidget.setUseVRTheme(cboxVRTheme.isSelected());
 
 		lastAppliedRomPreset.setText(lastAppliedRomPreset.getText() + " #");
 	}

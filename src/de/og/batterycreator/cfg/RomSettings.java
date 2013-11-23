@@ -12,6 +12,7 @@ public class RomSettings implements Serializable {
 	private boolean				useVRThemeTemplate			= false;
 	private boolean				usePreload					= false;
 	private boolean				useMMSForEmoticons			= true;
+	private boolean				useHtcForLockhandle			= false;
 
 	private String				fileBattPattern				= RomPreset.BATT_ICON_NAME_AOKP;
 	private String				fileBattPatternCharge		= RomPreset.BATT_ICON_CHARGE_NAME_AOKP;
@@ -32,6 +33,10 @@ public class RomSettings implements Serializable {
 
 	private String				morphPath2MMS				= RomPreset.MORPHPATH_MMS;
 	private String				folderEmoticonsInZip		= morphPath2MMS + RomPreset.DRAWABLE_HDPI + "/";
+
+	private String				morphPath2HTCLock			= RomPreset.MORPHPATH_HTC_LOCK;
+
+	private String				folderLockHandleInZip		= morphPath2Framework + RomPreset.DRAWABLE_HDPI + "/";
 
 	private int					battIconSize				= RomPreset.BATT_ICON_HEIGHT_HDPI;
 	private boolean				useAdvancedResize			= true;
@@ -141,6 +146,7 @@ public class RomSettings implements Serializable {
 	public void setFrameworkDrawableFolder(final String frameworkDrawableFolder) {
 		this.frameworkDrawableFolder = frameworkDrawableFolder;
 		setFolderFrameworkInZip();
+		setFolderLockHandleInZip();
 	}
 
 	private void setFolderFrameworkInZip() {
@@ -201,6 +207,30 @@ public class RomSettings implements Serializable {
 		else
 			folderEmoticonsInZip = morphPath2Framework + emoticonsDrawableFolder + "/";
 
+	}
+
+	public String getFolderLockHandleInZip() {
+		return folderLockHandleInZip;
+	}
+
+	// ##########################################
+	// Lock stuff
+	// ##########################################
+	private void setFolderLockHandleInZip() {
+		if (useHtcForLockhandle)
+			folderLockHandleInZip = morphPath2HTCLock + frameworkDrawableFolder + "/";
+		else
+			folderLockHandleInZip = morphPath2Framework + frameworkDrawableFolder + "/";
+
+	}
+
+	public String getMorphPath2HTCLock() {
+		return morphPath2HTCLock;
+	}
+
+	public void setMorphPath2HTCLock(final String morphPath2HTCLock) {
+		this.morphPath2HTCLock = morphPath2HTCLock;
+		setFolderLockHandleInZip();
 	}
 
 	public String getFolderEmoticonsInZip() {
@@ -545,6 +575,15 @@ public class RomSettings implements Serializable {
 
 	public void setUsePreload(final boolean usePreload) {
 		this.usePreload = usePreload;
+	}
+
+	public boolean isUseHtcForLockhandle() {
+		return useHtcForLockhandle;
+	}
+
+	public void setUseHtcForLockhandle(final boolean useHtcForLockhandle) {
+		this.useHtcForLockhandle = useHtcForLockhandle;
+		setFolderLockHandleInZip();
 	}
 
 }
