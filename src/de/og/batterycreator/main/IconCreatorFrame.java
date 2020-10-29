@@ -3,36 +3,61 @@ package de.og.batterycreator.main;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
+import de.og.batterycreator.gui.IconCreatingPanelNew;
+import de.og.batterycreator.gui.iconstore.IconStore;
 import og.basics.gui.LToolBar;
 import og.basics.gui.about.UniversalAboutDialog;
 import og.basics.gui.about.VersionDetails;
 import og.basics.gui.icon.CommonIconProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import de.og.batterycreator.gui.IconCreatingPanelNew;
-import de.og.batterycreator.gui.iconstore.IconStore;
 
 public class IconCreatorFrame extends JFrame {
-	private static final Logger			LOGGER				= LoggerFactory.getLogger(IconCreatorFrame.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(IconCreatorFrame.class);
 
-	private final JButton				aboutButton			= new JButton(CommonIconProvider.BUTTON_ICON_INFO);
-	private final JButton				exitButton			= new JButton(CommonIconProvider.BUTTON_ICON_EXIT);
-	public static final String			APP_NAME			= "'The Rom Fumbler'";
-	public static final String			VERSION_NR			= "33.0 beta";
-	private static final String			VERSION_DATE		= "xx.mmmm.2013";
-	public static final String			HOMEPAGE_URL		= "http://forum.xda-developers.com/showthread.php?t=1918500";
-	private static final long			serialVersionUID	= 1L;
-	public static IconCreatorFrame		MAIN_FRAME_INSTANCE;
-	private final IconCreatingPanelNew	iconCreatingPanel	= new IconCreatingPanelNew(this);
-	private final LToolBar				toolBar				= iconCreatingPanel.getToolBar();
+	private final JButton aboutButton = new JButton(CommonIconProvider.BUTTON_ICON_INFO);
+	private final JButton exitButton = new JButton(CommonIconProvider.BUTTON_ICON_EXIT);
+	public static final String APP_NAME = "'The Rom Fumbler'";
+	public static final String VERSION_NR = "33.0 beta";
+	private static final String VERSION_DATE = "xx.mmmm.2013";
+	public static final String HOMEPAGE_URL = "http://forum.xda-developers.com/showthread.php?t=1918500";
+	private static final long serialVersionUID = 1L;
+	public static IconCreatorFrame MAIN_FRAME_INSTANCE;
+	private final IconCreatingPanelNew iconCreatingPanel = new IconCreatingPanelNew(this);
+	private final LToolBar toolBar = iconCreatingPanel.getToolBar();
 
 	public static void main(final String[] args) {
+		configureLogback();
 		LOGGER.info("Java Version:" + VersionDetails.javaVendor + " " + VersionDetails.javaVersion);
 		LOGGER.info("Starting " + APP_NAME + " V." + VERSION_NR + "(" + VERSION_DATE + ")");
 		MAIN_FRAME_INSTANCE = new IconCreatorFrame();
 
+	}
+
+	private static void configureLogback() {
+		final LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
+		final JoranConfigurator jc = new JoranConfigurator();
+		jc.setContext(context);
+		context.reset();
+
+		// this assumes that the logback.xml file is in the root of the bundle.
+		final File logback = new File("logback.xml"); //$NON-NLS-1$
+		try (final InputStream stream = logback.toURI().toURL().openStream()) {
+			jc.doConfigure(stream);
+		} catch (IOException | JoranException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public IconCreatorFrame() {
